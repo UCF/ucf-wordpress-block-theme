@@ -100,9 +100,10 @@ the standard width.
   Nesting two `has-global-padding` containers triggers WP's breakout-reset rule
   and pins full-width blocks — avoided here. Full-width Group/Cover now break out
   correctly on the front end, matching the editor.
-- [ ] **`templates/page.html`** — static Pages still fall back to the blog-list
-  `index.html`, whose deep Query Loop nesting re-introduces the breakout-reset
-  problem. A flat `page.html` (same pattern as `single.html`) is the fix.
+- [x] **`templates/page.html`** — flat structure mirroring `single.html` (flow
+  `<main>`, constrained title/featured-image group + constrained `post-content`).
+  Static Pages no longer fall back to the deeply-nested `index.html`, so
+  full-width blocks break out correctly on Pages too.
 
 ---
 
