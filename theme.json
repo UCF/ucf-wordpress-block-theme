@@ -4,30 +4,126 @@
 		"appearanceTools": true,
 		"color": {
 			"palette": [
-				{ "color": "#fc0", "name": "UCF Gold (Primary)", "slug": "primary" },
-				{ "color": "#000", "name": "Black (Secondary)", "slug": "secondary" },
-				{ "color": "#fff", "name": "White (Inverse)", "slug": "inverse" },
-				{ "color": "#2ecc71", "name": "Success", "slug": "success" },
-				{ "color": "#81cfe0", "name": "Info", "slug": "info" },
-				{ "color": "#f4b350", "name": "Warning", "slug": "warning" },
-				{ "color": "#ff6445", "name": "Danger", "slug": "danger" },
-				{ "color": "#786000", "name": "Primary (Accessible)", "slug": "primary-aw" },
-				{ "color": "#477e5e", "name": "Success (Accessible)", "slug": "success-aw" },
-				{ "color": "#298194", "name": "Info (Accessible)", "slug": "info-aw" },
-				{ "color": "#966e31", "name": "Warning (Accessible)", "slug": "warning-aw" },
-				{ "color": "#c44f38", "name": "Danger (Accessible)", "slug": "danger-aw" },
-				{ "color": "#ffeb9b", "name": "Gold Lighter", "slug": "gold-lighter" },
-				{ "color": "#fdf9e8", "name": "Gold Lightest", "slug": "gold-lightest" },
-				{ "color": "#b18e00", "name": "Gold Darker", "slug": "gold-darker" },
-				{ "color": "#786000", "name": "Gold Darkest", "slug": "gold-darkest" },
-				{ "color": "#bc9a36", "name": "Metal Gold", "slug": "metal-gold" },
-				{ "color": "#292b2c", "name": "Gray Darkest", "slug": "gray-darkest" },
-				{ "color": "#464a4c", "name": "Gray Darker", "slug": "gray-darker" },
-				{ "color": "#636c72", "name": "Gray Dark", "slug": "gray-dark" },
-				{ "color": "#767676", "name": "Gray", "slug": "gray" },
-				{ "color": "#ccc", "name": "Gray Light", "slug": "gray-light" },
-				{ "color": "#eceeef", "name": "Gray Lighter", "slug": "gray-lighter" },
-				{ "color": "#f7f7f9", "name": "Gray Lightest", "slug": "gray-lightest" }
+				{
+					"color": "#fc0",
+					"name": "UCF Gold (Primary)",
+					"slug": "primary"
+				},
+				{
+					"color": "#000",
+					"name": "Black (Secondary)",
+					"slug": "secondary"
+				},
+				{
+					"color": "#fff",
+					"name": "White (Inverse)",
+					"slug": "inverse"
+				},
+				{
+					"color": "#2ecc71",
+					"name": "Success",
+					"slug": "success"
+				},
+				{
+					"color": "#81cfe0",
+					"name": "Info",
+					"slug": "info"
+				},
+				{
+					"color": "#f4b350",
+					"name": "Warning",
+					"slug": "warning"
+				},
+				{
+					"color": "#ff6445",
+					"name": "Danger",
+					"slug": "danger"
+				},
+				{
+					"color": "#786000",
+					"name": "Primary (Accessible)",
+					"slug": "primary-aw"
+				},
+				{
+					"color": "#477e5e",
+					"name": "Success (Accessible)",
+					"slug": "success-aw"
+				},
+				{
+					"color": "#298194",
+					"name": "Info (Accessible)",
+					"slug": "info-aw"
+				},
+				{
+					"color": "#966e31",
+					"name": "Warning (Accessible)",
+					"slug": "warning-aw"
+				},
+				{
+					"color": "#c44f38",
+					"name": "Danger (Accessible)",
+					"slug": "danger-aw"
+				},
+				{
+					"color": "#ffeb9b",
+					"name": "Gold Lighter",
+					"slug": "gold-lighter"
+				},
+				{
+					"color": "#fdf9e8",
+					"name": "Gold Lightest",
+					"slug": "gold-lightest"
+				},
+				{
+					"color": "#b18e00",
+					"name": "Gold Darker",
+					"slug": "gold-darker"
+				},
+				{
+					"color": "#786000",
+					"name": "Gold Darkest",
+					"slug": "gold-darkest"
+				},
+				{
+					"color": "#bc9a36",
+					"name": "Metal Gold",
+					"slug": "metal-gold"
+				},
+				{
+					"color": "#292b2c",
+					"name": "Gray Darkest",
+					"slug": "gray-darkest"
+				},
+				{
+					"color": "#464a4c",
+					"name": "Gray Darker",
+					"slug": "gray-darker"
+				},
+				{
+					"color": "#636c72",
+					"name": "Gray Dark",
+					"slug": "gray-dark"
+				},
+				{
+					"color": "#767676",
+					"name": "Gray",
+					"slug": "gray"
+				},
+				{
+					"color": "#ccc",
+					"name": "Gray Light",
+					"slug": "gray-light"
+				},
+				{
+					"color": "#eceeef",
+					"name": "Gray Lighter",
+					"slug": "gray-lighter"
+				},
+				{
+					"color": "#f7f7f9",
+					"name": "Gray Lightest",
+					"slug": "gray-lightest"
+				}
 			]
 		},
 		"layout": {
@@ -35,13 +131,40 @@
 			"wideSize": "100%"
 		},
 		"spacing": {
-			"units": [ "%", "px", "em", "rem", "vh", "vw" ],
+			"units": [
+				"%",
+				"px",
+				"em",
+				"rem",
+				"vh",
+				"vw"
+			],
 			"spacingSizes": [
-				{ "size": "0.25rem", "name": "Tiny", "slug": "10" },
-				{ "size": "0.5rem", "name": "Small", "slug": "20" },
-				{ "size": "1rem", "name": "Medium", "slug": "30" },
-				{ "size": "1.5rem", "name": "Large", "slug": "40" },
-				{ "size": "3rem", "name": "Extra Large", "slug": "50" }
+				{
+					"size": "0.25rem",
+					"name": "Tiny",
+					"slug": "10"
+				},
+				{
+					"size": "0.5rem",
+					"name": "Small",
+					"slug": "20"
+				},
+				{
+					"size": "1rem",
+					"name": "Medium",
+					"slug": "30"
+				},
+				{
+					"size": "1.5rem",
+					"name": "Large",
+					"slug": "40"
+				},
+				{
+					"size": "3rem",
+					"name": "Extra Large",
+					"slug": "50"
+				}
 			]
 		},
 		"typography": {
@@ -195,10 +318,26 @@
 				}
 			],
 			"fontSizes": [
-				{ "size": "0.75rem", "name": "Extra Small", "slug": "xs" },
-				{ "size": "0.875rem", "name": "Small", "slug": "sm" },
-				{ "size": "1rem", "name": "Medium", "slug": "md" },
-				{ "size": "1.25rem", "name": "Large", "slug": "lg" }
+				{
+					"size": "0.75rem",
+					"name": "Extra Small",
+					"slug": "xs"
+				},
+				{
+					"size": "0.875rem",
+					"name": "Small",
+					"slug": "sm"
+				},
+				{
+					"size": "1rem",
+					"name": "Medium",
+					"slug": "md"
+				},
+				{
+					"size": "1.25rem",
+					"name": "Large",
+					"slug": "lg"
+				}
 			]
 		},
 		"useRootPaddingAwareAlignments": true
@@ -220,6 +359,69 @@
 						"top": "0",
 						"bottom": "1rem"
 					}
+				}
+			},
+			"link": {
+				"color": {
+					"text": "var(--wp--preset--color--primary-aw)"
+				},
+				"typography": {
+					"textDecoration": "none"
+				},
+				":hover": {
+					"color": {
+						"text": "var(--wp--preset--color--secondary)"
+					},
+					"typography": {
+						"textDecoration": "underline"
+					}
+				},
+				":focus": {
+					"typography": {
+						"textDecoration": "underline"
+					}
+				}
+			},
+			"button": {
+				"border": {
+					"radius": "0"
+				},
+				"color": {
+					"background": "var(--wp--preset--color--primary)",
+					"text": "var(--wp--preset--color--secondary)"
+				},
+				"typography": {
+					"fontWeight": "700",
+					"textTransform": "uppercase",
+					"letterSpacing": "0.03em"
+				},
+				"spacing": {
+					"padding": {
+						"top": "0.5rem",
+						"bottom": "0.5rem",
+						"left": "1rem",
+						"right": "1rem"
+					}
+				},
+				":hover": {
+					"color": {
+						"background": "var(--wp--preset--color--gold-darker)",
+						"text": "var(--wp--preset--color--secondary)"
+					}
+				},
+				":focus": {
+					"color": {
+						"background": "var(--wp--preset--color--gold-darker)",
+						"text": "var(--wp--preset--color--secondary)"
+					}
+				}
+			},
+			"caption": {
+				"color": {
+					"text": "var(--wp--preset--color--gray-dark)"
+				},
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--sm)"
 				}
 			}
 		}

@@ -47,6 +47,24 @@ function ucf_block_theme_register_heading_styles() {
 			'label' => __( 'Underline', 'ucf-wordpress-block-theme' ),
 		)
 	);
+
+	// Display headings: oversized, light hero type (Athena .display-1–.display-4).
+	$display_sizes = array(
+		'display-1' => __( 'Display 1', 'ucf-wordpress-block-theme' ),
+		'display-2' => __( 'Display 2', 'ucf-wordpress-block-theme' ),
+		'display-3' => __( 'Display 3', 'ucf-wordpress-block-theme' ),
+		'display-4' => __( 'Display 4', 'ucf-wordpress-block-theme' ),
+	);
+
+	foreach ( $display_sizes as $name => $label ) {
+		register_block_style(
+			'core/heading',
+			array(
+				'name'  => $name,
+				'label' => $label,
+			)
+		);
+	}
 }
 add_action( 'init', 'ucf_block_theme_register_heading_styles' );
 
@@ -66,6 +84,31 @@ function ucf_block_theme_register_text_styles() {
 	);
 }
 add_action( 'init', 'ucf_block_theme_register_text_styles' );
+
+/**
+ * Register List block style variations.
+ *
+ * "Unstyled" removes bullets/indent; "Inline" lays items out horizontally
+ * (Athena's .list-unstyled / .list-inline). Each applies an
+ * `is-style-{name}` class; the matching styles live in src/scss/_lists.scss.
+ */
+function ucf_block_theme_register_list_styles() {
+	$list_styles = array(
+		'list-unstyled' => __( 'Unstyled', 'ucf-wordpress-block-theme' ),
+		'list-inline'   => __( 'Inline', 'ucf-wordpress-block-theme' ),
+	);
+
+	foreach ( $list_styles as $name => $label ) {
+		register_block_style(
+			'core/list',
+			array(
+				'name'  => $name,
+				'label' => $label,
+			)
+		);
+	}
+}
+add_action( 'init', 'ucf_block_theme_register_list_styles' );
 
 /**
  * Register Quote block style variations that recolor the left accent border

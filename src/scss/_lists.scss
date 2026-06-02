@@ -1,0 +1,27 @@
+// -----------------------------------------------------------------------------
+// List utilities
+//
+// Athena's .list-unstyled (no bullets / indent) and .list-inline (horizontal
+// list). Available as core/list block style variations (.is-style-list-*),
+// which surface them in the editor's Styles list, or as utility classes.
+// -----------------------------------------------------------------------------
+
+.list-unstyled,
+.is-style-list-unstyled {
+	padding-left: 0;
+	list-style: none;
+}
+
+.list-inline,
+.is-style-list-inline {
+	padding-left: 0;
+	list-style: none;
+
+	> li {
+		display: inline-block;
+	}
+}
+
+.list-inline-item:not(:last-child) {
+	margin-right: 0.5rem;
+}

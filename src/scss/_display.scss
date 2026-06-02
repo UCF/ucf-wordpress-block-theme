@@ -1,0 +1,21 @@
+// -----------------------------------------------------------------------------
+// Display headings
+//
+// Athena's oversized hero type (.display-1 .. .display-4). Available two ways:
+// the utility class (.display-N, e.g. via Advanced > Additional CSS class) and
+// the matching core/heading block style variation (.is-style-display-N), which
+// surfaces them in the editor's Styles list. Either way the heading keeps its
+// semantic tag while rendering large, light display text.
+// -----------------------------------------------------------------------------
+
+@use "sass:map";
+@use "variables" as *;
+
+@each $level, $size in $display-sizes {
+	.display-#{$level},
+	.is-style-display-#{$level} {
+		font-size: $size;
+		font-weight: $display-font-weight;
+		line-height: $display-line-height;
+	}
+}

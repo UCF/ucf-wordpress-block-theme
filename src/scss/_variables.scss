@@ -36,3 +36,19 @@ $font-size-ratios: (
 	"slab-serif": 1.15,
 	"condensed":  1.75,
 );
+
+// Display headings (.display-1 .. .display-4) -- oversized hero type.
+$display-font-weight: 300;
+$display-line-height: 1.1;
+$display-sizes: (
+	1: 6rem,
+	2: 5.5rem,
+	3: 4.5rem,
+	4: 3.5rem,
+);
+
+// Shared element base styling.
+$border-color: var(--wp--preset--color--gray-light);
+$muted-color: var(--wp--preset--color--gray-dark);
+$code-bg: var(--wp--preset--color--gray-lightest);
+$monospace-font: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;

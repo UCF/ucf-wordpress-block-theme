@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// Horizontal rule / separator
+//
+// Athena's thin rule. Applies to <hr> and the core Separator block (in its
+// default, non-dots/wide variations).
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+hr {
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border: 0;
+	border-top: 1px solid $border-color;
+}

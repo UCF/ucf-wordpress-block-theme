@@ -33,21 +33,28 @@ font-size menus, spacing menus).
 
 ---
 
-## Tier 2 — Element base styling
+## Tier 2 — Element base styling  ✅ DONE
 
 Styled globally via `theme.json` `styles.elements` or the SCSS pipeline — applies
 automatically, no editor action needed. (Body font, headings, and blockquote are
 already done.)
 
-- [ ] **Links** (`elements.link`) — brand color + hover/focus treatment
-- [ ] **Buttons** (`elements.button` / `core/button`) — Athena `.btn` base look
-- [ ] **Display headings** (`.display-1`–`.display-4`) — large `vw`-based hero sizes
-- [ ] **Lists** — `.list-unstyled`, `.list-inline`
-- [ ] **Tables** — `.table` base, striped / bordered / hover
-- [ ] **Code / pre / kbd** styling
-- [ ] **Figures & captions** (`elements.caption`)
-- [ ] **Horizontal rule / separator**
-- [ ] **Print styles** (port `_print.scss`)
+- [x] **Links** (`elements.link`) — accessible gold (`primary-aw`) text, black
+  underline on hover/focus
+- [x] **Buttons** (`elements.button` / `core/button`) — Athena `.btn` base look:
+  square corners, gold/black, uppercase bold. (Color *variants* are Tier 3.)
+- [x] **Display headings** (`.display-1`–`.display-4`) — large, light hero sizes
+  (`src/scss/_display.scss`). Also promoted to `core/heading` block styles
+  ("Display 1–4") so they're selectable in the editor's Styles list.
+- [x] **Lists** — `.list-unstyled`, `.list-inline` (`src/scss/_lists.scss`).
+  Also registered as `core/list` block styles ("Unstyled", "Inline").
+- [x] **Tables** — `.table` base (`src/scss/_tables.scss`), applied automatically
+  to every `core/table` block (no block style needed). Striped / bordered /
+  hover *variants* are Tier 3.
+- [x] **Code / pre / kbd** styling (`src/scss/_code.scss`)
+- [x] **Figures & captions** (`elements.caption`) — muted gray, small size
+- [x] **Horizontal rule / separator** (`src/scss/_separator.scss`)
+- [x] **Print styles** (`src/scss/_print.scss`, ported from Athena)
 
 ---
 

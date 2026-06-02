@@ -1,0 +1,27 @@
+// -----------------------------------------------------------------------------
+// Tables
+//
+// Base table styling matching Athena's .table. Applies to the core Table block
+// and to any element carrying the .table utility class. Striped / bordered /
+// hover treatments are registered as block style variations (see Tier 3).
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+.table,
+.wp-block-table table {
+	width: 100%;
+	margin-bottom: 1rem;
+
+	th,
+	td {
+		padding: 0.75rem;
+		vertical-align: top;
+		border-top: 1px solid $border-color;
+	}
+
+	thead th {
+		vertical-align: bottom;
+		border-bottom: 2px solid $border-color;
+	}
+}

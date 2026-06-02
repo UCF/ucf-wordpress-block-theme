@@ -1,0 +1,51 @@
+// -----------------------------------------------------------------------------
+// Code, preformatted text & keyboard input
+//
+// Monospace styling for inline code, <kbd>, and code blocks, matching Athena's
+// treatment. Applies to the core Code / Preformatted blocks automatically.
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+code,
+kbd,
+pre,
+samp {
+	font-family: $monospace-font;
+}
+
+code {
+	padding: 0.2rem 0.4rem;
+	font-size: 0.875em;
+	color: var(--wp--preset--color--danger-aw);
+	background-color: $code-bg;
+	border-radius: 0.25rem;
+}
+
+kbd {
+	padding: 0.2rem 0.4rem;
+	font-size: 0.875em;
+	color: var(--wp--preset--color--inverse);
+	background-color: var(--wp--preset--color--gray-darkest);
+	border-radius: 0.25rem;
+}
+
+pre,
+.wp-block-code,
+.wp-block-preformatted {
+	display: block;
+	margin-bottom: 1rem;
+	padding: 1rem;
+	overflow: auto;
+	font-size: 0.875em;
+	background-color: $code-bg;
+
+	// Reset inline-code styling when nested in a code block.
+	code {
+		padding: 0;
+		font-size: inherit;
+		color: inherit;
+		background-color: transparent;
+		border-radius: 0;
+	}
+}
