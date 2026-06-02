@@ -83,6 +83,29 @@ theme (see heading sizes, `.lead`).
 
 ---
 
+## Layout & templates — full-width / full-bleed support  ✅ DONE
+
+Cross-cutting work (not part of the Athena port) enabling full-bleed sections —
+e.g. a black jumbotron that spans the viewport edges while its content stays at
+the standard width.
+
+- [x] **`theme.json` layout** — `contentSize 1200px`, `wideSize 1400px` (was
+  `100%`, which made Wide == Full). Full/Wide alignment toolbar now meaningful.
+- [x] **Root padding** — `styles.spacing.padding` left/right =
+  `var(--wp--preset--spacing--30)` (1rem). With `useRootPaddingAwareAlignments`,
+  normal content gets edge breathing room while `alignfull` blocks break out to
+  the true viewport edge.
+- [x] **`templates/single.html`** — flat structure (flow `<main>` wrapping
+  *sibling* constrained containers) so root padding lives on exactly one level.
+  Nesting two `has-global-padding` containers triggers WP's breakout-reset rule
+  and pins full-width blocks — avoided here. Full-width Group/Cover now break out
+  correctly on the front end, matching the editor.
+- [ ] **`templates/page.html`** — static Pages still fall back to the blog-list
+  `index.html`, whose deep Query Loop nesting re-introduces the breakout-reset
+  problem. A flat `page.html` (same pattern as `single.html`) is the fix.
+
+---
+
 ## Tier 4 — Select pure-CSS utility classes
 
 Most utilities are redundant in a block theme; only port those with no block-editor
