@@ -7,7 +7,7 @@ look, feel, and conventions of the [UCF Athena Framework](https://ucf.github.io/
 - **Requires at least:** WordPress 7.0
 - **Tested up to:** 7.0
 - **Requires PHP:** 5.7
-- **License:** GPLv2 or later ([details](http://www.gnu.org/licenses/gpl-2.0.html))
+- **License:** MIT ([details](https://opensource.org/licenses/MIT))
 
 ## Purpose
 
@@ -96,15 +96,11 @@ npm install
 ### 1.0.0
 - Initial release.
 
-## Copyright
+## License
 
 UCF WordPress Block Theme, &copy; 2026 UCF Web Communications.
 
-This theme is distributed under the terms of the GNU GPL. This program is free
-software: you can redistribute it and/or modify it under the terms of the GNU
-General Public License as published by the Free Software Foundation, either
-version 2 of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful, but WITHOUT ANY
-WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE. See the GNU General Public License for more details.
+This theme is released under the [MIT License](LICENSE). You are free to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+software, subject to the conditions in the license file. The software is
+provided "as is", without warranty of any kind.

@@ -2,7 +2,7 @@
 	"name": "ucf-wordpress-block-theme",
 	"version": "1.0.0",
 	"description": "Build pipeline for the UCF WordPress block theme styles.",
-	"license": "GPL-2.0-or-later",
+	"license": "MIT",
 	"author": "UCF Web Communications",
 	"private": true,
 	"scripts": {
