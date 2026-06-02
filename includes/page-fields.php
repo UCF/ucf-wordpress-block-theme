@@ -1,10 +1,12 @@
 <?php
 /**
- * ACF field definitions for page headers (hero title / subtitle).
+ * Page-header custom fields.
  *
- * Registered in PHP via ACF's local field groups so the fields live in version
- * control with the theme rather than the database. The whole file no-ops cleanly
- * when ACF is not active; an admin notice flags the missing dependency.
+ * Registers post meta for the hero title/subtitle and the three breakpoint
+ * background images, exposes them to the REST API, and enqueues the editor
+ * sidebar panel (assets/js/page-header-panel.js) that edits them on the Page
+ * edit screen. The page-header block (includes/page-header.php) reads this meta
+ * at render time.
  *
  * @package ucf-wordpress-block-theme
  */
@@ -14,116 +16,67 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Whether Advanced Custom Fields is installed and active.
+ * The page-header meta keys and their REST types.
  *
- * `acf_add_local_field_group()` exists in both the free and Pro plugins once
- * active, so it's the most reliable capability check.
+ * Images store an attachment ID (integer); text fields store strings.
  *
- * @return bool
+ * @return array<string,string> Meta key => type.
  */
-function ucf_block_theme_acf_active() {
-	return function_exists( 'acf_add_local_field_group' );
+function ucf_block_theme_page_header_meta() {
+	return array(
+		'hero_title'    => 'string',
+		'hero_subtitle' => 'string',
+		'hero_image_lg' => 'integer',
+		'hero_image_md' => 'integer',
+		'hero_image_sm' => 'integer',
+	);
 }
 
 /**
- * Register the "Page Header" field group (hero title + subtitle) on Pages.
- *
- * These let an editor set header text per page independently of the page title,
- * which the page template overlays on the masthead image. The H1/subtitle the
- * template renders fall back to the page title when these are left blank
- * (fallback handled at render time, not here).
+ * Register the page-header meta on Pages, exposed to REST so the block editor
+ * can read/write it via useEntityProp.
  */
-function ucf_block_theme_register_page_header_fields() {
-	if ( ! ucf_block_theme_acf_active() ) {
-		return;
+function ucf_block_theme_register_page_header_meta() {
+	foreach ( ucf_block_theme_page_header_meta() as $key => $type ) {
+		register_post_meta(
+			'page',
+			$key,
+			array(
+				'type'          => $type,
+				'single'        => true,
+				'show_in_rest'  => true,
+				'default'       => ( 'integer' === $type ) ? 0 : '',
+				'auth_callback' => function () {
+					return current_user_can( 'edit_pages' );
+				},
+			)
+		);
 	}
+}
+add_action( 'init', 'ucf_block_theme_register_page_header_meta' );
 
-	acf_add_local_field_group(
+/**
+ * Enqueue the Page-editor sidebar panel for the page-header fields.
+ */
+function ucf_block_theme_enqueue_page_header_panel() {
+	$rel  = 'assets/js/page-header-panel.js';
+	$path = get_theme_file_path( $rel );
+
+	wp_enqueue_script(
+		'ucf-page-header-panel',
+		get_theme_file_uri( $rel ),
 		array(
-			'key'                   => 'group_ucf_page_header',
-			'title'                 => __( 'Page Header', 'ucf-wordpress-block-theme' ),
-			'fields'                => array(
-				array(
-					'key'          => 'field_ucf_hero_title',
-					'label'        => __( 'Header title', 'ucf-wordpress-block-theme' ),
-					'name'         => 'hero_title',
-					'type'         => 'text',
-					'instructions' => __( 'Overlaid on the header image. Leave blank to use the page title.', 'ucf-wordpress-block-theme' ),
-				),
-				array(
-					'key'          => 'field_ucf_hero_subtitle',
-					'label'        => __( 'Header subtitle', 'ucf-wordpress-block-theme' ),
-					'name'         => 'hero_subtitle',
-					'type'         => 'text',
-					'instructions' => __( 'Optional supporting line shown beneath the title.', 'ucf-wordpress-block-theme' ),
-				),
-				array(
-					'key'           => 'field_ucf_hero_image_lg',
-					'label'         => __( 'Header image — desktop', 'ucf-wordpress-block-theme' ),
-					'name'          => 'hero_image_lg',
-					'type'          => 'image',
-					'return_format' => 'id',
-					'preview_size'  => 'medium',
-					'library'       => 'all',
-					'instructions'  => __( 'Background image for the Desktop preview (wider than 780px). Used as the default if smaller breakpoints are left blank.', 'ucf-wordpress-block-theme' ),
-				),
-				array(
-					'key'               => 'field_ucf_hero_image_md',
-					'label'             => __( 'Header image — tablet', 'ucf-wordpress-block-theme' ),
-					'name'              => 'hero_image_md',
-					'type'              => 'image',
-					'return_format'     => 'id',
-					'preview_size'      => 'medium',
-					'library'           => 'all',
-					'instructions'      => __( 'Background image for the Tablet preview (up to 780px wide). Falls back to the desktop image when blank.', 'ucf-wordpress-block-theme' ),
-				),
-				array(
-					'key'               => 'field_ucf_hero_image_sm',
-					'label'             => __( 'Header image — mobile', 'ucf-wordpress-block-theme' ),
-					'name'              => 'hero_image_sm',
-					'type'              => 'image',
-					'return_format'     => 'id',
-					'preview_size'      => 'medium',
-					'library'           => 'all',
-					'instructions'      => __( 'Background image for the Mobile preview (up to 360px wide). Falls back to the tablet, then desktop image when blank.', 'ucf-wordpress-block-theme' ),
-				),
-			),
-			'location'              => array(
-				array(
-					array(
-						'param'    => 'post_type',
-						'operator' => '==',
-						'value'    => 'page',
-					),
-				),
-			),
-			'menu_order'            => 0,
-			'position'              => 'acf_after_title',
-			'style'                 => 'default',
-			'label_placement'       => 'top',
-			'active'                => true,
-			'description'           => __( 'Title and subtitle overlaid on the page header image.', 'ucf-wordpress-block-theme' ),
-		)
+			'wp-plugins',
+			'wp-edit-post',
+			'wp-element',
+			'wp-components',
+			'wp-block-editor',
+			'wp-core-data',
+			'wp-data',
+			'wp-i18n',
+		),
+		file_exists( $path ) ? filemtime( $path ) : false,
+		true
 	);
 }
-add_action( 'acf/init', 'ucf_block_theme_register_page_header_fields' );
-
-/**
- * Show an admin notice when ACF is missing, since the page-header fields
- * (and any template features that read them) depend on it.
- */
-function ucf_block_theme_acf_admin_notice() {
-	if ( ucf_block_theme_acf_active() ) {
-		return;
-	}
-
-	if ( ! current_user_can( 'activate_plugins' ) ) {
-		return;
-	}
-
-	printf(
-		'<div class="notice notice-warning"><p>%s</p></div>',
-		esc_html__( 'UCF Block Theme: Advanced Custom Fields (ACF) is not active. Page header title/subtitle fields are unavailable until it is installed and activated.', 'ucf-wordpress-block-theme' )
-	);
-}
-add_action( 'admin_notices', 'ucf_block_theme_acf_admin_notice' );
+add_action( 'enqueue_block_editor_assets', 'ucf_block_theme_enqueue_page_header_panel' );

@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 require_once get_theme_file_path( 'includes/page-fields.php' );
 require_once get_theme_file_path( 'includes/page-header.php' );
+require_once get_theme_file_path( 'includes/patterns.php' );
 
 /**
  * Register heading-size block style variations.

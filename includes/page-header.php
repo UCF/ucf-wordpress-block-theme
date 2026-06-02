@@ -3,12 +3,12 @@
  * Page header (masthead) dynamic block.
  *
  * Renders a full-width header: an art-directed <picture> background driven by
- * the three ACF breakpoint images, a gradient overlay for legibility, the
- * primary navigation spread across the top, and the overlaid title/subtitle.
+ * the three breakpoint images, a gradient overlay for legibility, the primary
+ * navigation spread across the top, and the overlaid title/subtitle.
  *
  * Implemented as a server-rendered block (no inner blocks) so it can be dropped
- * into a block template — see templates/page.html — while still reading the ACF
- * fields defined in includes/page-fields.php at render time.
+ * into a block template — see templates/page.html — while reading the page-header
+ * post meta defined in includes/page-fields.php at render time.
  *
  * @package ucf-wordpress-block-theme
  */
@@ -30,31 +30,40 @@ function ucf_block_theme_register_menus() {
 add_action( 'after_setup_theme', 'ucf_block_theme_register_menus' );
 
 /**
- * Register the ucf/page-header dynamic block.
+ * Register the ucf/page-header dynamic block + its editor preview script.
  */
 function ucf_block_theme_register_page_header_block() {
+	$script_rel  = 'assets/js/page-header-block.js';
+	$script_path = get_theme_file_path( $script_rel );
+
+	wp_register_script(
+		'ucf-page-header-block',
+		get_theme_file_uri( $script_rel ),
+		array( 'wp-blocks', 'wp-element', 'wp-server-side-render', 'wp-i18n' ),
+		file_exists( $script_path ) ? filemtime( $script_path ) : false,
+		true
+	);
+
 	register_block_type(
 		'ucf/page-header',
 		array(
 			'api_version'     => 3,
 			'render_callback' => 'ucf_block_theme_render_page_header',
+			'editor_script'   => 'ucf-page-header-block',
 		)
 	);
 }
 add_action( 'init', 'ucf_block_theme_register_page_header_block' );
 
 /**
- * Read an ACF field with a graceful fallback when ACF is inactive.
+ * Read a page-header meta value (see includes/page-fields.php).
  *
- * @param string $name    Field name.
+ * @param string $name    Meta key.
  * @param int    $post_id Post ID.
- * @return mixed Field value, or '' when ACF is unavailable / empty.
+ * @return mixed Meta value, or '' when empty.
  */
 function ucf_block_theme_field( $name, $post_id ) {
-	if ( ! function_exists( 'get_field' ) ) {
-		return '';
-	}
-	$value = get_field( $name, $post_id );
+	$value = get_post_meta( $post_id, $name, true );
 	return ( false === $value || null === $value ) ? '' : $value;
 }
 
@@ -118,18 +127,23 @@ function ucf_block_theme_header_picture( $post_id ) {
  */
 function ucf_block_theme_render_page_header( $attributes = array(), $content = '', $block = null ) {
 	$post_id = get_the_ID();
-	if ( ! $post_id ) {
+
+	// ServerSideRender previews (Site Editor) hit this over REST with no queried
+	// page. Show a structural placeholder instead of an empty block.
+	$is_preview = defined( 'REST_REQUEST' ) && REST_REQUEST;
+	if ( ! $post_id && ! $is_preview ) {
 		return '';
 	}
 
-	// Title: ACF override, falling back to the post/page title.
-	$title = ucf_block_theme_field( 'hero_title', $post_id );
+	// Title: meta override, falling back to the post/page title (or a placeholder
+	// in the editor when there's no page context).
+	$title = $post_id ? ucf_block_theme_field( 'hero_title', $post_id ) : '';
 	if ( '' === $title ) {
-		$title = get_the_title( $post_id );
+		$title = $post_id ? get_the_title( $post_id ) : __( 'Page title', 'ucf-wordpress-block-theme' );
 	}
-	$subtitle = ucf_block_theme_field( 'hero_subtitle', $post_id );
+	$subtitle = $post_id ? ucf_block_theme_field( 'hero_subtitle', $post_id ) : '';
 
-	$picture = ucf_block_theme_header_picture( $post_id );
+	$picture = $post_id ? ucf_block_theme_header_picture( $post_id ) : '';
 
 	// Primary navigation, output as a list-unstyled bar.
 	$nav = '';

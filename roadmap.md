@@ -166,24 +166,41 @@ that builds on that foundation — site structure, reusable content, and anythin
 that needs more than block styling. Items are candidates; check off / re-scope as
 we go.
 
-### Page header / masthead  🚧 IN PROGRESS
-- [x] **ACF page-header fields** — `hero_title`, `hero_subtitle`, and three
-  breakpoint background images (`hero_image_lg/md/sm`) on Pages, registered as
-  local field groups in `includes/page-fields.php`. ACF-active guard + admin
-  notice when missing.
-- [x] **`ucf/page-header` dynamic block** (`includes/page-header.php`) — renders
-  an art-directed `<picture>` (breakpoints 360px / 780px, matching the editor
-  device previews) with mobile→tablet→desktop fallback, gradient overlay, the
-  Primary nav as a list-unstyled bar with its own gradient, and overlaid
-  title/subtitle (title falls back to the page title). Styling in
-  `src/scss/_hero.scss`.
-- [x] **`page.html`** now leads with the masthead block (replaces the old
-  template-part header + title group for Pages).
-- [ ] **Editor preview** — the block is server-rendered with no edit component,
-  so the Site Editor shows it empty; add a `ServerSideRender`/`block.json` edit
-  so the masthead previews while editing.
-- [ ] **Post masthead** — decide the `single.html` equivalent (featured image +
+### Page header / hero  🚧 IN PROGRESS
+
+**Active approach (Option A): content-editable Hero pattern.** Authors place /
+edit a Hero (Cover + H1 + subtitle) at the top of the page content; it is
+auto-seeded into every new Page.
+
+- [x] **Hero pattern** (`patterns/hero.php`) — full-width `core/cover` with a
+  gradient overlay, an H1 (`display-2` style) and a `lead` subtitle. Categorized
+  under "UCF Headers"; registered for `core/post-content` on Pages.
+- [x] **Auto-seed new Pages** — `default_content` filter (`includes/patterns.php`)
+  inserts the Hero pattern markup into new Pages so the hero is present and
+  editable from the start. Existing pages untouched.
+- [x] **Navigation in its own bar** — `parts/header.html` now puts the primary
+  nav in a full-width black bar at the very top, with branding (logo/site title)
+  in a separate row below.
+- [x] **`page.html`** — global header part on top, then `post-content` (which
+  begins with the Hero). No template-injected masthead or post title (the H1
+  lives in the hero content).
+- [ ] **Nav-over-hero (optional)** — overlay the top nav on the hero image
+  (transparent bar + negative margin) instead of a separate bar, if desired.
+- [ ] **Post hero** — decide the `single.html` equivalent (featured image +
   post title); posts intentionally less flexible than pages.
+
+**Dormant alternative (Option B): template-injected masthead block.** Kept in
+the codebase in case we pivot back — currently registered but not placed in any
+template. Would re-add `<!-- wp:ucf/page-header /-->` to `page.html` and remove
+the Hero pattern seeding.
+
+- `ucf/page-header` dynamic block (`includes/page-header.php`) — art-directed
+  `<picture>` (breakpoints 360px / 780px) with mobile→tablet→desktop fallback,
+  gradient overlay, primary nav, and meta-driven title/subtitle. Styling in
+  `src/scss/_hero.scss`.
+- Post-meta fields + sidebar panel (`includes/page-fields.php`,
+  `assets/js/page-header-panel.js`) for title/subtitle/3 breakpoint images.
+- `ServerSideRender` editor preview (`assets/js/page-header-block.js`).
 
 ### Templates & site structure
 - [ ] **Additional templates** — `archive.html`, `search.html`, `404.html`,
