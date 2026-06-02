@@ -1,0 +1,12 @@
+// -----------------------------------------------------------------------------
+// UCF WordPress Block Theme
+//
+// Entry point. Compiles to assets/css/main.css (see package.json scripts),
+// which is enqueued on the front end and in the block editor via functions.php.
+// -----------------------------------------------------------------------------
+
+@use "fonts";
+@use "headings";
+@use "text";
+@use "blockquote";
+@use "spacing";

@@ -1,0 +1,44 @@
+// -----------------------------------------------------------------------------
+// Blockquote
+//
+// Default UCF/Athena look for the core Quote block: larger text with a left
+// accent border. Targets both the raw element and the core/quote block wrapper.
+// -----------------------------------------------------------------------------
+
+@use "sass:map";
+
+// Quote block style variations that recolor the left accent border. Each key
+// is the variation name (-> is-style-quote-{key}) and maps to a theme.json
+// color preset (--wp--preset--color--{value}).
+$blockquote-border-colors: (
+	"primary":   "primary",
+	"secondary": "secondary",
+	"success":   "success",
+	"info":      "info",
+	"warning":   "warning",
+	"danger":    "danger",
+);
+
+blockquote,
+.wp-block-quote {
+	margin: 0 0 1rem;
+	padding: 0.5rem 0 0.5rem 1rem;
+	border-left: 0.25rem solid currentColor;
+	font-size: 1.25rem;
+
+	// Attribution line (core/quote renders a <cite>).
+	cite,
+	.wp-block-quote__citation {
+		display: block;
+		margin-top: 0.5rem;
+		font-size: 0.875rem;
+		font-style: normal;
+		opacity: 0.75;
+	}
+}
+
+@each $name, $preset in $blockquote-border-colors {
+	.wp-block-quote.is-style-quote-#{$name} {
+		border-left-color: var(--wp--preset--color--#{$preset});
+	}
+}

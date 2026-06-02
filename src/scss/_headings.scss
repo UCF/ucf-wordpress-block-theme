@@ -1,0 +1,68 @@
+// -----------------------------------------------------------------------------
+// Headings
+//
+// Generates the heading scale for element selectors (h1-h6), the matching
+// utility classes (.h1-.h6) and the block style variations (.is-style-h1-h6).
+//
+// Because a class selector outranks an element selector, applying `.h3` (or the
+// "Heading 3 size" block style) to an <h1> resizes it while keeping the
+// semantic tag intact -- the Athena Framework behaviour.
+// -----------------------------------------------------------------------------
+
+@use "sass:map";
+@use "variables" as *;
+
+// Shared properties so the .hN utilities look like headings even when applied
+// to non-heading elements. Actual h1-h6 elements get these from theme.json.
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	font-weight: $heading-font-weight;
+	line-height: $heading-line-height;
+	margin-top: 0;
+	margin-bottom: $heading-margin-bottom;
+}
+
+// Emit font-size rules for the given size key (`base` or `md`).
+@mixin heading-font-sizes($size-key) {
+	@each $level, $sizes in $heading-sizes {
+		$size: map.get($sizes, $size-key);
+
+		h#{$level},
+		.h#{$level},
+		.is-style-h#{$level} {
+			font-size: $size;
+		}
+
+		// Display-font size bumps (e.g. <h2 class="font-slab-serif">).
+		@each $name, $ratio in $font-size-ratios {
+			h#{$level}.font-#{$name},
+			.h#{$level}.font-#{$name},
+			.is-style-h#{$level}.font-#{$name} {
+				font-size: $size * $ratio;
+			}
+		}
+	}
+}
+
+@include heading-font-sizes(base);
+
+@media (min-width: $breakpoint-md) {
+	@include heading-font-sizes(md);
+}
+
+// "Underline" variation: uppercase text with a short UCF Gold accent bar
+// beneath. Available on every heading level via the core/heading block style
+// (.is-style-heading-underline) or the utility class (.heading-underline).
+.heading-underline,
+.is-style-heading-underline {
+	text-transform: uppercase;
+
+	&::after {
+		content: "";
+		display: block;
+		width: 3rem;
+		height: 0.25rem;
+		margin-top: 0.5rem;
+		// Always UCF Gold, regardless of the heading's text color.
+		background-color: var(--wp--preset--color--primary);
+	}
+}

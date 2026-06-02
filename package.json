@@ -1,0 +1,15 @@
+{
+	"name": "ucf-wordpress-block-theme",
+	"version": "1.0.0",
+	"description": "Build pipeline for the UCF WordPress block theme styles.",
+	"license": "GPL-2.0-or-later",
+	"author": "UCF Web Communications",
+	"private": true,
+	"scripts": {
+		"build": "sass src/scss/main.scss assets/css/main.css --style=compressed --no-source-map",
+		"watch": "sass --watch src/scss/main.scss assets/css/main.css --style=expanded"
+	},
+	"devDependencies": {
+		"sass": "^1.100.0"
+	}
+}

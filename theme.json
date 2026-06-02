@@ -1,0 +1,238 @@
+{
+	"$schema": "https://schemas.wp.org/wp/7.0/theme.json",
+	"settings": {
+		"appearanceTools": true,
+		"color": {
+			"palette": [
+				{ "color": "#fc0", "name": "UCF Gold (Primary)", "slug": "primary" },
+				{ "color": "#000", "name": "Black (Secondary)", "slug": "secondary" },
+				{ "color": "#fff", "name": "White (Inverse)", "slug": "inverse" },
+				{ "color": "#2ecc71", "name": "Success", "slug": "success" },
+				{ "color": "#81cfe0", "name": "Info", "slug": "info" },
+				{ "color": "#f4b350", "name": "Warning", "slug": "warning" },
+				{ "color": "#ff6445", "name": "Danger", "slug": "danger" },
+				{ "color": "#786000", "name": "Primary (Accessible)", "slug": "primary-aw" },
+				{ "color": "#477e5e", "name": "Success (Accessible)", "slug": "success-aw" },
+				{ "color": "#298194", "name": "Info (Accessible)", "slug": "info-aw" },
+				{ "color": "#966e31", "name": "Warning (Accessible)", "slug": "warning-aw" },
+				{ "color": "#c44f38", "name": "Danger (Accessible)", "slug": "danger-aw" },
+				{ "color": "#ffeb9b", "name": "Gold Lighter", "slug": "gold-lighter" },
+				{ "color": "#fdf9e8", "name": "Gold Lightest", "slug": "gold-lightest" },
+				{ "color": "#b18e00", "name": "Gold Darker", "slug": "gold-darker" },
+				{ "color": "#786000", "name": "Gold Darkest", "slug": "gold-darkest" },
+				{ "color": "#bc9a36", "name": "Metal Gold", "slug": "metal-gold" },
+				{ "color": "#292b2c", "name": "Gray Darkest", "slug": "gray-darkest" },
+				{ "color": "#464a4c", "name": "Gray Darker", "slug": "gray-darker" },
+				{ "color": "#636c72", "name": "Gray Dark", "slug": "gray-dark" },
+				{ "color": "#767676", "name": "Gray", "slug": "gray" },
+				{ "color": "#ccc", "name": "Gray Light", "slug": "gray-light" },
+				{ "color": "#eceeef", "name": "Gray Lighter", "slug": "gray-lighter" },
+				{ "color": "#f7f7f9", "name": "Gray Lightest", "slug": "gray-lightest" }
+			]
+		},
+		"layout": {
+			"contentSize": "1200px",
+			"wideSize": "100%"
+		},
+		"spacing": {
+			"units": [ "%", "px", "em", "rem", "vh", "vw" ],
+			"spacingSizes": [
+				{ "size": "0.25rem", "name": "Tiny", "slug": "10" },
+				{ "size": "0.5rem", "name": "Small", "slug": "20" },
+				{ "size": "1rem", "name": "Medium", "slug": "30" },
+				{ "size": "1.5rem", "name": "Large", "slug": "40" },
+				{ "size": "3rem", "name": "Extra Large", "slug": "50" }
+			]
+		},
+		"typography": {
+			"fontFamilies": [
+				{
+					"fontFamily": "'UCF Sans Serif Alt', 'Helvetica Neue', Arial, sans-serif",
+					"name": "UCF Sans Serif Alt",
+					"slug": "ucf-sans-serif-alt",
+					"fontFace": [
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "100",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-thin-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-thin-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "200",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-extralight-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-extralight-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "300",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-light-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-light-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-regular-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-regular-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "500",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "600",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-semibold-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "800",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-extrabold-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-extrabold-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Sans Serif Alt",
+							"fontWeight": "900",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-black-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-sans-serif-alt/ucfsansserifalt-black-webfont.woff"
+							]
+						}
+					]
+				},
+				{
+					"fontFamily": "'UCF Slab Serif Alt', serif",
+					"name": "UCF Slab Serif Alt",
+					"slug": "ucf-slab-serif-alt",
+					"fontFace": [
+						{
+							"fontFamily": "UCF Slab Serif Alt",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/tulia/tulia_regular-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/tulia/tulia_regular-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Slab Serif Alt",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/tulia/tulia_italic-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/tulia/tulia_italic-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Slab Serif Alt",
+							"fontWeight": "700",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/tulia/tulia_bold-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/tulia/tulia_bold-webfont.woff"
+							]
+						}
+					]
+				},
+				{
+					"fontFamily": "'UCF Condensed Alt', sans-serif",
+					"name": "UCF Condensed Alt",
+					"slug": "ucf-condensed-alt",
+					"fontFace": [
+						{
+							"fontFamily": "UCF Condensed Alt",
+							"fontWeight": "400",
+							"fontStyle": "normal",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-condensed-alt/ucfcondensedalt-regular-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-condensed-alt/ucfcondensedalt-regular-webfont.woff"
+							]
+						},
+						{
+							"fontFamily": "UCF Condensed Alt",
+							"fontWeight": "400",
+							"fontStyle": "italic",
+							"src": [
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-condensed-alt/ucfcondensedalt-italic-webfont.woff2",
+								"https://cdn.ucf.edu/athena-framework/latest/fonts/ucf-condensed-alt/ucfcondensedalt-italic-webfont.woff"
+							]
+						}
+					]
+				}
+			],
+			"fontSizes": [
+				{ "size": "0.75rem", "name": "Extra Small", "slug": "xs" },
+				{ "size": "0.875rem", "name": "Small", "slug": "sm" },
+				{ "size": "1rem", "name": "Medium", "slug": "md" },
+				{ "size": "1.25rem", "name": "Large", "slug": "lg" }
+			]
+		},
+		"useRootPaddingAwareAlignments": true
+	},
+	"styles": {
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--ucf-sans-serif-alt)",
+			"lineHeight": "1.5"
+		},
+		"elements": {
+			"heading": {
+				"typography": {
+					"fontFamily": "inherit",
+					"fontWeight": "600",
+					"lineHeight": "1.1"
+				},
+				"spacing": {
+					"margin": {
+						"top": "0",
+						"bottom": "1rem"
+					}
+				}
+			}
+		}
+	},
+	"templateParts": [
+		{
+			"area": "header",
+			"name": "header"
+		},
+		{
+			"area": "footer",
+			"name": "footer"
+		}
+	],
+	"version": 3
+}

@@ -1,0 +1,14 @@
+// -----------------------------------------------------------------------------
+// Font-family utilities
+//
+// Lets editors override a block's font via an Additional CSS class
+// (e.g. `font-slab-serif`), mirroring Athena's .font-* utilities.
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+@each $name, $family in $font-families {
+	.font-#{$name} {
+		font-family: $family;
+	}
+}

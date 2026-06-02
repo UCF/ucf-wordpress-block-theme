@@ -1,0 +1,13 @@
+// -----------------------------------------------------------------------------
+// Text utilities
+//
+// Body-copy variations from the Athena Framework. `.lead` is larger, lighter
+// intro text; `.is-style-lead` is the matching Paragraph block style variation.
+// -----------------------------------------------------------------------------
+
+.lead,
+.is-style-lead {
+	font-size: 1.25rem;
+	font-weight: 300;
+	line-height: 1.4;
+}

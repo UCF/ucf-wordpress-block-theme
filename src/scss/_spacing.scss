@@ -1,0 +1,17 @@
+// -----------------------------------------------------------------------------
+// Spacing
+//
+// Default vertical rhythm so flow content isn't smooshed together. Applies a
+// standard bottom margin to headings, paragraphs and blockquotes, tied to the
+// theme.json spacing preset (--wp--preset--spacing--30 = 1rem / "Medium").
+// -----------------------------------------------------------------------------
+
+$block-margin-bottom: var(--wp--preset--spacing--30);
+
+p,
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+blockquote,
+.wp-block-quote {
+	margin-bottom: $block-margin-bottom;
+}

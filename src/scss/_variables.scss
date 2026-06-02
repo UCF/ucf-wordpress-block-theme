@@ -1,0 +1,38 @@
+// -----------------------------------------------------------------------------
+// Typography variables
+//
+// Mirrors the UCF Athena Framework heading scale. Sizes are paired per level:
+// `base` (mobile) and `md` (>= 768px), matching Athena's responsive jump.
+// -----------------------------------------------------------------------------
+
+// Breakpoint where headings step up to their desktop size.
+$breakpoint-md: 768px;
+
+// Shared heading properties.
+$heading-font-weight: 600;
+$heading-line-height: 1.1;
+$heading-margin-bottom: 0.5rem;
+
+// Heading sizes per level: (base: mobile, md: >= $breakpoint-md).
+$heading-sizes: (
+	1: (base: 2rem,    md: 2.5rem),
+	2: (base: 1.7rem,  md: 2rem),
+	3: (base: 1.45rem, md: 1.75rem),
+	4: (base: 1.2rem,  md: 1.5rem),
+	5: (base: 1rem,    md: 1.25rem),
+	6: (base: 0.75rem, md: 1rem),
+);
+
+// Font-family utility classes -> theme.json font preset CSS variables.
+$font-families: (
+	"sans-serif-alt": var(--wp--preset--font-family--ucf-sans-serif-alt),
+	"slab-serif":     var(--wp--preset--font-family--ucf-slab-serif-alt),
+	"condensed":      var(--wp--preset--font-family--ucf-condensed-alt),
+);
+
+// Athena bumps heading sizes when a display font is applied. The keys here
+// must match keys in $font-families above.
+$font-size-ratios: (
+	"slab-serif": 1.15,
+	"condensed":  1.75,
+);
