@@ -10,6 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Load additional theme PHP from the includes/ directory.
+ */
+require_once get_theme_file_path( 'includes/page-fields.php' );
+require_once get_theme_file_path( 'includes/page-header.php' );
+
+/**
  * Register heading-size block style variations.
  *
  * These let an editor render a heading at a different visual size
