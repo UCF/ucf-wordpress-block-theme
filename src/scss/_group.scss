@@ -1,0 +1,32 @@
+// -----------------------------------------------------------------------------
+// Group container styles
+//
+// Athena container components recreated as core/group block style variations
+// (.is-style-card / .is-style-jumbotron / .is-style-well). Apply to a Group
+// block to wrap its inner content in the chosen treatment.
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+// Card: bordered white panel.
+.wp-block-group.is-style-card {
+	padding: 1.25rem;
+	background-color: var(--wp--preset--color--inverse);
+	border: 1px solid $border-color;
+	border-radius: 0.25rem;
+}
+
+// Jumbotron: large, padded hero band.
+.wp-block-group.is-style-jumbotron {
+	padding: 2rem;
+	background-color: var(--wp--preset--color--gray-lighter);
+	border-radius: 0.25rem;
+}
+
+// Well: inset light box for secondary content.
+.wp-block-group.is-style-well {
+	padding: 1.25rem;
+	background-color: var(--wp--preset--color--gray-lightest);
+	border: 1px solid $border-color;
+	border-radius: 0.25rem;
+}

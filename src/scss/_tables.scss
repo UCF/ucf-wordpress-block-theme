@@ -1,9 +1,11 @@
 // -----------------------------------------------------------------------------
 // Tables
 //
-// Base table styling matching Athena's .table. Applies to the core Table block
-// and to any element carrying the .table utility class. Striped / bordered /
-// hover treatments are registered as block style variations (see Tier 3).
+// Base table styling matching Athena's .table, applied automatically to every
+// core Table block. Below that, Athena's table variants (striped, bordered,
+// hover, compact, dark) are available two ways: as core/table block style
+// variations (.is-style-table-*), surfaced in the editor's Styles list, and as
+// utility classes (.table-striped, etc.) for combining more than one at a time.
 // -----------------------------------------------------------------------------
 
 @use "variables" as *;
@@ -24,4 +26,53 @@
 		vertical-align: bottom;
 		border-bottom: 2px solid $border-color;
 	}
+}
+
+// Striped: shade every other body row.
+.table-striped tbody tr:nth-of-type(odd),
+.wp-block-table.is-style-table-striped tbody tr:nth-of-type(odd) {
+	background-color: var(--wp--preset--color--gray-lightest);
+}
+
+// Bordered: a full grid of borders on every cell.
+.table-bordered,
+.wp-block-table.is-style-table-bordered table {
+	border: 1px solid $border-color;
+}
+
+.table-bordered th,
+.table-bordered td,
+.wp-block-table.is-style-table-bordered th,
+.wp-block-table.is-style-table-bordered td {
+	border: 1px solid $border-color;
+}
+
+// Hover: highlight the row under the cursor.
+.table-hover tbody tr:hover,
+.wp-block-table.is-style-table-hover tbody tr:hover {
+	background-color: var(--wp--preset--color--gray-lighter);
+}
+
+// Compact: tighter cell padding.
+.table-sm th,
+.table-sm td,
+.wp-block-table.is-style-table-sm th,
+.wp-block-table.is-style-table-sm td {
+	padding: 0.3rem;
+}
+
+// Dark: light text on a dark background, with lighter dividers.
+.table-dark,
+.wp-block-table.is-style-table-dark table {
+	color: var(--wp--preset--color--inverse);
+	background-color: var(--wp--preset--color--gray-darkest);
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th,
+.wp-block-table.is-style-table-dark th,
+.wp-block-table.is-style-table-dark td,
+.wp-block-table.is-style-table-dark thead th {
+	border-color: var(--wp--preset--color--gray-darker);
 }

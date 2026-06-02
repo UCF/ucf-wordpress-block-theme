@@ -1,0 +1,39 @@
+// -----------------------------------------------------------------------------
+// Alerts (static callouts)
+//
+// Athena's static alert boxes recreated as core/group block style variations
+// (.is-style-alert-{name}). A colored left accent + matching border calls out
+// the message. These are the non-dismissible variants only; a closeable alert
+// needs JS and belongs in a plugin (see roadmap "Keep in a PLUGIN").
+//
+// Border/accent colors use the accessible "-aw" palette variants so the text
+// inside stays legible against the light background.
+// -----------------------------------------------------------------------------
+
+@use "sass:map";
+@use "variables" as *;
+
+// Alert variant -> accessible palette color slug.
+$alert-colors: (
+	"primary": "primary-aw",
+	"success": "success-aw",
+	"info":    "info-aw",
+	"warning": "warning-aw",
+	"danger":  "danger-aw",
+);
+
+.wp-block-group[class*="is-style-alert-"] {
+	padding: 1rem 1.25rem;
+	margin-bottom: 1rem;
+	background-color: var(--wp--preset--color--gray-lightest);
+	border: 1px solid currentColor;
+	border-left-width: 0.25rem;
+	border-radius: 0.25rem;
+}
+
+@each $name, $preset in $alert-colors {
+	.wp-block-group.is-style-alert-#{$name} {
+		color: var(--wp--preset--color--#{$preset});
+		border-color: var(--wp--preset--color--#{$preset});
+	}
+}

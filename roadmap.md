@@ -58,19 +58,28 @@ already done.)
 
 ---
 
-## Tier 3 — Block style variations (CSS-only)
+## Tier 3 — Block style variations (CSS-only)  ✅ DONE
 
 Registered via `register_block_style()` + SCSS — the established pattern in this
 theme (see heading sizes, `.lead`).
 
-- [ ] **Button variants** on `core/button`: `.btn-primary`, `.btn-secondary`,
-  `.btn-outline-*`, `.btn-inverse`, size `lg`
-- [ ] **Table variants** on `core/table`: striped / bordered / hover
-- [ ] **Quote / pullquote** variants
-- [ ] **List variants**: unstyled, inline
-- [ ] **Group "card"** style on `core/group`: Athena `.card` look
-- [ ] **Group "jumbotron / well"** style (note: `core/cover` overlaps)
-- [ ] **Alert (static)** style — colored callout box (`.alert-*`)
+- [x] **Button variants** on `core/button`: solid Gold/Black/Inverse, Outline
+  gold/black/inverse, and a Large size — block styles + `.btn-*` utility classes
+  (`src/scss/_buttons.scss`).
+- [x] **Table variants** on `core/table`: Striped, Bordered, Row hover, Compact,
+  Dark — registered as block styles and available as `.table-*` utility classes
+  for combining (`src/scss/_tables.scss`).
+- [x] **Quote / pullquote** variants — Quote border colors (Tier 1) plus
+  matching `core/pullquote` border-color variants (`src/scss/_blockquote.scss`).
+- [x] **List variants**: Unstyled, Inline — `core/list` block styles
+  (promoted in Tier 2, `src/scss/_lists.scss`).
+- [x] **Group "card"** style on `core/group`: Athena `.card` look
+  (`src/scss/_group.scss`).
+- [x] **Group "jumbotron / well"** style — Jumbotron + Well `core/group` styles
+  (`src/scss/_group.scss`).
+- [x] **Alert (static)** style — Gold/Success/Info/Warning/Danger callout boxes
+  as `core/group` block styles (`src/scss/_alerts.scss`). Dismissible/closeable
+  alerts remain a plugin concern (need JS).
 
 ---
 

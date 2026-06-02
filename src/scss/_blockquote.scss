@@ -42,3 +42,31 @@ blockquote,
 		border-left-color: var(--wp--preset--color--#{$preset});
 	}
 }
+
+// Pullquote: a centered, full-width emphasis quote with top/bottom rules. The
+// same palette set recolors those rules via core/pullquote block styles
+// (.is-style-pullquote-{name}).
+.wp-block-pullquote {
+	padding: 1.5rem 0;
+	border-top: 0.25rem solid currentColor;
+	border-bottom: 0.25rem solid currentColor;
+	text-align: center;
+	font-size: 1.5rem;
+
+	cite,
+	.wp-block-pullquote__citation {
+		display: block;
+		margin-top: 0.5rem;
+		font-size: 0.875rem;
+		font-style: normal;
+		text-transform: none;
+		opacity: 0.75;
+	}
+}
+
+@each $name, $preset in $blockquote-border-colors {
+	.wp-block-pullquote.is-style-pullquote-#{$name} {
+		border-top-color: var(--wp--preset--color--#{$preset});
+		border-bottom-color: var(--wp--preset--color--#{$preset});
+	}
+}

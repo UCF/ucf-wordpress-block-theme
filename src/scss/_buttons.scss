@@ -1,0 +1,90 @@
+// -----------------------------------------------------------------------------
+// Button variants
+//
+// Athena's button color modifiers. Available as core/button block style
+// variations (.is-style-btn-*), surfaced in the editor's Styles list, and as
+// utility classes (.btn / .btn-primary, etc.) for use on plain anchors.
+//
+// The base button look (square corners, uppercase, gold/black) is set on the
+// default core/button via theme.json (styles.elements.button); these variants
+// recolor it. Block styles are single-select, so the size modifier (.btn-lg)
+// is offered alongside the color variants -- combine via utility classes when
+// you need a color + size together.
+// -----------------------------------------------------------------------------
+
+@use "sass:map";
+@use "variables" as *;
+
+// Solid variants: name -> (background, text, hover background).
+$button-solid: (
+	"primary":   (bg: var(--wp--preset--color--primary),   text: var(--wp--preset--color--secondary), hover: var(--wp--preset--color--gold-darker)),
+	"secondary": (bg: var(--wp--preset--color--secondary), text: var(--wp--preset--color--inverse),   hover: var(--wp--preset--color--gray-darkest)),
+	"inverse":   (bg: var(--wp--preset--color--inverse),   text: var(--wp--preset--color--secondary), hover: var(--wp--preset--color--gray-lighter)),
+);
+
+// Outline variants: name -> (line/text color, fill text on hover, fill bg on hover).
+$button-outline: (
+	"primary":   (color: var(--wp--preset--color--primary-aw), fill-text: var(--wp--preset--color--secondary), fill-bg: var(--wp--preset--color--primary)),
+	"secondary": (color: var(--wp--preset--color--secondary),  fill-text: var(--wp--preset--color--inverse),   fill-bg: var(--wp--preset--color--secondary)),
+	"inverse":   (color: var(--wp--preset--color--inverse),    fill-text: var(--wp--preset--color--secondary), fill-bg: var(--wp--preset--color--inverse)),
+);
+
+// Base look for the .btn utility (mirrors theme.json's button element so plain
+// anchors can opt in). Core buttons already get this from theme.json.
+.btn {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 0;
+}
+
+// Solid color variants.
+@each $name, $c in $button-solid {
+	.btn-#{$name},
+	.wp-block-button.is-style-btn-#{$name} .wp-block-button__link {
+		color: map.get($c, text);
+		background-color: map.get($c, bg);
+		border-color: map.get($c, bg);
+	}
+
+	.btn-#{$name}:hover,
+	.btn-#{$name}:focus,
+	.wp-block-button.is-style-btn-#{$name} .wp-block-button__link:hover,
+	.wp-block-button.is-style-btn-#{$name} .wp-block-button__link:focus {
+		color: map.get($c, text);
+		background-color: map.get($c, hover);
+		border-color: map.get($c, hover);
+	}
+}
+
+// Outline color variants: transparent until hovered/focused.
+@each $name, $c in $button-outline {
+	.btn-outline-#{$name},
+	.wp-block-button.is-style-btn-outline-#{$name} .wp-block-button__link {
+		color: map.get($c, color);
+		background-color: transparent;
+		border-color: map.get($c, color);
+	}
+
+	.btn-outline-#{$name}:hover,
+	.btn-outline-#{$name}:focus,
+	.wp-block-button.is-style-btn-outline-#{$name} .wp-block-button__link:hover,
+	.wp-block-button.is-style-btn-outline-#{$name} .wp-block-button__link:focus {
+		color: map.get($c, fill-text);
+		background-color: map.get($c, fill-bg);
+		border-color: map.get($c, fill-bg);
+	}
+}
+
+// Large size modifier.
+.btn-lg,
+.wp-block-button.is-style-btn-lg .wp-block-button__link {
+	padding: 0.75rem 1.5rem;
+	font-size: 1.25rem;
+}
