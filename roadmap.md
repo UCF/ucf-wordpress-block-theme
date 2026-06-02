@@ -13,6 +13,34 @@ markup belongs in a plugin so it survives a theme switch.
 
 ---
 
+## Phase 1 — Athena foundation & full-bleed layout  ✅ COMPLETE
+
+The brand layer and presentational styling are in place. Everything an editor
+needs to build on-brand UCF pages with the core blocks now exists in the theme,
+plus the layout plumbing for full-width sections. Summary of what shipped:
+
+- **Design tokens** (Tier 1) — full UCF color palette incl. accessible `-aw`
+  text variants, font-size presets, and a Bootstrap-matched spacing scale, all
+  exposed in the editor via `theme.json`.
+- **Element base styling** (Tier 2) — links, buttons, display headings, lists,
+  tables, code/pre/kbd, captions, separators, and print styles applied globally
+  via `styles.elements` and the SCSS pipeline.
+- **Block style variations** (Tier 3) — selectable styles on core blocks:
+  button colors/outlines/sizes, table treatments, quote/pullquote borders, list
+  variants, group card/jumbotron/well, and static alert callouts. Every variant
+  also has a parallel utility class so multiple effects can be combined.
+- **Utility classes** (Tier 4) — the handful with no editor equivalent:
+  `.sr-only(-focusable)`, `.stretched-link`, and text helpers (uppercase /
+  nowrap / truncate); the editor-useful ones also registered as block styles.
+- **Full-bleed layout & templates** — `theme.json` layout tuned
+  (`contentSize 1200px` / `wideSize 1400px` + root padding), and flat
+  `single.html` / `page.html` templates so Full-width blocks break out to the
+  viewport edges on the front end, matching the editor.
+
+The detailed tier-by-tier breakdown follows.
+
+---
+
 ## Tier 1 — `theme.json` design tokens  ✅ DONE
 
 Foundational brand tokens exposed in every block's editor controls (color pickers,
@@ -107,21 +135,61 @@ the standard width.
 
 ---
 
-## Tier 4 — Select pure-CSS utility classes
+## Tier 4 — Select pure-CSS utility classes  ✅ DONE
 
 Most utilities are redundant in a block theme; only port those with no block-editor
-equivalent. (Font-family utilities are already done.)
+equivalent. All live in `src/scss/_utilities.scss`.
 
-- [ ] **`.sr-only` / `.sr-only-focusable`** — accessibility
-- [ ] **`.stretched-link`** — makes a whole card/group clickable
-- [ ] **Text helpers**: `.text-uppercase`, `.text-truncate`, `.text-nowrap`
-- [ ] **`.embed-responsive`** (note: `core/embed` largely handles this)
+- [x] **`.sr-only` / `.sr-only-focusable`** — accessibility. `.sr-only` also a
+  `core/paragraph` + `core/heading` block style ("Screen-reader only").
+- [x] **`.stretched-link`** — makes a whole card/group clickable; pair with
+  `.position-relative` (the `.is-style-card` group is already a positioning
+  context, so a stretched link inside a Card works with no extra class).
+- [x] **Text helpers**: `.text-uppercase`, `.text-truncate`, `.text-nowrap` —
+  also `core/paragraph` + `core/heading` block styles ("Uppercase", "Truncate",
+  "No wrap").
+- [x] **`.embed-responsive`** — *intentionally skipped*; `core/embed` already
+  outputs responsive aspect-ratio wrappers, so a utility class would be redundant.
 - [x] **Font-family utilities** — `.font-slab-serif`, `.font-condensed`, `.font-sans-serif-alt`
 
 **Intentionally skipped** (block editor / `theme.json` already provides): spacing
 (`.m-*`/`.p-*`), flex, float, display, sizing (`.w-*`), borders/rounded, alignment,
 the grid (`.container`/`.row`/`.col-*`), background/text color utilities (palette
 presets replace these).
+
+---
+
+## Phase 2 — Next  🚧 PLANNING
+
+Phase 1 delivered the brand layer on top of core blocks. Phase 2 is for the work
+that builds on that foundation — site structure, reusable content, and anything
+that needs more than block styling. Items are candidates; check off / re-scope as
+we go.
+
+### Templates & site structure
+- [ ] **Additional templates** — `archive.html`, `search.html`, `404.html`,
+  `home.html` (currently only `index`, `single`, `page` exist).
+- [ ] **Template parts** — review/expand `header.html` / `footer.html` (nav,
+  branding, utility links) to match UCF site chrome.
+- [ ] **Block patterns** — ship ready-made sections (full-width jumbotron hero,
+  alert callout, card grid, CTA band) so editors insert in one click instead of
+  assembling Group + alignment + styles by hand.
+
+### Content & components
+- [ ] **Badge** — decide build approach (custom block vs. inline style); from the
+  Phase 1 "Undecided" note below.
+- [ ] **Custom block(s)** — any Athena component that needs structured markup the
+  core blocks can't express.
+
+### Quality & polish
+- [ ] **Accessibility pass** — color-contrast audit, focus states, skip link.
+- [ ] **Responsive review** — verify full-bleed sections, tables, and typography
+  across breakpoints.
+- [ ] **Editor parity** — confirm every front-end style also renders in the
+  editor (`add_editor_style` coverage).
+
+> Companion interactive/JS components are tracked separately under
+> **Keep in a PLUGIN** below — they intentionally live outside this theme.
 
 ---
 

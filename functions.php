@@ -258,6 +258,36 @@ function ucf_block_theme_register_table_styles() {
 add_action( 'init', 'ucf_block_theme_register_table_styles' );
 
 /**
+ * Register Tier 4 utility block style variations.
+ *
+ * The few Athena utilities worth exposing in the editor: visually-hidden
+ * (.sr-only) and the text helpers (uppercase / nowrap / truncate). Each applies
+ * an `is-style-{name}` class; the matching rules live in src/scss/_utilities.scss
+ * (which also defines the equivalent plain utility classes for hand-application).
+ */
+function ucf_block_theme_register_utility_styles() {
+	$text_styles = array(
+		'sr-only'        => __( 'Screen-reader only', 'ucf-wordpress-block-theme' ),
+		'text-uppercase' => __( 'Uppercase', 'ucf-wordpress-block-theme' ),
+		'text-nowrap'    => __( 'No wrap', 'ucf-wordpress-block-theme' ),
+		'text-truncate'  => __( 'Truncate', 'ucf-wordpress-block-theme' ),
+	);
+
+	foreach ( array( 'core/paragraph', 'core/heading' ) as $block ) {
+		foreach ( $text_styles as $name => $label ) {
+			register_block_style(
+				$block,
+				array(
+					'name'  => $name,
+					'label' => $label,
+				)
+			);
+		}
+	}
+}
+add_action( 'init', 'ucf_block_theme_register_utility_styles' );
+
+/**
  * Enqueue the compiled theme stylesheet on the front end.
  *
  * Built from src/scss via `npm run build` -> assets/css/main.css.

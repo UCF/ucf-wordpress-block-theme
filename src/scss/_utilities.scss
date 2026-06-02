@@ -1,0 +1,84 @@
+// -----------------------------------------------------------------------------
+// Utility classes (Tier 4)
+//
+// The small set of Athena utilities that have no block-editor or theme.json
+// equivalent. Most spacing/flex/sizing/color utilities are intentionally NOT
+// ported (the editor + presets cover them — see roadmap "Intentionally skipped").
+//
+// Where a utility is useful to pick from the editor, it's also registered as a
+// block style in functions.php and gets a matching `.is-style-*` selector so the
+// same rule applies whether added as a utility class or chosen from the Styles
+// list (the dual-selector pattern used throughout this theme).
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+// Visually hidden, but available to screen readers (Athena .sr-only).
+%sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.sr-only,
+.is-style-sr-only {
+	@extend %sr-only;
+}
+
+// Like .sr-only, but becomes visible when focused (skip links, etc.).
+.sr-only-focusable {
+	&:not(:focus):not(:focus-within) {
+		@extend %sr-only;
+	}
+}
+
+// Text transform / wrapping helpers.
+.text-uppercase,
+.is-style-text-uppercase {
+	text-transform: uppercase !important;
+}
+
+.text-nowrap,
+.is-style-text-nowrap {
+	white-space: nowrap !important;
+}
+
+// Single-line ellipsis truncation. Needs a constrained width to take effect
+// (e.g. inside a fixed-width column or card).
+.text-truncate,
+.is-style-text-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+// Stretched link: makes the nearest positioned ancestor (e.g. a Card group)
+// fully clickable via a single link/button inside it. Add `.position-relative`
+// to that ancestor — or use it inside `.is-style-card`, which is already a
+// positioning context below.
+.stretched-link::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	pointer-events: auto;
+}
+
+.position-relative {
+	position: relative !important;
+}
+
+// Make the Card group style a positioning context so a `.stretched-link`
+// inside it stretches over the whole card without extra markup.
+.wp-block-group.is-style-card {
+	position: relative;
+}
