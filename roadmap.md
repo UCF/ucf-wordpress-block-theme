@@ -219,7 +219,11 @@ content; it is auto-seeded into every new Page.
   core blocks can't express.
 
 ### Quality & polish
-- [ ] **Accessibility pass** — color-contrast audit, focus states, skip link.
+- [~] **Accessibility pass** — audited all templates with pa11y (htmlcs WCAG2AA
+  + axe WCAG 2.1 AA). All clean except **color contrast** (white hero text over
+  the cover; one author-colored paragraph) — set aside for now. Confirmed: skip
+  link present, no `outline:none`, single H1 per page, mobile nav overlay fixed,
+  landmarks/labels clean.
 - [x] **Responsive review (pass 1)** — fixed the mobile hamburger menu
   (navigation overlay had no background/text color → invisible; set
   `overlayBackgroundColor`/`overlayTextColor` on all header nav blocks). Made
@@ -228,6 +232,18 @@ content; it is auto-seeded into every new Page.
   Header logo/hamburger row intentionally `nowrap`. Re-check after patterns/footer.
 - [ ] **Editor parity** — confirm every front-end style also renders in the
   editor (`add_editor_style` coverage).
+- [ ] **Automated testing** — stand up a repeatable test suite so layout/visual
+  regressions and accessibility issues are caught automatically, not by manual
+  spot-checks.
+  - **Visual regression** — capture baseline screenshots of each template
+    (page/hero, post, home, 404, search, archive) at desktop / tablet / mobile
+    widths and diff on change (e.g. Playwright + pixel diff, or BackstopJS).
+  - **Accessibility** — run the pa11y audit (htmlcs WCAG2AA + axe WCAG 2.1 AA)
+    across the same set of URLs and fail on new violations (the manual pass is
+    already wired — formalize it as a script).
+  - **Wiring** — npm scripts + a CI workflow (GitHub Actions) against a disposable
+    WordPress instance (e.g. `wp-env`) seeded with representative content; gate
+    PRs on both checks.
 
 > Companion interactive/JS components are tracked separately under
 > **Keep in a PLUGIN** below — they intentionally live outside this theme.
