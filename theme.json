@@ -40,6 +40,11 @@
 					"slug": "danger"
 				},
 				{
+					"color": "#0275d8",
+					"name": "Text Complementary",
+					"slug": "text-complementary"
+				},
+				{
 					"color": "#786000",
 					"name": "Primary (Accessible)",
 					"slug": "primary-aw"
@@ -363,14 +368,14 @@
 			},
 			"link": {
 				"color": {
-					"text": "var(--wp--preset--color--primary-aw)"
+					"text": "var(--wp--preset--color--text-complementary)"
 				},
 				"typography": {
-					"textDecoration": "none"
+					"textDecoration": "underline"
 				},
 				":hover": {
 					"color": {
-						"text": "var(--wp--preset--color--secondary)"
+						"text": "var(--wp--preset--color--text-complementary)"
 					},
 					"typography": {
 						"textDecoration": "underline"

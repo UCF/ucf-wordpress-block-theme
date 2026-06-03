@@ -50,6 +50,7 @@ font-size menus, spacing menus).
   - UCF Gold `#fc0` (primary), Black `#000` (secondary), White (inverse)
   - Gray ramp: `#292b2c`, `#464a4c`, `#636c72`, `#767676`, `#ccc`, `#eceeef`, `#f7f7f9`
   - Semantic: success `#2ecc71`, info `#81cfe0`, warning `#f4b350`, danger `#ff6445`
+  - Text complementary `#0275d8` — link color (black/gold reserved per usage rules)
   - Accessible "-aw" (AA contrast) variants for text use: primary-aw `#786000`,
     success-aw `#477e5e`, info-aw `#298194`, warning-aw `#966e31`, danger-aw `#c44f38`
   - Gold shade ramp: gold-lighter `#ffeb9b`, gold-lightest `#fdf9e8`,
@@ -196,8 +197,12 @@ content; it is auto-seeded into every new Page.
   less flexible than pages.
 
 ### Templates & site structure
-- [ ] **Additional templates** — `archive.html`, `search.html`, `404.html`,
-  `home.html` (currently only `index`, `single`, `page` exist).
+- [x] **`404.html`** — modeled on UCF's 404: centered "Page Not Found" H1,
+  guidance text, a search field, and a feedback link. Uses the default header.
+- [x] **`home.html`** — simple fallback (recent-posts query loop) for when a
+  static Page isn't set as the front page. Site normally uses a Page for home.
+- [ ] **Additional templates** — `archive.html`, `search.html` (currently
+  `index`, `single`, `page`, `home`, `404` exist).
 - [ ] **Template parts** — review/expand `header.html` / `footer.html` (nav,
   branding, utility links) to match UCF site chrome.
 - [ ] **Block patterns** — ship ready-made sections (full-width jumbotron hero,
