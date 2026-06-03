@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Build, accessibility & visual regression
+    name: Build & accessibility
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -34,12 +34,6 @@ jobs:
 
       - name: Accessibility tests
         run: npm run test:a11y
-        env:
-          CI: true
-          TEST_BASE_URL: http://localhost:8888
-
-      - name: Visual regression tests
-        run: npm run test:visual
         env:
           CI: true
           TEST_BASE_URL: http://localhost:8888

@@ -241,18 +241,20 @@ content; it is auto-seeded into every new Page.
   editor (`add_editor_style` coverage).
 - [x] **Automated testing** — Playwright suite covering both concerns, wired to
   npm scripts + GitHub Actions against a seeded `wp-env` (see `tests/README.md`).
-  - **Visual regression** (`tests/visual.spec.js`) — full-page screenshots of
-    each template (home, page/hero, basic page, post, archive, search, 404) at
-    desktop / tablet 780px / mobile 360px, diffed against committed baselines
-    (`npm run test:visual` / `test:visual:update`).
   - **Accessibility** (`tests/a11y.spec.js`) — `@axe-core/playwright`, WCAG
     2.0/2.1 A+AA; fails on **violations**, reports axe **incomplete** separately
-    (avoids the hero-image false positives the pa11y CLI produced).
-  - **Wiring** — `.wp-env.json` + `tests/seed.sh` (deterministic content),
-    `playwright.config.js` (3 viewport projects, system-Chrome via `PW_CHANNEL`),
-    `.github/workflows/ci.yml` gates PRs on build + both suites. Verified locally:
-    a11y correctly flags the one real content violation and passes heroes; visual
-    baselines generate and re-match.
+    (avoids the hero-image false positives the pa11y CLI produced). **Gates CI**
+    (`.github/workflows/ci.yml`: build → wp-env → seed → a11y).
+  - **Visual regression** (`tests/visual.spec.js`) — full-page screenshots of
+    each template (home, page/hero, basic page, post, archive, search, 404) at
+    desktop / tablet 780px / mobile 360px, diffed against committed baselines.
+    **Local/manual only** (`npm run test:visual` / `test:visual:update`); not a
+    CI gate. Linux baselines are regenerated via the manual
+    `update-visual-baselines.yml` (`workflow_dispatch`).
+  - **Wiring** — `.wp-env.json` + `tests/seed.sh` (deterministic content incl. a
+    nav menu), `playwright.config.js` (3 viewport projects, system-Chrome via
+    `PW_CHANNEL`). Verified locally: a11y passes all routes; visual baselines
+    generate and re-match.
 
 > Companion interactive/JS components are tracked separately under
 > **Keep in a PLUGIN** below — they intentionally live outside this theme.
