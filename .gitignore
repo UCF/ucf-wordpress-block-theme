@@ -1,6 +1,11 @@
 # Dependencies
 node_modules/
 
+# Test output (baselines under tests/**-snapshots/ ARE committed)
+test-results/
+playwright-report/
+tests/routes.local.js
+
 # Build artifacts / source maps
 *.css.map
 *.map

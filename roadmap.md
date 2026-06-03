@@ -220,10 +220,17 @@ content; it is auto-seeded into every new Page.
 
 ### Quality & polish
 - [~] **Accessibility pass** — audited all templates with pa11y (htmlcs WCAG2AA
-  + axe WCAG 2.1 AA). All clean except **color contrast** (white hero text over
-  the cover; one author-colored paragraph) — set aside for now. Confirmed: skip
-  link present, no `outline:none`, single H1 per page, mobile nav overlay fixed,
-  landmarks/labels clean.
+  + axe WCAG 2.1 AA). Confirmed clean: skip link, no `outline:none`, single H1
+  per page, mobile nav overlay, landmarks/labels.
+  - **Hero contrast** — axe-core reports the white hero text as *incomplete /
+    needs-review* (`bgOverlap`: text over a background image, contrast not
+    auto-determinable), **not a violation** (0 violations). pa11y's CLI surfaces
+    axe "incomplete" as errors, which is misleading. Added a dark fallback
+    background-color to the hero cover (`src/scss/_hero.scss`, `.ucf-hero` class +
+    structural selector) so the *no-image* hero state passes outright and the
+    text always has a dark base.
+  - **Remaining real violation** — one author-colored paragraph in a post
+    (custom text color ~4.21:1); content-level, fixed by the editor.
 - [x] **Responsive review (pass 1)** — fixed the mobile hamburger menu
   (navigation overlay had no background/text color → invisible; set
   `overlayBackgroundColor`/`overlayTextColor` on all header nav blocks). Made
@@ -232,18 +239,20 @@ content; it is auto-seeded into every new Page.
   Header logo/hamburger row intentionally `nowrap`. Re-check after patterns/footer.
 - [ ] **Editor parity** — confirm every front-end style also renders in the
   editor (`add_editor_style` coverage).
-- [ ] **Automated testing** — stand up a repeatable test suite so layout/visual
-  regressions and accessibility issues are caught automatically, not by manual
-  spot-checks.
-  - **Visual regression** — capture baseline screenshots of each template
-    (page/hero, post, home, 404, search, archive) at desktop / tablet / mobile
-    widths and diff on change (e.g. Playwright + pixel diff, or BackstopJS).
-  - **Accessibility** — run the pa11y audit (htmlcs WCAG2AA + axe WCAG 2.1 AA)
-    across the same set of URLs and fail on new violations (the manual pass is
-    already wired — formalize it as a script).
-  - **Wiring** — npm scripts + a CI workflow (GitHub Actions) against a disposable
-    WordPress instance (e.g. `wp-env`) seeded with representative content; gate
-    PRs on both checks.
+- [x] **Automated testing** — Playwright suite covering both concerns, wired to
+  npm scripts + GitHub Actions against a seeded `wp-env` (see `tests/README.md`).
+  - **Visual regression** (`tests/visual.spec.js`) — full-page screenshots of
+    each template (home, page/hero, basic page, post, archive, search, 404) at
+    desktop / tablet 780px / mobile 360px, diffed against committed baselines
+    (`npm run test:visual` / `test:visual:update`).
+  - **Accessibility** (`tests/a11y.spec.js`) — `@axe-core/playwright`, WCAG
+    2.0/2.1 A+AA; fails on **violations**, reports axe **incomplete** separately
+    (avoids the hero-image false positives the pa11y CLI produced).
+  - **Wiring** — `.wp-env.json` + `tests/seed.sh` (deterministic content),
+    `playwright.config.js` (3 viewport projects, system-Chrome via `PW_CHANNEL`),
+    `.github/workflows/ci.yml` gates PRs on build + both suites. Verified locally:
+    a11y correctly flags the one real content violation and passes heroes; visual
+    baselines generate and re-match.
 
 > Companion interactive/JS components are tracked separately under
 > **Keep in a PLUGIN** below — they intentionally live outside this theme.

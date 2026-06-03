@@ -1,0 +1,20 @@
+// -----------------------------------------------------------------------------
+// Hero cover
+//
+// The hero pattern (patterns/hero.php) is a core/cover with white overlaid text.
+// Give it a dark fallback background-color so the white text always sits on a
+// dark base for contrast evaluation. When a background image is set it covers
+// this color entirely, so the fallback is never visible — but accessibility
+// checkers (and the no-image state) see a dark background and the text passes
+// the 4.5:1 contrast requirement.
+//
+// Targeted by class (future heroes) and structurally (the cover that opens the
+// post content — covers heroes already saved without the class).
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+.wp-block-cover.ucf-hero,
+.wp-block-post-content > .wp-block-cover:first-child {
+	background-color: var(--wp--preset--color--secondary);
+}

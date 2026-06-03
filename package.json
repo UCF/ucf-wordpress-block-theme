@@ -7,9 +7,19 @@
 	"private": true,
 	"scripts": {
 		"build": "sass src/scss/main.scss assets/css/main.css --style=compressed --no-source-map",
-		"watch": "sass --watch src/scss/main.scss assets/css/main.css --style=expanded"
+		"watch": "sass --watch src/scss/main.scss assets/css/main.css --style=expanded",
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"env:seed": "bash tests/seed.sh",
+		"test": "npm run test:a11y && npm run test:visual",
+		"test:a11y": "playwright test tests/a11y.spec.js",
+		"test:visual": "playwright test tests/visual.spec.js",
+		"test:visual:update": "playwright test tests/visual.spec.js --update-snapshots"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.10.0",
+		"@playwright/test": "^1.48.0",
+		"@wordpress/env": "^10.0.0",
 		"sass": "^1.100.0"
 	}
 }
