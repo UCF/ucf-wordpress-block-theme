@@ -293,6 +293,16 @@ function ucf_block_theme_register_utility_styles() {
 add_action( 'init', 'ucf_block_theme_register_utility_styles' );
 
 /**
+ * Disable the core Navigation block's "Page List" fallback.
+ *
+ * When no menu is assigned, the Navigation block falls back to a Page List,
+ * which renders a <ul> directly inside the navigation's own <ul> — invalid,
+ * inaccessible markup (axe "list" violation). Returning an empty fallback means
+ * an unconfigured nav renders nothing rather than broken markup.
+ */
+add_filter( 'block_core_navigation_render_fallback', '__return_empty_string' );
+
+/**
  * Enqueue the compiled theme stylesheet on the front end.
  *
  * Built from src/scss via `npm run build` -> assets/css/main.css.

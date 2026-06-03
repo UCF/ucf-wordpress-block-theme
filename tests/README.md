@@ -14,10 +14,10 @@ Routes (one per template) live in `routes.js`.
 ## Running against wp-env (the supported path)
 
 ```bash
-npm install
-npm run build           # compile CSS first
-npm run env:start       # boot wp-env (needs Docker)
-npm run env:seed        # create deterministic content (tests/seed.sh)
+npm install                 # installs wp-env + Playwright into node_modules
+npm run build               # compile CSS first
+npm run env:start           # boot wp-env (needs Docker running)
+npm run env:seed            # create deterministic content (tests/seed.sh)
 npx playwright install chromium
 
 npm run test:a11y
@@ -27,13 +27,33 @@ npm run test:visual:update       # regenerate baselines after a reviewed change
 
 `TEST_BASE_URL` defaults to `http://localhost:8888` (wp-env).
 
+### Requirements / gotchas
+
+- **Docker must be running.** wp-env runs WordPress in Docker.
+- **The checkout must live in a Docker-shared path.** Docker Desktop shares your
+  home directory by default but *not* arbitrary locations like
+  `/Applications/...`. Clone the theme somewhere under your home folder (or add
+  the path under Docker → Settings → Resources → File Sharing). Otherwise
+  `wp-env start` fails with a "mounts denied" error.
+- **No global installs / PATH edits needed.** The `npm run *` scripts put
+  `./node_modules/.bin` on PATH, so the local `wp-env`/`playwright` binaries are
+  used. Run `env:seed` via `npm run env:seed` (or from the repo root after
+  `npm install`) so `seed.sh` finds the local `wp-env`.
+
 ### Visual baselines
 
-Baselines are environment- and platform-specific (Playwright suffixes them, e.g.
-`-linux.png`). Generate and commit them from the same OS CI uses (Linux) — run
-`test:visual:update` inside the Playwright Linux container, or let the CI job
-produce them and commit the artifact. The first run with a missing baseline
-writes it and fails by design (forces review).
+Baselines live in `tests/visual.spec.js-snapshots/` and are committed. Playwright
+suffixes them per-OS, so each platform needs its own set:
+
+- **`*-darwin.png`** — committed, for local runs on macOS.
+- **`*-linux.png`** — needed by CI (Ubuntu). Generate them on Linux: run
+  `npm run test:visual:update` inside the matching Playwright container
+  (`mcr.microsoft.com/playwright:vX.Y.Z-noble`) against the seeded site, or let
+  the CI job write them and commit the uploaded artifact.
+
+A missing baseline is written on first run and fails that run by design (forces a
+human to review the new screenshot before it becomes the reference). Regenerate
+intentionally after a reviewed layout change.
 
 ## Running against another install (e.g. local MAMP)
 
