@@ -201,8 +201,11 @@ content; it is auto-seeded into every new Page.
   guidance text, a search field, and a feedback link. Uses the default header.
 - [x] **`home.html`** — simple fallback (recent-posts query loop) for when a
   static Page isn't set as the front page. Site normally uses a Page for home.
-- [ ] **Additional templates** — `archive.html`, `search.html` (currently
-  `index`, `single`, `page`, `home`, `404` exist).
+- [x] **`archive.html`** — category/tag/date listings: archive title
+  (`query-title`) + term description, then the post listing (query loop,
+  pagination, no-results).
+- [x] **`search.html`** — "Search results for: …" title, a refine search field,
+  then the post listing (query loop, pagination, no-results message).
 - [ ] **Template parts** — review/expand `header.html` / `footer.html` (nav,
   branding, utility links) to match UCF site chrome.
 - [ ] **Block patterns** — ship ready-made sections (full-width jumbotron hero,
@@ -217,8 +220,12 @@ content; it is auto-seeded into every new Page.
 
 ### Quality & polish
 - [ ] **Accessibility pass** — color-contrast audit, focus states, skip link.
-- [ ] **Responsive review** — verify full-bleed sections, tables, and typography
-  across breakpoints.
+- [x] **Responsive review (pass 1)** — fixed the mobile hamburger menu
+  (navigation overlay had no background/text color → invisible; set
+  `overlayBackgroundColor`/`overlayTextColor` on all header nav blocks). Made
+  display headings fluid (`clamp()`, was fixed 3.5–6rem → mobile overflow). Wide
+  tables now scroll horizontally (`.wp-block-table { overflow-x: auto }`).
+  Header logo/hamburger row intentionally `nowrap`. Re-check after patterns/footer.
 - [ ] **Editor parity** — confirm every front-end style also renders in the
   editor (`add_editor_style` coverage).
 

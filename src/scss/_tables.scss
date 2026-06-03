@@ -10,6 +10,12 @@
 
 @use "variables" as *;
 
+// Let wide tables scroll horizontally on small screens instead of overflowing
+// the layout (the figure wraps the table).
+.wp-block-table {
+	overflow-x: auto;
+}
+
 .table,
 .wp-block-table table {
 	width: 100%;
