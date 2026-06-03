@@ -46,10 +46,12 @@ Baselines live in `tests/visual.spec.js-snapshots/` and are committed. Playwrigh
 suffixes them per-OS, so each platform needs its own set:
 
 - **`*-darwin.png`** — committed, for local runs on macOS.
-- **`*-linux.png`** — needed by CI (Ubuntu). Generate them on Linux: run
-  `npm run test:visual:update` inside the matching Playwright container
-  (`mcr.microsoft.com/playwright:vX.Y.Z-noble`) against the seeded site, or let
-  the CI job write them and commit the uploaded artifact.
+- **`*-linux.png`** — needed by CI (Ubuntu). Easiest path: run the
+  **"Update visual baselines"** workflow (`.github/workflows/update-visual-baselines.yml`,
+  `workflow_dispatch`) from the branch — it seeds a wp-env on the Linux runner,
+  regenerates the baselines, and commits the updated `*-linux.png` back to that
+  branch. Or generate them locally on a Linux machine with
+  `npm run test:visual:update`.
 
 A missing baseline is written on first run and fails that run by design (forces a
 human to review the new screenshot before it becomes the reference). Regenerate
