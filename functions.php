@@ -12,8 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Load additional theme PHP from the includes/ directory.
  */
-require_once get_theme_file_path( 'includes/page-fields.php' );
-require_once get_theme_file_path( 'includes/page-header.php' );
 require_once get_theme_file_path( 'includes/patterns.php' );
 
 /**

@@ -168,9 +168,8 @@ we go.
 
 ### Page header / hero  🚧 IN PROGRESS
 
-**Active approach (Option A): content-editable Hero pattern.** Authors place /
-edit a Hero (Cover + H1 + subtitle) at the top of the page content; it is
-auto-seeded into every new Page.
+Authors place / edit a Hero (Cover + H1 + subtitle) at the top of the page
+content; it is auto-seeded into every new Page.
 
 - [x] **Hero pattern** (`patterns/hero.php`) — full-width `core/cover` with a
   gradient overlay, an H1 (`display-2` style) and a `lead` subtitle. Categorized
@@ -188,19 +187,6 @@ auto-seeded into every new Page.
   (transparent bar + negative margin) instead of a separate bar, if desired.
 - [ ] **Post hero** — decide the `single.html` equivalent (featured image +
   post title); posts intentionally less flexible than pages.
-
-**Dormant alternative (Option B): template-injected masthead block.** Kept in
-the codebase in case we pivot back — currently registered but not placed in any
-template. Would re-add `<!-- wp:ucf/page-header /-->` to `page.html` and remove
-the Hero pattern seeding.
-
-- `ucf/page-header` dynamic block (`includes/page-header.php`) — art-directed
-  `<picture>` (breakpoints 360px / 780px) with mobile→tablet→desktop fallback,
-  gradient overlay, primary nav, and meta-driven title/subtitle. Styling in
-  `src/scss/_hero.scss`.
-- Post-meta fields + sidebar panel (`includes/page-fields.php`,
-  `assets/js/page-header-panel.js`) for title/subtitle/3 breakpoint images.
-- `ServerSideRender` editor preview (`assets/js/page-header-block.js`).
 
 ### Templates & site structure
 - [ ] **Additional templates** — `archive.html`, `search.html`, `404.html`,
