@@ -293,14 +293,32 @@ function ucf_block_theme_register_utility_styles() {
 add_action( 'init', 'ucf_block_theme_register_utility_styles' );
 
 /**
- * Disable the core Navigation block's "Page List" fallback.
+ * Suppress only the core Navigation block's "Page List" fallback.
  *
- * When no menu is assigned, the Navigation block falls back to a Page List,
- * which renders a <ul> directly inside the navigation's own <ul> — invalid,
- * inaccessible markup (axe "list" violation). Returning an empty fallback means
- * an unconfigured nav renders nothing rather than broken markup.
+ * The `block_core_navigation_render_fallback` filter receives the array of
+ * fallback *blocks*. When no menu is assigned, that fallback is a `core/page-list`
+ * block, which renders a <ul> directly inside the navigation's own <ul> —
+ * invalid, inaccessible markup (axe "list" violation). We drop only that case;
+ * an assigned or auto-selected menu (navigation-link blocks → <li> items) flows
+ * through untouched.
+ *
+ * @param array $fallback_blocks Parsed fallback blocks.
+ * @return array
  */
-add_filter( 'block_core_navigation_render_fallback', '__return_empty_string' );
+function ucf_block_theme_suppress_page_list_fallback( $fallback_blocks ) {
+	if ( ! is_array( $fallback_blocks ) ) {
+		return $fallback_blocks;
+	}
+
+	foreach ( $fallback_blocks as $block ) {
+		if ( isset( $block['blockName'] ) && 'core/page-list' === $block['blockName'] ) {
+			return array(); // No accessible auto-fallback; render nothing instead.
+		}
+	}
+
+	return $fallback_blocks;
+}
+add_filter( 'block_core_navigation_render_fallback', 'ucf_block_theme_suppress_page_list_fallback' );
 
 /**
  * Enqueue the compiled theme stylesheet on the front end.
