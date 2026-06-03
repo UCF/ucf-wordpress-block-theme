@@ -1,0 +1,49 @@
+// -----------------------------------------------------------------------------
+// Site header (template part)
+//
+// Default: the primary nav sits in its own black bar at the top, branding below
+// (see parts/header.html).
+//
+// Hero overlay: when a page's content starts with a full-width Cover hero, the
+// header floats *over* the hero image instead of pushing it down. Scoped with
+// :has() so posts and hero-less pages keep the normal in-flow black bar.
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+// Only when the post content opens with a Cover hero.
+body:has( .wp-block-post-content > .wp-block-cover:first-child ) {
+	// Anchor the absolutely-positioned header to the site blocks wrapper so it
+	// respects the admin bar / page top rather than the raw viewport.
+	.wp-site-blocks {
+		position: relative;
+	}
+
+	// With the header pulled out of flow (absolute), <main> becomes the first
+	// visible child but is the 2nd DOM child, so it keeps the block-gap
+	// margin-block-start and opens a gap above the hero. Remove it so the hero
+	// sits flush under the floating header.
+	.wp-site-blocks > main {
+		margin-block-start: 0;
+	}
+
+	.wp-site-blocks > header.wp-block-template-part {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		// Legibility gradient behind the nav, fading into the hero image.
+		background: linear-gradient(
+			to bottom,
+			rgba(0, 0, 0, 0.55) 0%,
+			rgba(0, 0, 0, 0) 100%
+		);
+		color: var(--wp--preset--color--inverse);
+
+		// Let the hero image show through the default black nav bar.
+		.has-secondary-background-color {
+			background-color: transparent;
+		}
+	}
+}

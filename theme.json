@@ -438,6 +438,16 @@
 			"name": "header"
 		},
 		{
+			"area": "header",
+			"name": "header-page",
+			"title": "Header (Pages)"
+		},
+		{
+			"area": "header",
+			"name": "header-post",
+			"title": "Header (Posts)"
+		},
+		{
 			"area": "footer",
 			"name": "footer"
 		}

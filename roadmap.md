@@ -177,16 +177,23 @@ content; it is auto-seeded into every new Page.
 - [x] **Auto-seed new Pages** — `default_content` filter (`includes/patterns.php`)
   inserts the Hero pattern markup into new Pages so the hero is present and
   editable from the start. Existing pages untouched.
-- [x] **Navigation in its own bar** — `parts/header.html` now puts the primary
-  nav in a full-width black bar at the very top, with branding (logo/site title)
-  in a separate row below.
+- [x] **Header parts** — `parts/header-page.html` (Pages): nav-only, centered,
+  space-between, overlays the hero. `parts/header-post.html` (Posts): nav
+  (space-between) + post title (H1) + byline (author/date/category) + featured
+  image, then post content. `parts/header.html` (everything else): logo + site
+  title + nav. All registered in `theme.json`; `page.html`→`header-page`,
+  `single.html`→`header-post`, `index.html`→`header`.
+- [x] **Navigation over the hero** — `src/scss/_header.scss` overlays the header
+  on the hero image (absolute + legibility gradient, light text) *only* when the
+  content opens with a Cover hero (scoped via `:has()`), so posts / hero-less
+  pages keep the in-flow black bar. Site title is `<p>` (`level:0`) so the hero
+  title is the page's sole H1.
 - [x] **`page.html`** — global header part on top, then `post-content` (which
   begins with the Hero). No template-injected masthead or post title (the H1
   lives in the hero content).
-- [ ] **Nav-over-hero (optional)** — overlay the top nav on the hero image
-  (transparent bar + negative margin) instead of a separate bar, if desired.
-- [ ] **Post hero** — decide the `single.html` equivalent (featured image +
-  post title); posts intentionally less flexible than pages.
+- [x] **Post header** — `parts/header-post.html` (see above): a fixed,
+  templated header for posts (no per-post hero image picker); posts intentionally
+  less flexible than pages.
 
 ### Templates & site structure
 - [ ] **Additional templates** — `archive.html`, `search.html`, `404.html`,
