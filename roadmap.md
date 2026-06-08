@@ -226,6 +226,21 @@ content; it is auto-seeded into every new Page.
   - `patterns/cta-band.php` — full-width black CTA band (heading + text + button).
   The jumbotron hero already ships as `patterns/hero.php` (UCF Headers category).
 
+### Patterns to create
+
+Backlog of additional reusable patterns (UCF Blocks category unless noted).
+Refine scope as needs become clearer.
+
+- [ ] **Three-item horizontal feature row** — three items laid out side by side,
+  each: a logo (or `display-3`-styled heading) + bold text, a **thick partial
+  horizontal rule**, then a block of body text. The pain point this solves is
+  getting the partial HRs to **align vertically across all three columns** even
+  when the headings/text above them differ in length (i.e. the rule sits at a
+  consistent baseline rather than floating with each column's content height).
+  Likely needs equal-height columns / a flex layout so the rules line up.
+- [ ] **Blockquote variations** — a small set of blockquote patterns (exact
+  variants TBD; to be defined as the need becomes clearer). Placeholder task.
+
 ### Content & components
 - [ ] **Badge** — decide build approach (custom block vs. inline style); from the
   Phase 1 "Undecided" note below.
@@ -251,8 +266,16 @@ content; it is auto-seeded into every new Page.
   display headings fluid (`clamp()`, was fixed 3.5–6rem → mobile overflow). Wide
   tables now scroll horizontally (`.wp-block-table { overflow-x: auto }`).
   Header logo/hamburger row intentionally `nowrap`. Re-check after patterns/footer.
-- [ ] **Editor parity** — confirm every front-end style also renders in the
-  editor (`add_editor_style` coverage).
+- [x] **Editor parity** — verified front end and editor share the same compiled
+  `assets/css/main.css` (`wp_enqueue_style` + `add_editor_style`) and the same
+  `theme.json` (which also drives webfonts in both contexts — `@font-face` comes
+  from `theme.json` `fontFace`, not SCSS). All content-level classes (`.lead`,
+  `.display-*`, `.btn-*`, `.is-style-*`, `.table-*`, `.ucf-hero`) resolve
+  identically. The only context-divergent rules are the intentional page-chrome
+  hero overlay in `_header.scss` (`body:has(...)` / `.wp-site-blocks > …`), which
+  by design applies to the rendered front-end document, not the block-content
+  editor canvas (and won't preview in the Site Editor template canvas either — a
+  known block-theme limitation for full-page structural styles, not a content gap).
 - [x] **Automated testing** — Playwright suite covering both concerns, wired to
   npm scripts + GitHub Actions against a seeded `wp-env` (see `tests/README.md`).
   - **Accessibility** (`tests/a11y.spec.js`) — `@axe-core/playwright`, WCAG
