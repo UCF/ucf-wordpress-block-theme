@@ -1,0 +1,42 @@
+// -----------------------------------------------------------------------------
+// Site footer (template part)
+//
+// UCF site chrome: wordmark, a centered row of utility links, address, and
+// copyright on a black band (see parts/footer.html).
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+.ucf-footer {
+	// Links read white (underlined) on the dark footer rather than the default
+	// body link blue.
+	a {
+		color: var(--wp--preset--color--inverse);
+		text-decoration: underline;
+
+		&:hover,
+		&:focus {
+			text-decoration: none;
+		}
+	}
+
+	// Wordmark: undecorated, weight matches the brand chrome.
+	.wp-block-heading a {
+		text-decoration: none;
+		font-weight: 700;
+	}
+
+	// Configurable footer menu (Navigation block): wrap, centered, spaced.
+	.ucf-footer__nav {
+		margin: 1.25rem 0;
+
+		.wp-block-navigation__container {
+			gap: 0.5rem 1.5rem;
+		}
+	}
+
+	// Configurable social menu (Social Links block).
+	.ucf-footer__social {
+		margin: 0 0 1.5rem;
+	}
+}

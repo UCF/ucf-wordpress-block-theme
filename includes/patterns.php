@@ -21,6 +21,10 @@ function ucf_block_theme_register_pattern_categories() {
 		'ucf-headers',
 		array( 'label' => __( 'UCF Headers', 'ucf-wordpress-block-theme' ) )
 	);
+	register_block_pattern_category(
+		'ucf-blocks',
+		array( 'label' => __( 'UCF Blocks', 'ucf-wordpress-block-theme' ) )
+	);
 }
 add_action( 'init', 'ucf_block_theme_register_pattern_categories' );
 

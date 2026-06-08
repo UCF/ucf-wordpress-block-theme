@@ -10,6 +10,14 @@
 const { test, expect } = require('@playwright/test');
 const { routes } = require('./routes');
 
+// Always-masked selectors (dynamic content). TEST_MASK_SELECTORS (comma-
+// separated) appends more — e.g. to exclude the AJAX-injected UCF Header plugin
+// bar when running against a plugin-enabled site. The default wp-env test
+// environment is theme-only, so that bar isn't present there.
+const baseMask = 'time, .wp-block-post-date';
+const extraMask = (process.env.TEST_MASK_SELECTORS || '').trim();
+const maskSelector = extraMask ? `${baseMask}, ${extraMask}` : baseMask;
+
 for (const route of routes) {
 	test(`visual: ${route.name}`, async ({ page }) => {
 		const response = await page.goto(route.path, { waitUntil: 'networkidle' });
@@ -19,7 +27,7 @@ for (const route of routes) {
 		}
 		await expect(page).toHaveScreenshot(`${route.name}.png`, {
 			fullPage: true,
-			mask: [page.locator('time, .wp-block-post-date')],
+			mask: [page.locator(maskSelector)],
 		});
 	});
 }

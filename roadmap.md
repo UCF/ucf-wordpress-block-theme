@@ -206,11 +206,25 @@ content; it is auto-seeded into every new Page.
   pagination, no-results).
 - [x] **`search.html`** — "Search results for: …" title, a refine search field,
   then the post listing (query loop, pagination, no-results message).
-- [ ] **Template parts** — review/expand `header.html` / `footer.html` (nav,
-  branding, utility links) to match UCF site chrome.
-- [ ] **Block patterns** — ship ready-made sections (full-width jumbotron hero,
-  alert callout, card grid, CTA band) so editors insert in one click instead of
-  assembling Group + alignment + styles by hand.
+- [x] **Footer** (`parts/footer.html`) — UCF site chrome on a black band:
+  wordmark, a **configurable footer menu** (Navigation block, UCF utility links
+  as defaults — editable in the Site Editor), a **configurable social menu**
+  (core Social Links block: Facebook/X/Instagram/YouTube/LinkedIn), address, and
+  copyright. Styling in `src/scss/_footer.scss`; footer nav has a distinct
+  `aria-label="Footer"`. axe-clean.
+- [x] **Header** — logo + site title + nav. The black UCF top utility bar is NOT
+  a theme concern: it's the **UCF Header plugin** (AJAX-injected on every page),
+  so it stays out of the theme. (Note: because it loads via AJAX, visual tests
+  run against a plugin-enabled site should mask it — see `TEST_MASK_SELECTORS`.)
+- [x] **Block patterns** — ready-made sections in the **UCF Blocks** category
+  (registered in `includes/patterns.php`) so editors insert in one click instead
+  of assembling Group + alignment + styles by hand:
+  - `patterns/alert-callout.php` — static alert box using the `is-style-alert-*`
+    group block styles (swap tone via block style).
+  - `patterns/card-grid.php` — responsive three-column card row (image + heading
+    + text + link); empty image blocks so the editor shows the upload placeholder.
+  - `patterns/cta-band.php` — full-width black CTA band (heading + text + button).
+  The jumbotron hero already ships as `patterns/hero.php` (UCF Headers category).
 
 ### Content & components
 - [ ] **Badge** — decide build approach (custom block vs. inline style); from the

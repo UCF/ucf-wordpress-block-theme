@@ -73,6 +73,11 @@ npx playwright test tests/a11y.spec.js
 download). Use a trailing slash on `TEST_BASE_URL` and non-leading-slash paths
 when the site lives in a subdirectory.
 
+`TEST_MASK_SELECTORS` (comma-separated CSS) excludes regions from visual diffs —
+useful for AJAX-injected, plugin-provided chrome (e.g. the UCF Header plugin bar)
+when testing a plugin-enabled site. The default wp-env environment is theme-only,
+so it isn't needed there.
+
 ## CI
 
 `.github/workflows/ci.yml` builds CSS, starts wp-env, seeds content, installs the
