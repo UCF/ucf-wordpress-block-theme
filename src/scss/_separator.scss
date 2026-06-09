@@ -13,3 +13,15 @@ hr {
 	border: 0;
 	border-top: 1px solid $border-color;
 }
+
+// "Thick" separator block style: a short, heavy rule for underlining a heading
+// or stat. Draws in currentColor so it inherits the surrounding text color
+// (white on a dark band, black on light) — no per-instance color needed.
+.wp-block-separator.is-style-thick {
+	width: 2.5rem;
+	max-width: 2.5rem;
+	height: 0;
+	border: 0;
+	border-top: 4px solid currentColor;
+	opacity: 1;
+}

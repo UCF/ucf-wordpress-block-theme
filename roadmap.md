@@ -231,13 +231,21 @@ content; it is auto-seeded into every new Page.
 Backlog of additional reusable patterns (UCF Blocks category unless noted).
 Refine scope as needs become clearer.
 
-- [ ] **Three-item horizontal feature row** — three items laid out side by side,
-  each: a logo (or `display-3`-styled heading) + bold text, a **thick partial
-  horizontal rule**, then a block of body text. The pain point this solves is
-  getting the partial HRs to **align vertically across all three columns** even
-  when the headings/text above them differ in length (i.e. the rule sits at a
-  consistent baseline rather than floating with each column's content height).
-  Likely needs equal-height columns / a flex layout so the rules line up.
+- [x] **Three-item horizontal feature row** — `patterns/feature-row.php` (UCF
+  Blocks category). Three centered columns, each: a logo band (a `display-3`
+  heading by default — swap for an image to use a Font Awesome / Noun Project
+  SVG), a short thick rule, body text, and an optional italic citation. Built
+  entirely from **core block controls + existing tokens** — no pattern-specific
+  CSS:
+  - The HR-alignment pain point is solved with the core Group **`minHeight`**
+    control (fixed-height logo band, flex-centered), so the rules share a baseline
+    regardless of logo size.
+  - The rule is the reusable **`is-style-thick` separator block style** (registered
+    in `functions.php`, styled in `src/scss/_separator.scss`); it draws in
+    `currentColor`, so it inherits the band's text color automatically.
+  - One pattern covers both backgrounds: it ships dark (black band, inverse text);
+    for a light version, change the outer group's background/text color in the
+    editor — the rule recolors itself via `currentColor`.
 - [ ] **Blockquote variations** — a small set of blockquote patterns (exact
   variants TBD; to be defined as the need becomes clearer). Placeholder task.
 

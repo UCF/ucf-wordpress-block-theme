@@ -263,6 +263,25 @@ function ucf_block_theme_register_table_styles() {
 add_action( 'init', 'ucf_block_theme_register_table_styles' );
 
 /**
+ * Register Separator block style variations.
+ *
+ * "Thick" — a short, heavy rule (vs. the default thin hairline) used to underline
+ * a heading or stat. It draws in `currentColor`, so it inherits the surrounding
+ * text color (white on a dark band, black on light) with no per-instance setting.
+ * The matching rule lives in src/scss/_separator.scss.
+ */
+function ucf_block_theme_register_separator_styles() {
+	register_block_style(
+		'core/separator',
+		array(
+			'name'  => 'thick',
+			'label' => __( 'Thick', 'ucf-wordpress-block-theme' ),
+		)
+	);
+}
+add_action( 'init', 'ucf_block_theme_register_separator_styles' );
+
+/**
  * Register Tier 4 utility block style variations.
  *
  * The few Athena utilities worth exposing in the editor: visually-hidden
