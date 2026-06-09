@@ -246,8 +246,15 @@ Refine scope as needs become clearer.
   - One pattern covers both backgrounds: it ships dark (black band, inverse text);
     for a light version, change the outer group's background/text color in the
     editor — the rule recolors itself via `currentColor`.
-- [ ] **Blockquote variations** — a small set of blockquote patterns (exact
-  variants TBD; to be defined as the need becomes clearer). Placeholder task.
+- [x] **Blockquote variations** — added Athena's stylized "quotation" blockquote
+  as two `core/quote` block styles, **Quotation** (`is-style-quote-quotation`) and
+  **Quotation (Inverse)** (`is-style-quote-quotation-inverse`, for dark
+  backgrounds): centered, borderless, slab-serif, led by a large gold quotation
+  mark — all token-driven (`src/scss/_blockquote.scss`). Each is also exposed via
+  the literal Athena utility class (`.blockquote-quotation` /
+  `.blockquote-quotation-inverse`) for parity. Shipped a pattern that uses it:
+  `patterns/image-quote.php` — a 33/66 row, image left + quotation blockquote with
+  citation right, vertically centered.
 
 ### Content & components
 - [ ] **Badge** — decide build approach (custom block vs. inline style); from the

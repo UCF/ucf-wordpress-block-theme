@@ -43,6 +43,83 @@ blockquote,
 	}
 }
 
+// Athena "quotation" blockquote: a large decorative quotation mark sits behind
+// the quote text (top-left, z-index -1), with the text indented past it. Ported
+// verbatim from the Athena Framework (src/scss/_type.scss) — same em-based
+// metrics and md breakpoint — with the hard-coded colors swapped for tokens
+// (gold mark = primary, inverse mark = inverse, inverse footer = gray-darker).
+// Exposed as core/quote block styles (.is-style-quote-quotation[-inverse]) and
+// via the literal Athena utility classes (.blockquote-quotation[-inverse]).
+//
+// The mark uses Arial intentionally: Athena sets a dedicated
+// `$blockquote-quotation-mark-font-family: Arial` (a non-brand system font for a
+// clean glyph), not one of the brand faces — so this is a faithful spec value,
+// not a stray hard-coded stack.
+%blockquote-quotation {
+	position: relative;
+	z-index: 0;
+	margin: 0 0 1rem;
+	padding: 1.5em 0 1em 2.75em;
+	border: 0;
+
+	&::before {
+		content: "\201C";
+		position: absolute;
+		top: 0.575em;
+		left: -0.05em;
+		z-index: -1;
+		font-family: Arial, sans-serif;
+		font-size: 5.25em;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 0;
+	}
+
+	@media (min-width: 768px) {
+		padding-top: 2em;
+		padding-left: 3.75em;
+
+		&::before {
+			top: 0.65em;
+		}
+	}
+}
+
+.wp-block-quote.is-style-quote-quotation,
+.blockquote-quotation {
+	@extend %blockquote-quotation;
+
+	&::before {
+		color: var(--wp--preset--color--primary);
+	}
+}
+
+// Inverse: an opinionated dark-background variant — white quotation mark, for a
+// dark / colored panel.
+.wp-block-quote.is-style-quote-quotation-inverse,
+.blockquote-quotation-inverse {
+	@extend %blockquote-quotation;
+
+	&::before {
+		color: var(--wp--preset--color--inverse);
+	}
+}
+
+// Opinionated default text colors — dark (black) for the standard variant, white
+// for the inverse. Scoped with :not(.has-text-color) so they apply by default but
+// step aside the moment an author picks a Text color in the block's Color panel
+// (which adds .has-text-color). The chosen color — or this default — then
+// cascades to the citation, since the citation sets no color of its own.
+.wp-block-quote.is-style-quote-quotation:not(.has-text-color),
+.blockquote-quotation:not(.has-text-color) {
+	color: var(--wp--preset--color--secondary);
+}
+
+.wp-block-quote.is-style-quote-quotation-inverse:not(.has-text-color),
+.blockquote-quotation-inverse:not(.has-text-color) {
+	color: var(--wp--preset--color--inverse);
+}
+
 // Pullquote: a centered, full-width emphasis quote with top/bottom rules. The
 // same palette set recolors those rules via core/pullquote block styles
 // (.is-style-pullquote-{name}).

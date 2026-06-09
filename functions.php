@@ -127,8 +127,10 @@ function ucf_block_theme_register_quote_styles() {
 		'quote-secondary' => __( 'Black border', 'ucf-wordpress-block-theme' ),
 		'quote-success'   => __( 'Success border', 'ucf-wordpress-block-theme' ),
 		'quote-info'      => __( 'Info border', 'ucf-wordpress-block-theme' ),
-		'quote-warning'   => __( 'Warning border', 'ucf-wordpress-block-theme' ),
-		'quote-danger'    => __( 'Danger border', 'ucf-wordpress-block-theme' ),
+		'quote-warning'            => __( 'Warning border', 'ucf-wordpress-block-theme' ),
+		'quote-danger'             => __( 'Danger border', 'ucf-wordpress-block-theme' ),
+		'quote-quotation'          => __( 'Quotation', 'ucf-wordpress-block-theme' ),
+		'quote-quotation-inverse'  => __( 'Quotation (Inverse)', 'ucf-wordpress-block-theme' ),
 	);
 
 	foreach ( $border_colors as $name => $label ) {
