@@ -1,0 +1,72 @@
+// -----------------------------------------------------------------------------
+// Badge
+//
+// Athena-style inline badge: a small, bold, uppercase label applied to a run of
+// text via the "Badge" rich-text formats (see assets/js/badge-format.js). Ported
+// to match the Athena Framework badge component
+// (https://ucf.github.io/Athena-Framework/components/badge/) — same metrics
+// (padding, font-size, letter-spacing, uppercase, squared corners) and the same
+// per-variant colors — with hard-coded values swapped for theme.json tokens so a
+// palette change flows through.
+//
+// Class names mirror Athena's contextual variants: base .badge is the neutral
+// "default", with .badge-{variant} for each context. Each variant is a
+// standalone class (it maps to its own independent inline format), so the shared
+// look lives in %badge-base and only the fill/text color differs per variant.
+// Athena's optional .badge-pill is intentionally omitted — badges are squared.
+// -----------------------------------------------------------------------------
+
+@use "sass:list";
+
+%badge-base {
+	display: inline-block;
+	padding: 0.35em 0.8em;
+	font-size: 0.75rem; // Athena $badge-font-size-fixed (fluid fallback below).
+	font-weight: bold;
+	line-height: 1;
+	letter-spacing: 0.1em;
+	text-align: left;
+	text-transform: uppercase;
+	white-space: normal;
+	vertical-align: baseline;
+	border-radius: 0;
+
+	// Athena's progressive-enhancement fluid size: scale with surrounding text
+	// where max() is supported, never dropping below the fixed 0.75rem floor.
+	@supports (font-size: max(0.75rem, 0.75em)) {
+		font-size: max(0.75rem, 0.75em);
+	}
+
+	&:empty {
+		display: none;
+	}
+}
+
+// Default (neutral): gray fill, light text.
+.badge {
+	@extend %badge-base;
+	color: var(--wp--preset--color--inverse);
+	background-color: var(--wp--preset--color--gray);
+}
+
+// Contextual variants: (background token, text token). One entry per Athena
+// contextual variation, with Athena's text colors (black on the light/bright
+// fills; white on the dark blue/black ones).
+$badge-tones: (
+	"primary":       ("primary", "secondary"),
+	"secondary":     ("secondary", "inverse"),
+	"complementary": ("text-complementary", "inverse"),
+	"success":       ("success", "secondary"),
+	"info":          ("info", "secondary"),
+	"warning":       ("warning", "secondary"),
+	"danger":        ("danger", "secondary"),
+	"inverse":       ("inverse", "secondary"),
+);
+
+@each $name, $pair in $badge-tones {
+	.badge-#{$name} {
+		@extend %badge-base;
+		color: var(--wp--preset--color--#{list.nth($pair, 2)});
+		background-color: var(--wp--preset--color--#{list.nth($pair, 1)});
+	}
+}

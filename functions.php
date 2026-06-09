@@ -368,3 +368,26 @@ function ucf_block_theme_editor_styles() {
 	add_editor_style( 'assets/css/main.css' );
 }
 add_action( 'after_setup_theme', 'ucf_block_theme_editor_styles' );
+
+/**
+ * Register the "Badge" rich-text inline format in the block editor.
+ *
+ * A no-build script (uses the global wp.* packages declared as dependencies)
+ * that adds a Badge button to the RichText formatting toolbar, wrapping the
+ * selected text in <span class="badge">. The .badge look comes from the
+ * compiled stylesheet (src/scss/_badge.scss), so it matches the front end.
+ */
+function ucf_block_theme_enqueue_editor_scripts() {
+	$relative_path = 'assets/js/badge-format.js';
+	$file_path     = get_theme_file_path( $relative_path );
+	$version       = file_exists( $file_path ) ? filemtime( $file_path ) : false;
+
+	wp_enqueue_script(
+		'ucf-badge-format',
+		get_theme_file_uri( $relative_path ),
+		array( 'wp-rich-text', 'wp-block-editor', 'wp-element', 'wp-i18n' ),
+		$version,
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'ucf_block_theme_enqueue_editor_scripts' );

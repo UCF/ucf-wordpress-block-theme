@@ -46,6 +46,13 @@ Row pattern).
 - Header block comment + matching HTML must reflect what the block would save, or
   the editor flags "invalid content" (e.g. an empty `core/image` is invalid; use a
   real `src`).
+- **Set color through the block's color controls, not hard-coded CSS.** Unless
+  explicitly told otherwise, a pattern must never hard-code a hex value or add a
+  bare `.has-*-color` utility class. Express a default color via the block's
+  `textColor`/`backgroundColor` (or `style.color`) attributes — i.e. what the
+  editor's Color panel would emit — so the author can change it from the controls.
+  Prefer letting a parent Group's color cascade to children over re-declaring it on
+  each child.
 
 ## Build & test
 
