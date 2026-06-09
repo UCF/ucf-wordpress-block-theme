@@ -13,7 +13,7 @@
 
 ?>
 <!-- wp:cover {"customGradient":"linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.55) 100%)","minHeight":500,"minHeightUnit":"px","align":"full","className":"ucf-hero","layout":{"type":"constrained"}} -->
-<div class="wp-block-cover alignfull ucf-hero" style="min-height:500px"><span aria-hidden="true" class="wp-block-cover__background has-background-gradient" style="background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.55) 100%)"></span><div class="wp-block-cover__inner-container">
+<div class="wp-block-cover alignfull ucf-hero" style="min-height:500px"><span aria-hidden="true" class="wp-block-cover__background has-background-dim-100 has-background-dim has-background-gradient" style="background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.55) 100%)"></span><div class="wp-block-cover__inner-container">
 <!-- wp:heading {"level":1,"textColor":"inverse","className":"display-2"} -->
 <h1 class="wp-block-heading has-inverse-color has-text-color display-2"><?php esc_html_e( 'Page Title', 'ucf-wordpress-block-theme' ); ?></h1>
 <!-- /wp:heading -->

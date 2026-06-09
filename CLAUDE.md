@@ -18,7 +18,8 @@ over new ones, in this order:
    token already expresses.
 2. **Existing classes / block styles next.** `.lead`, `.display-1`–`4`, `.h1`–`6`,
    `.btn-*`, `.is-style-*` (card / jumbotron / well / alert-* / table-* / quote /
-   pullquote / thick separator), text helpers, `.mt-0/.mb-0/.my-0`. Reuse these
+   pullquote / thick separator), text helpers, `.mt-0/.mb-0/.my-0`, `.mx-auto`.
+   Reuse these
    rather than writing pattern-local CSS.
 3. **Core block controls next.** Many things that look like they need CSS are now
    native controls: Group **`minHeight`**, flex/constrained layouts, per-block
