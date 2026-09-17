@@ -1,0 +1,127 @@
+# Fast checks — every commit, every branch.
+#
+# The loop has to stay quick enough that nobody resents it. Today that is a build plus the
+# cheap correctness checks; it runs in well under two minutes.
+#
+# `branches: ['**']` is every branch but no tags; a tag push re-tests a commit that has
+# already been tested.
+#
+# The jobs split along one line: does a check prove the theme still **works**, or that the
+# code is **tidy**?
+#
+#   Blocking      build — the theme compiles, its two version headers agree, and the
+#                 committed build/ output matches the source it came from.
+#
+#   Advisory      quality — phpcs, eslint, stylelint, prettier. Reported on every commit,
+#                 never gating. Style findings are worth seeing and worth fixing, but they
+#                 are not the same claim as "this is broken", and a red X meaning "an
+#                 unrelated file has a long comment line" is a red X people learn to ignore.
+#
+# `continue-on-error` sits on the whole `quality` job rather than on individual steps, so the
+# distinction is visible in the checks list rather than buried in a log.
+#
+# `lint:version` and the build/ drift check are deliberately NOT advisory despite sounding
+# like lint. Neither is about style: a version mismatch ships a theme whose reported version
+# is wrong, and stale build/ output means the deployed theme does not match its source.
+#
+# TODO: there are no test suites yet. When they land, add a blocking job here that runs them
+# and move the slow tiers (WordPress integration, accessibility) into a separate
+# pull-request-only workflow so this one stays fast.
+
+name: CI
+
+on:
+    push:
+        branches: ['**']
+
+# A new push supersedes whatever was already running for the same branch.
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: .nvmrc
+                  cache: npm
+
+            - name: Install dependencies
+              run: npm ci
+
+            # Not style: WordPress reads the Version: header in style.css, npm reads
+            # package.json, and nothing links them. A release that bumps one reports the
+            # wrong version.
+            - name: Version headers agree
+              run: npm run lint:version
+
+            - name: Build
+              run: npm run build
+
+            # Also not style: build/ is committed so the theme deploys without a build step.
+            # If a rebuild changes anything, the committed output is stale and what gets
+            # deployed does not match the source it came from.
+            - name: build/ is up to date with src/
+              run: |
+                  if [ -n "$(git status --porcelain build/)" ]; then
+                    echo "::error::build/ is out of date. Run 'npm run build' and commit the result."
+                    git --no-pager diff --stat build/
+                    exit 1
+                  fi
+                  echo "build/ matches src/."
+
+    quality:
+        name: Code quality (advisory)
+        runs-on: ubuntu-latest
+
+        # Never gates a merge. See the note at the top of this file.
+        continue-on-error: true
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.2'
+                  coverage: none
+                  tools: composer:v2
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: .nvmrc
+                  cache: npm
+
+            - name: Install dependencies
+              run: |
+                  composer install --prefer-dist --no-interaction --no-progress
+                  npm ci
+
+            # Each step keeps going so one failure does not hide the others — the point of
+            # this job is the full picture, not the first thing that trips.
+            - name: PHP coding standards
+              if: ${{ always() }}
+              run: composer run lint
+
+            - name: JavaScript
+              if: ${{ always() }}
+              run: npm run lint:js
+
+            - name: SCSS
+              if: ${{ always() }}
+              run: npm run lint:css
+
+            - name: Formatting
+              if: ${{ always() }}
+              run: npm run format:check

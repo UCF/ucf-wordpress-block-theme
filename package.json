@@ -1,0 +1,36 @@
+{
+	"name": "ucf-wordpress-block-theme",
+	"version": "0.1.0-alpha.1",
+	"description": "A WordPress block theme bringing the UCF Athena Framework to Full Site Editing.",
+	"private": true,
+	"license": "GPL-2.0-or-later",
+	"engines": {
+		"node": ">=22"
+	},
+	"scripts": {
+		"build": "npm run build:css && npm run build:blocks",
+		"build:blocks": "node tools/build-blocks.js",
+		"build:css": "sass src/scss/main.scss build/css/main.css --style=compressed --no-source-map",
+		"start": "wp-scripts start --webpack-src-dir=src/blocks --output-path=build",
+		"watch": "sass --watch src/scss/main.scss build/css/main.css --style=expanded",
+		"lint:js": "wp-scripts lint-js tools webpack.config.js src --no-error-on-unmatched-pattern",
+		"lint:css": "wp-scripts lint-style \"src/scss/**/*.scss\"",
+		"lint:version": "node tools/check-version.js",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"lint:php": "composer lint",
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"env:clean": "wp-env clean all"
+	},
+	"devDependencies": {
+		"@wordpress/env": "^10.39.0",
+		"@wordpress/prettier-config": "^4.51.0",
+		"@wordpress/scripts": "^30.0.0",
+		"prettier": "npm:wp-prettier@3.0.3",
+		"sass": "^1.100.0"
+	},
+	"overrides": {
+		"typescript": "~5.3.3"
+	}
+}

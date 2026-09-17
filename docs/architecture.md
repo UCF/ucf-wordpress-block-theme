@@ -1,0 +1,271 @@
+# Architecture
+
+This is the single source for the theme's conventions and the reasoning behind them. Read it
+before changing anything; `CLAUDE.md` and `README.md` deliberately do not restate these rules,
+because keeping two copies is how they drift.
+
+The theme was seeded from the structural half of the UCF Brand Block Theme. The machinery
+described here — the token escalation ladder, the role layer, the one-topic-per-file rule —
+came over intact and is proven. The _values_ those tokens hold are placeholders pending the
+UCF Athena Framework; see [Tokens are placeholders](#tokens-are-placeholders).
+
+---
+
+## The escalation ladder
+
+When something needs to look a particular way, go down this list and stop at the first rung
+that works. Each rung down is more code to own, so skipping ahead is the expensive mistake.
+
+1. **A token.** A color, size, spacing step or family already in `theme.json`. Use the preset,
+   not the literal.
+2. **An existing class or block style.** A composition (`.is-style-dark`,
+   `.is-style-paper-accent`) or a role utility (`.accent-text`, `.accent-fill`, `.hairline`) —
+   the vocabulary in `src/scss/_compositions.scss` and `_utilities.scss`.
+3. **A core block control.** Padding, border width, alignment, background. If the editor can
+   already express it, let the editor express it.
+4. **Something new.** A new token in `theme.json`, a new block style, a new partial. This rung
+   requires a reason that the three above could not cover.
+
+The ladder exists because rungs 1–3 are things an editor can change later without a developer.
+Rung 4 is not.
+
+## Tokens are placeholders
+
+`theme.json`'s palette, font families and font sizes currently hold the UCF Brand Block Theme's
+values. **They are stand-ins for UCF Athena Framework equivalents, not a decision.**
+
+What matters is the distinction between a slug and a value:
+
+-   **The slugs are the contract.** `gold`, `text-body`, `line`, `link-blue` and the rest are
+    referenced by `src/scss/_variables.scss`, assigned to roles in `_compositions.scss`, and
+    baked into the `is-style-*` names in `includes/block-styles.php`. Renaming a slug is a
+    three-place edit.
+-   **The values are free.** Changing a hex in `theme.json` re-paints everything downstream with
+    no other edit, because nothing below `_variables.scss` names a token directly.
+
+So: swapping in Athena's colors is a `theme.json` change. Swapping in Athena's _vocabulary_ —
+different role names, a different number of compositions — is a change to the three files above.
+
+**A11Y: re-check the contrast pairs when the values change.** `_compositions.scss` carries
+per-row comments recording which combinations are at the WCAG AA limit and why a given role
+gave up grey. Those notes are about the current hexes. New hexes invalidate them.
+
+## Roles, not tokens
+
+The layer that makes a pattern reusable on any background.
+
+```
+theme.json           defines what a token is worth
+_variables.scss      gives the token a Sass-level name       $color, $font, $size, $space
+_compositions.scss   assigns tokens to roles                 sets --ucf-*
+_typography.scss     binds elements to roles                 reads --ucf-body, --ucf-heading …
+_utilities.scss      binds roles to parts of a component     reads --ucf-accent, --ucf-line
+component partials   read a role for one component           reads --ucf-*
+```
+
+A **composition** is a background plus everything that has to be true of what sits on it: body
+copy, headings, links, meta text, an accent, a hairline. `.is-style-dark` does not just paint
+a black background — it redeclares all eleven `--ucf-*` roles for a dark field.
+
+The payoff: **a pattern holds no color at all.** It names a composition and nothing else. Drop
+the same pattern inside a Dark group and every role re-resolves. A pattern that hardcodes
+`textColor` breaks the moment it is nested somewhere else — see below.
+
+**Only `_compositions.scss` may set a `--ucf-*` property.** Everything else reads one. A
+component that sets its own role is a component that cannot be recomposed.
+
+### Why custom properties and not descendant selectors
+
+A rule like `.is-style-on-dark p { color: white }` keeps applying to a nested card that has its
+own white background, because inheritance never beats a matching selector. The custom-property
+form scopes correctly: the nested card redeclares `--ucf-body` for itself, and the paragraph
+inside it resolves to the card's value.
+
+## Patterns declare structure and composition, never color
+
+A `textColor` or `backgroundColor` attribute in a pattern is a bug, not a style choice. It
+freezes that pattern to one field.
+
+What a pattern may carry:
+
+-   structure — groups, columns, block nesting
+-   a composition class — `is-style-dark`, `is-style-paper-accent`
+-   a role utility — `accent-text`, `accent-fill`, `hairline`
+-   layout the block's own controls own — padding, width, gap, border _width_
+
+## Blocks
+
+**Static blocks only in `src/blocks/`.** A block there has a `save()` that emits real markup and
+no `render.php`. `includes/blocks.php` registers every folder in `build/` that has a
+`block.json`, discovered from disk rather than listed, so adding a block is a one-place change.
+
+**A server-rendered block does not go in `includes/blocks.php`.** It lives in the file that owns
+the data it renders, next to the queries and meta it reads, so its registration and its behavior
+are one thing.
+
+**Block sources must not reference the theme.** Keeping that true is what makes moving
+`src/blocks/` into a distribution plugin later a copy plus a registration loop.
+
+**Block CSS belongs in `src/scss/`, not beside the block.** One stylesheet, one cascade, one
+place where a role is read.
+
+## PHP lives in `includes/`
+
+One topic per file. `functions.php` is a loader and nothing else — **never append to it.** New
+behavior goes in the `includes/` file that owns its topic, or in a new file added to the array
+there.
+
+The current topics:
+
+| File                    | Owns                                                        |
+| ----------------------- | ----------------------------------------------------------- |
+| `setup.php`             | Theme supports; the page editor's rendering mode            |
+| `enqueue.php`           | Every way CSS or JS reaches a browser                       |
+| `blocks.php`            | Static custom block registration                            |
+| `block-styles.php`      | Every `register_block_style()`                              |
+| `university-header.php` | The UCF University Header script tag and placeholder        |
+| `paste-artifacts.php`   | Word-processor characters normalized on save and on display |
+
+**No file may depend on another at include time.** Every one only defines functions and adds
+hooks, so the load order in `functions.php` is documentation rather than a constraint. A
+require-time dependency between two of them silently makes it load-bearing.
+
+**Prefix is `ucf_theme_` / `UCF_THEME_`.** Not the bare `ucf_`: WPCS rejects a three-character
+prefix outright, and it would be wrong anyway — this WordPress install already carries 200+
+`ucf_*` functions across the other UCF themes, every one of which uses a second segment
+(`ucf_bct_`, `ucf_bot_`, `ucf_brand_`). CSS classes and custom properties keep the shorter
+`ucf-` / `--ucf-`; they have no collision sniff, and a differing PHP and CSS prefix is the
+existing house pattern.
+
+## A registered block style ships with its CSS
+
+`includes/block-styles.php` registers the style; a partial under `src/scss/` defines it. The
+comment above each registration names the partial. **A style registered and not defined is an
+editor offering that paints nothing** — add both in the same commit.
+
+The reverse also matters: a composition defined in `_compositions.scss` and not registered in
+`ucf_theme_register_composition_styles()` is CSS no editor can reach. PHP cannot read a Sass
+map, so those two lists are maintained by hand.
+
+## JavaScript is one pipeline
+
+`src/` → `build/`, through `@wordpress/scripts`.
+
+Every entry emits a `<name>.asset.php` next to its `<name>.js`, holding the WordPress script
+handles that entry imported plus a content hash. `ucf_theme_enqueue_build_script()` reads it,
+so **a dependency list is never restated in PHP** — adding an `@wordpress/*` import to the
+source is the whole change.
+
+A folder with a `block.json` is auto-detected. Anything else — editor glue, a front-end script,
+a rich-text format — is named in `webpack.config.js`.
+
+## Build and content
+
+`npm run build` is both halves: the stylesheet (`sass`) and the blocks (`wp-scripts`).
+
+**`build/` is committed.** The theme deploys without a build step, which is why CI fails if a
+rebuild changes anything — stale output means the deployed theme does not match its source.
+**Never hand-edit anything in `build/`.** Rebuild and commit it with any change under `src/`.
+
+`npm run build:blocks` goes through `tools/build-blocks.js` rather than calling `wp-scripts`
+directly, because `wp-scripts build` exits non-zero when there are no entries at all — the
+state of a theme that has not written its first block. Delete that guard once the theme ships
+a block and the empty case can no longer happen.
+
+## Formatting and linting
+
+One formatter owns whitespace; each linter keeps its rules about what the code _means_.
+
+| Files                  | Formatter | Linter              |
+| ---------------------- | --------- | ------------------- |
+| PHP                    | PHPCBF    | PHPCS (WordPress)   |
+| JS                     | Prettier  | ESLint (wp-scripts) |
+| SCSS                   | Prettier  | Stylelint           |
+| `templates/`, `parts/` | _nothing_ | —                   |
+
+**Block markup is never reformatted.** Its canonical serialization is defined by each block's
+`save()`, not by Prettier. Reformatting the style or void-element syntax diverges from what the
+editor emits and produces invalid-block warnings — hence those three directories in
+`.prettierignore`.
+
+**Stylelint uses the `scss` preset, not `scss-stylistic`.** The stylistic rules contradict
+Prettier on any declaration long enough to wrap, and stylelint's own `--fix` is then rejected by
+Prettier. `.stylelintrc.js` records the specific failure modes, including one where the fixer
+corrupts the Sass maps in `_compositions.scss`.
+
+**`no-console` is off in `tools/`.** Those are command-line scripts whose job is to print, and
+nothing in `tools/` ships.
+
+## Gotchas that have already bitten
+
+Do not "clean these up".
+
+-   **`overflow-x: clip`, never `hidden`.** An `overflow: hidden` ancestor silently disables
+    `position: sticky` on every descendant, and the bug surfaces far from the rule that caused it.
+-   **`:not(:first-child)` / `:not(:last-child)` in the heading rhythm rules.** Core pairs its
+    layout rule with first/last-child exceptions at the same specificity, so outranking one
+    outranks those too. Without the exclusions the first heading in a band takes the band's
+    padding _plus_ a full step.
+-   **`styles.elements.link` reads `--ucf-link`, not a token.** WordPress emits element styles at
+    (0,1,0), which outranks the fallback rule in `_typography.scss`. Naming a token there instead
+    freezes every link to the light field's blue — 3.58:1 on black.
+-   **Heading color is a role, not `styles.elements.heading.color`.** Core emits that as
+    `:root :where(h1, …, h6)`, which matches the heading itself and always beats a color inherited
+    from an ancestor — every heading in a Dark section would go black on black.
+-   **The University Header's `?use-full-width=1` cannot move into a setting.** The host serves a
+    _different build_ of the script for that query string, and that build reads the option back out
+    of its own `src` at runtime.
+-   **The University Header's script tag id is matched on the handle, never on the `src`.** UCF's
+    published snippet tests the src, which both mis-stamps other scripts from that host and stops
+    working behind an asset proxy.
+-   **The editor canvas is an iframe.** `wp_enqueue_style()` never reaches inside it. Editor CSS
+    goes through `add_editor_style()`, or the `styles` key of `block_editor_settings_all` when it
+    has to be computed per post.
+-   **Never verify markup through the front end.** Invalid blocks still render there, so a page
+    that looks right proves nothing. Ask the editor's store instead:
+    `wp.data.select( 'core/block-editor' ).getBlocks()`, and watch the console for
+    "Updated Block" — a block reporting `isValid: true` may have been migrated through a
+    deprecation rather than matched outright.
+-   **Watch for opcache when testing PHP changes on a running site.** The usual local stack caches
+    with `revalidate_freq=2`; a before/after capture taken faster than that compares stale code
+    against stale code.
+
+## Comments
+
+This codebase documents **why**, not **what**. Comments explain reasoning and record bugs that
+already shipped. Match that when adding code, and when moving code keep its comment with it —
+including the file paths it references.
+
+Unbudgeted, that principle produces twenty-line essays above four-line rules. So each comment is
+tagged with the kind of reason it gives:
+
+| Tag         | Means                                                 |
+| ----------- | ----------------------------------------------------- |
+| `WHY:`      | A decision that has a defensible alternative          |
+| `FIX:`      | A bug this line prevents, which has actually occurred |
+| `A11Y:`     | An accessibility requirement, with the measurement    |
+| `UPSTREAM:` | Behavior imposed by WordPress core or a third party   |
+| `SYNC:`     | This value must match another place, named            |
+| `SPEC:`     | A value that comes from a design, not from reasoning  |
+| `PERF:`     | A measured cost, not a guess                          |
+| `CONTEXT:`  | A file- or section-level orientation banner           |
+
+An untagged comment is usually one restating the code beneath it — delete it.
+
+## What is not here yet
+
+Ported from the brand theme's structural half only. Deliberately absent, with no stub:
+
+-   **Test suites.** The brand theme's four tiers — PHPUnit unit, PHPUnit integration under
+    `wp-env`, Jest block/markup, Playwright + axe accessibility — are the obvious next thing to
+    bring over. `.wp-env.json` is already here; `.gitignore` already anticipates their scratch
+    output. CI has a `TODO` marking where the blocking job goes.
+-   **Patterns.** None, and no `patterns/` directory or custom pattern categories. The brand
+    theme's units → groups → sections → pages taxonomy was its own editorial structure, and
+    units and sections are intended to ship here as _blocks_ instead. Core's built-in
+    categories are available if a pattern is ever added; register a custom one only when
+    there is a pattern that does not fit them.
+-   **Custom blocks and editor glue.** `src/blocks/` and `src/js/` are empty.
+    `webpack.config.js` and `ucf_theme_enqueue_editor_assets()` are both wired for an `editor`
+    entry and no-op without one.
+-   **Athena values.** See [Tokens are placeholders](#tokens-are-placeholders).

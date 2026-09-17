@@ -1,0 +1,77 @@
+// Sass-level aliases for theme.json presets.
+//
+// WHY: values are always `--wp--preset--*` / `--wp--custom--*`, never literals. A token that
+// is not in theme.json does not belong here — add it there first. theme.json is the single
+// source for what a token is worth; this file only gives it a shorter name.
+//
+// SYNC: every key below names a slug in theme.json. Renaming a slug there is a three-place
+// edit — theme.json, this map, and any `is-style-*` registration in includes/block-styles.php
+// that depends on it.
+
+$color: (
+	"gold": var(--wp--preset--color--gold),
+	"gold-deep": var(--wp--preset--color--gold-deep),
+	"black": var(--wp--preset--color--black),
+	"white": var(--wp--preset--color--white),
+	"ink": var(--wp--preset--color--ink),
+	"paper-alt": var(--wp--preset--color--paper-alt),
+	"horizon-blue": var(--wp--preset--color--horizon-blue),
+	"blue-tint": var(--wp--preset--color--blue-tint),
+	"link-blue": var(--wp--preset--color--link-blue),
+	"link-blue-hover": var(--wp--preset--color--link-blue-hover),
+	"text-body": var(--wp--preset--color--text-body),
+	"text-secondary": var(--wp--preset--color--text-secondary),
+	"text-secondary-dark": var(--wp--preset--color--text-secondary-dark),
+	"text-meta-dark": var(--wp--preset--color--text-meta-dark),
+	"line": var(--wp--preset--color--line),
+	"line-dark": var(--wp--preset--color--line-dark),
+);
+
+$font: (
+	"display": var(--wp--preset--font-family--display),
+	"body": var(--wp--preset--font-family--body),
+	"mono": var(--wp--preset--font-family--mono),
+);
+
+// UPSTREAM: WordPress kebab-cases slugs when generating CSS vars, so `h1` would become
+// `--wp--preset--font-size--h-1`. Every slug here is already kebab-stable.
+$size: (
+	"meta": var(--wp--preset--font-size--meta),
+	"eyebrow": var(--wp--preset--font-size--eyebrow),
+	"ui": var(--wp--preset--font-size--ui),
+	"body": var(--wp--preset--font-size--body),
+	"lead": var(--wp--preset--font-size--lead),
+	"heading-4": var(--wp--preset--font-size--heading-4),
+	"heading-3": var(--wp--preset--font-size--heading-3),
+	"heading-2": var(--wp--preset--font-size--heading-2),
+	"heading-1": var(--wp--preset--font-size--heading-1),
+	"display-1": var(--wp--preset--font-size--display-1),
+);
+
+$space: (
+	"10": var(--wp--preset--spacing--10),
+	"20": var(--wp--preset--spacing--20),
+	"30": var(--wp--preset--spacing--30),
+	"40": var(--wp--preset--spacing--40),
+	"50": var(--wp--preset--spacing--50),
+	"60": var(--wp--preset--spacing--60),
+);
+
+// The full-bleed wrapper width, wider than `contentSize` — for bands that run edge to edge
+// but still need an inner measure.
+$wrap: var(--wp--custom--wrap);
+
+// UPSTREAM: the University Header paints at z-index 10000 and is script-built by
+// universityheader.ucf.edu — not ours to restyle (includes/university-header.php). It sits in
+// normal flow but establishes its own stacking context, which outranks every layer a theme
+// would otherwise create. Anything that has to cover the page measures from here.
+$z-university-header: 10000;
+
+// The theme's one shared breakpoint: where a two-column shell collapses to a single column.
+// Nothing reads it yet — the theme currently ships no responsive component — so it is here as
+// the agreed value for the first one that needs it, not as a leftover.
+//
+// WHY: one shared value, and only one. A component with its own breaking point declares it
+// next to the component and says why; a general-purpose scale invites rules to break at a
+// width that has nothing to do with their content.
+$breakpoint-lg: 960px;

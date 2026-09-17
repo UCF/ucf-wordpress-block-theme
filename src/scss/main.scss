@@ -1,0 +1,13 @@
+// UCF WordPress Block Theme
+//
+// WHY: load order is output order — Sass emits a module's CSS at its first load in the graph,
+// so `compositions` precedes `base`, which depends on it. Keep new component partials below
+// the four foundation ones for the same reason.
+//
+// Compiled to build/css/main.css by `npm run build`. Never edit the compiled CSS.
+
+@use "variables";
+@use "compositions";
+@use "base";
+@use "typography";
+@use "utilities";

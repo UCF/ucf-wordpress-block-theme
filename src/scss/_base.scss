@@ -1,0 +1,92 @@
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+// FIX: `clip`, never `hidden` — an `overflow: hidden` ancestor silently disables
+// `position: sticky` on every descendant, which is a bug that surfaces far from this rule.
+// WHY: 12px of anchor clearance and nothing more. The University Header scrolls away, so no
+// chrome sits above an anchor target. A theme that adds sticky chrome has to add its height
+// here, in a media query matching wherever that chrome becomes sticky.
+html {
+	overflow-x: clip;
+	scroll-behavior: smooth;
+	scroll-padding-top: 12px;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizelegibility;
+}
+
+// SPEC: square corners everywhere. Buttons opt back in via theme.json if one ever needs it.
+button,
+input,
+select,
+textarea,
+.wp-block-button__link {
+	border-radius: 0;
+}
+
+:focus-visible {
+	outline: 3px solid map.get($color, "horizon-blue");
+	outline-offset: 2px;
+}
+
+// A11Y: off-screen but announced — for live regions and labels that belong to the
+// accessibility tree and not to the visual layout.
+.ucf-visually-hidden {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+// A11Y: core inserts its own "Skip to content" link immediately before `div.wp-site-blocks`.
+// This styles that link; the `<main>` landmark every template carries is what satisfies
+// WCAG 2.4.1 regardless.
+// WHY: `top: -100vh` rather than `display: none` — a hidden element is not focusable, so the
+// link has to stay in the layout and merely off-screen until it takes focus.
+.skip-link,
+.ucf-skip-link {
+	background: map.get($color, "gold");
+	color: map.get($color, "black");
+	font-family: map.get($font, "body");
+	font-size: map.get($size, "ui");
+	font-weight: 800;
+	left: map.get($space, "20");
+	padding: map.get($space, "20") map.get($space, "30");
+	position: absolute;
+	text-transform: uppercase;
+	top: -100vh;
+	z-index: $z-university-header + 1;
+
+	&:focus {
+		top: map.get($space, "20");
+	}
+}
+
+// UPSTREAM: core's separator inherits `currentColor`, making it as dark as the copy. The
+// hairline role gives a pattern the field-appropriate rule without naming a token; an editor
+// who sets one explicitly still wins, since preset color classes carry `!important`.
+.wp-block-separator {
+	border-color: var(--ucf-line, #{compositions.role-default("line")});
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

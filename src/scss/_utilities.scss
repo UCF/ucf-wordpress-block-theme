@@ -1,0 +1,30 @@
+// ── Role utilities ───────────────────────────────────────────────────────────
+//
+// CONTEXT: plain classes a pattern prefills on a block to bind the enclosing composition's
+// roles to one part of itself. This is the other half of the seam that lets a pattern hold no
+// color at all — `_compositions.scss` decides what a role *is*, these decide what a component
+// does with it, and the pattern names only the class. Drop it in a Dark group and all
+// re-resolve.
+//
+// WHY: not registered block styles. The accent on a card's header bar is what the pattern
+// *is*, not a look an editor picks, and staying out of the Styles panel leaves each block's
+// single style slot free for the editor to use.
+// WHY: color only. Width, side, padding and size stay with the block's own controls.
+
+@use "compositions";
+
+// A11Y: always paired — a background without a legible text color is the bug.
+.accent-fill {
+	background-color: var(--ucf-accent, #{compositions.role-default("accent")});
+	color: var(--ucf-on-accent, #{compositions.role-default("on-accent")});
+}
+
+.accent-text {
+	color: var(--ucf-accent, #{compositions.role-default("accent")});
+}
+
+// WHY: sets color on every side; only the sides the block's own border controls give a width
+// will paint.
+.hairline {
+	border-color: var(--ucf-line, #{compositions.role-default("line")});
+}

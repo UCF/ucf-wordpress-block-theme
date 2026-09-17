@@ -1,0 +1,54 @@
+@use "compositions";
+
+// ── Typography ───────────────────────────────────────────────────────────────
+//
+// CONTEXT: the bare-element half of the type layer. Everything here binds an element to a
+// color role and stops; size, family and weight come from theme.json, which is where an
+// editor can reach them.
+//
+// WHY: this file assigns roles but never decides what a role is worth — both the live value
+// and the fallback come from _compositions.scss, so no color token is named here.
+// WHY: no named type helpers. The `.is-style-lead` / `.eyebrow` / `.meta` vocabulary that
+// used to live here came from the brand guide's own editorial voice, not from anything
+// structural, so it was removed rather than carried into a general-purpose theme. A style
+// added back here needs a reason that is about the element, not about a house style.
+
+// WHY: `--ucf-body` falls back to `inherit`, so outside a declared composition nothing changes
+// and copy keeps inheriting whatever the page sets.
+p,
+li {
+	color: var(--ucf-body, inherit);
+}
+
+// WHY: an element margin is enough here — a list item is a child of the `ul`, not of a layout
+// container, so core's layout rules do not reach it and no class is needed.
+li {
+	margin-bottom: 2px;
+}
+
+// A11Y: a role, not `styles.elements.heading.color`. WordPress emits that as
+// `:root :where(h1, …, h6)`, which matches the heading itself and so always beats a color
+// inherited from an ancestor — every heading in a Dark section would have gone black on black.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--ucf-heading, #{compositions.role-default("heading")});
+}
+
+// A11Y: this is the fallback, not what paints a link. theme.json's `styles.elements.link` is
+// emitted at (0,1,0) and outranks this (0,0,1) — theme.json reads the role itself, and this
+// rule stays for links outside a composition.
+// WHY: `ucf-` components are excluded — a component that carries its own link color does so at
+// (0,1,0), which the `:hover` half here would otherwise outrank.
+a:where(:not(.wp-block-button__link, [class*="ucf-"])) {
+	color: var(--ucf-link, #{compositions.role-default("link")});
+}
+
+// WHY: hover moves toward the field's own high-contrast text rather than the light field's
+// darker blue, which on black reads as the link switching off.
+a:where(:not(.wp-block-button__link, [class*="ucf-"])):hover {
+	color: var(--ucf-link-hover, #{compositions.role-default("link-hover")});
+}
