@@ -22,9 +22,10 @@ $color: (
 	"text-body": var(--wp--preset--color--text-body),
 	"text-secondary": var(--wp--preset--color--text-secondary),
 	"text-secondary-dark": var(--wp--preset--color--text-secondary-dark),
-	"text-meta-dark": var(--wp--preset--color--text-meta-dark),
 	"line": var(--wp--preset--color--line),
 	"line-dark": var(--wp--preset--color--line-dark),
+	"success": var(--wp--preset--color--success),
+	"danger": var(--wp--preset--color--danger),
 );
 
 $font: (
@@ -36,9 +37,7 @@ $font: (
 // UPSTREAM: WordPress kebab-cases slugs when generating CSS vars, so `h1` would become
 // `--wp--preset--font-size--h-1`. Every slug here is already kebab-stable.
 $size: (
-	"meta": var(--wp--preset--font-size--meta),
-	"eyebrow": var(--wp--preset--font-size--eyebrow),
-	"ui": var(--wp--preset--font-size--ui),
+	"small": var(--wp--preset--font-size--small),
 	"body": var(--wp--preset--font-size--body),
 	"lead": var(--wp--preset--font-size--lead),
 	"heading-4": var(--wp--preset--font-size--heading-4),
@@ -57,9 +56,10 @@ $space: (
 	"60": var(--wp--preset--spacing--60),
 );
 
-// The full-bleed wrapper width, wider than `contentSize` — for bands that run edge to edge
-// but still need an inner measure.
-$wrap: var(--wp--custom--wrap);
+// SYNC: the page's inline breathing room. Every full-bleed band uses this, so a band and the
+// header above it line up. Template parts reference the token directly as `var:custom|gutter`,
+// since block markup cannot read a Sass variable.
+$gutter: var(--wp--custom--gutter);
 
 // UPSTREAM: the University Header paints at z-index 10000 and is script-built by
 // universityheader.ucf.edu — not ours to restyle (includes/university-header.php). It sits in

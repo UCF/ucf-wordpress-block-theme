@@ -27,8 +27,13 @@ textarea,
 	border-radius: 0;
 }
 
+// A11Y: the ring is a role, so it re-resolves at every composition — including a nested one.
+// This replaced a `.is-style-dark :focus-visible` override, which as a descendant selector
+// kept matching *into* nested compositions: a Light card inside a Dark section drew the dark
+// field's gold ring on white, at 1.83:1. Same class of bug as using descendant selectors for
+// text color, which is what the roles exist to avoid.
 :focus-visible {
-	outline: 3px solid map.get($color, "horizon-blue");
+	outline: 3px solid var(--ucf-focus, #{compositions.role-default("focus")});
 	outline-offset: 2px;
 }
 
@@ -56,7 +61,7 @@ textarea,
 	background: map.get($color, "gold");
 	color: map.get($color, "black");
 	font-family: map.get($font, "body");
-	font-size: map.get($size, "ui");
+	font-size: map.get($size, "small");
 	font-weight: 800;
 	left: map.get($space, "20");
 	padding: map.get($space, "20") map.get($space, "30");

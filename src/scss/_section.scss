@@ -1,0 +1,31 @@
+@use "sass:map";
+@use "variables" as *;
+
+// ── Section ──────────────────────────────────────────────────────────────────
+//
+// CONTEXT: the band primitive — a full-bleed strip of page with its own padding and its own
+// field. Inserted as the "Section" variation of core/group (src/js/editor/section-variation.js),
+// which is what supplies the `<section>` tag, the full alignment, this class and the
+// constrained inner layout.
+//
+// WHY: a variation rather than a block type of its own. A band is a group with its defaults
+// already chosen; making it a separate block type would mean re-registering every composition
+// onto it and owning a `save()` forever, to arrive at the same markup.
+//
+// The field comes from a composition style, which the variation applies at insertion
+// (`is-style-light`) and the Styles panel switches. That is deliberate and is the whole rule:
+// a background set through the color control is just a color and does not bring the roles
+// with it — see _compositions.scss.
+
+.ucf-section {
+	padding-block: map.get($space, "60");
+	padding-inline: $gutter;
+}
+
+// UPSTREAM: bands stack flush on their own `padding-block`, so core's flow block-gap has to
+// go — `:root :where(.is-layout-constrained) > *` at (0,1,0) otherwise leaves a strip of page
+// background between two bands, which reads as a seam between fields that should meet. The
+// doubled class outranks it without `!important`.
+.ucf-section.ucf-section {
+	margin-block: 0;
+}

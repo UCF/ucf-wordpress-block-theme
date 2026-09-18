@@ -9,8 +9,9 @@
 # The jobs split along one line: does a check prove the theme still **works**, or that the
 # code is **tidy**?
 #
-#   Blocking      build — the theme compiles, its two version headers agree, and the
-#                 committed build/ output matches the source it came from.
+#   Blocking      php   — the unit suite, on both supported PHP versions.
+#                 build — the theme compiles, its two version headers agree, and the
+#                         committed build/ output matches the source it came from.
 #
 #   Advisory      quality — phpcs, eslint, stylelint, prettier. Reported on every commit,
 #                 never gating. Style findings are worth seeing and worth fixing, but they
@@ -24,9 +25,11 @@
 # like lint. Neither is about style: a version mismatch ships a theme whose reported version
 # is wrong, and stale build/ output means the deployed theme does not match its source.
 #
-# TODO: there are no test suites yet. When they land, add a blocking job here that runs them
-# and move the slow tiers (WordPress integration, accessibility) into a separate
-# pull-request-only workflow so this one stays fast.
+# The `php` job runs the unit suite only — it needs no database and no Docker, which is what
+# keeps it on every commit. When slower tiers land (WordPress integration under wp-env,
+# accessibility under Playwright), put them in a separate pull-request-only workflow rather
+# than here; a suite that needs a container is one nobody runs before committing, and adding
+# one here would cost this workflow the property that makes it worth having.
 
 name: CI
 
@@ -43,6 +46,40 @@ permissions:
     contents: read
 
 jobs:
+    php:
+        name: PHP ${{ matrix.php }}
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                # style.css declares "Requires PHP: 8.1"; the production container runs 8.2.
+                # Test both — the floor is a promise and the ceiling is what actually ships.
+                php: ['8.1', '8.2']
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Set up PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  coverage: none
+                  tools: composer:v2
+
+            - name: Cache Composer packages
+              uses: actions/cache@v4
+              with:
+                  path: ~/.cache/composer/files
+                  key: composer-${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+                  restore-keys: composer-${{ matrix.php }}-
+
+            - name: Install PHP dependencies
+              run: composer install --prefer-dist --no-interaction --no-progress
+
+            - name: Unit tests
+              run: composer run test:unit
+
     build:
         name: Build
         runs-on: ubuntu-latest

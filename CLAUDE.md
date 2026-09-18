@@ -31,14 +31,41 @@ This is a **scaffold**, seeded from the structural half of the UCF Brand Block T
 here works and is linted clean; what is absent is absent on purpose and listed in the
 architecture doc's last section. When adding to it:
 
--   **There are no tests yet.** Do not write a change that assumes a suite will catch it. If you
-    add the first suite, follow the brand theme's four-tier split (fast PHPUnit + Jest with no
-    Docker; integration and a11y behind separate commands) and add the blocking CI job at the
-    `TODO` in `.github/workflows/ci.yml`.
+-   **There is one test tier: PHP unit, via `npm test`.** It needs no Docker and gates CI. Read
+    [`tests/README.md`](tests/README.md) before adding to it. The Jest markup sweep,
+    integration and accessibility tiers do not exist yet — so do not assume a suite will catch
+    a change to templates or blocks. Verify those by hand, and keep anything needing Docker out
+    of `npm test`.
 -   **`theme.json`'s values are placeholders; its slugs are a contract.** Changing a hex is a
     one-file change. Changing a slug is a three-file change — `theme.json`,
     `src/scss/_variables.scss`, and any `is-style-*` name in `includes/block-styles.php` built on
     it. Re-check the contrast notes in `_compositions.scss` whenever the values move.
+
+## Tests
+
+`npm test` runs the PHP unit suite in about a tenth of a second and needs no Docker. Read
+[`tests/README.md`](tests/README.md) before adding to it — it covers what belongs in this tier,
+what must never be mocked into it, and the two non-obvious parts of the harness (includes load
+per-test, and hooks are therefore not assertable).
+
+**New code in `includes/` ships with its test.** Nothing enforces it. Put the test with the
+file that owns the topic.
+
+**Prove a new test can fail.** Break the code it covers, watch it go red, then restore. A test
+that passes against nothing at all is indistinguishable from a passing test.
+
+## Tests
+
+`npm test` runs the PHP unit suite in about a tenth of a second and needs no Docker. Read
+[`tests/README.md`](tests/README.md) before adding to it — it covers what belongs in this tier,
+what must never be mocked into it, and the two non-obvious parts of the harness (includes load
+per-test, so hooks are not assertable).
+
+**New code in `includes/` ships with its test.** Nothing enforces it. Put the test with the
+file that owns the topic.
+
+**Prove a new test can fail.** Break the code it covers, watch it go red, then restore. A test
+that passes against nothing at all is indistinguishable from a passing test.
 
 ## Working practices
 

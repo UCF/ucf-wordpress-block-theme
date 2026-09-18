@@ -2,20 +2,26 @@
 //
 // CONTEXT: the layer between the raw tokens in _variables.scss and the CSS that paints
 // them. A composition is a background plus everything that has to be true of what sits on
-// it — body text, the helper idioms, links, an accent. Nothing here invents a value.
+// it — body text, headings, links, a hairline, an accent. Nothing here invents a value.
 //
-//   this module        declares --ucf-*        (a composition sets the properties)
-//   _typography.scss   reads --ucf-lead etc.   (role assignment for the helpers)
-//   component partials read --ucf-accent       (a component binds it to something)
+//   this module        declares --ucf-*                       (a composition sets them)
+//   _typography.scss   reads --ucf-body, -heading, -link      (an element binds to a role)
+//   _utilities.scss    reads --ucf-accent, -on-accent, -line  (a class binds one to a part)
+//   component partials read whichever it needs                (same, for one component)
+//
+// A role with no reader is not a placeholder — it is eleven declarations of CSS shipping in
+// every composition for nothing. `body-muted`, `eyebrow` and `meta` were removed for exactly
+// that reason once the type helpers that read them went. Add a role when something reads it.
 //
 // Anything that *sets* a --ucf-* property belongs here; anything that reads one for a single
-// component belongs with that component. Each composition ships two flavors —
-// `.is-style-paper` and `.is-style-paper-accent`, the latter adding a leading-edge rule.
+// component belongs with that component. Each composition has two flavors —
+// `.is-style-paper` and `.is-style-paper-accent`, the latter adding a leading-edge rule —
+// but only the first is offered in the editor; see the SYNC note further down.
 //
 // This is the seam that lets a pattern hold no color at all. A pattern names a composition
 // and nothing else; drop the same pattern inside a Dark group and every role re-resolves.
 //
-// FIX: custom properties, not descendant selectors. A rule like `.is-style-on-dark p` keeps
+// FIX: custom properties, not descendant selectors. A rule like `.is-style-dark p` keeps
 // applying to a nested card with its own background, because inheritance never beats a
 // matching rule — a Light card inside a Dark section gets washed-out grey paragraphs on white.
 // WHY: two tables, deliberately not flattened. `paper` and `light` are different backgrounds
@@ -31,30 +37,29 @@
 // background has to say how text sits on it. Every pair below is checked against WCAG AA
 // (4.5:1 for body copy); re-check when the placeholder tokens are swapped for Athena's.
 $treatments: (
-	// SYNC: `role-default()` reads this row for the `var()` fallbacks the typography helpers
-	// use, so the two cannot drift.
+	// SYNC: `role-default()` reads this row for the `var()` fallbacks every consumer uses, so
+	// the two cannot drift.
 	"light":
 		(
 			"accent": "gold",
 			"body": "text-body",
-			"body-muted": "text-secondary",
-			"eyebrow": "black",
+			// SPEC: the tightest pair in the table — 3.54:1 on white, 3.19:1 on paper-alt
+			// against the 3:1 WCAG 2.4.11 asks. Passing, but re-measure this one first when
+			// the tokens change; `link-blue` is the 5.86:1 fallback if it stops clearing.
+			"focus": "horizon-blue",
 			"heading": "black",
 			"lead": "text-body",
 			"line": "line",
 			"link": "link-blue",
 			"link-hover": "link-blue-hover",
-			"meta": "text-secondary",
 			"on-accent": "black",
 		),
-	// WHY: body copy is white, not `text-secondary-dark` — the grey reads as washed out on
-	// black. `.meta` keeps its grey so the hierarchy survives.
+	// WHY: body copy is white rather than a grey — grey body copy reads as washed out on black.
 	"dark":
 		(
 			"accent": "gold-deep",
 			"body": "white",
-			"body-muted": "text-secondary-dark",
-			"eyebrow": "gold",
+			"focus": "gold",
 			"heading": "white",
 			"lead": "white",
 			"line": "line-dark",
@@ -62,25 +67,25 @@ $treatments: (
 			// WHY: gold on hover, not the light field's darker blue, which on black reads as the
 			// link switching off. Every other interactive state on black moves to gold; 10.4:1.
 			"link-hover": "gold",
-			"meta": "text-meta-dark",
 			"on-accent": "black",
 		),
-	// A11Y: nothing lighter than `text-body` clears 4.5:1 on gold — `text-secondary` is
-	// 4.01:1, `link-blue` 3.20:1 — so `meta` and `body-muted` give up grey and de-emphasize
-	// through family and size instead.
+	// A11Y: the gold field is unforgiving — nothing lighter than `text-body` clears 4.5:1 on it
+	// (`text-secondary` is 4.01:1, `link-blue` 3.20:1). A role added here cannot de-emphasize
+	// with grey; use family and size instead.
 	// WHY: accent and line are the deeper gold, or the edge disappears into the field.
 	"gold":
 		(
 			"accent": "gold-deep",
 			"body": "black",
-			"body-muted": "text-body",
-			"eyebrow": "black",
+			// FIX: black, 11.46:1. The blue this field used to inherit was 1.93:1 on gold —
+			// a focus ring that failed 2.4.11 outright, because the old special-cased rule
+			// covered only the dark compositions and nothing covered this one.
+			"focus": "black",
 			"heading": "black",
 			"lead": "text-body",
 			"line": "gold-deep",
 			"link": "black",
 			"link-hover": "black",
-			"meta": "text-body",
 			"on-accent": "black",
 		)
 );
@@ -122,19 +127,24 @@ $compositions: (
 
 	--ucf-accent: #{map.get($color, map.get($spec, "accent"))};
 	--ucf-body: #{map.get($color, map.get($spec, "body"))};
-	--ucf-body-muted: #{map.get($color, map.get($spec, "body-muted"))};
-	--ucf-eyebrow: #{map.get($color, map.get($spec, "eyebrow"))};
+	--ucf-focus: #{map.get($color, map.get($spec, "focus"))};
 	--ucf-heading: #{map.get($color, map.get($spec, "heading"))};
 	--ucf-lead: #{map.get($color, map.get($spec, "lead"))};
 	--ucf-line: #{map.get($color, map.get($spec, "line"))};
 	--ucf-link: #{map.get($color, map.get($spec, "link"))};
 	--ucf-link-hover: #{map.get($color, map.get($spec, "link-hover"))};
-	--ucf-meta: #{map.get($color, map.get($spec, "meta"))};
 	--ucf-on-accent: #{map.get($color, map.get($spec, "on-accent"))};
 }
 
 // WHY: both flavors set the accent, so a component can bind `--ucf-accent` whether or not the
 // edge rule is showing. The `-accent` flavor adds only the border.
+//
+// SYNC: the `-accent` flavors are deliberately NOT registered as block styles — see
+// `ucf_theme_register_composition_styles()` in includes/block-styles.php. They are defined
+// here and applied by whatever establishes the accent (a pattern, a component), not offered
+// in the editor's Styles panel for an author to pick. This is the one place in the theme
+// where CSS exists with no registration behind it, and it is intentional: everywhere else,
+// defined-but-unregistered means a rule no editor can reach.
 @each $name, $spec in $compositions {
 	// WHY: `border-color` is set though nothing draws a border — `border-style: none` means it
 	// paints only once the editor adds a width, letting a pattern ask for an outline without
@@ -150,27 +160,5 @@ $compositions: (
 
 	.is-style-#{$name}-accent {
 		border-left: 3px solid var(--ucf-accent, #{role-default("accent")});
-	}
-}
-
-// WHY: a block whose background is already set some other way — a preset color class, a cover
-// image — still needs the text roles to follow it. `.is-style-on-dark` supplies the treatment
-// only; the editor sets the background through the block's own color controls.
-.has-black-background-color,
-.has-ink-background-color,
-.is-style-on-dark {
-	@include treatment("dark");
-}
-
-.has-gold-background-color {
-	@include treatment("gold");
-}
-
-// A11Y: focus rings need to clear the dark field. Pairs with the base outline in _base.scss.
-.is-style-dark,
-.is-style-dark-accent,
-.is-style-on-dark {
-	:focus-visible {
-		outline-color: map.get($color, "gold");
 	}
 }

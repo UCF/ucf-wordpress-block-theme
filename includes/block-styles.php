@@ -21,33 +21,27 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function ucf_theme_register_block_styles() {
 	ucf_theme_register_composition_styles();
-
-	// `.is-style-on-dark` supplies the dark treatment only — no background and no base
-	// color, both of which stay with the block's own controls. It is the escape hatch for a
-	// block that already has its background set some other way (a cover image, a featured
-	// image) and needs the text roles to follow. Definition: src/scss/_compositions.scss.
-	register_block_style(
-		'core/group',
-		array(
-			'name'  => 'on-dark',
-			'label' => __( 'On Dark', 'ucf-wordpress-block-theme' ),
-		)
-	);
 }
 add_action( 'init', 'ucf_theme_register_block_styles' );
 
 /**
  * Register the color compositions as core/group block styles.
  *
- * One primitive, four color pairs, two flavors each — a plain background/text pair and the
- * same pair with a 3px accent rule on the leading edge:
- *
- *     is-style-paper           background + text only
- *     is-style-paper-accent    the same pair plus the edge rule
+ * One primitive, four color pairs, one registered style each — `is-style-paper` and friends,
+ * a background plus the text roles that go with it.
  *
  * Definitions live in src/scss/_compositions.scss, which also declares the `--ucf-*` roles
- * each pair supplies — including `--ucf-accent`, set by both flavors so a component can bind
- * it whether or not the edge rule is showing.
+ * each pair supplies.
+ *
+ * WHY only one per pair: each composition also has an `-accent` flavor in the stylesheet,
+ * adding a rule on the leading edge. Those are deliberately not registered. The accent is
+ * established elsewhere — by whatever component or pattern wants the edge — rather than
+ * chosen by an author from the Styles panel, and registering them would double the length of
+ * that panel to offer eight variants of one decision.
+ *
+ * NOTE: this is the theme's one intentional case of CSS with no registration behind it. The
+ * general rule still holds everywhere else — a rule defined and not registered is a rule no
+ * editor can reach.
  *
  * SYNC: adding a pair means a row here plus a row in the `$compositions` map in
  * _compositions.scss. PHP cannot read a Sass map, so the two lists are maintained by hand;
@@ -70,15 +64,6 @@ function ucf_theme_register_composition_styles() {
 			array(
 				'name'  => $name,
 				'label' => $label,
-			)
-		);
-
-		register_block_style(
-			'core/group',
-			array(
-				'name'  => $name . '-accent',
-				/* translators: %s: composition color pair name, e.g. "Paper". */
-				'label' => sprintf( __( '%s + Accent', 'ucf-wordpress-block-theme' ), $label ),
 			)
 		);
 	}

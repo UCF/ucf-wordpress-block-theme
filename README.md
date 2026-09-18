@@ -38,6 +38,7 @@ npm run env:start     # wp-env, Docker required
 
 | Command                | Does                                                         |
 | ---------------------- | ------------------------------------------------------------ |
+| `npm test`             | The PHP unit suite. No Docker, under a second                |
 | `npm run build`        | Stylesheet + blocks. Run before committing `src/` changes    |
 | `npm run watch`        | Recompile the stylesheet on change (expanded, for debugging) |
 | `npm run start`        | `wp-scripts` dev server for blocks                           |
@@ -48,7 +49,9 @@ npm run env:start     # wp-env, Docker required
 | `npm run format`       | Prettier, write                                              |
 | `npm run format:check` | Prettier, check only                                         |
 
-There are no test suites yet; see
+`npm test` runs the PHP unit suite and needs no Docker. Read [tests/README.md](tests/README.md)
+before adding to it — it covers what belongs in this tier, what must not, and the non-obvious
+parts of the harness. The integration and accessibility tiers do not exist yet; see
 [docs/architecture.md § What is not here yet](docs/architecture.md#what-is-not-here-yet).
 
 ## Where things live
@@ -67,13 +70,16 @@ src/scss/              The stylesheet, compiled to build/css/main.css
   _utilities.scss        Classes a pattern uses to bind a role to part of a component
   main.scss              Load order — which is output order
 src/blocks/            Static custom blocks (empty)
-src/js/                Editor glue and front-end scripts (empty)
+src/js/editor/         Editor glue — Section variation, Badge formats. Builds to build/editor.js
 
+patterns/              Block patterns (empty, flat). See patterns/README.md
 templates/             Block templates: index, page, single, search, 404
-parts/                 Template parts: header, footer
+                       No header or footer part — the University Header is injected
+                       by includes/university-header.php, and the footer is a plugin
 
 assets/fonts/          Self-hosted webfonts, declared as fontFace in theme.json
 build/                 Compiled output. Committed; never hand-edited
+tests/php/             PHP unit suite. See tests/README.md
 tools/                 Build and check scripts
 docs/                  architecture.md — read it before changing anything
 ```

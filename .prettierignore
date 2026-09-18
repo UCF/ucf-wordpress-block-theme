@@ -15,6 +15,8 @@ composer.lock
 # Block markup — its canonical serialization is defined by each block's save(),
 # not by Prettier. Reformatting the style/void-element syntax diverges from what
 # the editor emits and risks invalid-block warnings, so leave it untouched.
-parts/
+# parts/ is listed for if template parts ever return; the theme ships none today (the
+# University Header and the UCF footer are both chrome, not template markup).
 templates/
 patterns/
+parts/

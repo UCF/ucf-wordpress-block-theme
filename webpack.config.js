@@ -26,9 +26,9 @@ module.exports = {
 	entry: {
 		...blockEntries,
 
-		// Add non-block entries here as they are written, e.g.:
-		//   editor: './src/js/editor/index.js',
-		// includes/enqueue.php already looks for an `editor` manifest and no-ops without one.
+		// Everything that customizes the block editor. Imported for side effects; see
+		// src/js/editor/index.js.
+		editor: './src/js/editor/index.js',
 	},
 	output: {
 		...defaultConfig.output,

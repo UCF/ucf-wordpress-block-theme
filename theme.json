@@ -76,11 +76,6 @@
 					"slug": "text-secondary-dark"
 				},
 				{
-					"color": "#8A8A8A",
-					"name": "Meta Text (On Dark)",
-					"slug": "text-meta-dark"
-				},
-				{
 					"color": "#E4E2DC",
 					"name": "Hairline",
 					"slug": "line"
@@ -89,11 +84,21 @@
 					"color": "#262626",
 					"name": "Hairline (On Dark)",
 					"slug": "line-dark"
+				},
+				{
+					"color": "#0A5D2E",
+					"name": "Success",
+					"slug": "success"
+				},
+				{
+					"color": "#8A2B1A",
+					"name": "Danger",
+					"slug": "danger"
 				}
 			]
 		},
 		"custom": {
-			"wrap": "1160px"
+			"gutter": "clamp(1.5rem, 4vw, 3.4rem)"
 		},
 		"layout": {
 			"contentSize": "850px"
@@ -229,19 +234,9 @@
 			],
 			"fontSizes": [
 				{
-					"size": "0.68rem",
-					"name": "Meta",
-					"slug": "meta"
-				},
-				{
-					"size": "0.72rem",
-					"name": "Eyebrow",
-					"slug": "eyebrow"
-				},
-				{
 					"size": "0.86rem",
-					"name": "UI",
-					"slug": "ui"
+					"name": "Small",
+					"slug": "small"
 				},
 				{
 					"size": "1rem",
@@ -355,7 +350,7 @@
 				},
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--body)",
-					"fontSize": "var(--wp--preset--font-size--ui)",
+					"fontSize": "var(--wp--preset--font-size--small)",
 					"fontWeight": "800",
 					"letterSpacing": "0.02em",
 					"textTransform": "uppercase"
@@ -386,7 +381,7 @@
 					"text": "var(--wp--preset--color--text-secondary)"
 				},
 				"typography": {
-					"fontSize": "var(--wp--preset--font-size--meta)"
+					"fontSize": "var(--wp--preset--font-size--small)"
 				}
 			}
 		},
@@ -394,33 +389,21 @@
 			"core/navigation": {
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--body)",
-					"fontSize": "var(--wp--preset--font-size--ui)",
+					"fontSize": "var(--wp--preset--font-size--small)",
 					"fontWeight": "700"
 				}
 			},
 			"core/code": {
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--mono)",
-					"fontSize": "var(--wp--preset--font-size--ui)"
+					"fontSize": "var(--wp--preset--font-size--small)"
 				}
 			},
 			"core/table": {
 				"typography": {
-					"fontSize": "var(--wp--preset--font-size--ui)"
+					"fontSize": "var(--wp--preset--font-size--small)"
 				}
 			}
 		}
-	},
-	"templateParts": [
-		{
-			"area": "header",
-			"name": "header",
-			"title": "Header"
-		},
-		{
-			"area": "footer",
-			"name": "footer",
-			"title": "Footer"
-		}
-	]
+	}
 }

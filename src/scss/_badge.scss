@@ -1,0 +1,82 @@
+// ── Badge ────────────────────────────────────────────────────────────────────
+//
+// CONTEXT: inline chip applied to a run of text via the "Badge" rich-text format — see
+// src/js/badge-format.js.
+//
+// SPEC: the Athena-derived badge, same metrics, with the tones mapped onto this theme's
+// palette so a theme.json change flows through. Arrived here by way of the UCF Brand Block
+// Theme, which had taken it from the classic Athena theme.
+//
+// SUBSTITUTION: the original sized this with the `meta` token (0.68rem). That step was
+// removed from this theme's scale, so it uses `small` (0.86rem) — the current floor. Badges
+// are uppercase and tracked at 0.1em, which needs the size more than body copy does.
+
+@use "sass:list";
+
+// WHY: each tone is a standalone class (one inline format each), so the shared look
+// lives here and only the fill and text color differ.
+%badge-base {
+	border-radius: 0;
+	display: inline-block;
+	font-family: var(--wp--preset--font-family--body);
+	font-size: var(--wp--preset--font-size--small);
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	line-height: 1;
+	padding: 0.35em 0.8em;
+	text-align: left;
+	text-transform: uppercase;
+	vertical-align: baseline;
+	white-space: normal;
+
+	&:empty {
+		display: none;
+	}
+}
+
+.badge {
+	@extend %badge-base;
+	background-color: var(--wp--preset--color--line);
+	color: var(--wp--preset--color--text-body);
+}
+
+// SYNC: one entry per format in src/js/editor/badge-format.js. (background slug, text slug).
+//
+// A11Y: every pair clears WCAG AA for body text (4.5:1) against the current placeholder
+// tokens — `blue` is the floor at 5.86:1, the rest are 8:1 or better. A badge is 0.86rem at
+// 700 uppercase, which is *not* large text, so 4.5:1 is the bar and not the 3:1 that applies
+// from 18.66px bold. Re-measure the whole table when the tokens are swapped for Athena's.
+$badge-tones: (
+	"gold": (
+		"gold",
+		"black",
+	),
+	"blue": (
+		"link-blue",
+		"white",
+	),
+	"success": (
+		"success",
+		"white",
+	),
+	"danger": (
+		"danger",
+		"white",
+	),
+	"dark": (
+		"ink",
+		"white",
+	),
+	"inverse": (
+		"white",
+		"black",
+	),
+);
+
+@each $name, $pair in $badge-tones {
+	.badge-#{$name} {
+		@extend %badge-base;
+		background-color: var(--wp--preset--color--#{list.nth($pair, 1)});
+		color: var(--wp--preset--color--#{list.nth($pair, 2)});
+	}
+}

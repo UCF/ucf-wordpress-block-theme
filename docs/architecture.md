@@ -19,7 +19,7 @@ that works. Each rung down is more code to own, so skipping ahead is the expensi
 1. **A token.** A color, size, spacing step or family already in `theme.json`. Use the preset,
    not the literal.
 2. **An existing class or block style.** A composition (`.is-style-dark`,
-   `.is-style-paper-accent`) or a role utility (`.accent-text`, `.accent-fill`, `.hairline`) —
+   `.is-style-paper`) or a role utility (`.accent-text`, `.accent-fill`, `.hairline`) —
    the vocabulary in `src/scss/_compositions.scss` and `_utilities.scss`.
 3. **A core block control.** Padding, border width, alignment, background. If the editor can
    already express it, let the editor express it.
@@ -65,21 +65,56 @@ component partials   read a role for one component           reads --ucf-*
 
 A **composition** is a background plus everything that has to be true of what sits on it: body
 copy, headings, links, meta text, an accent, a hairline. `.is-style-dark` does not just paint
-a black background — it redeclares all eleven `--ucf-*` roles for a dark field.
+a black background — it redeclares all nine `--ucf-*` roles for a dark field — including the focus ring.
 
 The payoff: **a pattern holds no color at all.** It names a composition and nothing else. Drop
 the same pattern inside a Dark group and every role re-resolves. A pattern that hardcodes
 `textColor` breaks the moment it is nested somewhere else — see below.
+
+**A treatment is applied by a composition style and by nothing else.** Not by
+`.has-black-background-color`, not by an `on-dark` modifier. A background set through the
+block's own color control is just a color — it does not change what the field _is_, and a
+block with one keeps the roles of whatever composition encloses it. Both alternatives were
+built and removed: they made one visual result reachable by several routes with different
+consequences, and left every palette color lacking such a rule behaving differently again.
+To change the field, change the style. `BlockStylesTest` holds the line by asserting the
+compositions are the only registered block styles.
 
 **Only `_compositions.scss` may set a `--ucf-*` property.** Everything else reads one. A
 component that sets its own role is a component that cannot be recomposed.
 
 ### Why custom properties and not descendant selectors
 
-A rule like `.is-style-on-dark p { color: white }` keeps applying to a nested card that has its
+A rule like `.is-style-dark p { color: white }` keeps applying to a nested card that has its
 own white background, because inheritance never beats a matching selector. The custom-property
 form scopes correctly: the nested card redeclares `--ucf-body` for itself, and the paragraph
 inside it resolves to the card's value.
+
+## The Section band
+
+A Section is a full-bleed strip of page with its own padding and its own field. It is
+registered as the `ucf-section` **variation of `core/group`**, in
+`src/js/editor/section-variation.js`, and styled as `.ucf-section` in `src/scss/_section.scss`.
+
+**Why a variation and not a block type.** A band is a group whose defaults are already chosen.
+As a variation it _is_ a group, so every composition style, every core group control and every
+future core improvement applies with nothing to keep in step — and there is no `save()` to
+version with deprecations for markup core already emits. A separate block type would have
+meant re-registering all eight compositions onto it to arrive at the same markup.
+
+**It ships with a composition applied** (`is-style-light`). That follows from the rule above:
+a background set through the color control does not bring the roles with it, so a band with no
+style is a band with no field. Switching the style in the Styles panel is the one documented
+way to change what the field is.
+
+**Two details worth keeping:**
+
+-   `scope: [ 'inserter' ]`. Without it the variation is also offered as a transform on every
+    existing group, which turns an ordinary content group into a full-bleed band by accident.
+-   `isActive` is a function, not the `[ 'className' ]` shorthand. That shorthand compares the
+    attribute for equality, and `className` changes the moment an author switches composition —
+    `ucf-section is-style-dark` would stop matching and the block would revert to reading as a
+    plain Group in the list view. Only the marker class is load-bearing.
 
 ## Patterns declare structure and composition, never color
 
@@ -89,7 +124,7 @@ freezes that pattern to one field.
 What a pattern may carry:
 
 -   structure — groups, columns, block nesting
--   a composition class — `is-style-dark`, `is-style-paper-accent`
+-   a composition class — `is-style-dark`, `is-style-paper`
 -   a role utility — `accent-text`, `accent-fill`, `hairline`
 -   layout the block's own controls own — padding, width, gap, border _width_
 
@@ -146,6 +181,16 @@ editor offering that paints nothing** — add both in the same commit.
 The reverse also matters: a composition defined in `_compositions.scss` and not registered in
 `ucf_theme_register_composition_styles()` is CSS no editor can reach. PHP cannot read a Sass
 map, so those two lists are maintained by hand.
+
+**One deliberate exception: the `-accent` flavors.** Every composition has a second rule in the
+stylesheet — `.is-style-paper-accent` and friends — adding a rule on the leading edge. None of
+them are registered. The accent is _established_ by whatever wants the edge, a component or a
+pattern applying the class, rather than picked by an author from the Styles panel; registering
+them would double that panel to offer eight variants of one decision.
+
+Because that looks exactly like the bug this section warns about, it is pinned from both sides
+by `BlockStylesTest::test_accent_flavors_are_defined_but_not_registered()`. Deleting the rules
+as "unreachable" fails, and so does registering them.
 
 ## JavaScript is one pipeline
 
@@ -256,16 +301,22 @@ An untagged comment is usually one restating the code beneath it — delete it.
 
 Ported from the brand theme's structural half only. Deliberately absent, with no stub:
 
--   **Test suites.** The brand theme's four tiers — PHPUnit unit, PHPUnit integration under
-    `wp-env`, Jest block/markup, Playwright + axe accessibility — are the obvious next thing to
-    bring over. `.wp-env.json` is already here; `.gitignore` already anticipates their scratch
-    output. CI has a `TODO` marking where the blocking job goes.
--   **Patterns.** None, and no `patterns/` directory or custom pattern categories. The brand
-    theme's units → groups → sections → pages taxonomy was its own editorial structure, and
-    units and sections are intended to ship here as _blocks_ instead. Core's built-in
-    categories are available if a pattern is ever added; register a custom one only when
-    there is a pattern that does not fit them.
--   **Custom blocks and editor glue.** `src/blocks/` and `src/js/` are empty.
-    `webpack.config.js` and `ucf_theme_enqueue_editor_assets()` are both wired for an `editor`
-    entry and no-op without one.
+-   **The slower test tiers.** The PHP unit suite exists and gates CI — see
+    [tests/README.md](../tests/README.md). Missing are the Jest markup sweep over `templates/`
+    and `parts/`, an integration tier under `wp-env`, and an accessibility tier.
+    `.wp-env.json` is already here and `.gitignore` already anticipates their scratch output.
+    Keep all three out of `npm test`: that command must never need Docker.
+-   **Patterns.** `patterns/` exists and is empty; no pattern has been written and no custom
+    pattern category is registered. The directory is **flat on purpose** — core reads each
+    file's header comment and never the path, so subdirectories imply a taxonomy nothing
+    enforces. The brand theme's units → groups → sections → pages ladder was its own editorial
+    structure; units and sections are intended to ship here as blocks instead, and Section
+    already does, as the `ucf-section` variation of core/group (see
+    [The Section band](#the-section-band)). Core's built-in categories cover almost everything;
+    register a custom one only for a pattern that fits none of them. See
+    [patterns/README.md](../patterns/README.md).
+-   **Custom blocks.** `src/blocks/` is empty; the theme ships no block type of its own. The
+    editor pipeline is live, though — `src/js/editor/` builds to `build/editor.js` and is
+    enqueued from its generated manifest. It currently carries the Section variation and the
+    Badge rich-text formats.
 -   **Athena values.** See [Tokens are placeholders](#tokens-are-placeholders).
