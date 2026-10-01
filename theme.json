@@ -405,5 +405,12 @@
 				}
 			}
 		}
-	}
+	},
+	"customTemplates": [
+		{
+			"name": "degree-program",
+			"title": "Degree Program",
+			"postTypes": [ "degree" ]
+		}
+	]
 }

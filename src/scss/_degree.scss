@@ -1,0 +1,77 @@
+// ── Degree blocks ────────────────────────────────────────────────────────────
+//
+// CONTEXT: the markup the server-rendered `ucf-theme/degree-*` blocks emit — see
+// includes/degree.php, where each class below is written. Everything here reads a role or a
+// token, so the blocks recompose inside whichever Section band they are dropped into.
+//
+// SYNC: class names match the markup builders in includes/degree.php.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+.ucf-degree-block + .ucf-degree-block {
+	margin-block-start: map.get($space, "50");
+}
+
+// A figure-over-label row. The markup is <dt>label</dt><dd>figure</dd>, the order a screen
+// reader should announce them in; the figure is lifted above it visually.
+.ucf-degree-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: map.get($space, "40");
+	margin: 0;
+}
+
+.ucf-degree-stats__item {
+	display: flex;
+	flex-direction: column-reverse;
+	min-width: 10rem;
+
+	dt {
+		color: var(--ucf-lead, #{compositions.role-default("lead")});
+	}
+
+	dd {
+		color: var(--ucf-accent, #{compositions.role-default("accent")});
+		font-family: map.get($font, "display");
+		font-size: map.get($size, "heading-2");
+		font-weight: 700;
+		line-height: 1.1;
+		margin: 0;
+	}
+}
+
+.ucf-degree-stats__source {
+	font-size: map.get($size, "small");
+}
+
+.ucf-degree-deadlines {
+	display: flex;
+	flex-wrap: wrap;
+	gap: map.get($space, "40");
+
+	dl {
+		display: grid;
+		gap: map.get($space, "10") map.get($space, "30");
+		grid-template-columns: max-content max-content;
+		margin: 0;
+	}
+
+	dt {
+		font-weight: 700;
+	}
+
+	dd {
+		margin: 0;
+	}
+}
+
+.ucf-degree-careers {
+	columns: 2 16rem;
+}
+
+.ucf-degree-placeholder {
+	border: 1px dashed var(--ucf-line, #{compositions.role-default("line")});
+	padding: map.get($space, "30");
+}

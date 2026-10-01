@@ -160,6 +160,9 @@ The current topics:
 | `block-styles.php`      | Every `register_block_style()`                              |
 | `university-header.php` | The UCF University Header script tag and placeholder        |
 | `paste-artifacts.php`   | Word-processor characters normalized on save and on display |
+| `search-service.php`    | Cached, GET-only reads of the UCF Search Service API        |
+| `degree.php`            | Degree pages: the `ucf-theme/degree` bindings source and    |
+|                         | the server-rendered `ucf-theme/degree-*` blocks             |
 
 **No file may depend on another at include time.** Every one only defines functions and adds
 hooks, so the load order in `functions.php` is documentation rather than a constraint. A
@@ -315,8 +318,9 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     [The Section band](#the-section-band)). Core's built-in categories cover almost everything;
     register a custom one only for a pattern that fits none of them. See
     [patterns/README.md](../patterns/README.md).
--   **Custom blocks.** `src/blocks/` is empty; the theme ships no block type of its own. The
-    editor pipeline is live, though — `src/js/editor/` builds to `build/editor.js` and is
-    enqueued from its generated manifest. It currently carries the Section variation and the
-    Badge rich-text formats.
+-   **Custom static blocks.** `src/blocks/` is empty. The editor pipeline is live, though —
+    `src/js/editor/` builds to `build/editor.js` and is enqueued from its generated manifest.
+    It currently carries the Section variation and the Badge rich-text formats. The theme's
+    only block types are the server-rendered degree blocks in `includes/degree.php`, which
+    are PHP-only (`supports.autoRegister`) and so have no source under `src/` at all.
 -   **Athena values.** See [Tokens are placeholders](#tokens-are-placeholders).

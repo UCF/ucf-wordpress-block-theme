@@ -37,3 +37,44 @@ if ( ! function_exists( '__' ) ) {
 		return $text;
 	}
 }
+
+if ( ! function_exists( 'wp_list_pluck' ) ) {
+	/**
+	 * One field from each item of a list.
+	 *
+	 * Reduced to what `includes/degree.php` calls it with: a list of arrays, one key, no
+	 * index key. Items missing the key are skipped, as core does.
+	 *
+	 * @param array      $input List of arrays.
+	 * @param int|string $field Key to pluck.
+	 * @return array
+	 */
+	function wp_list_pluck( $input, $field ) {
+		$plucked = array();
+		foreach ( $input as $item ) {
+			if ( is_array( $item ) && array_key_exists( $field, $item ) ) {
+				$plucked[] = $item[ $field ];
+			}
+		}
+		return $plucked;
+	}
+}
+
+if ( ! function_exists( 'trailingslashit' ) ) {
+	/**
+	 * Ensure exactly one trailing slash. Core's implementation, verbatim.
+	 *
+	 * @param string $value Path or URL.
+	 * @return string
+	 */
+	function trailingslashit( $value ) {
+		return rtrim( $value, '/\\' ) . '/';
+	}
+}
+
+// Core's time constants, which `includes/search-service.php` computes cache lifetimes from.
+// The prefix sniff is silenced because these are core's names, not the theme's: a prefixed
+// copy would be a different constant, and the code under test would not see it.
+defined( 'MINUTE_IN_SECONDS' ) || define( 'MINUTE_IN_SECONDS', 60 ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
+defined( 'HOUR_IN_SECONDS' ) || define( 'HOUR_IN_SECONDS', 3600 ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
+defined( 'WEEK_IN_SECONDS' ) || define( 'WEEK_IN_SECONDS', 604800 ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound

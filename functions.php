@@ -28,6 +28,8 @@ $ucf_theme_files = array(
 	'block-styles',       // register_block_style() for core blocks.
 	'university-header',  // The UCF University Header: its script tag and placeholder.
 	'paste-artifacts',    // Word-processor characters normalized on display.
+	'search-service',     // Cached, read-only GETs against the UCF Search Service API.
+	'degree',             // Degree pages: bindings source and blocks fed by the Search Service.
 );
 
 foreach ( $ucf_theme_files as $ucf_theme_file ) {

@@ -73,7 +73,8 @@ src/blocks/            Static custom blocks (empty)
 src/js/editor/         Editor glue — Section variation, Badge formats. Builds to build/editor.js
 
 patterns/              Block patterns (empty, flat). See patterns/README.md
-templates/             Block templates: index, page, single, search, 404
+templates/             Block templates: index, page, single, search, 404, and the
+                       selectable degree-program template for the `degree` post type
                        No header or footer part — the University Header is injected
                        by includes/university-header.php, and the footer is a plugin
 
