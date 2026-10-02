@@ -6,7 +6,8 @@
 //
 //   this module        declares --ucf-*                       (a composition sets them)
 //   _typography.scss   reads --ucf-body, -heading, -link      (an element binds to a role)
-//   _utilities.scss    reads --ucf-accent, -on-accent, -line  (a class binds one to a part)
+//   _utilities.scss    reads --ucf-accent, -accent-text, -on-accent, -line (a class binds one to a part)
+//   _buttons.scss      reads --ucf-button-*                   (primary via theme.json, outline here)
 //   component partials read whichever it needs                (same, for one component)
 //
 // A role with no reader is not a placeholder — it is eleven declarations of CSS shipping in
@@ -34,7 +35,10 @@
 @use "variables" as *;
 
 // A11Y: `accent` and `on-accent` are always declared together — anything that sets a
-// background has to say how text sits on it. Every pair below is checked against WCAG AA
+// background has to say how text sits on it.
+// FIX: `accent-text` is its own role, not `accent`. The accent paints fills and edge rules,
+// where gold is right; as text, gold fails on every field but black (1.00–2.59:1), which the
+// accessibility suite reported against `.accent-text` the first time it ran. Every pair below is checked against WCAG AA
 // (4.5:1 for body copy); re-check when the placeholder tokens are swapped for Athena's.
 $treatments: (
 	// SYNC: `role-default()` reads this row for the `var()` fallbacks every consumer uses, so
@@ -42,7 +46,19 @@ $treatments: (
 	"light":
 		(
 			"accent": "gold",
+			// A11Y: not gold — no gold in the palette clears 4.5:1 as text on white or paper-alt
+			// (`gold` 1.83:1, `gold-deep` 2.59:1). A softer black instead: 7.34:1 on white, 6.61:1
+			// on paper-alt. It cannot follow onto the gold field, where it is 4.01:1 — see below.
+			"accent-text": "text-secondary",
 			"body": "text-body",
+			// A11Y: primary is black on gold, 11.46:1 (8.11:1 on the `gold-deep` hover); the
+			// outline is black, 21:1 on white and 18.93:1 on paper-alt, filling on hover.
+			"button": "gold",
+			"button-hover": "gold-deep",
+			"button-hover-text": "black",
+			"button-outline": "black",
+			"button-outline-on": "white",
+			"button-text": "black",
 			// SPEC: the tightest pair in the table — 3.54:1 on white, 3.19:1 on paper-alt
 			// against the 3:1 WCAG 2.4.11 asks. Passing, but re-measure this one first when
 			// the tokens change; `link-blue` is the 5.86:1 fallback if it stops clearing.
@@ -58,7 +74,16 @@ $treatments: (
 	"dark":
 		(
 			"accent": "gold-deep",
+			// A11Y: plain gold, not the `gold-deep` accent — 11.46:1 on black against 8.11:1.
+			"accent-text": "gold",
 			"body": "white",
+			// A11Y: same primary as light — gold reads on black. The outline turns white, 21:1.
+			"button": "gold",
+			"button-hover": "gold-deep",
+			"button-hover-text": "black",
+			"button-outline": "white",
+			"button-outline-on": "black",
+			"button-text": "black",
 			"focus": "gold",
 			"heading": "white",
 			"lead": "white",
@@ -76,7 +101,19 @@ $treatments: (
 	"gold":
 		(
 			"accent": "gold-deep",
+			// A11Y: no accent hue survives on this field (`gold-deep` 1.41:1, `link-blue` 3.20:1),
+			// so accent text falls back to the darkest body tone — 9.50:1. See the note above.
+			"accent-text": "text-body",
 			"body": "black",
+			// FIX: the primary inverts to black, gold text 11.46:1. The shared gold button
+			// vanished into this field — legible label, no visible button. Hover keeps the fill
+			// and turns the label white, 21:1, since no darker fill is distinguishable from black.
+			"button": "black",
+			"button-hover": "black",
+			"button-hover-text": "white",
+			"button-outline": "black",
+			"button-outline-on": "gold",
+			"button-text": "gold",
 			// FIX: black, 11.46:1. The blue this field used to inherit was 1.93:1 on gold —
 			// a focus ring that failed 2.4.11 outright, because the old special-cased rule
 			// covered only the dark compositions and nothing covered this one.
@@ -126,7 +163,20 @@ $compositions: (
 	$spec: map.get($treatments, $name);
 
 	--ucf-accent: #{map.get($color, map.get($spec, "accent"))};
+	--ucf-accent-text: #{map.get($color, map.get($spec, "accent-text"))};
 	--ucf-body: #{map.get($color, map.get($spec, "body"))};
+	--ucf-button: #{map.get($color, map.get($spec, "button"))};
+	--ucf-button-hover: #{map.get($color, map.get($spec, "button-hover"))};
+	--ucf-button-hover-text: #{map.get(
+			$color,
+			map.get($spec, "button-hover-text")
+		)};
+	--ucf-button-outline: #{map.get($color, map.get($spec, "button-outline"))};
+	--ucf-button-outline-on: #{map.get(
+			$color,
+			map.get($spec, "button-outline-on")
+		)};
+	--ucf-button-text: #{map.get($color, map.get($spec, "button-text"))};
 	--ucf-focus: #{map.get($color, map.get($spec, "focus"))};
 	--ucf-heading: #{map.get($color, map.get($spec, "heading"))};
 	--ucf-lead: #{map.get($color, map.get($spec, "lead"))};

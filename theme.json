@@ -345,8 +345,8 @@
 					"radius": "0"
 				},
 				"color": {
-					"background": "var(--wp--preset--color--gold)",
-					"text": "var(--wp--preset--color--black)"
+					"background": "var(--ucf-button, var(--wp--preset--color--gold))",
+					"text": "var(--ucf-button-text, var(--wp--preset--color--black))"
 				},
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--body)",
@@ -365,14 +365,14 @@
 				},
 				":hover": {
 					"color": {
-						"background": "var(--wp--preset--color--gold-deep)",
-						"text": "var(--wp--preset--color--black)"
+						"background": "var(--ucf-button-hover, var(--wp--preset--color--gold-deep))",
+						"text": "var(--ucf-button-hover-text, var(--wp--preset--color--black))"
 					}
 				},
 				":focus": {
 					"color": {
-						"background": "var(--wp--preset--color--gold-deep)",
-						"text": "var(--wp--preset--color--black)"
+						"background": "var(--ucf-button-hover, var(--wp--preset--color--gold-deep))",
+						"text": "var(--ucf-button-hover-text, var(--wp--preset--color--black))"
 					}
 				}
 			},
