@@ -43,15 +43,16 @@ jobs:
         name: Accessibility (axe)
         runs-on: ubuntu-latest
 
-        # `pull-requests: write` is for the summary comment below and nothing else. Job-level
-        # permissions replace the workflow's block outright rather than adding to it, so
-        # `contents: read` has to be restated here.
-        permissions:
-            contents: read
-            pull-requests: write
-
+        # WHY no `pull-requests: write` here: this job runs npm's install scripts, the build,
+        # wp-env and Playwright — hundreds of packages nobody here wrote. Any of them could read
+        # a token on this runner, so this job keeps the workflow's read-only one and the write
+        # token lives in `a11y-comment` below, which runs none of that code.
         steps:
+            # Nothing in this job pushes, so the token is not left in .git/config for every
+            # later step to read.
             - uses: actions/checkout@v4
+              with:
+                  persist-credentials: false
 
             - name: Set up Node
               uses: actions/setup-node@v4
@@ -85,11 +86,61 @@ jobs:
                   node tools/a11y-report.js playwright-report/results.json > a11y-comment.md
                   cat a11y-comment.md >> "$GITHUB_STEP_SUMMARY"
 
-            # Skipped for pull requests from forks: `pull_request` hands those a read-only
-            # token, so this would fail on permissions rather than on anything real. The job
-            # summary and the artifact still carry the full findings there.
+            # The hand-off to `a11y-comment`: that job never checks out, so this file is all it
+            # gets.
+            - name: Upload the comment
+              if: ${{ always() }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: a11y-comment
+                  path: a11y-comment.md
+                  retention-days: 1
+                  if-no-files-found: ignore
+
+            # The comment lists findings; this is where the failing screenshots, the DOM
+            # snapshots and the full node lists live when a finding needs chasing.
+            - name: Upload the Playwright report
+              if: ${{ always() }}
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-report
+                  path: playwright-report/
+                  retention-days: 14
+                  # A run that failed before Playwright started has no report to upload, and a
+                  # "no files found" warning on top of the real failure is just noise pointing
+                  # at the wrong thing.
+                  if-no-files-found: ignore
+
+    # Posts the report from `accessibility`. Split out so the one job holding a write token runs
+    # no PR or third-party code — only GitHub's own actions and the script below, against a
+    # markdown file downloaded from the job above.
+    #
+    # Skipped for pull requests from forks: `pull_request` hands those a read-only token, so
+    # this would fail on permissions rather than on anything real. The job summary and the
+    # artifact still carry the full findings there.
+    a11y-comment:
+        name: Accessibility report comment
+        needs: accessibility
+        if: ${{ always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        runs-on: ubuntu-latest
+
+        # Job-level permissions replace the workflow's block outright rather than adding to
+        # it. Nothing here reads the repo, so `contents` is deliberately not restated.
+        permissions:
+            pull-requests: write
+
+        steps:
+            # A run that failed before the report was rendered has no comment to post; the red
+            # `accessibility` job is the real signal, so this skips rather than failing too.
+            - name: Download the comment
+              id: download
+              continue-on-error: true
+              uses: actions/download-artifact@v4
+              with:
+                  name: a11y-comment
+
             - name: Comment on the pull request
-              if: ${{ always() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+              if: ${{ steps.download.outcome == 'success' }}
               uses: actions/github-script@v7
               with:
                   script: |
@@ -123,17 +174,3 @@ jobs:
                           body,
                         } );
                       }
-
-            # The comment lists findings; this is where the failing screenshots, the DOM
-            # snapshots and the full node lists live when a finding needs chasing.
-            - name: Upload the Playwright report
-              if: ${{ always() }}
-              uses: actions/upload-artifact@v4
-              with:
-                  name: playwright-report
-                  path: playwright-report/
-                  retention-days: 14
-                  # A run that failed before Playwright started has no report to upload, and a
-                  # "no files found" warning on top of the real failure is just noise pointing
-                  # at the wrong thing.
-                  if-no-files-found: ignore
