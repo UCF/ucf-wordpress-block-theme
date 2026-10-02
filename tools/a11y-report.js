@@ -355,6 +355,14 @@ function render( report ) {
 
 const reportPath = process.argv[ 2 ];
 
+/** A link to this run's log, for the two fallbacks below; null outside Actions. */
+const run =
+	process.env.GITHUB_SERVER_URL &&
+	process.env.GITHUB_REPOSITORY &&
+	process.env.GITHUB_RUN_ID
+		? `${ process.env.GITHUB_SERVER_URL }/${ process.env.GITHUB_REPOSITORY }/actions/runs/${ process.env.GITHUB_RUN_ID }`
+		: null;
+
 if ( ! reportPath || ! fs.existsSync( reportPath ) ) {
 	/*
 	 * Exiting 0 here is deliberate: the run has already failed the build, and a second failure
@@ -366,13 +374,6 @@ if ( ! reportPath || ! fs.existsSync( reportPath ) ) {
 	 * than like nothing was ever audited. Naming the two things that get you here points at
 	 * the log line that matters.
 	 */
-	const run =
-		process.env.GITHUB_SERVER_URL &&
-		process.env.GITHUB_REPOSITORY &&
-		process.env.GITHUB_RUN_ID
-			? `${ process.env.GITHUB_SERVER_URL }/${ process.env.GITHUB_REPOSITORY }/actions/runs/${ process.env.GITHUB_RUN_ID }`
-			: null;
-
 	process.stdout.write(
 		'## Accessibility audit\n\n' +
 			'**The audit did not run**, so nothing here says anything about accessibility ' +
@@ -385,6 +386,32 @@ if ( ! reportPath || ! fs.existsSync( reportPath ) ) {
 	process.exit( 0 );
 }
 
-process.stdout.write(
-	render( JSON.parse( fs.readFileSync( reportPath, 'utf8' ) ) ) + '\n'
-);
+/*
+ * The always-0 contract holds here too. A results file Playwright was killed partway through
+ * writing (a timeout, or `cancel-in-progress` on a new push) fails to parse, and a report shape
+ * `render()` did not expect throws; uncaught, either turned the job red over a passing audit
+ * and left the comment empty.
+ *
+ * Unlike the branch above, the audit *did* run here — only this summary of it failed. The
+ * message says so, because "could not be rendered" alone reads as "the audit is broken" and
+ * sends the reader to the wrong step.
+ */
+try {
+	process.stdout.write(
+		render( JSON.parse( fs.readFileSync( reportPath, 'utf8' ) ) ) + '\n'
+	);
+} catch ( error ) {
+	// The stack, not just the message: a `render()` bug is only traceable from the log.
+	console.error( 'Could not render the accessibility report:' );
+	console.error( error );
+
+	process.stdout.write(
+		'## Accessibility audit\n\n' +
+			'**The audit ran, but its summary could not be rendered.** Whether it passed is ' +
+			'the status of the `Accessibility suite` step, not this comment.\n\n' +
+			'The reporter could not read the results file — usually one Playwright was ' +
+			'stopped partway through writing — or hit a result it did not expect. The ' +
+			'Playwright report artifact on the run has the raw results.\n\n' +
+			( run ? `See the job log: ${ run }\n` : 'See the job log.\n' )
+	);
+}
