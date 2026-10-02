@@ -13,9 +13,11 @@
 		"build:css": "sass src/scss/main.scss build/css/main.css --style=compressed --no-source-map",
 		"test": "npm run test:php",
 		"test:php": "composer test",
+		"test:a11y": "node tools/a11y-tests.js",
+		"test:a11y:only": "playwright test",
 		"start": "wp-scripts start --webpack-src-dir=src/blocks --output-path=build",
 		"watch": "sass --watch src/scss/main.scss build/css/main.css --style=expanded",
-		"lint:js": "wp-scripts lint-js tools webpack.config.js src --no-error-on-unmatched-pattern",
+		"lint:js": "wp-scripts lint-js tools webpack.config.js playwright.config.js src tests/a11y --no-error-on-unmatched-pattern",
 		"lint:css": "wp-scripts lint-style \"src/scss/**/*.scss\"",
 		"lint:version": "node tools/check-version.js",
 		"format": "prettier --write .",
@@ -23,9 +25,12 @@
 		"lint:php": "composer lint",
 		"env:start": "wp-env start",
 		"env:stop": "wp-env stop",
-		"env:clean": "wp-env clean all"
+		"env:clean": "wp-env clean all",
+		"env:seed": "wp-env run cli wp theme activate ucf-wordpress-block-theme && wp-env run cli wp eval-file wp-content/themes/ucf-wordpress-block-theme/tests/a11y/seed.php"
 	},
 	"devDependencies": {
+		"@axe-core/playwright": "^4.13.0",
+		"@playwright/test": "^1.63.0",
 		"@wordpress/env": "^10.39.0",
 		"@wordpress/prettier-config": "^4.51.0",
 		"@wordpress/scripts": "^30.0.0",

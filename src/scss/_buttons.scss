@@ -1,0 +1,53 @@
+// ── Buttons ──────────────────────────────────────────────────────────────────
+//
+// CONTEXT: the secondary button. The primary is painted by theme.json's
+// `styles.elements.button`, which reads the `--ucf-button*` roles directly; this file
+// handles core's Outline style, which theme.json cannot address.
+//
+// WHY: core's Outline as the secondary, not a registered style of our own. It is already in
+// every button's Styles panel, and reusing it keeps the compositions the only block styles
+// the theme registers — see BlockStylesTest.
+//
+// UPSTREAM: core paints the outline at `:root :where(…)`, (0,1,0) — the same specificity as
+// theme.json's element rule, so which one wins depends on stylesheet order. The selectors
+// below are (0,3,0) and win regardless. `:not(.has-*)` mirrors core, so a color an author
+// sets through the block's own controls still takes.
+
+@use "compositions";
+
+.wp-block-button.is-style-outline > .wp-block-button__link {
+	// FIX: core pads the outline at .667em/1.333em on top of its 2px border, which left the
+	// secondary visibly shorter than a primary beside it. SYNC: theme.json's
+	// `styles.elements.button.spacing.padding`, less the border, so the two stay one size.
+	padding: calc(0.85rem - 2px) calc(1.5rem - 2px);
+
+	&:not(.has-text-color) {
+		color: var(
+			--ucf-button-outline,
+			#{compositions.role-default("button-outline")}
+		);
+	}
+
+	&:not(.has-background) {
+		background-color: transparent;
+	}
+
+	// WHY: hover fills with the outline color rather than shifting it — a second outline
+	// shade would have to clear contrast on the field as well, and the fill only has to
+	// clear it against its own label.
+	&:not(.has-background):hover,
+	&:not(.has-background):focus {
+		background-color: var(
+			--ucf-button-outline,
+			#{compositions.role-default("button-outline")}
+		);
+		border-color: var(
+			--ucf-button-outline,
+			#{compositions.role-default("button-outline")}
+		);
+		color: var(
+			--ucf-button-outline-on,
+			#{compositions.role-default("button-outline-on")}
+		);
+	}
+}

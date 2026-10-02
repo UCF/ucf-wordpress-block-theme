@@ -19,8 +19,10 @@
 	color: var(--ucf-on-accent, #{compositions.role-default("on-accent")});
 }
 
+// WHY: its own role, not `--ucf-accent`. The accent is chosen to read as a fill or an edge;
+// accent *text* is chosen to clear 4.5:1 on the field, which no gold does on a light one.
 .accent-text {
-	color: var(--ucf-accent, #{compositions.role-default("accent")});
+	color: var(--ucf-accent-text, #{compositions.role-default("accent-text")});
 }
 
 // WHY: sets color on every side; only the sides the block's own border controls give a width

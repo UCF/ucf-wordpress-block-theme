@@ -59,13 +59,13 @@ theme.json           defines what a token is worth
 _variables.scss      gives the token a Sass-level name       $color, $font, $size, $space
 _compositions.scss   assigns tokens to roles                 sets --ucf-*
 _typography.scss     binds elements to roles                 reads --ucf-body, --ucf-heading …
-_utilities.scss      binds roles to parts of a component     reads --ucf-accent, --ucf-line
+_utilities.scss      binds roles to parts of a component     reads --ucf-accent, --ucf-accent-text, --ucf-line
 component partials   read a role for one component           reads --ucf-*
 ```
 
 A **composition** is a background plus everything that has to be true of what sits on it: body
 copy, headings, links, meta text, an accent, a hairline. `.is-style-dark` does not just paint
-a black background — it redeclares all nine `--ucf-*` roles for a dark field — including the focus ring.
+a black background — it redeclares every `--ucf-*` role for a dark field — including the focus ring and the buttons.
 
 The payoff: **a pattern holds no color at all.** It names a composition and nothing else. Drop
 the same pattern inside a Dark group and every role re-resolves. A pattern that hardcodes

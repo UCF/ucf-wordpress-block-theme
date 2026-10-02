@@ -26,10 +26,11 @@
 # is wrong, and stale build/ output means the deployed theme does not match its source.
 #
 # The `php` job runs the unit suite only — it needs no database and no Docker, which is what
-# keeps it on every commit. When slower tiers land (WordPress integration under wp-env,
-# accessibility under Playwright), put them in a separate pull-request-only workflow rather
-# than here; a suite that needs a container is one nobody runs before committing, and adding
-# one here would cost this workflow the property that makes it worth having.
+# keeps it on every commit. Tiers that need a container live in ci-full.yml, which runs on
+# pull requests and main only: accessibility under Playwright today, and WordPress
+# integration under wp-env when it lands. Keep them there rather than here; a suite that
+# needs a container is one nobody runs before committing, and adding one here would cost this
+# workflow the property that makes it worth having.
 
 name: CI
 
