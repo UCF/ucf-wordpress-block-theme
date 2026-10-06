@@ -1,18 +1,36 @@
 // ── Table ────────────────────────────────────────────────────────────────────
 //
 // CONTEXT: core Table, styled to the design system's Table brief — hairline rows, a heavy rule
-// under the header, numbers right-aligned in mono, and the caption as the source line.
+// under the header, numbers right-aligned in mono, the caption as its title on top.
 //
 // WHY: numbers are marked by core's own column alignment control, not a class. Choosing
 // "Align right" on a column is what an editor already does for a figure, so that choice is
 // the hook for the mono, tabular face.
-// WHY: the caption stays below the table and reads as a source line in the data voice (via
-// theme.json's caption element). The brief's caption-on-top would mean reordering the
-// figure visually away from its source order.
+// SPEC: the caption sits above the table and says what it shows, as the brief asks; the
+// source goes in a Data paragraph after the table.
+// A11Y: moved visually only, with flex order. A `<figcaption>` names its figure wherever it
+// sits in the source, so assistive technology already announces it with the table.
 
 @use "sass:map";
 @use "compositions";
 @use "variables" as *;
+
+// UPSTREAM: (0,2,0) over theme.json's caption element rule, which sets the data voice for
+// every caption — right for an image credit, wrong for a table's title.
+.wp-block-table {
+	display: flex;
+	flex-direction: column;
+
+	> .wp-element-caption {
+		color: var(--ucf-body, #{compositions.role-default("body")});
+		font-family: var(--wp--preset--font-family--body);
+		font-size: map.get($size, "heading-5");
+		font-weight: 800;
+		margin: 0 0 map.get($space, "30");
+		order: -1;
+		text-align: left;
+	}
+}
 
 // UPSTREAM: core's own table rules are (0,1,1) and load after this stylesheet when blocks
 // load their styles on demand, so these sit one class higher.
@@ -53,5 +71,35 @@
 		font-variant-numeric: tabular-nums;
 		font-weight: 500;
 		text-align: right;
+	}
+}
+
+// SPEC: the comparison table — two to four options side by side, the first column held in
+// place while the table scrolls sideways on a phone. Applied by the Comparison pattern.
+.wp-block-table.ucf-compare {
+	border-bottom: $border-control solid
+		var(--ucf-body, #{compositions.role-default("body")});
+
+	table {
+		min-width: 720px;
+	}
+
+	thead th {
+		font-family: var(--wp--preset--font-family--display);
+		font-size: 1.25rem;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		line-height: 1.1;
+		text-transform: uppercase;
+		vertical-align: bottom;
+	}
+
+	// WHY: the field's own color behind the sticky column, or rows scroll visibly under it.
+	tbody td:first-child {
+		background-color: var(--ucf-surface, #{map.get($color, "white")});
+		font-weight: 800;
+		left: 0;
+		position: sticky;
+		width: 22%;
 	}
 }

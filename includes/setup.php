@@ -48,3 +48,28 @@ function ucf_theme_page_rendering_mode() {
 	add_post_type_support( 'page', 'editor', array( 'default-mode' => 'template-locked' ) );
 }
 add_action( 'init', 'ucf_theme_page_rendering_mode' );
+
+/**
+ * Mark the body when the Brighter style variation is active.
+ *
+ * WHY a body class. Brighter re-resolves the dark compositions to light, which means setting
+ * `--ucf-*` roles — and only src/scss/_compositions.scss may do that. The variation
+ * (styles/bright.json) sets one custom setting; this turns it into a class that file keys on.
+ *
+ * @param string[] $classes Body classes.
+ * @return string[] Body classes.
+ */
+function ucf_theme_variation_body_class( $classes ) {
+	return array_merge( $classes, ucf_theme_variation_classes( wp_get_global_settings( array( 'custom', 'mode' ) ) ) );
+}
+add_filter( 'body_class', 'ucf_theme_variation_body_class' );
+
+/**
+ * The classes a variation's `custom.mode` setting asks for.
+ *
+ * @param mixed $mode The setting's value.
+ * @return string[] Classes.
+ */
+function ucf_theme_variation_classes( $mode ) {
+	return 'bright' === $mode ? array( 'is-bright' ) : array();
+}

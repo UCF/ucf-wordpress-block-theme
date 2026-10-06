@@ -2,7 +2,7 @@
 /**
  * Title: FAQ
  * Slug: ucf-wordpress-block-theme/faq
- * Categories: text
+ * Categories: ucf
  * Description: Real questions in the words people use, each answered in two to four sentences that start with the answer. Answers stay in the page even when closed.
  * Keywords: faq, questions, accordion
  *
@@ -15,8 +15,8 @@
 <h2 class="wp-block-heading">Questions we get most</h2>
 <!-- /wp:heading -->
 
-<!-- wp:accordion -->
-<div role="group" class="wp-block-accordion">
+<!-- wp:accordion {"className":"ucf-faq"} -->
+<div role="group" class="wp-block-accordion ucf-faq">
 <!-- wp:accordion-item -->
 <div class="wp-block-accordion-item"><!-- wp:accordion-heading -->
 <h3 class="wp-block-accordion-heading has-icon has-icon-right"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">Can I change my major after I am admitted?</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>

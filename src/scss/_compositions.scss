@@ -263,3 +263,41 @@ $compositions: (
 			var(--ucf-accent, #{role-default("accent")});
 	}
 }
+
+// ── Brighter ─────────────────────────────────────────────────────────────────
+//
+// CONTEXT: the "Brighter" treatment from the design system's page studies — the same markup,
+// delivered lighter. Dark bands become white with the drafting grid, and gold does the
+// accenting. Turned on by the Brighter style variation (styles/bright.json), which sets
+// `settings.custom.mode` to "bright"; includes/setup.php reads that setting and adds
+// `is-bright` to the body.
+// WHY: a body class and not CSS in the variation. A variation's own CSS would be a second file
+// setting `--ucf-*` roles, and this is the only file allowed to.
+// WHY `:not(.ucf-keep-dark)`: a band whose darkness is the point — a panel over a photograph —
+// opts out, the way the page studies exempt their anchor bands.
+.is-bright .is-style-dark:not(.ucf-keep-dark) {
+	@include treatment("light");
+
+	--ucf-surface: #{map.get($color, "white")};
+
+	background-color: map.get($color, "white");
+	background-image: linear-gradient(
+			to right,
+			rgb(0 0 0 / 4%) 1px,
+			transparent 1px
+		),
+		linear-gradient(to bottom, rgb(0 0 0 / 4%) 1px, transparent 1px),
+		linear-gradient(to right, rgb(0 0 0 / 7%) 1px, transparent 1px),
+		linear-gradient(to bottom, rgb(0 0 0 / 7%) 1px, transparent 1px);
+	background-size:
+		24px 24px,
+		24px 24px,
+		120px 120px,
+		120px 120px;
+	color: map.get($color, "black");
+}
+
+// SPEC: separation comes from a hairline rather than a change of ground.
+.is-bright .ucf-section + .ucf-section:not(.is-style-gold) {
+	border-top: $border-hairline solid map.get($color, "gray-200");
+}

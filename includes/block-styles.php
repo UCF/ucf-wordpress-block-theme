@@ -91,7 +91,8 @@ function ucf_theme_element_styles() {
 	return array(
 		// src/scss/_text.scss.
 		'core/paragraph' => array(
-			'data' => __( 'Data', 'ucf-wordpress-block-theme' ),
+			'data'   => __( 'Data', 'ucf-wordpress-block-theme' ),
+			'sample' => __( 'Sample data note', 'ucf-wordpress-block-theme' ),
 		),
 		// src/scss/_text.scss.
 		'core/heading'   => array(
@@ -99,8 +100,10 @@ function ucf_theme_element_styles() {
 		),
 		// src/scss/_lists.scss.
 		'core/list'      => array(
-			'check'   => __( 'Checklist', 'ucf-wordpress-block-theme' ),
-			'divided' => __( 'Divided', 'ucf-wordpress-block-theme' ),
+			'check'       => __( 'Checklist', 'ucf-wordpress-block-theme' ),
+			'divided'     => __( 'Divided', 'ucf-wordpress-block-theme' ),
+			'tags'        => __( 'Tags', 'ucf-wordpress-block-theme' ),
+			'definitions' => __( 'Definitions', 'ucf-wordpress-block-theme' ),
 		),
 		// src/scss/_buttons.scss.
 		'core/button'    => array(

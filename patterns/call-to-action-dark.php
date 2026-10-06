@@ -2,7 +2,7 @@
 /**
  * Title: Call to action (dark)
  * Slug: ucf-wordpress-block-theme/call-to-action-dark
- * Categories: call-to-action
+ * Categories: ucf
  * Description: A closing band on black for a page whose main action is not the page's real goal. The gold version is reserved for that.
  * Keywords: cta, dark, button
  *

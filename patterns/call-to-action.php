@@ -2,7 +2,7 @@
 /**
  * Title: Call to action
  * Slug: ucf-wordpress-block-theme/call-to-action
- * Categories: call-to-action
+ * Categories: ucf
  * Description: The one gold band on a page, asking for the action the page exists for. Use at the end, before the footer.
  * Keywords: cta, apply, gold, button
  *

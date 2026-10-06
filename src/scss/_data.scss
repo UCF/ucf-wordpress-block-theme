@@ -1,0 +1,528 @@
+// ── Data blocks ──────────────────────────────────────────────────────────────
+//
+// CONTEXT: the components fed from a data source rather than typed — Facts, Program finder,
+// Profile, Events, Provenance, Alert banner. Each is a server-rendered block registered in the
+// includes/ file that owns its data (programs.php, people.php, events.php, provenance.php,
+// alerts.php); the markup and class names follow the design system's own, so this file is
+// close to its bundle.css with every value read from a role.
+//
+// WHY one partial for all of them: they share a vocabulary — the data voice for sources and
+// dates, the stretched-link list row — and none is large enough to stand alone.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+$_body: var(--ucf-body, #{compositions.role-default("body")});
+$_muted: var(--ucf-muted, #{compositions.role-default("muted")});
+$_line: var(--ucf-line, #{compositions.role-default("line")});
+$_accent: var(--ucf-accent, #{compositions.role-default("accent")});
+$_focus: var(--ucf-focus, #{compositions.role-default("focus")});
+
+// A list row whose title link covers the row: one tab stop, focus ring around the row.
+@mixin row-link($link) {
+	position: relative;
+
+	#{$link} {
+		color: $_body;
+		text-decoration-color: transparent;
+		text-decoration-thickness: 3px;
+
+		&::after {
+			content: "";
+			inset: 0;
+			position: absolute;
+		}
+
+		&:focus-visible {
+			outline: none;
+		}
+	}
+
+	&:hover #{$link} {
+		text-decoration-color: $_accent;
+	}
+
+	&:focus-within {
+		outline: $focus-width solid $_focus;
+		outline-offset: 2px;
+	}
+}
+
+// ── Facts ────────────────────────────────────────────────────────────────────
+
+.ucf-facts__list {
+	border-top: $border-control solid $_body;
+	display: grid;
+	grid-template-columns: 1fr;
+	margin: 0;
+
+	@media (min-width: 576px) {
+		column-gap: map.get($space, "60");
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	@media (min-width: $breakpoint-lg) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+.ucf-facts__item {
+	border-bottom: $border-hairline solid $_line;
+	padding-block: map.get($space, "40");
+
+	dt {
+		color: $_muted;
+		font-size: map.get($size, "data");
+		font-weight: 700;
+		margin-bottom: map.get($space, "10");
+	}
+
+	dd {
+		font-size: map.get($size, "body");
+		font-weight: 700;
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	// SPEC: a quantity in the data voice, so units stay legible.
+	.is-data {
+		font-family: var(--wp--preset--font-family--mono);
+	}
+}
+
+.ucf-facts__source {
+	color: $_muted;
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: map.get($size, "data");
+	margin-top: map.get($space, "30");
+
+	a {
+		color: inherit;
+	}
+}
+
+// SPEC: "Cite this" — a ready-made citation, so the content is visibly meant to be quoted. The
+// copy button appears only with JavaScript (src/js/frontend/cite.js); the text is always there.
+.ucf-cite {
+	font-size: map.get($size, "small");
+	margin-top: map.get($space, "30");
+
+	> summary {
+		align-items: center;
+		cursor: pointer;
+		display: inline-flex;
+		font-weight: 700;
+		min-height: $tap-target;
+		text-decoration: underline;
+		text-decoration-color: var(
+			--ucf-indicator,
+			#{compositions.role-default("indicator")}
+		);
+		text-decoration-thickness: 3px;
+		text-underline-offset: 0.35em;
+	}
+}
+
+.ucf-cite__box {
+	background-color: var(--ucf-raised, #{compositions.role-default("raised")});
+	display: grid;
+	gap: map.get($space, "30");
+	justify-items: start;
+	margin-top: map.get($space, "20");
+	padding: map.get($space, "40");
+}
+
+.ucf-cite__text {
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: map.get($size, "data");
+	line-height: 1.55;
+	margin: 0;
+}
+
+// ── Program finder ───────────────────────────────────────────────────────────
+
+// SPEC: the full list ships in the HTML and every entry links to its own page — filtering is
+// an enhancement (src/js/frontend/finder.js). With JavaScript off the controls stay hidden and
+// the list is simply a list, still crawlable.
+.ucf-finder__controls {
+	background-color: var(--ucf-raised, #{compositions.role-default("raised")});
+	display: grid;
+	gap: map.get($space, "40");
+	margin-bottom: map.get($space, "50");
+	padding: map.get($space, "50");
+
+	&[hidden] {
+		display: none;
+	}
+}
+
+.ucf-finder__search {
+	display: grid;
+	gap: map.get($space, "20");
+	max-width: 32rem;
+
+	label {
+		font-weight: 700;
+	}
+}
+
+.ucf-finder__group {
+	align-items: center;
+	border: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: map.get($space, "20");
+	margin: 0;
+	padding: 0;
+
+	legend {
+		float: left;
+		font-size: map.get($size, "small");
+		font-weight: 700;
+		margin-right: map.get($space, "30");
+	}
+}
+
+// SPEC: square chips, 44px tall, pressed state shown by a check and a fill — not color alone.
+.ucf-chip {
+	align-items: center;
+	background-color: var(--ucf-surface, #{map.get($color, "white")});
+	border: $border-control solid
+		var(--ucf-line-strong, #{compositions.role-default("line-strong")});
+	color: $_body;
+	cursor: pointer;
+	display: inline-flex;
+	font: inherit;
+	font-size: map.get($size, "small");
+	font-weight: 600;
+	gap: map.get($space, "20");
+	min-height: $tap-target;
+	padding: 0 map.get($space, "40");
+
+	&:hover {
+		border-color: $_body;
+	}
+
+	&[aria-pressed="true"] {
+		background-color: var(
+			--ucf-indicator,
+			#{compositions.role-default("indicator")}
+		);
+		border-color: var(
+			--ucf-indicator,
+			#{compositions.role-default("indicator")}
+		);
+		color: var(--ucf-surface, #{map.get($color, "white")});
+		font-weight: 800;
+
+		&::before {
+			border-bottom: 2px solid currentcolor;
+			border-right: 2px solid currentcolor;
+			content: "";
+			height: 10px;
+			transform: rotate(40deg) translateY(-2px);
+			width: 5px;
+		}
+	}
+}
+
+.ucf-finder__status {
+	font-weight: 700;
+	margin: 0 0 map.get($space, "30");
+}
+
+.ucf-results {
+	border-top: $border-control solid $_body;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ucf-result {
+	border-bottom: $border-hairline solid $_line;
+	display: grid;
+	gap: map.get($space, "10") map.get($space, "50");
+	padding-block: map.get($space, "40");
+
+	@include row-link(".ucf-result__name a");
+
+	@media (min-width: 768px) {
+		align-items: center;
+		grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+	}
+
+	&[hidden] {
+		display: none;
+	}
+}
+
+.ucf-result__name {
+	font-size: map.get($size, "body");
+	font-weight: 800;
+	margin: 0;
+}
+
+.ucf-result__college,
+.ucf-result__level {
+	color: $_muted;
+	font-size: map.get($size, "small");
+	margin: 0;
+}
+
+// ── Profile ──────────────────────────────────────────────────────────────────
+
+// SPEC: a person — square portrait, name, role, credentials in the data voice, expertise tags,
+// and a route to reach them. No circles.
+.ucf-profile {
+	align-items: start;
+	display: grid;
+	gap: map.get($space, "50");
+	grid-template-columns: 96px minmax(0, 1fr);
+
+	@media (min-width: 768px) {
+		grid-template-columns: 120px minmax(0, 1fr);
+	}
+}
+
+.ucf-profile--feature {
+	background-color: var(--ucf-raised, #{compositions.role-default("raised")});
+	padding: map.get($space, "60");
+
+	@media (min-width: 768px) {
+		gap: map.get($space, "60");
+		grid-template-columns: 200px minmax(0, 1fr);
+	}
+}
+
+// WHY: a placeholder, not an image, while the people source is mock data. It says what photo
+// belongs there; it is never a stand-in face.
+.ucf-profile__photo {
+	align-items: flex-end;
+	aspect-ratio: 1;
+	background: repeating-linear-gradient(
+		135deg,
+		map.get($color, "gray-800") 0 18px,
+		map.get($color, "gray-900") 18px 19px
+	);
+	color: map.get($color, "gray-300");
+	display: flex;
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.625rem;
+	padding: map.get($space, "10") map.get($space, "20");
+}
+
+.ucf-profile__name {
+	margin: 0 0 map.get($space, "10");
+}
+
+.ucf-profile__role {
+	color: $_muted;
+	font-size: map.get($size, "data-lg");
+	line-height: 1.45;
+	margin: 0 0 map.get($space, "30");
+}
+
+.ucf-profile__credentials {
+	color: $_muted;
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: map.get($size, "data");
+	margin: 0 0 map.get($space, "30");
+}
+
+.ucf-profile__links {
+	display: flex;
+	flex-wrap: wrap;
+	font-size: map.get($size, "data-lg");
+	gap: map.get($space, "20") map.get($space, "50");
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+// ── Events ───────────────────────────────────────────────────────────────────
+
+.ucf-events {
+	border-top: $border-hairline solid $_line;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.ucf-event {
+	border-bottom: $border-hairline solid $_line;
+	display: grid;
+	gap: map.get($space, "50");
+	grid-template-columns: 72px minmax(0, 1fr);
+	padding-block: map.get($space, "50");
+
+	@include row-link(".ucf-event__title a");
+}
+
+// SPEC: the date block — inverse of the field, the day in Oswald. The text is a `<time>`, so
+// people and machines read the same date.
+.ucf-event__date {
+	align-items: center;
+	background-color: $_body;
+	color: var(--ucf-surface, #{map.get($color, "white")});
+	display: flex;
+	flex-direction: column;
+	height: 72px;
+	justify-content: center;
+	width: 72px;
+}
+
+.ucf-event__month {
+	font-size: 0.75rem;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.ucf-event__day {
+	font-family: var(--wp--preset--font-family--display);
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1;
+	margin-top: 2px;
+}
+
+.ucf-event__title {
+	margin: 0 0 map.get($space, "10");
+}
+
+.ucf-event__meta {
+	color: $_muted;
+	display: flex;
+	flex-wrap: wrap;
+	font-size: map.get($size, "small");
+	gap: map.get($space, "10") map.get($space, "50");
+	margin: 0;
+}
+
+// ── Provenance ───────────────────────────────────────────────────────────────
+
+// SPEC: who wrote it, who checked it, when, and which unit stands behind it. Dates are
+// `<time>` elements from real post fields, in the data voice.
+.ucf-provenance {
+	border-block: $border-hairline solid $_line;
+	display: grid;
+	font-size: map.get($size, "data-lg");
+	gap: map.get($space, "40");
+	line-height: 1.45;
+	margin: 0;
+	padding-block: map.get($space, "50");
+
+	@media (min-width: 768px) {
+		gap: map.get($space, "50");
+		grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+	}
+
+	dt {
+		color: $_muted;
+		font-size: map.get($size, "data");
+		font-weight: 700;
+		margin-bottom: map.get($space, "10");
+	}
+
+	dd {
+		font-weight: 700;
+		margin: 0;
+	}
+
+	time {
+		font-family: var(--wp--preset--font-family--mono);
+		font-size: map.get($size, "small");
+		font-weight: 500;
+	}
+}
+
+.ucf-provenance__detail {
+	color: $_muted;
+	display: block;
+	font-size: map.get($size, "small");
+	font-weight: 400;
+}
+
+// ── Alert banner ─────────────────────────────────────────────────────────────
+
+// SPEC: the university-wide banner. Emergency is red and comes only from the UCF Alert feed;
+// notice is gold. Each paints its own fixed pair rather than reading a role — the banner must
+// look the same on every site and every field.
+// A11Y: white on red-700 6.57:1; black on gold 11.46:1. Icon and title together, never hue alone.
+.ucf-alert-banner {
+	padding: map.get($space, "40") var(--wp--custom--gutter);
+
+	a {
+		color: inherit;
+		font-weight: 700;
+	}
+
+	.wp-block-icon svg {
+		flex: none;
+		height: 28px;
+		width: 28px;
+	}
+}
+
+.ucf-alert-banner__inner {
+	align-items: flex-start;
+	display: flex;
+	gap: map.get($space, "40");
+	margin-inline: auto;
+	max-width: var(--wp--style--global--wide-size);
+}
+
+.ucf-alert-banner__title {
+	font-size: map.get($size, "body");
+	font-weight: 800;
+	margin: 0 0 map.get($space, "10");
+}
+
+.ucf-alert-banner p {
+	margin: 0;
+}
+
+// FIX: (0,1,1) over _typography.scss, which colors `p` and headings from the enclosing
+// composition's roles — inside a Dark band that is white text on the gold notice.
+.ucf-alert-banner :is(p, h2) {
+	color: inherit;
+}
+
+.ucf-alert-banner--emergency {
+	background-color: map.get($color, "red-700");
+	color: map.get($color, "white");
+
+	:focus-visible {
+		outline-color: map.get($color, "white");
+	}
+}
+
+.ucf-alert-banner--notice {
+	background-color: map.get($color, "gold");
+	color: map.get($color, "black");
+
+	:focus-visible {
+		outline-color: map.get($color, "black");
+	}
+}
+
+// SPEC: the search box is a design-system control — 52px, a 2px border in `line-strong`.
+.ucf-finder__search input {
+	appearance: none;
+	background-color: var(--ucf-surface, #{map.get($color, "white")});
+	border: $border-control solid
+		var(--ucf-line-strong, #{compositions.role-default("line-strong")});
+	box-sizing: border-box;
+	color: $_body;
+	font: inherit;
+	min-height: 52px;
+	padding: 0.75rem 0.9rem;
+	width: 100%;
+
+	&:hover,
+	&:focus-visible {
+		border-color: $_body;
+	}
+}

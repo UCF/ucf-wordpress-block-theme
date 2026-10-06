@@ -36,3 +36,23 @@
 .muted {
 	color: var(--ucf-muted, #{compositions.role-default("muted")});
 }
+
+// SPEC: the drafting grid — a faint 24px grid with a heavier line every 120px, from the design
+// system's page studies. A texture for a light band that has no photograph, not a field: it
+// sits under whatever composition the band already has. Ink at low opacity, so it reads on
+// light and dark grounds alike.
+.ground-grid {
+	background-image: linear-gradient(
+			to right,
+			rgb(0 0 0 / 4%) 1px,
+			transparent 1px
+		),
+		linear-gradient(to bottom, rgb(0 0 0 / 4%) 1px, transparent 1px),
+		linear-gradient(to right, rgb(0 0 0 / 7%) 1px, transparent 1px),
+		linear-gradient(to bottom, rgb(0 0 0 / 7%) 1px, transparent 1px);
+	background-size:
+		24px 24px,
+		24px 24px,
+		120px 120px,
+		120px 120px;
+}

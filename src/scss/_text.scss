@@ -7,6 +7,7 @@
 // styles (includes/block-styles.php), because each changes more than a size.
 
 @use "compositions";
+@use "variables" as *;
 
 // SPEC: lead is 500 at 1.55 — heavier and looser than body so one paragraph reads as the
 // opener. Keyed on the preset's class, so choosing "Lead" in the size picker is the whole act.
@@ -46,4 +47,45 @@
 	letter-spacing: 0;
 	line-height: 1.3;
 	text-transform: none;
+}
+
+// SPEC: how an unverified number looks until its owner confirms it — the design system's
+// "sample data for review" convention. A sample figure ships with this note beside it, never
+// alone; the mock data blocks print the same note when their data is flagged as sample.
+// A11Y: the label is real text, not a pseudo-element, so it is read with the note. The dashed
+// border marks it as provisional in shape, not color.
+.is-style-sample,
+.ucf-sample {
+	// FIX: border-box, or the padding sits outside the content width and the note juts past
+	// the text column on both sides.
+	box-sizing: border-box;
+	border: $border-hairline dashed
+		var(--ucf-line-strong, #{compositions.role-default("line-strong")});
+	color: var(--ucf-body, #{compositions.role-default("body")});
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: var(--wp--preset--font-size--data);
+	line-height: 1.5;
+	padding: 0.5em 0.75em;
+}
+
+// SPEC: a link that leaves ucf.edu says so with a small arrow — the design system's
+// `ucf-external`. src/js/frontend/external.js adds the class to content links whose host is
+// neither this site nor ucf.edu.
+// WHY the script decides, not a selector: CSS cannot know the site's own host, so a selector
+// marks this site's own links as external on any domain but ucf.edu — localhost, staging.
+// A11Y: the arrow carries alternative text, so a screen reader hears "external link" where a
+// sighted reader sees the glyph.
+.ucf-external::after {
+	content: "\2197" / " (external link)";
+	display: inline-block;
+	font-size: 0.85em;
+	margin-left: 0.2em;
+	text-decoration: none;
+}
+
+// SPEC: a photo credit inside a caption, on its own line — applied with the Credit format
+// (src/js/editor/credit-format.js).
+.ucf-credit {
+	display: block;
+	margin-top: var(--wp--preset--spacing--10);
 }

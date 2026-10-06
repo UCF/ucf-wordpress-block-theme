@@ -2,7 +2,7 @@
 /**
  * Title: Steps
  * Slug: ucf-wordpress-block-theme/steps
- * Categories: text
+ * Categories: ucf
  * Description: A numbered sequence with one action per step. Each step starts with a verb. Use numbers only when order matters.
  * Keywords: steps, process, how to, numbered
  *

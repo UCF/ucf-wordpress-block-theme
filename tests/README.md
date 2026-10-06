@@ -78,12 +78,17 @@ on the wrong block type).
 
 ## What each file covers
 
-| File                   | Covers                                                            |
-| ---------------------- | ----------------------------------------------------------------- |
-| `PasteArtifactsTest`   | The substitution table — what is replaced _and_ what must survive |
-| `UniversityHeaderTest` | The contract with a host the theme does not control               |
-| `BlockStylesTest`      | That `block-styles.php` and `_compositions.scss` still agree      |
-| `IconsTest`            | That `ucf_theme_icons()` and `assets/icons/` still agree          |
+| File                   | Covers                                                              |
+| ---------------------- | ------------------------------------------------------------------- |
+| `PasteArtifactsTest`   | The substitution table — what is replaced _and_ what must survive   |
+| `UniversityHeaderTest` | The contract with a host the theme does not control                 |
+| `BlockStylesTest`      | That `block-styles.php` and `_compositions.scss` still agree        |
+| `IconsTest`            | That `ucf_theme_icons()` and `assets/icons/` still agree            |
+| `MockDataTest`         | That each mock data file has the shape its block documents          |
+| `DataBlocksTest`       | The data blocks' markup builders and structured-data nodes          |
+| `StructuredDataTest`   | The JSON-LD collector, its escaping, FAQ pairs from an accordion    |
+| `FormatTest`           | Dates in AP style                                                   |
+| `SetupTest`            | That the Brighter variation's class is the one the stylesheet reads |
 
 Two of these exist because the failure they guard is **silent**:
 
@@ -105,4 +110,4 @@ Worth adding, in roughly this order:
    markup by migrating it through the block type's `deprecated` array and then reports
    `isValid: true`.
 2. **An integration tier** under wp-env, for anything needing real WordPress.
-3. **An accessibility tier** — Playwright + axe — once there are patterns and blocks to audit.
+3. ~~An accessibility tier~~ — exists: `npm run test:a11y` (Playwright + axe under wp-env).

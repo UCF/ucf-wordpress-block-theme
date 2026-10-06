@@ -2,7 +2,7 @@
 /**
  * Title: Notice: success
  * Slug: ucf-wordpress-block-theme/notice-success
- * Categories: text
+ * Categories: ucf
  * Description: Confirms that something worked, such as a submitted form, and says what happens next.
  * Keywords: notice, alert, message
  *

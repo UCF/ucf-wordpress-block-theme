@@ -10,3 +10,8 @@
  */
 import './section-variation';
 import './badge-format';
+import './credit-format';
+import './data-blocks';
+import './editor-policy';
+import './prepublish-checks';
+import './variation-class';

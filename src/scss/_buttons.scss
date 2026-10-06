@@ -94,3 +94,17 @@
 		);
 	}
 }
+
+// SPEC: the two other sizes — small (44px, the tap-target floor) and large (60px). A button
+// has one style slot and it already holds the kind, so size rides on core's own font-size
+// control instead: Small makes a small button, Body a large one. Same move as Lead on a
+// paragraph — choosing the size is the whole act.
+.wp-block-button__link.has-small-font-size {
+	min-height: $tap-target;
+	padding: 0.55rem 1.1rem;
+}
+
+.wp-block-button__link.has-body-font-size {
+	min-height: 60px;
+	padding: 1rem 2rem;
+}

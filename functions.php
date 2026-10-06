@@ -26,7 +26,17 @@ $ucf_theme_files = array(
 	'enqueue',            // Every way CSS and JS reach the front end or editor canvas.
 	'blocks',             // Static custom blocks compiled from src/blocks/.
 	'block-styles',       // register_block_style() for core blocks.
+	'patterns',           // The UCF pattern category.
 	'icons',              // The UCF icon set, registered with core's icon registry.
+	'format',             // How dates are written, for every block that prints one.
+	'mock-data',          // The stand-in for the systems the data blocks will read.
+	'structured-data',    // One JSON-LD graph per page, from what the page renders.
+	'programs',           // Facts and Program finder blocks.
+	'people',             // Profile block.
+	'events',             // Events block.
+	'provenance',         // Provenance block and its reviewer field.
+	'alerts',             // Alert banner block.
+	'tables',             // Keyboard access to a table that scrolls sideways.
 	'university-header',  // The UCF University Header: its script tag and placeholder.
 	'paste-artifacts',    // Word-processor characters normalized on display.
 );

@@ -2,7 +2,7 @@
 /**
  * Title: Section header with link
  * Slug: ucf-wordpress-block-theme/section-header-split
- * Categories: text
+ * Categories: ucf
  * Description: A section heading and introduction with a See all link on the right. Use above a grid of cards that continues on another page.
  * Keywords: heading, see all, section
  *

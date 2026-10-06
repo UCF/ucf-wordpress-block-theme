@@ -2,7 +2,7 @@
 /**
  * Title: Card
  * Slug: ucf-wordpress-block-theme/card
- * Categories: featured
+ * Categories: ucf
  * Description: One linked card: image, category, title and a sentence. The whole card is clickable through the title link.
  * Keywords: card, link, news, program
  *

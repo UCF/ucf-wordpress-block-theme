@@ -2,7 +2,7 @@
 /**
  * Title: Card grid
  * Slug: ucf-wordpress-block-theme/card-grid
- * Categories: featured
+ * Categories: ucf
  * Description: A band of three boxed cards that each lead to one page. Two to four cards; more than that is a listing page.
  * Keywords: cards, grid, programs, news
  *

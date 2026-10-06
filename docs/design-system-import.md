@@ -61,38 +61,59 @@ treatment in `_compositions.scss`. New roles: `muted`, `line-strong`, `indicator
 
 **Prototype page.** `https://www.ucf.edu/academics/` was rebuilt on the local `ucf` site as
 the "Academics" page, using the Landing template (`templates/page-landing.html`, which leaves
-the H1 to the page's own hero). It uses only the pieces above. Its images point at
-ucf.edu, because the local PHP has no GD or Imagick to import them.
+the H1 to the page's own hero). Its photos are imported attachments; the local PHP has no GD
+or Imagick, so they have no resized variants, only the originals.
 
 **Removed after review.** The anchor chip ("UCF is" / "At UCF" on gold before a headline)
 was built as a rich-text format and then taken out: it is described in the design system as a
 brand device, but it is not confirmed against UCF's published brand guidelines.
 
-## Log: represented, not integrated
+## The degree program template
 
-Each of these needs a system larger than a theme. Where a plugin already on this install
-covers the data, it is named.
+`templates/single-degree.html` is the design system's TemplateDegreeProgram: one template for
+every post of the `degree` type that UCF-Degree-CPT-Plugin registers — 928 on the local `ucf`
+site. It reads what each degree post actually holds (title, URL, parent program for a track,
+dates), so the H1, breadcrumbs, level, program and track are real. The catalog facts the
+system calls for (credit hours, length, format, outcomes) are not on the local posts, because
+the plugin's importer has not populated them; until it does, the Facts block marks each
+degree's record as sample, and a mock record for the same degree stands in where one exists.
+The `page-degree-program` pattern remains for a hand-built program page.
 
-| Item                                                                                        | Needs                                     | Represented as                      | Existing plugin                                |
-| ------------------------------------------------------------------------------------------- | ----------------------------------------- | ----------------------------------- | ---------------------------------------------- |
-| Site header (unit name, nav, one action)                                                    | A decision: build or drop                 | Nothing yet                         | —                                              |
-| University Header                                                                           | Retiring `includes/university-header.php` | The theme's own include, unchanged  | UCF-Header-Plugin                              |
-| Site footer, owner and review date, external-link notice                                    | Footer plugin changes                     | The plugin's footer                 | UCF-Footer-Plugin                              |
-| Structured data (FAQPage, Program, Person, Event…)                                          | A schema layer fed from fields            | Semantic markup only                | —                                              |
-| AnswerSummary, FactList, Provenance, ComparisonTable                                        | Program data, post meta                   | Not built in this branch            | UCF-Degree-CPT-Plugin, UCF-Tuition-Fees-Plugin |
-| ProfileCard                                                                                 | People directory                          | Not built                           | UCF-People-CPT                                 |
-| EventList                                                                                   | Events feed                               | Not built                           | UCF-Events-Plugin                              |
-| FilterList / degree search                                                                  | Program source and client filtering       | A "Search all degrees" button       | UCF-Degree-Search-Plugin                       |
-| "Recently searched degrees"                                                                 | Search analytics                          | A static list on the academics page | —                                              |
-| Emergency banner                                                                            | UCF Alert feed                            | Not built; inline notices only      | UCF-Alert-Plugin                               |
-| Forms                                                                                       | Forms plugin, CRM field lock              | Not built                           | gravityforms, Athena-GravityForms-Plugin       |
-| OnThisPage auto-generation, scroll-spy                                                      | Content parse, front-end JS               | Not built                           | —                                              |
-| Video facade                                                                                | Front-end JS                              | Core Embed                          | —                                              |
-| FAQ "Expand all", FactList "cite this"                                                      | A first front-end script entry            | Not built                           | —                                              |
-| Font Awesome Sharp Solid                                                                    | Pro license token in CI                   | Free Solid, same names              | —                                              |
-| Editor policy (trimmed toolbar, required alt/caption, locked patterns, Tabs block disabled) | Editor configuration                      | Not built                           | —                                              |
-| Image budgets (300/150/60 KB)                                                               | Media pipeline                            | Documented in design-principles.md  | —                                              |
-| Page-study layouts (media pair, split media, bleed, plate, schematic, drafting grid)        | A page-composition branch                 | Not built                           | —                                              |
+## Built as mocks
+
+These need a system larger than a theme. Each is built against mock data in `data/mock/`, read
+through `ucf_theme_mock_data()`, and marked on the page with the sample-data note. The filter
+named is where a real source replaces the mock without touching the block.
+
+| Component                  | Built as                                                                                               | Real source (filter)                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| FactList                   | `ucf/facts` block, with "Cite this"                                                                    | UCF-Degree-CPT-Plugin (`ucf_theme_mock_data_programs`) |
+| FilterList / degree search | `ucf/program-finder` block                                                                             | UCF-Degree-CPT-Plugin, UCF-Degree-Search-Plugin (same) |
+| ProfileCard                | `ucf/profile` block                                                                                    | UCF-People-CPT (`ucf_theme_mock_data_people`)          |
+| EventList                  | `ucf/events` block; past events drop off                                                               | UCF-Events-Plugin (`ucf_theme_mock_data_events`)       |
+| Alert banner               | `ucf/alert-banner` block                                                                               | UCF-Alert-Plugin (`ucf_theme_mock_data_alerts`)        |
+| Provenance                 | `ucf/provenance` block; real author and dates, reviewer from `ucf_reviewer` meta                       | A reviewer field in the editor                         |
+| Structured data            | `includes/structured-data.php`: Organization, BreadcrumbList, FAQPage, Program, Person, Event, Article | Real once the data is                                  |
+| Forms                      | `form` pattern, a mock RFI form that does not submit                                                   | gravityforms + Athena-GravityForms-Plugin              |
+
+Patterns over core blocks, no data needed: Answer summary, Comparison table, Sources, On this
+page, Video (facade in `src/js/frontend/video.js`), Hero statement and Hero image (locked),
+the page-study placements, and three page-level patterns — Homepage, Degree program, Research
+story — with demo pages on the local `ucf` site.
+
+Editor policy: the toolbar is trimmed and Tabs removed (`src/js/editor/editor-policy.js`), and
+a pre-publish panel checks alt text, table captions and heading order without blocking a save
+(`prepublish-checks.js`). Brighter is a style variation (`styles/bright.json`).
+
+## Still not built
+
+| Item                                          | Why                                                                                                 |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Site header, University Header plugin, footer | Excluded from this round                                                                            |
+| Font Awesome Sharp Solid                      | Needs UCF's Pro license token; the Free Solid names match                                           |
+| Image budgets (300/150/60 KB)                 | A media pipeline; documented in design-principles.md                                                |
+| A reviewer field in the editor                | `ucf_reviewer` is registered and in REST; no panel edits it yet                                     |
+| College "photos" on the academics page        | They are round icon illustrations, not photographs — shown uncropped at 1:1 until real photos exist |
 
 ## Verification still owed
 

@@ -2,7 +2,7 @@
 /**
  * Title: Stat statement
  * Slug: ucf-wordpress-block-theme/stat
- * Categories: text
+ * Categories: ucf
  * Description: A fact written as a complete statement, with one supporting sentence and its source. Never a big number over small words.
  * Keywords: stat, fact, number, source
  *

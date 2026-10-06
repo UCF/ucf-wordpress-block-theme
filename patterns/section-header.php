@@ -2,7 +2,7 @@
 /**
  * Title: Section header
  * Slug: ucf-wordpress-block-theme/section-header
- * Categories: text
+ * Categories: ucf
  * Description: A section heading phrased as the question the section answers, with one sentence of introduction. Use at the top of a band.
  * Keywords: heading, intro, section
  *

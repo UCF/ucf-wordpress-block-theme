@@ -2,7 +2,7 @@
 /**
  * Title: Notice: error
  * Slug: ucf-wordpress-block-theme/notice-danger
- * Categories: text
+ * Categories: ucf
  * Description: Says what went wrong and how to fix it. Pair with a form; never use for marketing.
  * Keywords: notice, alert, message
  *

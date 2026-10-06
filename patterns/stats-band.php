@@ -2,7 +2,7 @@
 /**
  * Title: Stats band
  * Slug: ucf-wordpress-block-theme/stats-band
- * Categories: featured
+ * Categories: ucf
  * Description: Up to three stat statements on a dark band, each with its source and date.
  * Keywords: stats, facts, numbers, band
  *

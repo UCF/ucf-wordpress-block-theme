@@ -2,7 +2,7 @@
 /**
  * Title: Notice: important
  * Slug: ucf-wordpress-block-theme/notice-important
- * Categories: text
+ * Categories: ucf
  * Description: The one caveat a reader must not miss, on gold. Use one at most per page.
  * Keywords: notice, alert, message
  *

@@ -75,6 +75,27 @@ $_muted: var(--ucf-muted, #{compositions.role-default("muted")});
 	}
 }
 
+// SPEC: the horizontal card — image beside the text from 576px, for a list of stories where
+// a grid would be too much. The image takes 40%.
+@media (min-width: 576px) {
+	.ucf-card--horizontal {
+		align-items: start;
+		display: grid;
+		gap: map.get($space, "50");
+		grid-template-columns: 2fr 3fr;
+
+		> .wp-block-image {
+			grid-row: 1 / span 4;
+			margin: 0;
+		}
+
+		> :not(.wp-block-image) {
+			grid-column: 2;
+			margin-block-start: 0;
+		}
+	}
+}
+
 .ucf-card--boxed {
 	background-color: var(--ucf-raised, #{compositions.role-default("raised")});
 	padding: map.get($space, "50");
@@ -236,6 +257,140 @@ $_muted: var(--ucf-muted, #{compositions.role-default("muted")});
 	}
 }
 
+// ── Answer summary ───────────────────────────────────────────────────────────
+
+// SPEC: the page's whole point in the first 100 words — a boxed answer under the H1, with a
+// label tab, two to four takeaways and the date it was checked. One per page. The quotable
+// passage, so it is plain HTML a model can read in one pass.
+.ucf-answer {
+	border: $border-control solid $_body;
+	padding: map.get($space, "70") map.get($space, "50") map.get($space, "50");
+	position: relative;
+
+	// The label tab, sitting on the box's top-left corner.
+	> :first-child {
+		background-color: $_body;
+		color: var(--ucf-surface, #{map.get($color, "white")});
+		font-size: map.get($size, "data");
+		font-weight: 800;
+		left: -2px;
+		letter-spacing: 0.02em;
+		line-height: 1.3;
+		margin: 0;
+		padding: map.get($space, "20") map.get($space, "40");
+		position: absolute;
+		top: -2px;
+	}
+
+	> :nth-child(2) {
+		font-size: map.get($size, "lead");
+		font-weight: 500;
+		line-height: 1.55;
+		margin-top: 0;
+	}
+
+	> :last-child {
+		border-top: $border-hairline solid
+			var(--ucf-line, #{compositions.role-default("line")});
+		padding-top: map.get($space, "40");
+	}
+}
+
+// ── On this page ─────────────────────────────────────────────────────────────
+
+// SPEC: jump links to the page's H2s, under a heavy rule. Columns of 14rem, so the same list
+// is one column in a sidebar and several across a wide band.
+.ucf-toc {
+	border-top: $rule-accent solid $_body;
+	padding-top: map.get($space, "40");
+
+	.wp-block-list {
+		column-gap: map.get($space, "60");
+		columns: 3 14rem;
+		list-style: none;
+		padding-left: 0;
+
+		> li {
+			break-inside: avoid;
+			margin: 0;
+		}
+	}
+
+	a {
+		color: $_body;
+		display: block;
+		padding-block: map.get($space, "20");
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		// SPEC: the section in view, marked by src/js/frontend/spy.js.
+		&[aria-current="true"] {
+			font-weight: 800;
+		}
+	}
+}
+
+// ── Sources ──────────────────────────────────────────────────────────────────
+
+// SPEC: numbered references at the end of a page, in the data voice, under a heavy rule. An
+// in-text marker (`.ucf-ref`, a superscript link) jumps to its entry, which highlights.
+.ucf-sources {
+	border-top: $rule-accent solid $_body;
+	padding-top: map.get($space, "50");
+
+	ol {
+		color: $_muted;
+		font-family: var(--wp--preset--font-family--mono);
+		font-size: map.get($size, "data");
+		line-height: 1.6;
+	}
+
+	li:target {
+		background-color: var(
+			--ucf-raised,
+			#{compositions.role-default("raised")}
+		);
+		outline: $border-control solid $_accent;
+		outline-offset: 4px;
+	}
+}
+
+.ucf-ref {
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.72em;
+	line-height: 0;
+	margin-left: 0.1em;
+	text-decoration: none;
+	vertical-align: super;
+}
+
+// ── Video ────────────────────────────────────────────────────────────────────
+
+// SPEC: a video that loads nothing until asked — a poster, a play link, then the player
+// (src/js/frontend/video.js). Without JavaScript the link simply goes to the video. Title and
+// duration sit in text beside it.
+.ucf-video {
+	> figure {
+		margin: 0;
+		position: relative;
+	}
+
+	iframe {
+		aspect-ratio: 16 / 9;
+		border: 0;
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+}
+
+.ucf-video__play {
+	font-weight: 700;
+}
+
 // ── Steps ────────────────────────────────────────────────────────────────────
 
 // SPEC: a numbered sequence, one action per step, on a core ordered List so the order
@@ -292,5 +447,95 @@ ol.wp-block-list.ucf-steps {
 			font-size: map.get($size, "heading-5");
 			margin-block: 0.55rem map.get($space, "20");
 		}
+	}
+}
+
+// SPEC: the FAQ's "Expand all" (src/js/frontend/expand.js) — a text-weight action, right-aligned
+// above the questions, with the indicator underline the Text button uses.
+// WHY a row around the button: core's constrained layout centers every direct child with
+// `margin: auto !important`, so the row is that child and the button sits right inside it.
+.ucf-expand-all-row {
+	text-align: right;
+}
+
+.ucf-expand-all {
+	background: none;
+	border: 0;
+	color: $_body;
+	cursor: pointer;
+	font: inherit;
+	font-weight: 700;
+	min-height: $tap-target;
+	padding: 0;
+	text-decoration: underline;
+	text-decoration-color: var(
+		--ucf-indicator,
+		#{compositions.role-default("indicator")}
+	);
+	text-decoration-thickness: 3px;
+	text-underline-offset: 0.4em;
+}
+
+// ── Page layout: header band and main column with sidebar ────────────────────
+
+// SPEC: the design system's PageHeader — breadcrumbs, the H1, one sentence, closed by a
+// hairline. Quiet: it orients, then gets out of the way.
+.ucf-page-header {
+	border-bottom: $border-hairline solid
+		var(--ucf-line, #{compositions.role-default("line")});
+
+	// SPEC: the sentence under the H1 stays near the prose measure even though the band is
+	// the full container — a 1240px line of lead text is unreadable.
+	.has-lead-font-size {
+		max-width: 46rem;
+	}
+}
+
+// SPEC: the design system's `ucf-with-sidebar` — a main column and a 300px sidebar inside the
+// 1240px container. Applied by a pattern to core Columns, so authors edit two ordinary columns.
+// UPSTREAM: core stacks Columns below 782px; the design system's sidebars appear from 1024px,
+// so between the two the columns are stacked here too, main first, as the brief asks.
+.wp-block-columns.ucf-with-sidebar {
+	gap: map.get($space, "80");
+
+	@media (max-width: #{$breakpoint-lg - 1px}) {
+		flex-wrap: wrap !important; // UPSTREAM: core's own `is-not-stacked-on-mobile` rule uses !important.
+
+		> .wp-block-column {
+			flex-basis: 100% !important; // UPSTREAM: overrides the inline flex-basis core writes from the width control.
+		}
+	}
+}
+
+// SPEC: running text in the main column stays at the prose measure — about 70 characters —
+// while facts, stats, comparisons and profiles use the column's full width.
+.ucf-with-sidebar__main
+	> :where(
+		p,
+		h2,
+		h3,
+		h4,
+		.wp-block-list,
+		.wp-block-accordion,
+		.wp-block-details
+	) {
+	max-width: var(--wp--style--global--content-size);
+}
+
+// SPEC: the sidebar holds still beside the page from 1024px — "On this page", the next step,
+// a contact. Below that it is ordinary content after the main column.
+.ucf-sidebar {
+	display: grid;
+	gap: map.get($space, "60");
+
+	@media (min-width: $breakpoint-lg) {
+		position: sticky;
+		top: map.get($space, "50");
+	}
+
+	// WHY one column: the jump list sits in a 300px sidebar, where 14rem columns would be one
+	// anyway — this says so rather than relying on it.
+	.ucf-toc .wp-block-list {
+		columns: auto;
 	}
 }

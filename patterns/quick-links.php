@@ -2,7 +2,7 @@
 /**
  * Title: Quick links
  * Slug: ucf-wordpress-block-theme/quick-links
- * Categories: featured
+ * Categories: ucf
  * Description: Two to four large task links labeled with the questions people arrive with. Never more than four.
  * Keywords: quick links, tasks, questions
  *

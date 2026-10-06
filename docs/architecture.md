@@ -140,7 +140,11 @@ no `render.php`. `includes/blocks.php` registers every folder in `build/` that h
 
 **A server-rendered block does not go in `includes/blocks.php`.** It lives in the file that owns
 the data it renders, next to the queries and meta it reads, so its registration and its behavior
-are one thing.
+are one thing. It is registered in PHP with its attributes, and `src/js/editor/data-blocks.js`
+gives it an editor preview through core's server-side render — the attribute schema, including
+an `enum` for a picker, reaches the editor from the server definition, so it is written once.
+Keep each one's markup in a pure builder function beside the render callback; that is the part
+the unit suite can test.
 
 **Block sources must not reference the theme.** Keeping that true is what makes moving
 `src/blocks/` into a distribution plugin later a copy plus a registration loop.
@@ -156,15 +160,24 @@ there.
 
 The current topics:
 
-| File                    | Owns                                                        |
-| ----------------------- | ----------------------------------------------------------- |
-| `setup.php`             | Theme supports; the page editor's rendering mode            |
-| `enqueue.php`           | Every way CSS or JS reaches a browser                       |
-| `blocks.php`            | Static custom block registration                            |
-| `block-styles.php`      | Every `register_block_style()`                              |
-| `icons.php`             | The UCF icon set, registered with core's icon registry      |
-| `university-header.php` | The UCF University Header script tag and placeholder        |
-| `paste-artifacts.php`   | Word-processor characters normalized on save and on display |
+| File                    | Owns                                                                               |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| `setup.php`             | Theme supports; the page editor's rendering mode; the style variation's body class |
+| `enqueue.php`           | Every way CSS or JS reaches a browser                                              |
+| `blocks.php`            | Static custom block registration                                                   |
+| `block-styles.php`      | Every `register_block_style()`                                                     |
+| `patterns.php`          | The UCF pattern category every theme pattern is filed under                        |
+| `icons.php`             | The UCF icon set, registered with core's icon registry                             |
+| `format.php`            | How dates are written, for every block that prints one                             |
+| `mock-data.php`         | The stand-in for the data sources the data blocks will read                        |
+| `structured-data.php`   | One JSON-LD graph per page, from what the page rendered                            |
+| `programs.php`          | Facts and Program finder blocks                                                    |
+| `people.php`            | Profile block                                                                      |
+| `events.php`            | Events block                                                                       |
+| `provenance.php`        | Provenance block and the `ucf_reviewer` post field                                 |
+| `alerts.php`            | Alert banner block                                                                 |
+| `university-header.php` | The UCF University Header script tag and placeholder                               |
+| `paste-artifacts.php`   | Word-processor characters normalized on save and on display                        |
 
 **No file may depend on another at include time.** Every one only defines functions and adds
 hooks, so the load order in `functions.php` is documentation rather than a constraint. A
@@ -214,7 +227,11 @@ so **a dependency list is never restated in PHP** — adding an `@wordpress/*` i
 source is the whole change.
 
 A folder with a `block.json` is auto-detected. Anything else — editor glue, a front-end script,
-a rich-text format — is named in `webpack.config.js`.
+a rich-text format — is named in `webpack.config.js`. There are two named entries: `editor`
+(variations, formats, the data blocks' previews, editor policy) and `frontend` (every
+progressive enhancement — finder filtering, citation copy, the video facade, "Expand all",
+scroll-spy, external-link marking). Each front-end module finds its own markup and does
+nothing on a page without it; nothing on a page may depend on one to appear.
 
 ## Build and content
 
@@ -320,8 +337,8 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     an integration tier. Keep them out of `npm test`: that command must never need Docker.
 -   **A full pattern library.** `patterns/` holds the design system's basic components as
     patterns (cards, stats, notices, quick links, steps, FAQ, calls to action, section
-    headers); page-level patterns and templates are next. No custom pattern category is
-    registered. The directory is **flat on purpose** — core reads each
+    headers); page-level patterns and templates are next. Every pattern is filed under one custom
+    category, UCF (`includes/patterns.php`). The directory is **flat on purpose** — core reads each
     file's header comment and never the path, so subdirectories imply a taxonomy nothing
     enforces. The brand theme's units → groups → sections → pages ladder was its own editorial
     structure; units and sections are intended to ship here as blocks instead, and Section
@@ -329,11 +346,12 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     [The Section band](#the-section-band)). Core's built-in categories cover almost everything;
     register a custom one only for a pattern that fits none of them. See
     [patterns/README.md](../patterns/README.md).
--   **Custom blocks.** `src/blocks/` is empty; the theme ships no block type of its own, and
-    the design system import did not need one — every component it brought in is a core
-    block, a block style, or a pattern over core blocks. The editor pipeline is live:
-    `src/js/editor/` builds to `build/editor.js` and carries the Section variation and the Badge
-    formats.
--   **Data-fed components.** Degree facts, profiles, events, structured data and the rest
-    are logged, with the plugin each would integrate with, in
-    [design-system-import.md](design-system-import.md).
+-   **Static custom blocks.** `src/blocks/` is empty: every design-system component is a core
+    block, a block style, a pattern over core blocks — or, where it renders data, a
+    server-rendered block in the `includes/` file that owns the data.
+-   **Real data sources.** The six data blocks (Facts, Program finder, Profile, Events,
+    Provenance, Alert banner) read mock data from `data/mock/` through
+    `ucf_theme_mock_data()`. Each set has a filter, `ucf_theme_mock_data_{set}`, which is where a
+    plugin's real data replaces it; the shape each block expects is documented at the top of its
+    file, and `MockDataTest` checks the mock files still have it. Everything rendered from mock
+    data carries the sample-data note. See [design-system-import.md](design-system-import.md).

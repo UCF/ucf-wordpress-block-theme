@@ -70,15 +70,18 @@ src/scss/              The stylesheet, compiled to build/css/main.css
   _utilities.scss        Classes a pattern uses to bind a role to part of a component
   main.scss              Load order — which is output order
 src/blocks/            Static custom blocks (empty)
-src/js/editor/         Editor glue — Section variation, Badge formats. Builds to build/editor.js
+src/js/editor/         Editor glue — variation, formats, data-block previews, editor policy
+src/js/frontend/       Progressive enhancements. Builds to build/frontend.js
 
 patterns/              Block patterns, flat. See patterns/README.md
-templates/             Block templates: index, page, page-landing, single, search, 404
+templates/             Block templates: index, page, page-landing, single, single-degree, search, 404
                        No header or footer part — the University Header is injected
                        by includes/university-header.php, and the footer is a plugin
 
 assets/fonts/          Self-hosted webfonts, declared as fontFace in theme.json
 assets/icons/          The UCF icon set, registered by includes/icons.php
+data/mock/             Mock data the data blocks read until real sources are wired up
+styles/                Style variations: Brighter
 build/                 Compiled output. Committed; never hand-edited
 tests/php/             PHP unit suite. See tests/README.md
 tools/                 Build and check scripts

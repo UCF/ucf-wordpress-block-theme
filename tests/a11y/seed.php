@@ -258,6 +258,18 @@ function ucf_theme_a11y_seed_routes() {
 		)
 	);
 
+	// WHY: a page per custom template too. A template the theme ships is a route a visitor can
+	// land on, and `page-landing` leaves the H1 to the content — which only a page shows.
+	$landing = ucf_theme_a11y_insert(
+		array(
+			'post_title'   => 'A page, for the landing template',
+			'post_name'    => 'a11y-landing',
+			'post_content' => '<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">A landing page</h1><!-- /wp:heading -->'
+				. ucf_theme_a11y_body_content( 'a landing page' ),
+		)
+	);
+	update_post_meta( $landing, '_wp_page_template', 'page-landing' );
+
 	// WHY: two posts, not one. The blog index and search results are lists, and a list of one
 	// renders no separation between entries for axe to measure.
 	foreach ( array( 'first', 'second' ) as $which ) {
@@ -280,6 +292,10 @@ function ucf_theme_a11y_seed_routes() {
 		array(
 			'name' => 'page',
 			'path' => '/a11y-page/',
+		),
+		array(
+			'name' => 'page-landing',
+			'path' => '/a11y-landing/',
 		),
 		array(
 			'name' => 'single-post',

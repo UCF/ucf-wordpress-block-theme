@@ -2,7 +2,7 @@
 /**
  * Title: Notice
  * Slug: ucf-wordpress-block-theme/notice
- * Categories: text
+ * Categories: ucf
  * Description: A short notice with an icon and a word. Interrupt only when something changes what the reader should do.
  * Keywords: notice, alert, message
  *
