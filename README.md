@@ -3,10 +3,10 @@
 A WordPress block theme for the University of Central Florida that brings the look, feel, and
 conventions of the UCF Athena Framework to the WordPress block editor (Full Site Editing).
 
-> **Status: scaffold.** The structure, build pipeline and token architecture are in place and
-> working. The design values in `theme.json` are placeholders carried over from the UCF Brand
-> Block Theme, pending Athena equivalents — see
-> [docs/architecture.md § Tokens are placeholders](docs/architecture.md#tokens-are-placeholders).
+> **Status: prototype.** The structure, build pipeline and token architecture are in place and
+> working. The design values in `theme.json` and the patterns come from the UCF Web Design
+> System prototype — see [docs/design-system-import.md](docs/design-system-import.md) for what
+> came in and what was left out.
 
 ## Requirements
 
@@ -72,16 +72,18 @@ src/scss/              The stylesheet, compiled to build/css/main.css
 src/blocks/            Static custom blocks (empty)
 src/js/editor/         Editor glue — Section variation, Badge formats. Builds to build/editor.js
 
-patterns/              Block patterns (empty, flat). See patterns/README.md
-templates/             Block templates: index, page, single, search, 404
+patterns/              Block patterns, flat. See patterns/README.md
+templates/             Block templates: index, page, page-landing, single, search, 404
                        No header or footer part — the University Header is injected
                        by includes/university-header.php, and the footer is a plugin
 
 assets/fonts/          Self-hosted webfonts, declared as fontFace in theme.json
+assets/icons/          The UCF icon set, registered by includes/icons.php
 build/                 Compiled output. Committed; never hand-edited
 tests/php/             PHP unit suite. See tests/README.md
 tools/                 Build and check scripts
 docs/                  architecture.md — read it before changing anything
+                       design-principles.md, design-system-import.md
 ```
 
 ## Before you change anything

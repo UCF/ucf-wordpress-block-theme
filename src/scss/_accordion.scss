@@ -1,0 +1,151 @@
+// ── Accordion ────────────────────────────────────────────────────────────────
+//
+// CONTEXT: the design system's Accordion and FAQ, on two core blocks rather than a custom
+// one. Core Details is the plain disclosure; core Accordion is the FAQ, because its toggle
+// sits inside a real heading element, so the questions appear in the page outline. Both keep
+// a closed panel's content in the HTML — Details natively, Accordion behind `hidden` — so
+// search engines and AI tools read the answers with JavaScript off, which is the brief's
+// condition.
+//
+// SPEC: a 60px row, a hairline in `line-strong` between rows, and a square marker that shows
+// state by shape — plus when closed, minus when open — not by rotation alone.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+$_line: var(--ucf-line-strong, #{compositions.role-default("line-strong")});
+
+// The square marker: a 2px box with a plus drawn from two gradients. Open drops the vertical
+// bar, leaving a minus.
+@mixin marker {
+	background:
+		linear-gradient(currentcolor, currentcolor) center / 12px 2px no-repeat,
+		linear-gradient(currentcolor, currentcolor) center / 2px 12px no-repeat;
+	border: $border-control solid currentcolor;
+	flex: none;
+	height: 28px;
+	width: 28px;
+}
+
+@mixin marker-open {
+	background: linear-gradient(currentcolor, currentcolor) center / 12px 2px
+		no-repeat;
+}
+
+// ── Details ──────────────────────────────────────────────────────────────────
+
+.wp-block-details {
+	border-block: $border-hairline solid $_line;
+
+	// UPSTREAM: (0,2,0) beats core's flow gap, `:root :where(.is-layout-flow) > *` — stacked
+	// details share one rule between them instead of a strip of page and two rules.
+	& + & {
+		border-top: 0;
+		margin-block-start: 0;
+	}
+
+	> summary {
+		align-items: center;
+		// FIX: border-box, or the padding stacks on the 60px minimum and the row is 92px.
+		box-sizing: border-box;
+		cursor: pointer;
+		display: flex;
+		font-size: map.get($size, "body");
+		font-weight: 700;
+		gap: map.get($space, "20");
+		line-height: 1.4;
+		list-style: none;
+		min-height: 60px;
+		padding-block: map.get($space, "40");
+
+		&::-webkit-details-marker {
+			display: none;
+		}
+
+		// FIX: the marker pushes itself right, rather than `space-between` on the row. Every
+		// run of summary text — a title and a count in a span — is its own flex item, and
+		// `space-between` spread them across the row.
+		&::after {
+			content: "";
+			margin-left: auto;
+
+			@include marker;
+		}
+
+		&:hover {
+			text-decoration: underline;
+			text-decoration-thickness: 2px;
+			text-underline-offset: 0.3em;
+		}
+	}
+
+	&[open] > summary::after {
+		@include marker-open;
+	}
+
+	> :not(summary) {
+		padding-right: map.get($space, "70");
+	}
+
+	> :last-child:not(summary) {
+		padding-bottom: map.get($space, "50");
+	}
+}
+
+// ── Accordion ────────────────────────────────────────────────────────────────
+
+.wp-block-accordion {
+	border-top: $border-hairline solid $_line;
+}
+
+// UPSTREAM: core spaces items with the flow gap; the hairline is the separation here.
+.wp-block-accordion > .wp-block-accordion-item {
+	border-bottom: $border-hairline solid $_line;
+	margin-block: 0;
+}
+
+// SPEC: questions are long, so they take the H4 look — Montserrat in sentence case — whatever
+// level the accordion is set to. Capitalized Oswald over a ten-word question reads slowly.
+// UPSTREAM: (0,2,0) to outrank theme.json's per-level element rules.
+.wp-block-accordion .wp-block-accordion-heading {
+	font-family: var(--wp--preset--font-family--body);
+	font-size: map.get($size, "body");
+	font-weight: 800;
+	letter-spacing: 0;
+	line-height: 1.4;
+	margin: 0;
+	text-transform: none;
+}
+
+.wp-block-accordion .wp-block-accordion-heading__toggle {
+	gap: map.get($space, "50");
+	min-height: 60px;
+	padding-block: map.get($space, "40");
+}
+
+// WHY: the glyph core prints is hidden and the marker drawn instead — core's `+` turns into
+// an `×` by rotating, which is a close button, not an open panel.
+.wp-block-accordion .wp-block-accordion-heading__toggle-icon {
+	font-size: 0;
+
+	@include marker;
+}
+
+// UPSTREAM: matches core's own selector, (0,4,0), to cancel its 45° rotation.
+.wp-block-accordion-item.is-open
+	> .wp-block-accordion-heading
+	.wp-block-accordion-heading__toggle-icon {
+	transform: none;
+
+	@include marker-open;
+}
+
+.wp-block-accordion-panel {
+	padding-bottom: map.get($space, "50");
+	padding-right: map.get($space, "70");
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}

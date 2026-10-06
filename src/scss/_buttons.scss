@@ -1,12 +1,12 @@
 // ── Buttons ──────────────────────────────────────────────────────────────────
 //
-// CONTEXT: the secondary button. The primary is painted by theme.json's
-// `styles.elements.button`, which reads the `--ucf-button*` roles directly; this file
-// handles core's Outline style, which theme.json cannot address.
+// CONTEXT: everything about a button that theme.json's `styles.elements.button` cannot say.
+// The primary's colors are painted there, reading the `--ucf-button*` roles directly; this
+// file adds its box, core's Outline style as the secondary, and the Text style.
 //
 // WHY: core's Outline as the secondary, not a registered style of our own. It is already in
-// every button's Styles panel, and reusing it keeps the compositions the only block styles
-// the theme registers — see BlockStylesTest.
+// every button's Styles panel. The Text style is registered (includes/block-styles.php)
+// because core has no equivalent.
 //
 // UPSTREAM: core paints the outline at `:root :where(…)`, (0,1,0) — the same specificity as
 // theme.json's element rule, so which one wins depends on stylesheet order. The selectors
@@ -14,14 +14,57 @@
 // sets through the block's own controls still takes.
 
 @use "compositions";
+@use "variables" as *;
+
+// SPEC: 52px tall, label centered. The small size the design system names stays at the 44px
+// tap target; it is not offered yet, since a button has one style slot and that slot is its
+// kind (primary, outline, text).
+// WHY: every button carries a 2px border, transparent on the primary. The outline's border is
+// then not extra height, and the two sit side by side at one size with one padding — the
+// earlier fix subtracted the border from the outline's padding instead, which drifted the
+// moment either padding changed.
+.wp-block-button__link {
+	align-items: center;
+	border: $border-control solid transparent;
+	display: inline-flex;
+	justify-content: center;
+	min-height: 52px;
+	text-decoration: none;
+}
+
+// SPEC: the third kind — a link-weight action with a heavy underline in the `indicator`
+// color, for "See all" beside a section heading or a second action that must not compete.
+// A11Y: the underline thickens on hover rather than changing color, so the state is visible
+// in shape; the 44px height keeps it a full tap target though it reads as text.
+.wp-block-button.is-style-text > .wp-block-button__link {
+	text-decoration-thickness: 3px;
+	text-underline-offset: 0.4em;
+
+	&,
+	&:hover,
+	&:focus {
+		background-color: transparent;
+		border-color: transparent;
+		color: var(--ucf-body, #{compositions.role-default("body")});
+		min-height: $tap-target;
+		padding-inline: 0;
+		text-decoration-color: var(
+			--ucf-indicator,
+			#{compositions.role-default("indicator")}
+		);
+		text-decoration-line: underline;
+	}
+
+	&:hover,
+	&:focus {
+		text-decoration-thickness: 5px;
+		text-underline-offset: 0.3em;
+	}
+}
 
 .wp-block-button.is-style-outline > .wp-block-button__link {
-	// FIX: core pads the outline at .667em/1.333em on top of its 2px border, which left the
-	// secondary visibly shorter than a primary beside it. SYNC: theme.json's
-	// `styles.elements.button.spacing.padding`, less the border, so the two stay one size.
-	padding: calc(0.85rem - 2px) calc(1.5rem - 2px);
-
 	&:not(.has-text-color) {
+		border-color: currentcolor;
 		color: var(
 			--ucf-button-outline,
 			#{compositions.role-default("button-outline")}

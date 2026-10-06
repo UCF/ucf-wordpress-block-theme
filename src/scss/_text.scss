@@ -1,0 +1,49 @@
+// ── Text ─────────────────────────────────────────────────────────────────────
+//
+// CONTEXT: the paragraph and heading looks the UCF Web Design System names (Text, Headings)
+// that theme.json presets cannot finish on their own. Lead and Display are font-size presets
+// an editor picks in the Typography panel; the rules here add the weight and leading that go
+// with them, keyed on the class core emits for the preset. Data and Sans are registered block
+// styles (includes/block-styles.php), because each changes more than a size.
+
+@use "compositions";
+
+// SPEC: lead is 500 at 1.55 — heavier and looser than body so one paragraph reads as the
+// opener. Keyed on the preset's class, so choosing "Lead" in the size picker is the whole act.
+.has-lead-font-size {
+	font-weight: 500;
+	line-height: 1.55;
+}
+
+// SPEC: display, the hero statement — tighter and heavier than H1. One per page.
+.has-display-1-font-size {
+	font-weight: 700;
+	line-height: 0.92;
+}
+
+// SPEC: the data voice — Roboto Mono for things a reader can check: sources, as-of dates,
+// figure notes. It is a signal, not decoration, so it is never a running paragraph.
+// WHY: muted, from the role, so a source line sits quietly on every field.
+.is-style-data {
+	color: var(--ucf-muted, #{compositions.role-default("muted")});
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: var(--wp--preset--font-size--data);
+	line-height: 1.55;
+
+	a {
+		color: inherit;
+	}
+}
+
+// SPEC: Montserrat, sentence case — the H4 to H6 look on any level. Heading level is
+// structure, not size: a card title is an H3 that looks like an H4, never an H4 chosen to
+// look small. Pair with the Heading 4/5/6 size presets.
+// UPSTREAM: (0,2,0) to outrank theme.json's per-level element rules, which core emits at
+// (0,1,0) for `h1`…`h3` and which would otherwise keep the display family and capitals.
+.wp-block-heading.is-style-sans {
+	font-family: var(--wp--preset--font-family--body);
+	font-weight: 800;
+	letter-spacing: 0;
+	line-height: 1.3;
+	text-transform: none;
+}

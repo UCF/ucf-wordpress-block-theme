@@ -30,3 +30,9 @@
 .hairline {
 	border-color: var(--ucf-line, #{compositions.role-default("line")});
 }
+
+// WHY: secondary copy — metadata, a dateline, a caption written as a paragraph. A role rather
+// than a grey token, because gray-600 is 7:1 on white and invisible on black.
+.muted {
+	color: var(--ucf-muted, #{compositions.role-default("muted")});
+}

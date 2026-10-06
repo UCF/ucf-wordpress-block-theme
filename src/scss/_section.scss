@@ -18,7 +18,8 @@
 // with it — see _compositions.scss.
 
 .ucf-section {
-	padding-block: map.get($space, "60");
+	// SPEC: 64px on phones to 96px on desktop, fluid rather than stepped at a breakpoint.
+	padding-block: $section-y;
 	padding-inline: $gutter;
 }
 
@@ -28,4 +29,11 @@
 // doubled class outranks it without `!important`.
 .ucf-section.ucf-section {
 	margin-block: 0;
+}
+
+// SPEC: the tight band, 48px — a band that continues the one above it rather than starting a
+// new subject. Applied by a pattern as a class, not offered in the Styles panel, where the
+// band's one slot is its composition.
+.ucf-section.ucf-section--tight {
+	padding-block: map.get($space, "70");
 }

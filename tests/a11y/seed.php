@@ -540,16 +540,29 @@ function ucf_theme_a11y_seed_variants() {
  * block what its `save()` emits; the DOM assertion in `variants.spec.js` is what catches one
  * going stale.
  *
- * Only `core/group` today, because the compositions are the theme's only block styles.
  * `core/group` gets the probe rather than a paragraph, and that is the point of the whole
  * tier: a composition sets the `--ucf-*` roles its contents read, so the same link is legible
  * in one and not in another. Only a group carrying the full range of content finds that.
+ *
+ * The element styles (`ucf_theme_element_styles()`) get their own block, carrying a link
+ * where the style colors one — the data paragraph's source link is the case that matters,
+ * since it inherits the muted role.
  *
  * @return array<string, string> Block name to markup.
  */
 function ucf_theme_a11y_samples() {
 	return array(
-		'core/group' => '<!-- wp:group {"className":"%CLASS%","layout":{"type":"constrained"}} -->' . "\n"
+		'core/paragraph' => '<!-- wp:paragraph {"className":"%CLASS%"} --><p class="%CLASS%">Source: <a href="/a11y-page/">UCF Facts</a>, fall 2025</p><!-- /wp:paragraph -->',
+		'core/heading'   => '<!-- wp:heading {"level":3,"className":"%CLASS%"} --><h3 class="wp-block-heading %CLASS%">A heading in this style</h3><!-- /wp:heading -->',
+		'core/list'      => '<!-- wp:list {"className":"%CLASS%"} --><ul class="wp-block-list %CLASS%">'
+			. '<!-- wp:list-item --><li>A list item in this style</li><!-- /wp:list-item -->'
+			. '<!-- wp:list-item --><li>A second item, with <a href="/a11y-page/">a link</a></li><!-- /wp:list-item -->'
+			. '</ul><!-- /wp:list -->',
+		'core/button'    => '<!-- wp:buttons --><div class="wp-block-buttons">'
+			. '<!-- wp:button {"className":"%CLASS%"} --><div class="wp-block-button %CLASS%">'
+			. '<a class="wp-block-button__link wp-element-button" href="/a11y-page/">A button in this style</a>'
+			. '</div><!-- /wp:button --></div><!-- /wp:buttons -->',
+		'core/group'     => '<!-- wp:group {"className":"%CLASS%","layout":{"type":"constrained"}} -->' . "\n"
 			. '<div class="wp-block-group %CLASS%">'
 			. '<!-- wp:heading --><h2 class="wp-block-heading">Heading inside the composition</h2><!-- /wp:heading -->'
 			. ucf_theme_a11y_probe()

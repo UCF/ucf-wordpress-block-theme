@@ -26,6 +26,7 @@ $ucf_theme_files = array(
 	'enqueue',            // Every way CSS and JS reach the front end or editor canvas.
 	'blocks',             // Static custom blocks compiled from src/blocks/.
 	'block-styles',       // register_block_style() for core blocks.
+	'icons',              // The UCF icon set, registered with core's icon registry.
 	'university-header',  // The UCF University Header: its script tag and placeholder.
 	'paste-artifacts',    // Word-processor characters normalized on display.
 );

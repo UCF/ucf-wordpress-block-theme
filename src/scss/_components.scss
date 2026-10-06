@@ -1,0 +1,296 @@
+// ── Components ───────────────────────────────────────────────────────────────
+//
+// CONTEXT: the design system's components that are a *shape* made of core blocks rather than
+// a block of their own — Card, Stat statement, Notice, Quick links, Steps. Each is a pattern
+// (patterns/) that prefills a class on a core Group or List; the class here gives that
+// arrangement its look and reads the enclosing composition's roles for color.
+//
+// WHY patterns over custom blocks. Every one of these is a group of headings, paragraphs,
+// images and lists that core already edits, saves and validates. A custom block would own a
+// `save()` and its deprecations forever to arrive at the same markup — the reasoning that
+// made Section a variation of core/group (docs/architecture.md § The Section band).
+// WHY the `ucf-` prefix: these are components, and _typography.scss already excludes
+// `[class*="ucf-"]` links from the generic link color, so a component's own link styling is
+// not outranked on hover.
+// WHY none of these sets a `--ucf-*` role. A component that paints its own field — the gold
+// Important notice — gets there by also carrying the `gold` composition, not by redeclaring
+// roles here.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+$_body: var(--ucf-body, #{compositions.role-default("body")});
+$_accent: var(--ucf-accent, #{compositions.role-default("accent")});
+$_muted: var(--ucf-muted, #{compositions.role-default("muted")});
+
+// Whole-card click target through one link. The heading's link stretches over the card, so a
+// keyboard user meets one tab stop, not three, and the focus ring is drawn around the card.
+@mixin stretched-link($link) {
+	position: relative;
+
+	#{$link} {
+		color: $_body;
+		text-decoration-color: transparent;
+		text-decoration-line: underline;
+		text-decoration-thickness: 3px;
+		text-underline-offset: 0.25em;
+
+		&::after {
+			content: "";
+			inset: 0;
+			position: absolute;
+		}
+
+		&:focus-visible {
+			outline: none;
+		}
+	}
+
+	// A11Y: hover and focus both underline the title in the accent, so the affordance is a
+	// shape and not a color change alone.
+	&:hover #{$link},
+	&:focus-within #{$link} {
+		text-decoration-color: $_accent;
+	}
+
+	&:focus-within {
+		outline: $focus-width solid
+			var(--ucf-focus, #{compositions.role-default("focus")});
+		outline-offset: 4px;
+	}
+}
+
+// ── Card ─────────────────────────────────────────────────────────────────────
+
+// SPEC: one link, one title under about eight words, image and text optional. Three looks:
+// plain, boxed on the raised ground, ruled with a heavy top rule.
+.ucf-card {
+	height: 100%;
+
+	@include stretched-link(".wp-block-heading a");
+
+	> .wp-block-image {
+		margin-bottom: map.get($space, "40");
+	}
+}
+
+.ucf-card--boxed {
+	background-color: var(--ucf-raised, #{compositions.role-default("raised")});
+	padding: map.get($space, "50");
+
+	// SPEC: the image runs to the box's edges.
+	> .wp-block-image:first-child {
+		margin: calc(-1 * #{map.get($space, "50")})
+			calc(-1 * #{map.get($space, "50")}) map.get($space, "50");
+	}
+}
+
+.ucf-card--ruled {
+	border-top: $rule-accent solid $_body;
+	padding-top: map.get($space, "40");
+}
+
+// ── Stat statement ───────────────────────────────────────────────────────────
+
+// SPEC: a fact written as a complete statement, never a giant number over small words. The
+// statement is the first paragraph; one supporting sentence; the source in the data voice.
+.ucf-stat {
+	border-top: $rule-accent solid $_accent;
+	padding-top: map.get($space, "50");
+
+	> p:first-child {
+		font-family: var(--wp--preset--font-family--display);
+		font-size: clamp(1.625rem, 1.45rem + 0.75vw, 2.125rem);
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		line-height: 1.08;
+		text-transform: uppercase;
+		text-wrap: balance;
+	}
+
+	> p:not(:first-child, .is-style-data) {
+		font-size: map.get($size, "data-lg");
+		line-height: 1.6;
+	}
+}
+
+// ── Notice ───────────────────────────────────────────────────────────────────
+
+// SPEC: an icon and a word, always — meaning never rests on color. The pattern places a core
+// Icon and a heading; the type is a modifier class. The Important type is gold, so it is the
+// `gold` composition plus this class, which keeps every role on it correct.
+.ucf-notice {
+	border: $border-control solid $_body;
+	padding: map.get($space, "50");
+
+	.wp-block-icon svg {
+		height: 24px;
+		width: 24px;
+	}
+
+	> :last-child > :last-child {
+		margin-bottom: 0;
+	}
+}
+
+.ucf-notice.is-style-gold {
+	border-color: map.get($color, "gold");
+}
+
+.ucf-notice--success {
+	background-color: var(
+		--ucf-success-soft,
+		#{compositions.role-default("success-soft")}
+	);
+	border-color: var(--ucf-success, #{compositions.role-default("success")});
+
+	.wp-block-icon,
+	.wp-block-heading {
+		color: var(--ucf-success, #{compositions.role-default("success")});
+	}
+}
+
+.ucf-notice--danger {
+	background-color: var(
+		--ucf-danger-soft,
+		#{compositions.role-default("danger-soft")}
+	);
+	border-color: var(--ucf-danger, #{compositions.role-default("danger")});
+
+	.wp-block-icon,
+	.wp-block-heading {
+		color: var(--ucf-danger, #{compositions.role-default("danger")});
+	}
+}
+
+// ── Quick links ──────────────────────────────────────────────────────────────
+
+// SPEC: two to four task links in the visitor's words, tiled with a 2px line between. The
+// line is the grid's background showing through the gap, so each tile paints the field.
+// UPSTREAM: (0,2,0) over core's grid layout rule. Core fills the row with `auto-fill`, which
+// keeps empty tracks — here they would show the line color as a gray slab beside three tiles.
+// `auto-fit` collapses them, so two, three or four tiles always span the row.
+.ucf-quick-links.is-layout-grid {
+	grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+}
+
+.ucf-quick-links {
+	background-color: var(--ucf-line, #{compositions.role-default("line")});
+	border: $border-control solid
+		var(--ucf-line, #{compositions.role-default("line")});
+}
+
+.ucf-quick-link {
+	background-color: var(--ucf-surface, #{map.get($color, "white")});
+	min-height: 150px;
+	padding: map.get($space, "50");
+
+	@include stretched-link("> p:first-child a");
+
+	> p:first-child {
+		font-family: var(--wp--preset--font-family--display);
+		font-size: 1.5rem;
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		line-height: 1.1;
+		text-transform: uppercase;
+	}
+
+	> p:not(:first-child) {
+		color: $_muted;
+		font-size: map.get($size, "data-lg");
+		line-height: 1.5;
+	}
+
+	// SPEC: the accent bar grows along the bottom edge on hover and focus.
+	&::after {
+		background-color: $_accent;
+		bottom: 0;
+		content: "";
+		height: $rule-accent;
+		left: 0;
+		position: absolute;
+		right: 0;
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.2s ease;
+	}
+
+	&:hover {
+		background-color: var(
+			--ucf-raised,
+			#{compositions.role-default("raised")}
+		);
+	}
+
+	&:hover::after,
+	&:focus-within::after {
+		transform: scaleX(1);
+	}
+
+	// WHY: inside the tile, not around it — the tiles butt against each other, so an outset
+	// ring would be clipped by its neighbor.
+	&:focus-within {
+		outline-offset: -5px;
+	}
+}
+
+// ── Steps ────────────────────────────────────────────────────────────────────
+
+// SPEC: a numbered sequence, one action per step, on a core ordered List so the order
+// survives with styles off. Each item opens with its title in bold; the number sits in an
+// accent square and a line joins the squares.
+ol.wp-block-list.ucf-steps {
+	counter-reset: ucf-step;
+	list-style: none;
+	padding-left: 0;
+
+	> li {
+		counter-increment: ucf-step;
+		margin: 0;
+		min-height: 48px;
+		padding: 0 0 map.get($space, "60") calc(48px + #{map.get($space, "50")});
+		position: relative;
+
+		&::before {
+			align-items: center;
+			background-color: $_accent;
+			color: var(
+				--ucf-on-accent,
+				#{compositions.role-default("on-accent")}
+			);
+			content: counter(ucf-step);
+			display: flex;
+			font-family: var(--wp--preset--font-family--display);
+			font-size: 1.5rem;
+			font-weight: 700;
+			height: 48px;
+			justify-content: center;
+			left: 0;
+			line-height: 1;
+			position: absolute;
+			top: 0;
+			width: 48px;
+		}
+
+		&:not(:last-child)::after {
+			background-color: var(
+				--ucf-line-strong,
+				#{compositions.role-default("line-strong")}
+			);
+			bottom: map.get($space, "20");
+			content: "";
+			left: 23px;
+			position: absolute;
+			top: 56px;
+			width: 2px;
+		}
+
+		> strong:first-child {
+			display: block;
+			font-size: map.get($size, "heading-5");
+			margin-block: 0.55rem map.get($space, "20");
+		}
+	}
+}

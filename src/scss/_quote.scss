@@ -1,0 +1,91 @@
+// ── Quote ────────────────────────────────────────────────────────────────────
+//
+// CONTEXT: the design system's Quote, on two core blocks. Pullquote is the large Oswald
+// moment; Quote is the quieter testimonial inside running text. Both mark the quotation with
+// gold marks the theme adds — authors do not type them — and lead the citation with a 48px
+// gold rule.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+$_accent: var(--ucf-accent, #{compositions.role-default("accent")});
+
+@mixin marks {
+	> p:first-of-type::before {
+		color: $_accent;
+		content: "\201C";
+		margin-right: 0.04em;
+	}
+
+	> p:last-of-type::after {
+		color: $_accent;
+		content: "\201D";
+		margin-left: 0.04em;
+	}
+}
+
+@mixin cite {
+	align-items: center;
+	color: var(--ucf-muted, #{compositions.role-default("muted")});
+	display: flex;
+	font-size: map.get($size, "small");
+	font-style: normal;
+	gap: map.get($space, "40");
+	text-transform: none;
+
+	&::before {
+		background-color: $_accent;
+		content: "";
+		flex: none;
+		height: $rule-accent;
+		width: 48px;
+	}
+}
+
+// UPSTREAM: `wp-block-styles` gives Quote a left border and Pullquote top and bottom borders,
+// centered text and padding. All reset: the gold marks are the device here.
+.wp-block-quote {
+	border: 0;
+	margin-inline: 0;
+	padding: 0;
+
+	> p {
+		font-size: map.get($size, "lead");
+		font-weight: 500;
+		line-height: 1.5;
+	}
+
+	@include marks;
+
+	cite {
+		@include cite;
+	}
+}
+
+.wp-block-pullquote {
+	border: 0;
+	padding: 0;
+	text-align: left;
+
+	blockquote {
+		margin: 0;
+
+		@include marks;
+	}
+
+	blockquote > p {
+		font-family: var(--wp--preset--font-family--display);
+		font-size: clamp(1.75rem, 1.45rem + 1.3vw, 2.625rem);
+		font-weight: 600;
+		letter-spacing: 0.01em;
+		line-height: 1.08;
+		margin-bottom: map.get($space, "50");
+		text-transform: uppercase;
+		text-wrap: balance;
+	}
+
+	cite {
+		@include cite;
+	}
+}

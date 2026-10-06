@@ -83,6 +83,7 @@ on the wrong block type).
 | `PasteArtifactsTest`   | The substitution table — what is replaced _and_ what must survive |
 | `UniversityHeaderTest` | The contract with a host the theme does not control               |
 | `BlockStylesTest`      | That `block-styles.php` and `_compositions.scss` still agree      |
+| `IconsTest`            | That `ucf_theme_icons()` and `assets/icons/` still agree          |
 
 Two of these exist because the failure they guard is **silent**:
 

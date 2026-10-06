@@ -36,6 +36,7 @@ h4,
 h5,
 h6 {
 	color: var(--ucf-heading, #{compositions.role-default("heading")});
+	text-wrap: balance;
 }
 
 // A11Y: this is the fallback, not what paints a link. theme.json's `styles.elements.link` is
@@ -45,10 +46,15 @@ h6 {
 // (0,1,0), which the `:hover` half here would otherwise outrank.
 a:where(:not(.wp-block-button__link, [class*="ucf-"])) {
 	color: var(--ucf-link, #{compositions.role-default("link")});
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
 }
 
 // WHY: hover moves toward the field's own high-contrast text rather than the light field's
 // darker blue, which on black reads as the link switching off.
+// SPEC: hover thickens the underline to 2px as well as changing color, so the state never
+// depends on hue alone.
 a:where(:not(.wp-block-button__link, [class*="ucf-"])):hover {
 	color: var(--ucf-link-hover, #{compositions.role-default("link-hover")});
+	text-decoration-thickness: 2px;
 }

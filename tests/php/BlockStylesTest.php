@@ -25,6 +25,8 @@ use Brain\Monkey\Functions;
 
 /**
  * @covers ::ucf_theme_register_composition_styles
+ * @covers ::ucf_theme_register_element_styles
+ * @covers ::ucf_theme_element_styles
  * @covers ::ucf_theme_register_block_styles
  */
 final class BlockStylesTest extends TestCase {
@@ -217,27 +219,28 @@ final class BlockStylesTest extends TestCase {
 	}
 
 	/**
-	 * The compositions are the only block styles the theme registers.
+	 * The compositions are the only styles registered on core/group.
 	 *
 	 * A treatment is applied by a composition style and by nothing else — that is the whole
-	 * contract, and it only holds while this is true. A style registered outside the
-	 * composition set is either a second way to say the same thing or a look with no
-	 * definition in _compositions.scss; both are worth noticing on the commit that adds them.
+	 * contract, and it only holds while this is true. Any other group style would be a second
+	 * route to a field, which is what the removed `on-dark` style and `.has-*-background-color`
+	 * rules were: one visual result reachable several ways with different consequences.
 	 *
-	 * This used to allow exactly one exception, `on-dark`, which supplied the dark treatment
-	 * without a background. It was removed along with the `.has-*-background-color` rules: one
-	 * route to a field, not three.
+	 * Styles on other blocks are allowed, but only from `ucf_theme_element_styles()` — see
+	 * the next two tests.
 	 *
 	 * @return void
 	 */
-	public function test_the_compositions_are_the_only_registered_styles() {
+	public function test_the_compositions_are_the_only_group_styles() {
 		$all        = $this->captureRegistrations( 'ucf_theme_register_block_styles' );
 		$from_pairs = $this->captureRegistrations( 'ucf_theme_register_composition_styles' );
 
-		$names = array();
+		$group_names = array();
 
 		foreach ( $all as $call ) {
-			$names[] = $call[1];
+			if ( 'core/group' === $call[0] ) {
+				$group_names[] = $call[1];
+			}
 		}
 
 		$pair_names = array();
@@ -248,8 +251,61 @@ final class BlockStylesTest extends TestCase {
 
 		$this->assertSame(
 			array(),
-			array_values( array_diff( $names, $pair_names ) ),
-			'A block style is registered that is not one of the compositions.'
+			array_values( array_diff( $group_names, $pair_names ) ),
+			'A core/group style is registered that is not one of the compositions.'
 		);
+	}
+
+	/**
+	 * Every registered style is either a composition or on the reviewed element list.
+	 *
+	 * WHY: so a style cannot arrive by a third route. Adding one means adding it to
+	 * `ucf_theme_element_styles()`, where its comment names the partial that paints it.
+	 *
+	 * @return void
+	 */
+	public function test_every_style_is_a_composition_or_a_listed_element_style() {
+		$expected = $this->captureRegistrations( 'ucf_theme_register_composition_styles' );
+
+		foreach ( ucf_theme_element_styles() as $block => $styles ) {
+			$this->assertNotSame( 'core/group', $block, 'An element style is listed on core/group, which only compositions may style.' );
+
+			foreach ( array_keys( $styles ) as $name ) {
+				$expected[] = array( $block, $name );
+			}
+		}
+
+		$this->assertEqualsCanonicalizing(
+			$expected,
+			$this->captureRegistrations( 'ucf_theme_register_block_styles' )
+		);
+	}
+
+	/**
+	 * Every element style has a rule in the stylesheet.
+	 *
+	 * The composition test above reads a Sass map; element styles have no map, so this looks
+	 * for the `.is-style-{name}` selector in any partial. A style registered with no rule is an
+	 * editor offering that paints nothing.
+	 *
+	 * @return void
+	 */
+	public function test_every_element_style_ships_with_its_css() {
+		$source = '';
+
+		foreach ( (array) glob( UCF_THEME_DIR . '/src/scss/*.scss' ) as $partial ) {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- As above.
+			$source .= file_get_contents( $partial );
+		}
+
+		foreach ( ucf_theme_element_styles() as $block => $styles ) {
+			foreach ( array_keys( $styles ) as $name ) {
+				$this->assertMatchesRegularExpression(
+					'/\.is-style-' . preg_quote( $name, '/' ) . '(?![a-z0-9-])/',
+					$source,
+					"`{$block}` registers the style `{$name}`, but no partial in src/scss/ defines `.is-style-{$name}`."
+				);
+			}
+		}
 	}
 }

@@ -18,13 +18,46 @@ body {
 	text-rendering: optimizelegibility;
 }
 
-// SPEC: square corners everywhere. Buttons opt back in via theme.json if one ever needs it.
-button,
-input,
-select,
-textarea,
-.wp-block-button__link {
+// SPEC: square corners on everything — buttons, images, cards, chips, controls, avatars. The
+// design system enforces this globally rather than trusting each component to remember, and
+// it also flattens whatever a plugin or embed brings in. theme.json removes the editor's
+// radius control (`settings.border.radius`), so there is no setting for this rule to fight.
+// WHY: the one way out is per element. A shape a platform enforces opts out with
+// `.ucf-allow-radius` and a comment saying why; nothing in the theme uses it.
+*,
+*::before,
+*::after {
 	border-radius: 0;
+}
+
+.ucf-allow-radius,
+.ucf-allow-radius * {
+	border-radius: revert;
+}
+
+// SPEC: hover inverts rather than fades, and the only motion is 150ms on color.
+a,
+.wp-element-button,
+.wp-block-button__link {
+	transition:
+		background-color 0.15s ease,
+		border-color 0.15s ease,
+		color 0.15s ease,
+		text-decoration-color 0.15s ease;
+}
+
+// SPEC: the brand's one highlight. Gold is a fill, never a text color, so the text is black
+// whatever field the highlight sits on. An author's own Highlight color is an inline style and
+// still wins.
+mark {
+	background-color: map.get($color, "gold");
+	color: map.get($color, "black");
+	padding: 0 0.15em;
+}
+
+::selection {
+	background-color: map.get($color, "gold");
+	color: map.get($color, "black");
 }
 
 // A11Y: the ring is a role, so it re-resolves at every composition — including a nested one.
@@ -33,7 +66,8 @@ textarea,
 // field's gold ring on white, at 1.83:1. Same class of bug as using descendant selectors for
 // text color, which is what the roles exist to avoid.
 :focus-visible {
-	outline: 3px solid var(--ucf-focus, #{compositions.role-default("focus")});
+	outline: $focus-width solid
+		var(--ucf-focus, #{compositions.role-default("focus")});
 	outline-offset: 2px;
 }
 
@@ -61,16 +95,17 @@ textarea,
 	background: map.get($color, "gold");
 	color: map.get($color, "black");
 	font-family: map.get($font, "body");
-	font-size: map.get($size, "small");
-	font-weight: 800;
-	left: map.get($space, "20");
-	padding: map.get($space, "20") map.get($space, "30");
+	font-size: map.get($size, "data-lg");
+	font-weight: 700;
+	left: map.get($space, "40");
+	padding: map.get($space, "30") map.get($space, "40");
 	position: absolute;
-	text-transform: uppercase;
+	text-decoration: none;
 	top: -100vh;
 	z-index: $z-university-header + 1;
 
 	&:focus {
+		outline-color: map.get($color, "black");
 		top: map.get($space, "20");
 	}
 }

@@ -16,7 +16,7 @@
 //
 // Anything that *sets* a --ucf-* property belongs here; anything that reads one for a single
 // component belongs with that component. Each composition has two flavors —
-// `.is-style-paper` and `.is-style-paper-accent`, the latter adding a leading-edge rule —
+// `.is-style-alt` and `.is-style-alt-accent`, the latter adding a leading-edge rule —
 // but only the first is offered in the editor; see the SYNC note further down.
 //
 // This is the seam that lets a pattern hold no color at all. A pattern names a composition
@@ -25,11 +25,11 @@
 // FIX: custom properties, not descendant selectors. A rule like `.is-style-dark p` keeps
 // applying to a nested card with its own background, because inheritance never beats a
 // matching rule — a Light card inside a Dark section gets washed-out grey paragraphs on white.
-// WHY: two tables, deliberately not flattened. `paper` and `light` are different backgrounds
+// WHY: two tables, deliberately not flattened. `alt` and `light` are different backgrounds
 // sharing one treatment, so merging would duplicate that treatment per composition and let
 // the copies drift.
 // SYNC: adding a composition means a row in `$compositions` below plus a row in
-// `ucf_register_composition_styles()` in includes/block-styles.php — PHP cannot read a Sass map.
+// `ucf_theme_register_composition_styles()` in includes/block-styles.php — PHP cannot read a Sass map.
 
 @use "sass:map";
 @use "variables" as *;
@@ -37,117 +37,167 @@
 // A11Y: `accent` and `on-accent` are always declared together — anything that sets a
 // background has to say how text sits on it.
 // FIX: `accent-text` is its own role, not `accent`. The accent paints fills and edge rules,
-// where gold is right; as text, gold fails on every field but black (1.00–2.59:1), which the
-// accessibility suite reported against `.accent-text` the first time it ran. Every pair below is checked against WCAG AA
-// (4.5:1 for body copy); re-check when the placeholder tokens are swapped for Athena's.
+// where gold is right; as text, gold fails on every light field (1.83:1 on white), which the
+// accessibility suite reported against `.accent-text` the first time it ran.
+// SPEC: every value below is the UCF Web Design System's surface table (tokens.json, "color"
+// → semantic tokens). The ratios quoted are that system's measurements against these hexes;
+// re-measure the row when a value moves.
+//
+// Roles, and what reads them:
+//   body, lead, heading     _typography.scss — copy and headings
+//   muted                   captions, the `data` paragraph style, `.muted`, card meta
+//   line / line-strong      hairlines / control borders (inputs, details, outline marker)
+//   link / link-hover       theme.json `styles.elements.link`, _typography.scss fallback
+//   accent / on-accent      `.accent-fill`, list markers, stat rules
+//   button*                 theme.json `styles.elements.button`, _buttons.scss
+//   indicator               current navigation item, the text button's underline
+//   focus                   the focus ring, _base.scss
+//   raised                  a panel sitting on the field: boxed card, notice ground
+//   danger / success (+soft) the notice styles, always beside an icon and a word
 $treatments: (
 	// SYNC: `role-default()` reads this row for the `var()` fallbacks every consumer uses, so
 	// the two cannot drift.
 	"light":
 		(
 			"accent": "gold",
-			// A11Y: not gold — no gold in the palette clears 4.5:1 as text on white or paper-alt
-			// (`gold` 1.83:1, `gold-deep` 2.59:1). A softer black instead: 7.34:1 on white, 6.61:1
-			// on paper-alt. It cannot follow onto the gold field, where it is 4.01:1 — see below.
-			"accent-text": "text-secondary",
-			"body": "text-body",
-			// A11Y: primary is black on gold, 11.46:1 (8.11:1 on the `gold-deep` hover); the
-			// outline is black, 21:1 on white and 18.93:1 on paper-alt, filling on hover.
+			// A11Y: not gold — gold is 1.83:1 as text on white. gray-600 is 7:1 on white and
+			// 6.37:1 on gray-050.
+			"accent-text": "gray-600",
+			"body": "black",
+			// SPEC: the primary inverts on hover rather than darkening — the brand has no darker
+			// gold, and inventing one would put an unapproved color on every site. Black on gold
+			// 11.46:1; gold on black 11.46:1.
 			"button": "gold",
-			"button-hover": "gold-deep",
-			"button-hover-text": "black",
+			"button-hover": "black",
+			"button-hover-text": "gold",
 			"button-outline": "black",
 			"button-outline-on": "white",
 			"button-text": "black",
-			// SPEC: the tightest pair in the table — 3.54:1 on white, 3.19:1 on paper-alt
-			// against the 3:1 WCAG 2.4.11 asks. Passing, but re-measure this one first when
-			// the tokens change; `link-blue` is the 5.86:1 fallback if it stops clearing.
-			"focus": "horizon-blue",
+			"danger": "red-700",
+			"danger-soft": "red-050",
+			// A11Y: black, 21:1 on white. The ring used to be Horizon Blue at 3.54:1 — passing
+			// 2.4.11, but the tightest pair in the table.
+			"focus": "black",
 			"heading": "black",
-			"lead": "text-body",
-			"line": "line",
-			"link": "link-blue",
-			"link-hover": "link-blue-hover",
+			"indicator": "black",
+			"lead": "black",
+			"line": "gray-200",
+			// A11Y: control boundaries need 3:1 — gray-500 is 4.54:1 on white, 4.13:1 on gray-050.
+			"line-strong": "gray-500",
+			// SPEC: `horizon-deep`, the system's proposed web-only shade, pending University Brand
+			// and Marketing sign-off. Horizon Blue itself is 3.54:1 on white and fails body text;
+			// this is 5.86:1 on white and 5.32:1 on gray-050.
+			"link": "horizon-deep",
+			"link-hover": "horizon-deeper",
+			"muted": "gray-600",
 			"on-accent": "black",
+			"raised": "gray-050",
+			"success": "green-700",
+			"success-soft": "green-050",
 		),
 	// WHY: body copy is white rather than a grey — grey body copy reads as washed out on black.
 	"dark":
 		(
-			"accent": "gold-deep",
-			// A11Y: plain gold, not the `gold-deep` accent — 11.46:1 on black against 8.11:1.
+			"accent": "gold",
+			// A11Y: gold on black, 11.46:1.
 			"accent-text": "gold",
 			"body": "white",
-			// A11Y: same primary as light — gold reads on black. The outline turns white, 21:1.
+			// SPEC: gold primary; hover inverts to white, black label at 21:1.
 			"button": "gold",
-			"button-hover": "gold-deep",
+			"button-hover": "white",
 			"button-hover-text": "black",
 			"button-outline": "white",
 			"button-outline-on": "black",
 			"button-text": "black",
+			// A11Y: red-300 on black 9.2:1, on red-950 7.37:1.
+			"danger": "red-300",
+			"danger-soft": "red-950",
 			"focus": "gold",
 			"heading": "white",
+			"indicator": "gold",
 			"lead": "white",
-			"line": "line-dark",
-			"link": "blue-tint",
-			// WHY: gold on hover, not the light field's darker blue, which on black reads as the
-			// link switching off. Every other interactive state on black moves to gold; 10.4:1.
-			"link-hover": "gold",
+			"line": "gray-800",
+			// A11Y: gray-400 is 6.25:1 on black, 5.07:1 on gray-900.
+			"line-strong": "gray-400",
+			// A11Y: Horizon Blue 5.93:1 on black; its light hover 10.91:1.
+			"link": "horizon",
+			"link-hover": "horizon-light",
+			// A11Y: gray-300 is 10.02:1 on black, 8.13:1 on gray-900.
+			"muted": "gray-300",
 			"on-accent": "black",
+			"raised": "gray-900",
+			"success": "green-300",
+			"success-soft": "green-950",
 		),
-	// A11Y: the gold field is unforgiving — nothing lighter than `text-body` clears 4.5:1 on it
-	// (`text-secondary` is 4.01:1, `link-blue` 3.20:1). A role added here cannot de-emphasize
-	// with grey; use family and size instead.
-	// WHY: accent and line are the deeper gold, or the edge disappears into the field.
+	// A11Y: the gold field is unforgiving — nothing lighter than gray-700 clears 4.5:1 on it
+	// (gray-700 is 6.9:1; horizon-deep would be 3.20:1). A role added here cannot de-emphasize
+	// with a light grey; use family and size instead.
 	"gold":
 		(
-			"accent": "gold-deep",
-			// A11Y: no accent hue survives on this field (`gold-deep` 1.41:1, `link-blue` 3.20:1),
-			// so accent text falls back to the darkest body tone — 9.50:1. See the note above.
-			"accent-text": "text-body",
+			// SPEC: on gold the accent turns black, or a stat rule or list marker disappears.
+			"accent": "black",
+			"accent-text": "black",
 			"body": "black",
-			// FIX: the primary inverts to black, gold text 11.46:1. The shared gold button
-			// vanished into this field — legible label, no visible button. Hover keeps the fill
-			// and turns the label white, 21:1, since no darker fill is distinguishable from black.
+			// FIX: the primary inverts to black, white label 21:1. The shared gold button
+			// vanished into this field — legible label, no visible button.
 			"button": "black",
-			"button-hover": "black",
-			"button-hover-text": "white",
+			"button-hover": "white",
+			"button-hover-text": "black",
 			"button-outline": "black",
 			"button-outline-on": "gold",
-			"button-text": "gold",
-			// FIX: black, 11.46:1. The blue this field used to inherit was 1.93:1 on gold —
-			// a focus ring that failed 2.4.11 outright, because the old special-cased rule
-			// covered only the dark compositions and nothing covered this one.
+			"button-text": "white",
+			// WHY: the light pair. A notice on gold paints its own soft ground, and that is what
+			// the danger text sits on, not the gold.
+			"danger": "red-700",
+			"danger-soft": "red-050",
+			// FIX: black, 11.46:1. A blue ring inherited here was 1.93:1 on gold.
 			"focus": "black",
 			"heading": "black",
-			"lead": "text-body",
-			"line": "gold-deep",
+			"indicator": "black",
+			"lead": "black",
+			"line": "line-on-gold",
+			"line-strong": "black",
 			"link": "black",
 			"link-hover": "black",
-			"on-accent": "black",
+			"muted": "gray-700",
+			"on-accent": "white",
+			// WHY: gold, not a lighter tint — there is no approved tint, and a boxed card on a gold
+			// band separates by its rule instead.
+			"raised": "gold",
+			"success": "green-700",
+			"success-soft": "green-050"
 		)
 );
 
 // WHY: `treatment` is the foreign key into $treatments above.
+// SPEC: the design system's four surfaces — `ucf-surface-light`, `-alt`, `-dark`, `-gold`.
+// Balance light and dark down a page; one gold band per page at most, usually the call to
+// action.
 $compositions: (
-	"bold-gold": (
-		"bg": "gold",
-		"text": "black",
-		"treatment": "gold",
-	),
-	"paper": (
-		"bg": "paper-alt",
-		"text": "text-body",
-		"treatment": "light",
-	),
 	"light": (
 		"bg": "white",
-		"text": "text-body",
+		"text": "black",
 		"treatment": "light",
 	),
+	// FIX: a panel on this field is white, not the treatment's gray-050 — the design system's
+	// boxed card uses `surface-alt`, which on its own Alt surface is the ground itself, and the
+	// box disappears. Found on the first page built from it.
+	"alt":
+		(
+			"bg": "gray-050",
+			"raised": "white",
+			"text": "black",
+			"treatment": "light",
+		),
 	"dark": (
 		"bg": "black",
 		"text": "white",
 		"treatment": "dark",
+	),
+	"gold": (
+		"bg": "gold",
+		"text": "black",
+		"treatment": "gold",
 	),
 );
 
@@ -159,31 +209,18 @@ $compositions: (
 
 // WHY: everything downstream reads these properties rather than the tokens directly, which
 // is what makes nesting work in either direction.
+// WHY: a loop over the row, not a hand-written list. A role added to the table is emitted with
+// no second edit, and a typo in a slug fails the build below instead of emitting nothing.
 @mixin treatment($name) {
 	$spec: map.get($treatments, $name);
 
-	--ucf-accent: #{map.get($color, map.get($spec, "accent"))};
-	--ucf-accent-text: #{map.get($color, map.get($spec, "accent-text"))};
-	--ucf-body: #{map.get($color, map.get($spec, "body"))};
-	--ucf-button: #{map.get($color, map.get($spec, "button"))};
-	--ucf-button-hover: #{map.get($color, map.get($spec, "button-hover"))};
-	--ucf-button-hover-text: #{map.get(
-			$color,
-			map.get($spec, "button-hover-text")
-		)};
-	--ucf-button-outline: #{map.get($color, map.get($spec, "button-outline"))};
-	--ucf-button-outline-on: #{map.get(
-			$color,
-			map.get($spec, "button-outline-on")
-		)};
-	--ucf-button-text: #{map.get($color, map.get($spec, "button-text"))};
-	--ucf-focus: #{map.get($color, map.get($spec, "focus"))};
-	--ucf-heading: #{map.get($color, map.get($spec, "heading"))};
-	--ucf-lead: #{map.get($color, map.get($spec, "lead"))};
-	--ucf-line: #{map.get($color, map.get($spec, "line"))};
-	--ucf-link: #{map.get($color, map.get($spec, "link"))};
-	--ucf-link-hover: #{map.get($color, map.get($spec, "link-hover"))};
-	--ucf-on-accent: #{map.get($color, map.get($spec, "on-accent"))};
+	@each $role, $slug in $spec {
+		@if not map.has-key($color, $slug) {
+			@error "Treatment `#{$name}` gives `#{$role}` the slug `#{$slug}`, which is not in $color.";
+		}
+
+		--ucf-#{$role}: #{map.get($color, $slug)};
+	}
 }
 
 // WHY: both flavors set the accent, so a component can bind `--ucf-accent` whether or not the
@@ -203,12 +240,26 @@ $compositions: (
 	.is-style-#{$name}-accent {
 		@include treatment(map.get($spec, "treatment"));
 
+		// WHY: the field's own background, as a role. It is per composition, not per treatment —
+		// `light` and `alt` share a treatment but not a background — so it is set here rather
+		// than in the table. A tile that has to cover a line drawn behind it (quick links) paints
+		// this to look like the field it sits on.
+		--ucf-surface: #{map.get($color, map.get($spec, "bg"))};
+
+		// WHY: a composition may override its treatment's `raised`, for the same reason — it is
+		// a contrast with this background, not with the treatment.
+		@if map.has-key($spec, "raised") {
+			--ucf-raised: #{map.get($color, map.get($spec, "raised"))};
+		}
+
 		background-color: map.get($color, map.get($spec, "bg"));
 		border-color: var(--ucf-line);
 		color: map.get($color, map.get($spec, "text"));
 	}
 
 	.is-style-#{$name}-accent {
-		border-left: 3px solid var(--ucf-accent, #{role-default("accent")});
+		border-left: $rule-accent
+			solid
+			var(--ucf-accent, #{role-default("accent")});
 	}
 }

@@ -1,0 +1,57 @@
+// ── Table ────────────────────────────────────────────────────────────────────
+//
+// CONTEXT: core Table, styled to the design system's Table brief — hairline rows, a heavy rule
+// under the header, numbers right-aligned in mono, and the caption as the source line.
+//
+// WHY: numbers are marked by core's own column alignment control, not a class. Choosing
+// "Align right" on a column is what an editor already does for a figure, so that choice is
+// the hook for the mono, tabular face.
+// WHY: the caption stays below the table and reads as a source line in the data voice (via
+// theme.json's caption element). The brief's caption-on-top would mean reordering the
+// figure visually away from its source order.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+// UPSTREAM: core's own table rules are (0,1,1) and load after this stylesheet when blocks
+// load their styles on demand, so these sit one class higher.
+.wp-block-table table {
+	border-collapse: collapse;
+	width: 100%;
+
+	th,
+	td {
+		border: 0;
+		border-bottom: $border-hairline solid
+			var(--ucf-line, #{compositions.role-default("line")});
+		padding: map.get($space, "30") map.get($space, "40");
+		text-align: left;
+		vertical-align: top;
+	}
+
+	thead {
+		border-bottom: 0;
+	}
+
+	thead th {
+		border-bottom: $border-control solid
+			var(--ucf-body, #{compositions.role-default("body")});
+		font-weight: 800;
+	}
+
+	tbody th {
+		font-weight: 700;
+	}
+
+	tfoot {
+		border-top: 0;
+	}
+
+	.has-text-align-right {
+		font-family: var(--wp--preset--font-family--mono);
+		font-variant-numeric: tabular-nums;
+		font-weight: 500;
+		text-align: right;
+	}
+}

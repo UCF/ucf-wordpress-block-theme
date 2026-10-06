@@ -1,0 +1,71 @@
+// ── Lists ────────────────────────────────────────────────────────────────────
+//
+// CONTEXT: core List, styled to the design system's Lists brief — gold square bullets,
+// Oswald numerals, and two registered styles, Checklist and Divided.
+//
+// WHY: `::marker` for bullets and numerals rather than the design system's absolutely
+// positioned `::before`. A counter drawn by hand ignores the `start` and `reversed`
+// attributes core's ordered list writes; the marker honors them for free.
+// WHY: `.wp-block-list` only. Navigation, breadcrumbs and page lists are lists too, and each
+// styles its own.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+ul.wp-block-list {
+	list-style-type: square;
+
+	> li::marker {
+		color: var(--ucf-accent, #{compositions.role-default("accent")});
+	}
+}
+
+ol.wp-block-list > li::marker {
+	color: var(--ucf-heading, #{compositions.role-default("heading")});
+	font-family: var(--wp--preset--font-family--display);
+	font-weight: 600;
+}
+
+.wp-block-list > li + li {
+	margin-top: map.get($space, "30");
+}
+
+// SPEC: a requirement the reader must meet. The check is drawn, not a glyph, so it carries
+// no font dependency; it takes the body color, which clears contrast on every field.
+.wp-block-list.is-style-check {
+	list-style: none;
+	padding-left: 0;
+
+	> li {
+		padding-left: 1.75em;
+		position: relative;
+
+		&::before {
+			border-bottom: 3px solid
+				var(--ucf-body, #{compositions.role-default("body")});
+			border-right: 3px solid
+				var(--ucf-body, #{compositions.role-default("body")});
+			content: "";
+			height: 0.75em;
+			left: 0.35em;
+			position: absolute;
+			top: 0.3em;
+			transform: rotate(40deg);
+			width: 0.4em;
+		}
+	}
+}
+
+// SPEC: hairline-separated rows, for link lists and short facts — no marker.
+.wp-block-list.is-style-divided {
+	list-style: none;
+	padding-left: 0;
+
+	> li {
+		border-bottom: $border-hairline solid
+			var(--ucf-line, #{compositions.role-default("line")});
+		margin: 0;
+		padding-block: map.get($space, "30");
+	}
+}
