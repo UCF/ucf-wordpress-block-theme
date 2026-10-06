@@ -486,7 +486,10 @@ ol.wp-block-list.ucf-steps {
 
 	// SPEC: the sentence under the H1 stays near the prose measure even though the band is
 	// the full container — a 1240px line of lead text is unreadable.
-	.has-lead-font-size {
+	// UPSTREAM: core's constrained layout gives every child `margin: auto !important`, which
+	// centered the capped sentence under a left-aligned H1; only !important moves it back.
+	> .has-lead-font-size {
+		margin-left: 0 !important;
 		max-width: 46rem;
 	}
 }

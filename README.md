@@ -34,6 +34,31 @@ For a local WordPress to develop against:
 npm run env:start     # wp-env, Docker required
 ```
 
+## Try it in WordPress Playground
+
+[`blueprint.json`](blueprint.json) builds a throwaway site in the browser — no Docker, no
+install — with this theme from the `basic-blocks` branch, the UCF University Header (which
+the theme injects itself), the [UCF Footer plugin](https://github.com/UCF/UCF-Footer-Plugin),
+three pages built from the theme's page patterns — a homepage, a degree program page and a
+research story — and a style guide at `/style-guide/` with every block style, data block and
+pattern, built by [`tools/style-guide.php`](tools/style-guide.php). The same script rebuilds
+that page on any site: `wp eval-file wp-content/themes/ucf-wordpress-block-theme/tools/style-guide.php`.
+
+Open it at:
+
+```
+https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/UCF/ucf-wordpress-block-theme/basic-blocks/blueprint.json
+```
+
+Or locally: `npx @wp-playground/cli server --blueprint=blueprint.json`.
+
+-   **The blueprint installs the branch from GitHub, not your working copy** — push first.
+-   **Networking is on**, because the header script and the footer's menus are fetched from
+    ucf.edu. Both send CORS headers that allow `playground.wordpress.net`.
+-   **The patterns' photo slots are empty**, as they are when an author inserts them; the
+    blueprint adds no media.
+-   It signs you in as `admin`, which is Playground's own throwaway account.
+
 ## Scripts
 
 | Command                | Does                                                         |

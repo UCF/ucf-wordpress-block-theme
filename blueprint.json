@@ -1,0 +1,60 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"meta": {
+		"title": "UCF WordPress Block Theme",
+		"description": "The theme on its basic-blocks branch, with the UCF University Header (injected by the theme) and the UCF Footer plugin, plus a homepage, a degree program page and a research story built from the theme's patterns, and a style guide page with every block and pattern.",
+		"author": "UCF"
+	},
+	"landingPage": "/",
+	"preferredVersions": {
+		"php": "8.2",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"login": true,
+	"steps": [
+		{
+			"step": "setSiteOptions",
+			"options": {
+				"blogname": "UCF Block Theme",
+				"permalink_structure": "/%postname%/"
+			}
+		},
+		{
+			"step": "installTheme",
+			"themeData": {
+				"resource": "git:directory",
+				"url": "https://github.com/UCF/ucf-wordpress-block-theme",
+				"ref": "basic-blocks",
+				"refType": "branch"
+			},
+			"options": {
+				"activate": true,
+				"targetFolderName": "ucf-wordpress-block-theme"
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "git:directory",
+				"url": "https://github.com/UCF/UCF-Footer-Plugin",
+				"ref": "v2.0.2",
+				"refType": "tag"
+			},
+			"options": {
+				"activate": true,
+				"targetFolderName": "UCF-Footer-Plugin"
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php\nrequire_once '/wordpress/wp-load.php';\n\n// Pages built from the theme's own page patterns, so the demo always matches the branch.\nfunction ucf_playground_page( $title, $slug, $pattern, $type = 'page', $template = 'page-landing' ) {\n\t$id = wp_insert_post(\n\t\tarray(\n\t\t\t'post_type'    => $type,\n\t\t\t'post_status'  => 'publish',\n\t\t\t'post_title'   => $title,\n\t\t\t'post_name'    => $slug,\n\t\t\t'post_excerpt' => 'post' === $type ? 'A UCF team makes the dust that seals, bearings and optics meet on the Moon, so they fail in a Florida lab instead.' : '',\n\t\t\t'post_content' => '<!-- wp:pattern {\"slug\":\"ucf-wordpress-block-theme/' . $pattern . '\"} /-->',\n\t\t)\n\t);\n\tif ( $template && 'page' === $type ) {\n\t\tupdate_post_meta( $id, '_wp_page_template', $template );\n\t}\n\treturn $id;\n}\n\n$home = ucf_playground_page( 'University of Central Florida', 'home', 'page-home' );\nucf_playground_page( 'Computer Science B.S.', 'computer-science-bs', 'page-degree-program' );\nucf_playground_page( 'A lunar dust simulant built to break hardware early', 'lunar-dust-simulant', 'post-research-story', 'post', '' );\n\nupdate_option( 'show_on_front', 'page' );\nupdate_option( 'page_on_front', $home );\n"
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php\nrequire_once '/wordpress/wp-load.php';\n\n// The style guide page: every block and pattern. Built by the theme's own script, when the\n// installed branch has it, so the page matches the theme it ships with.\n$ucf_theme_style_guide = get_theme_file_path( 'tools/style-guide.php' );\nif ( file_exists( $ucf_theme_style_guide ) ) {\n\tdefine( 'UCF_THEME_STYLE_GUIDE', true );\n\trequire $ucf_theme_style_guide;\n}\n"
+		}
+	]
+}
