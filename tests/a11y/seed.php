@@ -258,6 +258,18 @@ function ucf_theme_a11y_seed_routes() {
 		)
 	);
 
+	// WHY: a page per custom template too. A template the theme ships is a route a visitor can
+	// land on, and `page-landing` leaves the H1 to the content — which only a page shows.
+	$landing = ucf_theme_a11y_insert(
+		array(
+			'post_title'   => 'A page, for the landing template',
+			'post_name'    => 'a11y-landing',
+			'post_content' => '<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">A landing page</h1><!-- /wp:heading -->'
+				. ucf_theme_a11y_body_content( 'a landing page' ),
+		)
+	);
+	update_post_meta( $landing, '_wp_page_template', 'page-landing' );
+
 	// WHY: two posts, not one. The blog index and search results are lists, and a list of one
 	// renders no separation between entries for axe to measure.
 	foreach ( array( 'first', 'second' ) as $which ) {
@@ -280,6 +292,10 @@ function ucf_theme_a11y_seed_routes() {
 		array(
 			'name' => 'page',
 			'path' => '/a11y-page/',
+		),
+		array(
+			'name' => 'page-landing',
+			'path' => '/a11y-landing/',
 		),
 		array(
 			'name' => 'single-post',
@@ -540,16 +556,29 @@ function ucf_theme_a11y_seed_variants() {
  * block what its `save()` emits; the DOM assertion in `variants.spec.js` is what catches one
  * going stale.
  *
- * Only `core/group` today, because the compositions are the theme's only block styles.
  * `core/group` gets the probe rather than a paragraph, and that is the point of the whole
  * tier: a composition sets the `--ucf-*` roles its contents read, so the same link is legible
  * in one and not in another. Only a group carrying the full range of content finds that.
+ *
+ * The element styles (`ucf_theme_element_styles()`) get their own block, carrying a link
+ * where the style colors one — the data paragraph's source link is the case that matters,
+ * since it inherits the muted role.
  *
  * @return array<string, string> Block name to markup.
  */
 function ucf_theme_a11y_samples() {
 	return array(
-		'core/group' => '<!-- wp:group {"className":"%CLASS%","layout":{"type":"constrained"}} -->' . "\n"
+		'core/paragraph' => '<!-- wp:paragraph {"className":"%CLASS%"} --><p class="%CLASS%">Source: <a href="/a11y-page/">UCF Facts</a>, fall 2025</p><!-- /wp:paragraph -->',
+		'core/heading'   => '<!-- wp:heading {"level":3,"className":"%CLASS%"} --><h3 class="wp-block-heading %CLASS%">A heading in this style</h3><!-- /wp:heading -->',
+		'core/list'      => '<!-- wp:list {"className":"%CLASS%"} --><ul class="wp-block-list %CLASS%">'
+			. '<!-- wp:list-item --><li>A list item in this style</li><!-- /wp:list-item -->'
+			. '<!-- wp:list-item --><li>A second item, with <a href="/a11y-page/">a link</a></li><!-- /wp:list-item -->'
+			. '</ul><!-- /wp:list -->',
+		'core/button'    => '<!-- wp:buttons --><div class="wp-block-buttons">'
+			. '<!-- wp:button {"className":"%CLASS%"} --><div class="wp-block-button %CLASS%">'
+			. '<a class="wp-block-button__link wp-element-button" href="/a11y-page/">A button in this style</a>'
+			. '</div><!-- /wp:button --></div><!-- /wp:buttons -->',
+		'core/group'     => '<!-- wp:group {"className":"%CLASS%","layout":{"type":"constrained"}} -->' . "\n"
 			. '<div class="wp-block-group %CLASS%">'
 			. '<!-- wp:heading --><h2 class="wp-block-heading">Heading inside the composition</h2><!-- /wp:heading -->'
 			. ucf_theme_a11y_probe()

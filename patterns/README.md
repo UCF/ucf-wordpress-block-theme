@@ -13,7 +13,7 @@ and nothing reads, and it drifts from the `Categories:` the files actually decla
 /**
  * Title: Call to Action
  * Slug: ucf-wordpress-block-theme/call-to-action
- * Categories: call-to-action
+ * Categories: ucf
  * Description: Shown in the inserter preview; write it for an author, not a developer.
  * Keywords: cta, button, banner
  *
@@ -26,10 +26,9 @@ and nothing reads, and it drifts from the `Categories:` the files actually decla
 `Title` and `Slug` are required; the rest are optional. The slug should be namespaced to the
 theme so it cannot collide with a plugin's.
 
-**`Categories:` takes core's built-in categories** — `banner`, `call-to-action`, `featured`,
-`text`, `gallery`, `about`, `contact`, `services`, `team`, `posts` — and they are almost
-always enough. Registering a custom one is a `register_block_pattern_category()` call that
-needs its own `includes/` file, so only do it when a pattern genuinely fits none of core's.
+**`Categories:` is `ucf`, for every pattern.** It is the theme's one pattern category,
+registered in `includes/patterns.php`, so an author finds every UCF pattern in one place in
+the inserter. `PatternsTest` fails if a pattern names any other category.
 
 ## Rules
 
@@ -51,3 +50,32 @@ that looks right proves nothing. Paste the markup into the editor and check the 
 ```js
 wp.data.select( 'core/block-editor' ).getBlocks();
 ```
+
+## Component classes
+
+Many patterns here are a design-system component made of core blocks: the pattern prefills a
+class on a core Group, List or Table, and that class — styled in `src/scss/` — is what makes it
+the component. Removing the class in the editor turns it back into a plain block. They are
+deliberately not block styles: the Styles panel slot on a Group is its composition.
+
+| Class                                        | Component                     | Styled in                                     |
+| -------------------------------------------- | ----------------------------- | --------------------------------------------- |
+| `ucf-card` (`--boxed`, `--ruled`, `--horizontal`) | Card                     | `_components.scss`                            |
+| `ucf-stat`                                   | Stat statement                | `_components.scss`                            |
+| `ucf-notice` (`--success`, `--danger`)       | Inline notice                 | `_components.scss`                            |
+| `ucf-quick-links`, `ucf-quick-link`          | Quick links                   | `_components.scss`                            |
+| `ucf-steps`                                  | Steps (on an ordered List)    | `_components.scss`                            |
+| `ucf-answer`                                 | Answer summary                | `_components.scss`                            |
+| `ucf-toc`                                    | On this page                  | `_components.scss`, `src/js/frontend/spy.js`  |
+| `ucf-sources`, `ucf-ref`                     | Sources and in-text markers   | `_components.scss`                            |
+| `ucf-video`, `ucf-video__play`               | Video facade                  | `_components.scss`, `src/js/frontend/video.js`|
+| `ucf-faq` (on core Accordion)                | FAQ, "Expand all", `FAQPage`  | `src/js/frontend/expand.js`, `structured-data.php` |
+| `ucf-compare` (on core Table)                | Comparison table              | `_table.scss`                                 |
+| `ucf-hero-image`, `ucf-keep-dark`            | Hero image                    | `_media.scss`, `_compositions.scss`           |
+| `ucf-media-pair`, `ucf-split-media`, `ucf-photo-strip`, `ucf-plate`, `ucf-bleed` | Photo placements | `_media.scss` |
+| `ucf-schematic`, `ucf-marker`                | Schematic figure, section marker | `_media.scss`                              |
+| `ucf-section--tight`                         | Tight Section band            | `_section.scss`                               |
+
+Page-level patterns (`page-*`, `post-*`) declare `Block Types: core/post-content`, so the
+editor offers them when a new page or post is created. The two page patterns expect the
+Landing template, which leaves the H1 to the content.

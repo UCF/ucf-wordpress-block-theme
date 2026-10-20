@@ -1,0 +1,21 @@
+{
+	"_comment": "MOCK DATA. Sample alerts in the shape the UCF Alert feed would supply. Replace through the ucf_theme_mock_data_alerts filter.",
+	"alerts": {
+		"emergency": {
+			"title": "Sample emergency alert",
+			"text": "This is a sample of the UCF Alert banner. Real alerts come only from the UCF Alert feed.",
+			"link": {
+				"label": "Get the latest updates",
+				"url": "https://www.ucf.edu/alert/"
+			}
+		},
+		"notice": {
+			"title": "The fall 2027 application opens Aug. 1",
+			"text": "Counselors answer questions until then.",
+			"link": {
+				"label": "See all deadlines",
+				"url": "https://www.ucf.edu/admissions/undergraduate/"
+			}
+		}
+	}
+}

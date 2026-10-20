@@ -1,0 +1,40 @@
+{
+	"_comment": "MOCK DATA. Sample events; dates are offsets in days from today, so the list never goes stale. Replace with UCF-Events-Plugin data through the ucf_theme_mock_data_events filter.",
+	"events": [
+		{
+			"title": "Senior design showcase",
+			"offset": -3,
+			"time": "1 p.m.",
+			"location": "Engineering II atrium",
+			"url": "#"
+		},
+		{
+			"title": "Lab tours for prospective students",
+			"offset": 4,
+			"time": "10 a.m.",
+			"location": "Harris Engineering Center",
+			"url": "#"
+		},
+		{
+			"title": "Transfer student information session",
+			"offset": 11,
+			"time": "6 p.m.",
+			"location": "Online",
+			"url": "#"
+		},
+		{
+			"title": "Graduate programs open house",
+			"offset": 18,
+			"time": "5:30 p.m.",
+			"location": "Student Union, Key West Ballroom",
+			"url": "#"
+		},
+		{
+			"title": "Research week poster session",
+			"offset": 32,
+			"time": "9 a.m.",
+			"location": "Student Union",
+			"url": "#"
+		}
+	]
+}

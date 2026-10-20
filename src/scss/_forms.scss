@@ -1,0 +1,132 @@
+// ── Forms ────────────────────────────────────────────────────────────────────
+//
+// CONTEXT: the design system's FormFields — labels above, help text before the input, 52px
+// controls with 2px borders in `line-strong`, errors that name the field. Scoped to `.ucf-form`
+// so a forms plugin's own markup is untouched until it opts in; the Form pattern uses it as a
+// mock of the request-for-information form.
+//
+// A11Y: control borders are `line-strong`, 3:1 or better on every field; checkboxes and radios
+// are 24px inside a 44px target.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+$_body: var(--ucf-body, #{compositions.role-default("body")});
+$_muted: var(--ucf-muted, #{compositions.role-default("muted")});
+$_strong: var(--ucf-line-strong, #{compositions.role-default("line-strong")});
+$_surface: var(--ucf-surface, #{map.get($color, "white")});
+
+.ucf-form {
+	display: grid;
+	gap: map.get($space, "60");
+	max-width: 40rem;
+
+	label,
+	legend {
+		font-size: map.get($size, "data-lg");
+		font-weight: 700;
+		line-height: 1.4;
+	}
+
+	fieldset {
+		border: 0;
+		display: grid;
+		gap: map.get($space, "20");
+		margin: 0;
+		padding: 0;
+	}
+
+	textarea {
+		min-height: 140px;
+		resize: vertical;
+	}
+
+	select {
+		background-image: linear-gradient(45deg, transparent 50%, $_body 50%),
+			linear-gradient(135deg, $_body 50%, transparent 50%);
+		background-position:
+			calc(100% - 22px) 50%,
+			calc(100% - 16px) 50%;
+		background-repeat: no-repeat;
+		background-size: 6px 6px;
+		padding-right: 2.75rem;
+	}
+
+	input:not([type="checkbox"], [type="radio"]),
+	select,
+	textarea {
+		appearance: none;
+		background-color: $_surface;
+		border: $border-control solid $_strong;
+		box-sizing: border-box;
+		color: $_body;
+		font: inherit;
+		line-height: 1.4;
+		min-height: 52px;
+		padding: 0.75rem 0.9rem;
+		width: 100%;
+
+		&:hover,
+		&:focus-visible {
+			border-color: $_body;
+		}
+
+		&:focus-visible {
+			outline-offset: 0;
+		}
+
+		&[aria-invalid="true"] {
+			border-color: var(
+				--ucf-danger,
+				#{compositions.role-default("danger")}
+			);
+			border-width: 3px;
+		}
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		accent-color: $_body;
+		height: 24px;
+		margin: 0;
+		width: 24px;
+	}
+}
+
+.ucf-field {
+	display: grid;
+	gap: map.get($space, "20");
+}
+
+// SPEC: "(required)" as a word, not an asterisk alone.
+.ucf-field__req {
+	color: $_muted;
+	font-weight: 500;
+}
+
+// SPEC: help text comes before the control, so a screen reader hears it before typing starts.
+.ucf-field__help {
+	color: $_muted;
+	font-size: map.get($size, "small");
+	margin: 0;
+}
+
+.ucf-field__error {
+	background-color: var(
+		--ucf-danger-soft,
+		#{compositions.role-default("danger-soft")}
+	);
+	color: var(--ucf-danger, #{compositions.role-default("danger")});
+	font-size: map.get($size, "small");
+	font-weight: 700;
+	margin: 0;
+	padding: map.get($space, "20") map.get($space, "30");
+}
+
+.ucf-choice {
+	align-items: center;
+	display: flex;
+	gap: map.get($space, "30");
+	min-height: $tap-target;
+}

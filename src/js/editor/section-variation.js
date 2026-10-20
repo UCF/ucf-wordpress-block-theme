@@ -31,7 +31,8 @@ registerBlockVariation( 'core/group', {
 		'A full-width band with its own padding and field. Switch its style to change the field.',
 		'ucf-wordpress-block-theme'
 	),
-	category: 'design',
+	// SYNC: the theme's own block category, UCF_THEME_BLOCK_CATEGORY in includes/blocks.php.
+	category: 'ucf',
 	icon: 'align-full-width',
 	keywords: [
 		__( 'band', 'ucf-wordpress-block-theme' ),

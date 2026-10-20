@@ -1,0 +1,243 @@
+// ── Media ────────────────────────────────────────────────────────────────────
+//
+// CONTEXT: how photographs sit on a page — core Media & Text, the page openers, and the
+// placement patterns from the design system's page studies (pair, split, strip, bleed, plate).
+// Every rule here is layout; color comes from the enclosing composition.
+//
+// SPEC: photography leads and graphics support. Images are square-cornered (_base.scss) and
+// cropped to the aspect-ratio presets in theme.json.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+// FIX: a cropped image fills its column. Core sets the crop as an inline aspect-ratio, but an
+// image smaller than its column stays at its own width, leaving the crop short of the edge.
+.wp-block-image img[style*="aspect-ratio"] {
+	width: 100%;
+}
+
+// ── Media & Text ─────────────────────────────────────────────────────────────
+
+// SPEC: one photo beside one short block of text, stacking below 1024px with the text first.
+// UPSTREAM: core stacks at 600px. Between 600 and 1024 its two columns are too narrow for a
+// photo and a paragraph, so the stack is extended up to the theme's breakpoint.
+@media (max-width: #{$breakpoint-lg - 1px}) {
+	.wp-block-media-text.is-stacked-on-mobile {
+		grid-template-columns: 100% !important; // UPSTREAM: core's own stacked rule uses !important.
+
+		> .wp-block-media-text__content {
+			grid-row: 1;
+			padding: 0 0 map.get($space, "60");
+		}
+
+		> .wp-block-media-text__media {
+			grid-row: 2;
+		}
+	}
+}
+
+.wp-block-media-text > .wp-block-media-text__content > :last-child {
+	margin-bottom: 0;
+}
+
+// ── Page openers ─────────────────────────────────────────────────────────────
+
+// SPEC: Hero image — a full-width photograph with the headline on a solid panel over its lower
+// corner, never on the photo itself. The panel is the `dark` composition, so its text is
+// 21:1 whatever the photograph does. Below 768px the panel simply follows the photo.
+.ucf-hero-image {
+	position: relative;
+
+	> .wp-block-image {
+		margin: 0;
+	}
+
+	> .is-style-dark {
+		padding: map.get($space, "60") map.get($space, "50");
+	}
+
+	@media (min-width: 768px) {
+		> .is-style-dark {
+			bottom: 0;
+			left: 0;
+			max-width: 40rem;
+			padding: map.get($space, "70");
+			position: absolute;
+		}
+	}
+}
+
+// SPEC: the panel on the right, for a photograph whose subject sits on the left.
+@media (min-width: 768px) {
+	.ucf-hero-image--right > .is-style-dark {
+		left: auto;
+		right: 0;
+	}
+}
+
+// ── Page-study placements ────────────────────────────────────────────────────
+
+// SPEC: full bleed — an image escapes the container to the screen edge. Needs the page to
+// clip sideways, which `html { overflow-x: clip }` in _base.scss already does.
+.ucf-bleed {
+	margin-inline: calc(
+		50% - 50vw
+	) !important; // UPSTREAM: beats core's constrained-layout auto margins.
+	max-width: 100vw !important; // UPSTREAM: as above, core's max-width on constrained children.
+	width: 100vw;
+}
+
+// SPEC: two images at different ratios, the second dropped 64px — "same light direction in
+// both". The drop goes away on a phone, where the two stack.
+.ucf-media-pair {
+	align-items: start;
+	display: grid;
+	gap: map.get($space, "40");
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+
+	> :nth-child(2) {
+		margin-top: map.get($space, "80");
+	}
+
+	@media (max-width: 575px) {
+		> :nth-child(2) {
+			margin-top: 0;
+		}
+	}
+}
+
+// SPEC: a tall image that holds still while the text beside it scrolls past.
+@media (min-width: $breakpoint-lg) {
+	.ucf-split-media {
+		align-items: start;
+		display: grid;
+		gap: map.get($space, "80");
+		grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+
+		> :first-child {
+			position: sticky;
+			top: map.get($space, "50");
+		}
+	}
+
+	.ucf-split-media--right > :first-child {
+		order: 2;
+	}
+}
+
+// SPEC: a strip of small square frames — process, sequence, place.
+.ucf-photo-strip {
+	display: grid;
+	gap: map.get($space, "20");
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+
+	@media (min-width: 768px) {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	> .wp-block-image {
+		margin: 0;
+	}
+}
+
+// SPEC: a photograph treated as a plate in a technical document — gold registration marks at
+// two corners, and the caption as a spec line in the data voice.
+.ucf-plate {
+	position: relative;
+
+	&::before,
+	&::after {
+		border: 2px solid
+			var(--ucf-accent, #{compositions.role-default("accent")});
+		content: "";
+		height: 20px;
+		pointer-events: none;
+		position: absolute;
+		width: 20px;
+	}
+
+	&::before {
+		border-bottom: 0;
+		border-right: 0;
+		left: -6px;
+		top: -6px;
+	}
+
+	&::after {
+		border-left: 0;
+		border-top: 0;
+		bottom: -6px;
+		right: -6px;
+	}
+}
+
+// SPEC: a schematic — a line drawing in the system's own colors, so it re-resolves on every
+// field. The SVG uses these classes; the pattern supplies a sample drawing.
+.ucf-schematic {
+	svg {
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+
+	.sk-line {
+		fill: none;
+		stroke: var(--ucf-body, #{compositions.role-default("body")});
+		stroke-linecap: square;
+		stroke-width: 2;
+	}
+
+	.sk-hair {
+		fill: none;
+		stroke: var(
+			--ucf-line-strong,
+			#{compositions.role-default("line-strong")}
+		);
+		stroke-width: 1;
+	}
+
+	.sk-gold {
+		fill: none;
+		stroke: var(--ucf-accent, #{compositions.role-default("accent")});
+		stroke-linecap: square;
+		stroke-width: 3;
+	}
+
+	.sk-fill {
+		fill: var(--ucf-body, #{compositions.role-default("body")});
+	}
+
+	.sk-fill-gold {
+		fill: var(--ucf-accent, #{compositions.role-default("accent")});
+	}
+
+	text {
+		fill: var(--ucf-muted, #{compositions.role-default("muted")});
+		font-family: var(--wp--preset--font-family--mono);
+		font-size: 11px;
+	}
+}
+
+// SPEC: a gold rule carrying a mono label — a section marker that does not need a dark band.
+.ucf-marker {
+	align-items: center;
+	color: var(--ucf-muted, #{compositions.role-default("muted")});
+	display: flex;
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: map.get($size, "data");
+	gap: map.get($space, "30");
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+
+	&::before {
+		background-color: var(
+			--ucf-accent,
+			#{compositions.role-default("accent")}
+		);
+		content: "";
+		flex: none;
+		height: $rule-accent;
+		width: 48px;
+	}
+}

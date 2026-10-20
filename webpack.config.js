@@ -29,6 +29,9 @@ module.exports = {
 		// Everything that customizes the block editor. Imported for side effects; see
 		// src/js/editor/index.js.
 		editor: './src/js/editor/index.js',
+
+		// Every front-end enhancement. Imported for side effects; see src/js/frontend/index.js.
+		frontend: './src/js/frontend/index.js',
 	},
 	output: {
 		...defaultConfig.output,

@@ -1,0 +1,65 @@
+{
+	"_comment": "MOCK DATA. Sample people, not real UCF faculty. Replace with UCF-People-CPT data through the ucf_theme_mock_data_people filter.",
+	"people": {
+		"sample-cs-professor": {
+			"name": "Sample Name, Ph.D.",
+			"role": "Associate Professor, Computer Science",
+			"credentials": "Ph.D. 2014 · machine learning and evaluation",
+			"expertise": [
+				"Machine learning",
+				"Software reliability",
+				"AI evaluation"
+			],
+			"links": [
+				{
+					"label": "Profile",
+					"url": "#"
+				},
+				{
+					"label": "Publications",
+					"url": "#"
+				}
+			],
+			"contact": {
+				"label": "Media contact",
+				"url": "#"
+			}
+		},
+		"sample-advisor": {
+			"name": "Sample Name, M.A.",
+			"role": "Academic Advisor, Engineering and Computer Science",
+			"credentials": "M.A. 2016 · higher education",
+			"expertise": [ "Course planning", "Transfer credit" ],
+			"links": [
+				{
+					"label": "Book an appointment",
+					"url": "#"
+				}
+			],
+			"contact": {
+				"label": "Email",
+				"url": "#"
+			}
+		},
+		"sample-researcher": {
+			"name": "Sample Name, Ph.D.",
+			"role": "Professor, Optics and Photonics",
+			"credentials": "Ph.D. 2009 · imaging through scattering media",
+			"expertise": [ "Optics", "Imaging", "Sensors" ],
+			"links": [
+				{
+					"label": "Profile",
+					"url": "#"
+				},
+				{
+					"label": "Lab",
+					"url": "#"
+				}
+			],
+			"contact": {
+				"label": "Media contact",
+				"url": "#"
+			}
+		}
+	}
+}

@@ -6,8 +6,9 @@ because keeping two copies is how they drift.
 
 The theme was seeded from the structural half of the UCF Brand Block Theme. The machinery
 described here — the token escalation ladder, the role layer, the one-topic-per-file rule —
-came over intact and is proven. The _values_ those tokens hold are placeholders pending the
-UCF Athena Framework; see [Tokens are placeholders](#tokens-are-placeholders).
+came over intact and is proven. The _values_ those tokens hold now come from the UCF Web
+Design System prototype; see [Tokens are placeholders](#tokens-are-placeholders) and
+[design-system-import.md](design-system-import.md) for what came in and what was left out.
 
 ---
 
@@ -19,8 +20,9 @@ that works. Each rung down is more code to own, so skipping ahead is the expensi
 1. **A token.** A color, size, spacing step or family already in `theme.json`. Use the preset,
    not the literal.
 2. **An existing class or block style.** A composition (`.is-style-dark`,
-   `.is-style-paper`) or a role utility (`.accent-text`, `.accent-fill`, `.hairline`) —
-   the vocabulary in `src/scss/_compositions.scss` and `_utilities.scss`.
+   `.is-style-alt`), a role utility (`.accent-text`, `.accent-fill`, `.hairline`, `.muted`),
+   an element style (`is-style-data`, `is-style-check`…) or a component class a pattern
+   applies (`.ucf-card`, `.ucf-stat`…) — the vocabulary in `src/scss/`.
 3. **A core block control.** Padding, border width, alignment, background. If the editor can
    already express it, let the editor express it.
 4. **Something new.** A new token in `theme.json`, a new block style, a new partial. This rung
@@ -31,20 +33,22 @@ Rung 4 is not.
 
 ## Tokens are placeholders
 
-`theme.json`'s palette, font families and font sizes currently hold the UCF Brand Block Theme's
-values. **They are stand-ins for UCF Athena Framework equivalents, not a decision.**
+`theme.json`'s palette, type scale, spacing scale and layout widths hold the UCF Web Design
+System's values — itself a prototype, with open brand decisions marked `SPEC:` where they
+land. **They are a test of that system, not a decision.**
 
 What matters is the distinction between a slug and a value:
 
--   **The slugs are the contract.** `gold`, `text-body`, `line`, `link-blue` and the rest are
+-   **The slugs are the contract.** `gold`, `gray-600`, `horizon-deep` and the rest are
     referenced by `src/scss/_variables.scss`, assigned to roles in `_compositions.scss`, and
     baked into the `is-style-*` names in `includes/block-styles.php`. Renaming a slug is a
     three-place edit.
 -   **The values are free.** Changing a hex in `theme.json` re-paints everything downstream with
     no other edit, because nothing below `_variables.scss` names a token directly.
 
-So: swapping in Athena's colors is a `theme.json` change. Swapping in Athena's _vocabulary_ —
-different role names, a different number of compositions — is a change to the three files above.
+So: swapping in new colors is a `theme.json` change. Swapping in a new _vocabulary_ —
+different role names, a different number of compositions — is a change to the three files
+above. The design system import was exactly that second kind.
 
 **A11Y: re-check the contrast pairs when the values change.** `_compositions.scss` carries
 per-row comments recording which combinations are at the WCAG AA limit and why a given role
@@ -124,7 +128,7 @@ freezes that pattern to one field.
 What a pattern may carry:
 
 -   structure — groups, columns, block nesting
--   a composition class — `is-style-dark`, `is-style-paper`
+-   a composition class — `is-style-dark`, `is-style-alt`
 -   a role utility — `accent-text`, `accent-fill`, `hairline`
 -   layout the block's own controls own — padding, width, gap, border _width_
 
@@ -136,7 +140,11 @@ no `render.php`. `includes/blocks.php` registers every folder in `build/` that h
 
 **A server-rendered block does not go in `includes/blocks.php`.** It lives in the file that owns
 the data it renders, next to the queries and meta it reads, so its registration and its behavior
-are one thing.
+are one thing. It is registered in PHP with its attributes, and `src/js/editor/data-blocks.js`
+gives it an editor preview through core's server-side render — the attribute schema, including
+an `enum` for a picker, reaches the editor from the server definition, so it is written once.
+Keep each one's markup in a pure builder function beside the render callback; that is the part
+the unit suite can test.
 
 **Block sources must not reference the theme.** Keeping that true is what makes moving
 `src/blocks/` into a distribution plugin later a copy plus a registration loop.
@@ -152,17 +160,27 @@ there.
 
 The current topics:
 
-| File                    | Owns                                                        |
-| ----------------------- | ----------------------------------------------------------- |
-| `setup.php`             | Theme supports; the page editor's rendering mode            |
-| `enqueue.php`           | Every way CSS or JS reaches a browser                       |
-| `blocks.php`            | Static custom block registration                            |
-| `block-styles.php`      | Every `register_block_style()`                              |
-| `university-header.php` | The UCF University Header script tag and placeholder        |
-| `paste-artifacts.php`   | Word-processor characters normalized on save and on display |
-| `search-service.php`    | Cached, GET-only reads of the UCF Search Service API        |
-| `degree.php`            | Degree pages: the `ucf-theme/degree` bindings source and    |
-|                         | the server-rendered `ucf-theme/degree-*` blocks             |
+| File                    | Owns                                                                               |
+| ----------------------- | ---------------------------------------------------------------------------------- |
+| `setup.php`             | Theme supports; the page editor's rendering mode; the style variation's body class |
+| `enqueue.php`           | Every way CSS or JS reaches a browser                                              |
+| `blocks.php`            | Static custom block registration                                                   |
+| `block-styles.php`      | Every `register_block_style()`                                                     |
+| `patterns.php`          | The UCF pattern category every theme pattern is filed under                        |
+| `icons.php`             | The UCF icon set, registered with core's icon registry                             |
+| `format.php`            | How dates are written, for every block that prints one                             |
+| `mock-data.php`         | The stand-in for the data sources the data blocks will read                        |
+| `structured-data.php`   | One JSON-LD graph per page, from what the page rendered                            |
+| `programs.php`          | Facts and Program finder blocks                                                    |
+| `people.php`            | Profile block                                                                      |
+| `events.php`            | Events block                                                                       |
+| `provenance.php`        | Provenance block and the `ucf_reviewer` post field                                 |
+| `alerts.php`            | Alert banner block                                                                 |
+| `university-header.php` | The UCF University Header script tag and placeholder                               |
+| `paste-artifacts.php`   | Word-processor characters normalized on save and on display                        |
+| `search-service.php`    | Cached, GET-only reads of the UCF Search Service API                               |
+| `degree.php`            | Degree pages: the `ucf-theme/degree` bindings source and the server-rendered       |
+|                         | `ucf-theme/degree-*` blocks                                                        |
 
 **No file may depend on another at include time.** Every one only defines functions and adds
 hooks, so the load order in `functions.php` is documentation rather than a constraint. A
@@ -185,8 +203,15 @@ The reverse also matters: a composition defined in `_compositions.scss` and not 
 `ucf_theme_register_composition_styles()` is CSS no editor can reach. PHP cannot read a Sass
 map, so those two lists are maintained by hand.
 
+**Element styles are a short, reviewed list.** Compositions are the only styles on
+`core/group`. Styles on other blocks — `data` on Paragraph, `sans` on Heading, `check` and
+`divided` on List, `text` on Button — live in `ucf_theme_element_styles()`, and
+`BlockStylesTest` checks each has an `.is-style-{name}` rule in `src/scss/` and that nothing
+is registered outside the two lists. Anything a preset can say is a preset instead: Lead and
+Display are font sizes, not styles.
+
 **One deliberate exception: the `-accent` flavors.** Every composition has a second rule in the
-stylesheet — `.is-style-paper-accent` and friends — adding a rule on the leading edge. None of
+stylesheet — `.is-style-alt-accent` and friends — adding a rule on the leading edge. None of
 them are registered. The accent is _established_ by whatever wants the edge, a component or a
 pattern applying the class, rather than picked by an author from the Styles panel; registering
 them would double that panel to offer eight variants of one decision.
@@ -205,7 +230,11 @@ so **a dependency list is never restated in PHP** — adding an `@wordpress/*` i
 source is the whole change.
 
 A folder with a `block.json` is auto-detected. Anything else — editor glue, a front-end script,
-a rich-text format — is named in `webpack.config.js`.
+a rich-text format — is named in `webpack.config.js`. There are two named entries: `editor`
+(variations, formats, the data blocks' previews, editor policy) and `frontend` (every
+progressive enhancement — finder filtering, citation copy, the video facade, "Expand all",
+scroll-spy, external-link marking). Each front-end module finds its own markup and does
+nothing on a page without it; nothing on a page may depend on one to appear.
 
 ## Build and content
 
@@ -304,13 +333,15 @@ An untagged comment is usually one restating the code beneath it — delete it.
 
 Ported from the brand theme's structural half only. Deliberately absent, with no stub:
 
--   **The slower test tiers.** The PHP unit suite exists and gates CI — see
-    [tests/README.md](../tests/README.md). Missing are the Jest markup sweep over `templates/`
-    and `parts/`, an integration tier under `wp-env`, and an accessibility tier.
-    `.wp-env.json` is already here and `.gitignore` already anticipates their scratch output.
-    Keep all three out of `npm test`: that command must never need Docker.
--   **Patterns.** `patterns/` exists and is empty; no pattern has been written and no custom
-    pattern category is registered. The directory is **flat on purpose** — core reads each
+-   **The slower test tiers, except accessibility.** The PHP unit suite gates CI — see
+    [tests/README.md](../tests/README.md) — and an axe tier runs under wp-env
+    (`npm run test:a11y`, `tests/a11y/`), seeding one page per template, pattern and block
+    style. Missing are the Jest markup sweep over `templates/`, `parts/` and `patterns/`, and
+    an integration tier. Keep them out of `npm test`: that command must never need Docker.
+-   **A full pattern library.** `patterns/` holds the design system's basic components as
+    patterns (cards, stats, notices, quick links, steps, FAQ, calls to action, section
+    headers); page-level patterns and templates are next. Every pattern is filed under one custom
+    category, UCF (`includes/patterns.php`). The directory is **flat on purpose** — core reads each
     file's header comment and never the path, so subdirectories imply a taxonomy nothing
     enforces. The brand theme's units → groups → sections → pages ladder was its own editorial
     structure; units and sections are intended to ship here as blocks instead, and Section
@@ -318,9 +349,14 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     [The Section band](#the-section-band)). Core's built-in categories cover almost everything;
     register a custom one only for a pattern that fits none of them. See
     [patterns/README.md](../patterns/README.md).
--   **Custom static blocks.** `src/blocks/` is empty. The editor pipeline is live, though —
-    `src/js/editor/` builds to `build/editor.js` and is enqueued from its generated manifest.
-    It currently carries the Section variation and the Badge rich-text formats. The theme's
-    only block types are the server-rendered degree blocks in `includes/degree.php`, which
-    are PHP-only (`supports.autoRegister`) and so have no source under `src/` at all.
--   **Athena values.** See [Tokens are placeholders](#tokens-are-placeholders).
+-   **Static custom blocks.** `src/blocks/` is empty: every design-system component is a core
+    block, a block style, a pattern over core blocks — or, where it renders data, a
+    server-rendered block in the `includes/` file that owns the data.
+-   **Real data sources.** The degree blocks in `includes/degree.php` are the exception: they
+    read the UCF Search Service live, and are PHP-only (`supports.autoRegister`), so have no
+    source under `src/`. The six data blocks (Facts, Program finder, Profile, Events,
+    Provenance, Alert banner) read mock data from `data/mock/` through
+    `ucf_theme_mock_data()`. Each set has a filter, `ucf_theme_mock_data_{set}`, which is where a
+    plugin's real data replaces it; the shape each block expects is documented at the top of its
+    file, and `MockDataTest` checks the mock files still have it. Everything rendered from mock
+    data carries the sample-data note. See [design-system-import.md](design-system-import.md).

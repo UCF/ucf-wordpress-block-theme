@@ -1,0 +1,83 @@
+// ── Navigation ───────────────────────────────────────────────────────────────
+//
+// CONTEXT: the wayfinding the design system specifies, on core blocks: Breadcrumbs (core
+// since 7.0, server-rendered from the page hierarchy), Page List as the Section Nav, and the
+// `indicator` mark on whatever item is current.
+//
+// SPEC: the current item is marked by a 4px bar in `indicator` — black on light, gold on dark
+// — and by weight, never by color alone.
+
+@use "sass:map";
+@use "compositions";
+@use "variables" as *;
+
+$_indicator: var(--ucf-indicator, #{compositions.role-default("indicator")});
+$_line: var(--ucf-line, #{compositions.role-default("line")});
+
+// ── Section nav (Page List) ──────────────────────────────────────────────────
+
+// SPEC: a vertical list of sibling pages, hairline rows, 44px targets.
+.wp-block-page-list {
+	border-top: $border-hairline solid $_line;
+	list-style: none;
+	padding-left: 0;
+
+	.wp-block-pages-list__item {
+		border-bottom: $border-hairline solid $_line;
+		margin: 0;
+	}
+
+	// WHY: core's link class, not a bare `a` — the breadcrumb rule below also ends in `a`,
+	// and stylelint's specificity ordering reads the two as one selector.
+	.wp-block-pages-list__item__link {
+		color: var(--ucf-body, #{compositions.role-default("body")});
+		display: block;
+		font-weight: 500;
+		min-height: $tap-target;
+		padding: map.get($space, "30") map.get($space, "40");
+		text-decoration: none;
+
+		&:hover {
+			background-color: var(
+				--ucf-raised,
+				#{compositions.role-default("raised")}
+			);
+		}
+	}
+
+	.current-menu-item > .wp-block-pages-list__item__link {
+		box-shadow: inset $rule-accent 0 0 $_indicator;
+		font-weight: 800;
+	}
+}
+
+// ── Breadcrumbs ──────────────────────────────────────────────────────────────
+
+// SPEC: small, first inside the page header, ink links with a quiet underline.
+.wp-block-breadcrumbs {
+	font-size: map.get($size, "small");
+	line-height: 1.5;
+
+	a {
+		color: var(--ucf-body, #{compositions.role-default("body")});
+		text-decoration-color: var(
+			--ucf-line-strong,
+			#{compositions.role-default("line-strong")}
+		);
+
+		&:hover {
+			text-decoration-color: currentcolor;
+		}
+	}
+
+	// A11Y: the current page is muted text, not a link, and carries `aria-current` from core.
+	[aria-current] {
+		color: var(--ucf-muted, #{compositions.role-default("muted")});
+	}
+}
+
+// ── Navigation ───────────────────────────────────────────────────────────────
+
+.wp-block-navigation .current-menu-item > a {
+	box-shadow: inset 0 calc(-1 * #{$rule-accent}) 0 $_indicator;
+}

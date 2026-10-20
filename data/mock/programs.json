@@ -1,0 +1,2195 @@
+{
+	"_comment": "MOCK DATA. Program names and URLs are copied from ucf.edu/academics (October 2026); levels for graduate programs are inferred from the degree suffix. Replace with UCF-Degree-CPT-Plugin data through the ucf_theme_mock_data_programs filter.",
+	"source": {
+		"label": "Sample program data",
+		"url": "https://www.ucf.edu/degree-search/",
+		"asOf": "2026-10-01"
+	},
+	"programs": [
+		{
+			"slug": "art-ba",
+			"name": "Art (BA)",
+			"url": "https://www.ucf.edu/degree/art-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "art-ba-history",
+			"name": "Art (BA) - History",
+			"url": "https://www.ucf.edu/degree/art-ba/history/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "art-ba-immersive-experience-design-track",
+			"name": "Art (BA) - Immersive Experience Design Track",
+			"url": "https://www.ucf.edu/degree/art-ba/immersive-experience-design-track/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "art-ba-studio",
+			"name": "Art (BA) - Studio",
+			"url": "https://www.ucf.edu/degree/art-ba/studio/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "art-ba-art-ba-visual-arts-management-track",
+			"name": "Art (BA) - Visual Arts Management Track",
+			"url": "https://www.ucf.edu/degree/art-ba/art-ba-visual-arts-management-track/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "bachelor-of-design-in-architecture-bdes",
+			"name": "Bachelor of Design in Architecture (BDes)",
+			"url": "https://www.ucf.edu/degree/bachelor-of-design-in-architecture-bdes/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "emerging-media-bfa",
+			"name": "Emerging Media (BFA)",
+			"url": "https://www.ucf.edu/degree/emerging-media-bfa/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "emerging-media-bfa-animation-visualization-track",
+			"name": "Emerging Media (BFA) - Animation & Visualization Track",
+			"url": "https://www.ucf.edu/degree/emerging-media-bfa/animation-visualization-track/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "emerging-media-bfa-character-animation-track",
+			"name": "Emerging Media (BFA) - Character Animation Track",
+			"url": "https://www.ucf.edu/degree/emerging-media-bfa/character-animation-track/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "emerging-media-bfa-graphic-design-track",
+			"name": "Emerging Media (BFA) - Graphic Design Track",
+			"url": "https://www.ucf.edu/degree/emerging-media-bfa/graphic-design-track/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "english-ba",
+			"name": "English (BA)",
+			"url": "https://www.ucf.edu/degree/english-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "english-ba-creative-writing",
+			"name": "English (BA) - Creative Writing",
+			"url": "https://www.ucf.edu/degree/english-ba/creative-writing/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "english-ba-literature",
+			"name": "English (BA) - Literature",
+			"url": "https://www.ucf.edu/degree/english-ba/literature/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "english-ba-technical-communication",
+			"name": "English (BA) - Technical Communication",
+			"url": "https://www.ucf.edu/degree/english-ba/technical-communication/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "french-and-francophone-studies-ba",
+			"name": "French and Francophone Studies (BA)",
+			"url": "https://www.ucf.edu/degree/french-and-francophone-studies-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "history-ba",
+			"name": "History (BA)",
+			"url": "https://www.ucf.edu/degree/history-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "humanities-and-cultural-studies-ba",
+			"name": "Humanities and Cultural Studies (BA)",
+			"url": "https://www.ucf.edu/degree/humanities-and-cultural-studies-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "integrated-humanities-ba",
+			"name": "Integrated Humanities (BA)",
+			"url": "https://www.ucf.edu/degree/integrated-humanities-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "integrated-humanities-bs",
+			"name": "Integrated Humanities (BS)",
+			"url": "https://www.ucf.edu/degree/integrated-humanities-bs/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "latin-american-caribbean-and-latinx-studies-ba",
+			"name": "Latin American Caribbean and Latinx Studies (BA)",
+			"url": "https://www.ucf.edu/degree/latin-american-caribbean-and-latinx-studies-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "music-ba",
+			"name": "Music (BA)",
+			"url": "https://www.ucf.edu/degree/music-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "music-education-bme",
+			"name": "Music Education (BME)",
+			"url": "https://www.ucf.edu/degree/music-education-bme/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "music-performance-bm-music-performance-bm-composition",
+			"name": "Music Performance (BM) - Composition",
+			"url": "https://www.ucf.edu/degree/music-performance-bm/music-performance-bm-composition/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "music-performance-bm-music-performance-bm-jazz-studies",
+			"name": "Music Performance (BM) - Jazz Studies",
+			"url": "https://www.ucf.edu/degree/music-performance-bm/music-performance-bm-jazz-studies/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "music-performance-bm",
+			"name": "Music: Performance (BM)",
+			"url": "https://www.ucf.edu/degree/music-performance-bm/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "philosophy-ba",
+			"name": "Philosophy (BA)",
+			"url": "https://www.ucf.edu/degree/philosophy-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "religion-and-cultural-studies-ba",
+			"name": "Religion and Cultural Studies (BA)",
+			"url": "https://www.ucf.edu/degree/religion-and-cultural-studies-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "spanish-ba",
+			"name": "Spanish (BA)",
+			"url": "https://www.ucf.edu/degree/spanish-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "studio-art-bfa",
+			"name": "Studio Art (BFA)",
+			"url": "https://www.ucf.edu/degree/studio-art-bfa/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "theatre-ba",
+			"name": "Theatre (BA)",
+			"url": "https://www.ucf.edu/degree/theatre-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "theatre-bfa",
+			"name": "Theatre (BFA)",
+			"url": "https://www.ucf.edu/degree/theatre-bfa/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "theatre-bfa-acting",
+			"name": "Theatre (BFA) - Acting",
+			"url": "https://www.ucf.edu/degree/theatre-bfa/acting/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "theatre-bfa-design-and-technology",
+			"name": "Theatre (BFA) - Design and Technology",
+			"url": "https://www.ucf.edu/degree/theatre-bfa/design-and-technology/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "theatre-bfa-musical-theatre",
+			"name": "Theatre (BFA) - Musical Theatre",
+			"url": "https://www.ucf.edu/degree/theatre-bfa/musical-theatre/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "theatre-bfa-stage-management",
+			"name": "Theatre (BFA) - Stage Management",
+			"url": "https://www.ucf.edu/degree/theatre-bfa/stage-management/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "writing-and-rhetoric-ba",
+			"name": "Writing and Rhetoric (BA)",
+			"url": "https://www.ucf.edu/degree/writing-and-rhetoric-ba/",
+			"college": "Arts and Humanities",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "career-and-technical-education-bs",
+			"name": "Career and Technical Education (BS)",
+			"url": "https://www.ucf.edu/degree/career-and-technical-education-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "career-and-technical-education-bs-workforce-training-and-development",
+			"name": "Career and Technical Education (BS) - Workforce Training and Development",
+			"url": "https://www.ucf.edu/degree/career-and-technical-education-bs/workforce-training-and-development/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "criminal-justice-ba-2",
+			"name": "Criminal Justice (BA)",
+			"url": "https://www.ucf.edu/degree/criminal-justice-ba-2/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "criminal-justice-ba-professional-track",
+			"name": "Criminal Justice (BA) - Professional Track",
+			"url": "https://www.ucf.edu/degree/criminal-justice-ba-professional-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "criminal-justice-ba-2-scholars-track",
+			"name": "Criminal Justice (BA) - Scholar's Track",
+			"url": "https://www.ucf.edu/degree/criminal-justice-ba-2/scholars-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "criminal-justice-bs",
+			"name": "Criminal Justice (BS)",
+			"url": "https://www.ucf.edu/degree/criminal-justice-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "criminal-justice-bs-professional-track",
+			"name": "Criminal Justice (BS) - Professional Track",
+			"url": "https://www.ucf.edu/degree/criminal-justice-bs-professional-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "criminal-justice-bs-scholars-scholars-track",
+			"name": "Criminal Justice (BS) - Scholar's Track",
+			"url": "https://www.ucf.edu/degree/criminal-justice-bs-scholars/scholars-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "early-childhood-development-and-education-bs",
+			"name": "Early Childhood Development and Education (BS)",
+			"url": "https://www.ucf.edu/degree/early-childhood-development-and-education-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "early-childhood-development-and-education-bs-child-life-track",
+			"name": "Early Childhood Development and Education (BS) - Child Life Track",
+			"url": "https://www.ucf.edu/degree/early-childhood-development-and-education-bs/child-life-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "early-childhood-development-and-education-bs-early-childhood-development",
+			"name": "Early Childhood Development and Education (BS) - Early Childhood Development",
+			"url": "https://www.ucf.edu/degree/early-childhood-development-and-education-bs/early-childhood-development/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "early-childhood-development-and-education-bs-education-pre-kindergarten-primary-pk-3",
+			"name": "Early Childhood Development and Education (BS) - Education: Pre-Kindergarten-Primary (PK-3)",
+			"url": "https://www.ucf.edu/degree/early-childhood-development-and-education-bs/education-pre-kindergarten-primary-pk-3/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "elementary-education-bs",
+			"name": "Elementary Education (BS)",
+			"url": "https://www.ucf.edu/degree/elementary-education-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "elementary-education-bs-k-6-certification",
+			"name": "Elementary Education (BS) - K-6 Certification",
+			"url": "https://www.ucf.edu/degree/elementary-education-bs/k-6-certification/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "elementary-education-bs-lifelong-learning",
+			"name": "Elementary Education (BS) - Lifelong Learning",
+			"url": "https://www.ucf.edu/degree/elementary-education-bs/lifelong-learning/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "elementary-education-bs-professional-studies-track-non-certification",
+			"name": "Elementary Education (BS) - Professional Studies Track (Non-Certification)",
+			"url": "https://www.ucf.edu/degree/elementary-education-bs/professional-studies-track-non-certification/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "emergency-management-ba",
+			"name": "Emergency Management (BA)",
+			"url": "https://www.ucf.edu/degree/emergency-management-ba/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "emergency-management-bs",
+			"name": "Emergency Management (BS)",
+			"url": "https://www.ucf.edu/degree/emergency-management-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "environmental-science-bs",
+			"name": "Environmental Science (BS)",
+			"url": "https://www.ucf.edu/degree/environmental-science-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "environmental-studies-bs",
+			"name": "Environmental Studies (BS)",
+			"url": "https://www.ucf.edu/degree/environmental-studies-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "environmental-studies-bs-communication-and-planning",
+			"name": "Environmental Studies (BS) - Communication and Planning",
+			"url": "https://www.ucf.edu/degree/environmental-studies-bs/communication-and-planning/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "environmental-studies-bs-sciences",
+			"name": "Environmental Studies (BS) - Sciences",
+			"url": "https://www.ucf.edu/degree/environmental-studies-bs/sciences/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "exceptional-student-education-bs",
+			"name": "Exceptional Student Education (BS)",
+			"url": "https://www.ucf.edu/degree/exceptional-student-education-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "exceptional-student-education-bs-exceptional-student-education-bs-learning-and-language-track",
+			"name": "Exceptional Student Education (BS) - Learning and Development Track",
+			"url": "https://www.ucf.edu/degree/exceptional-student-education-bs/exceptional-student-education-bs-learning-and-language-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "health-informatics-and-information-management-bs",
+			"name": "Health Informatics and Information Management (BS)",
+			"url": "https://www.ucf.edu/degree/health-informatics-and-information-management-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "integrative-general-studies-bgs",
+			"name": "Integrative General Studies (BGS)",
+			"url": "https://www.ucf.edu/degree/integrative-general-studies-bgs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "interdisciplinary-studies-ba",
+			"name": "Interdisciplinary Studies (BA)",
+			"url": "https://www.ucf.edu/degree/interdisciplinary-studies-ba/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "interdisciplinary-studies-ba-general-studies",
+			"name": "Interdisciplinary Studies (BA) - General Studies",
+			"url": "https://www.ucf.edu/degree/interdisciplinary-studies-ba/general-studies/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "interdisciplinary-studies-bs",
+			"name": "Interdisciplinary Studies (BS)",
+			"url": "https://www.ucf.edu/degree/interdisciplinary-studies-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "interdisciplinary-studies-bs-general-studies",
+			"name": "Interdisciplinary Studies (BS) - General Studies",
+			"url": "https://www.ucf.edu/degree/interdisciplinary-studies-bs/general-studies/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "leadership-ba",
+			"name": "Leadership (BA)",
+			"url": "https://www.ucf.edu/degree/leadership-ba/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "leadership-bs",
+			"name": "Leadership (BS)",
+			"url": "https://www.ucf.edu/degree/leadership-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "legal-studies-ba",
+			"name": "Legal Studies (BA)",
+			"url": "https://www.ucf.edu/degree/legal-studies-ba/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "legal-studies-ba-barry-law-touro-law-accel-ba-to-jd",
+			"name": "Legal Studies (BA) - Barry Law/Touro Law Accel BA to JD",
+			"url": "https://www.ucf.edu/degree/legal-studies-ba/barry-law-touro-law-accel-ba-to-jd/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "legal-studies-bs",
+			"name": "Legal Studies (BS)",
+			"url": "https://www.ucf.edu/degree/legal-studies-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "legal-studies-bs-barry-law-touro-law-accel-bs-to-jd",
+			"name": "Legal Studies (BS) - Barry Law/Touro Law Accel BS to JD",
+			"url": "https://www.ucf.edu/degree/legal-studies-bs/barry-law-touro-law-accel-bs-to-jd/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nonprofit-management-ba",
+			"name": "Nonprofit Management (BA)",
+			"url": "https://www.ucf.edu/degree/nonprofit-management-ba/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nonprofit-management-bs",
+			"name": "Nonprofit Management (BS)",
+			"url": "https://www.ucf.edu/degree/nonprofit-management-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "public-administration-ba",
+			"name": "Public Administration (BA)",
+			"url": "https://www.ucf.edu/degree/public-administration-ba/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "public-administration-bs",
+			"name": "Public Administration (BS)",
+			"url": "https://www.ucf.edu/degree/public-administration-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs",
+			"name": "Secondary Education (BS)",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-english-language-arts-ed-lifelong-learning-track",
+			"name": "Secondary Education (BS) - English Language Arts Ed - Lifelong Learning Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/english-language-arts-ed-lifelong-learning-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-secondary-education-bs-english-language-arts-education-track-with-esol-and-reading-endorsement",
+			"name": "Secondary Education (BS) - English Language Arts Education Track with ESOL and Reading Endorsement",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/secondary-education-bs-english-language-arts-education-track-with-esol-and-reading-endorsement/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-mathematics-ed-education-track",
+			"name": "Secondary Education (BS) - Mathematics Ed - Education Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/mathematics-ed-education-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-mathematics-ed-lifelong-learning-track",
+			"name": "Secondary Education (BS) - Mathematics Ed - Lifelong Learning Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/mathematics-ed-lifelong-learning-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-science-ed-biology-lifelong-learning-track",
+			"name": "Secondary Education (BS) - Science Ed - Biology - Lifelong Learning Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/science-ed-biology-lifelong-learning-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-science-ed-biology-education-track",
+			"name": "Secondary Education (BS) - Science Ed - Biology- Education Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/science-ed-biology-education-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-science-ed-chemistry-education-track",
+			"name": "Secondary Education (BS) - Science Ed - Chemistry - Education Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/science-ed-chemistry-education-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-science-ed-chemistry-lifelong-learning-track",
+			"name": "Secondary Education (BS) - Science Ed - Chemistry - Lifelong Learning Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/science-ed-chemistry-lifelong-learning-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-science-ed-physics-education-track",
+			"name": "Secondary Education (BS) - Science Ed - Physics - Education Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/science-ed-physics-education-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-science-ed-physics-lifelong-learning",
+			"name": "Secondary Education (BS) - Science Ed - Physics - Lifelong Learning",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/science-ed-physics-lifelong-learning/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "secondary-education-bs-social-science-ed-lifelong-learning-track",
+			"name": "Secondary Education (BS) - Social Science Ed - Lifelong Learning Track",
+			"url": "https://www.ucf.edu/degree/secondary-education-bs/social-science-ed-lifelong-learning-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "sustainability-ba",
+			"name": "Sustainability (BA)",
+			"url": "https://www.ucf.edu/degree/sustainability-ba/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "sustainability-bs",
+			"name": "Sustainability (BS)",
+			"url": "https://www.ucf.edu/degree/sustainability-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "teacher-education-bs",
+			"name": "Teacher Education (BS)",
+			"url": "https://www.ucf.edu/degree/teacher-education-bs/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "teacher-education-bs-art-ed-education-track",
+			"name": "Teacher Education (BS) - Art Ed - Education Track",
+			"url": "https://www.ucf.edu/degree/teacher-education-bs/art-ed-education-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "teacher-education-bs-art-ed-lifelong-learning-track",
+			"name": "Teacher Education (BS) - Art Ed - Lifelong Learning Track",
+			"url": "https://www.ucf.edu/degree/teacher-education-bs/art-ed-lifelong-learning-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "teacher-education-bs-physical-ed-education-track",
+			"name": "Teacher Education (BS) - Physical Ed - Education Track",
+			"url": "https://www.ucf.edu/degree/teacher-education-bs/physical-ed-education-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "teacher-education-bs-physical-ed-lifelong-learning-track",
+			"name": "Teacher Education (BS) - Physical Ed - Lifelong Learning Track",
+			"url": "https://www.ucf.edu/degree/teacher-education-bs/physical-ed-lifelong-learning-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "teacher-education-bs-world-languages-education-education-track",
+			"name": "Teacher Education (BS) - World Languages Education - Education Track",
+			"url": "https://www.ucf.edu/degree/teacher-education-bs/world-languages-education-education-track/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "teacher-education-bs-world-languages-education-lifelong-learning",
+			"name": "Teacher Education (BS) - World Languages Education - Lifelong Learning",
+			"url": "https://www.ucf.edu/degree/teacher-education-bs/world-languages-education-lifelong-learning/",
+			"college": "Community Innovation and Education",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "aerospace-engineering-bsae",
+			"name": "Aerospace Engineering (BSAE)",
+			"url": "https://www.ucf.edu/degree/aerospace-engineering-bsae/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "civil-engineering-bsce",
+			"name": "Civil Engineering (BSCE)",
+			"url": "https://www.ucf.edu/degree/civil-engineering-bsce/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "civil-engineering-bsce-structural-and-geotechnical-engineering-bs-to-ms-track",
+			"name": "Civil Engineering (BSCE) - Structural and Geotechnical Engineering BS to MS Track",
+			"url": "https://www.ucf.edu/degree/civil-engineering-bsce/structural-and-geotechnical-engineering-bs-to-ms-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "civil-engineering-bsce-transportation-systems-engineering-bs-to-ms-track",
+			"name": "Civil Engineering (BSCE) - Transportation Systems Engineering BS to MS Track",
+			"url": "https://www.ucf.edu/degree/civil-engineering-bsce/transportation-systems-engineering-bs-to-ms-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "civil-engineering-bsce-water-resources-engineering-bs-to-ms-track",
+			"name": "Civil Engineering (BSCE) - Water Resources Engineering BS to MS Track",
+			"url": "https://www.ucf.edu/degree/civil-engineering-bsce/water-resources-engineering-bs-to-ms-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "computer-engineering-bscpe",
+			"name": "Computer Engineering (BSCpE)",
+			"url": "https://www.ucf.edu/degree/computer-engineering-bscpe/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "computer-engineering-bscpe-comprehensive-track",
+			"name": "Computer Engineering (BSCpE) - Comprehensive Track",
+			"url": "https://www.ucf.edu/degree/computer-engineering-bscpe/comprehensive-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "computer-engineering-bscpe-digital-vlsi-circuits-track",
+			"name": "Computer Engineering (BSCpE) - Digital VLSI Circuits Track",
+			"url": "https://www.ucf.edu/degree/computer-engineering-bscpe/digital-vlsi-circuits-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "computer-science-bs",
+			"name": "Computer Science (BS)",
+			"url": "https://www.ucf.edu/degree/computer-science-bs/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "computer-science-bs-accelerated-bs-to-ms",
+			"name": "Computer Science (BS) - Accelerated BS to MS",
+			"url": "https://www.ucf.edu/degree/computer-science-bs/accelerated-bs-to-ms/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "computer-science-bs-bs-to-cyber-security-and-privacy-ms-track",
+			"name": "Computer Science (BS) - BS to Cyber Security and Privacy MS Track",
+			"url": "https://www.ucf.edu/degree/computer-science-bs/bs-to-cyber-security-and-privacy-ms-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "construction-engineering-bscone",
+			"name": "Construction Engineering (BSConE)",
+			"url": "https://www.ucf.edu/degree/construction-engineering-bscone/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "electrical-engineering-bsee",
+			"name": "Electrical Engineering (BSEE)",
+			"url": "https://www.ucf.edu/degree/electrical-engineering-bsee/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "electrical-engineering-bsee-communication-and-signal-processing-track",
+			"name": "Electrical Engineering (BSEE) - Communication and Signal Processing Track",
+			"url": "https://www.ucf.edu/degree/electrical-engineering-bsee/communication-and-signal-processing-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "electrical-engineering-bsee-comprehensive-track",
+			"name": "Electrical Engineering (BSEE) - Comprehensive Track",
+			"url": "https://www.ucf.edu/degree/electrical-engineering-bsee/comprehensive-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "electrical-engineering-bsee-power-and-renewable-energy-track",
+			"name": "Electrical Engineering (BSEE) - Power and Renewable Energy Track",
+			"url": "https://www.ucf.edu/degree/electrical-engineering-bsee/power-and-renewable-energy-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "electrical-engineering-bsee-rf-and-microwaves-track",
+			"name": "Electrical Engineering (BSEE) - RF and Microwaves Track",
+			"url": "https://www.ucf.edu/degree/electrical-engineering-bsee/rf-and-microwaves-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "environmental-engineering-bsve",
+			"name": "Environmental Engineering (BSVE)",
+			"url": "https://www.ucf.edu/degree/environmental-engineering-bsve/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "industrial-engineering-bsie",
+			"name": "Industrial Engineering (BSIE)",
+			"url": "https://www.ucf.edu/degree/industrial-engineering-bsie/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "information-technology-bs",
+			"name": "Information Technology (BS)",
+			"url": "https://www.ucf.edu/degree/information-technology-bs/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "information-technology-bs-accelerated-bs-to-cyber-security-privacy-ms-track",
+			"name": "Information Technology (BS) - Accelerated BS to Cyber Security & Privacy MS Track",
+			"url": "https://www.ucf.edu/degree/information-technology-bs/accelerated-bs-to-cyber-security-privacy-ms-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "materials-science-and-engineering-bs",
+			"name": "Materials Science and Engineering (BS)",
+			"url": "https://www.ucf.edu/degree/materials-science-and-engineering-bs/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mechanical-engineering-bsme",
+			"name": "Mechanical Engineering (BSME)",
+			"url": "https://www.ucf.edu/degree/mechanical-engineering-bsme/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mechanical-engineering-bsme-accelerated-bs-to-ms-track",
+			"name": "Mechanical Engineering (BSME) - Accelerated BS to MS Track",
+			"url": "https://www.ucf.edu/degree/mechanical-engineering-bsme/accelerated-bs-to-ms-track/",
+			"college": "Engineering and Computer Science",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "communication-sciences-and-disorders-bs",
+			"name": "Communication Sciences and Disorders (BS)",
+			"url": "https://www.ucf.edu/degree/communication-sciences-and-disorders-bs/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "general-health-studies-bs",
+			"name": "General Health Studies (BS)",
+			"url": "https://www.ucf.edu/degree/general-health-studies-bs/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "health-informatics-bs",
+			"name": "Health Informatics (BS)",
+			"url": "https://www.ucf.edu/degree/health-informatics-bs/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "health-information-management-b-s",
+			"name": "Health Information Management (BS)",
+			"url": "https://www.ucf.edu/degree/health-information-management-b-s/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "health-sciences-bs",
+			"name": "Health Sciences (BS)",
+			"url": "https://www.ucf.edu/degree/health-sciences-bs/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "health-sciences-bs-health-promotion-track",
+			"name": "Health Sciences (BS) - Health Promotion Track",
+			"url": "https://www.ucf.edu/degree/health-sciences-bs/health-promotion-track/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "health-sciences-bs-pre-professional-pre-clinical-track",
+			"name": "Health Sciences (BS) - Pre-Clinical Track",
+			"url": "https://www.ucf.edu/degree/health-sciences-bs-pre-professional/pre-clinical-track/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "health-services-administration-bs",
+			"name": "Health Services Administration (BS)",
+			"url": "https://www.ucf.edu/degree/health-services-administration-bs/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "interdisciplinary-healthcare-studies-bs",
+			"name": "Interdisciplinary Healthcare Studies (BS)",
+			"url": "https://www.ucf.edu/degree/interdisciplinary-healthcare-studies-bs/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "kinesiology-bs",
+			"name": "Kinesiology (BS)",
+			"url": "https://www.ucf.edu/degree/kinesiology-bs/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "kinesiology-bs-exercise-and-sport-physiology",
+			"name": "Kinesiology (BS) - Exercise and Sport Physiology",
+			"url": "https://www.ucf.edu/degree/kinesiology-bs/exercise-and-sport-physiology/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "kinesiology-bs-strength-and-conditioning-track",
+			"name": "Kinesiology (BS) - Strength and Conditioning Track",
+			"url": "https://www.ucf.edu/degree/kinesiology-bs/strength-and-conditioning-track/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "social-work-bsw",
+			"name": "Social Work (BSW)",
+			"url": "https://www.ucf.edu/degree/social-work-bsw/",
+			"college": "Health Professions and Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "entertainment-management-bs",
+			"name": "Entertainment Management (BS)",
+			"url": "https://www.ucf.edu/degree/entertainment-management-bs/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "event-management-bs",
+			"name": "Event Management (BS)",
+			"url": "https://www.ucf.edu/degree/event-management-bs/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "hospitality-management-bs",
+			"name": "Hospitality Management (BS)",
+			"url": "https://www.ucf.edu/degree/hospitality-management-bs/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "hospitality-management-bs-as-to-bs",
+			"name": "Hospitality Management (BS) - AS to BS",
+			"url": "https://www.ucf.edu/degree/hospitality-management-bs/as-to-bs/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "hospitality-management-bs-hospitality-information-technology",
+			"name": "Hospitality Management (BS) - Hospitality Information Technology",
+			"url": "https://www.ucf.edu/degree/hospitality-management-bs/hospitality-information-technology/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "hospitality-management-bs-lodging-management",
+			"name": "Hospitality Management (BS) - Lodging Management",
+			"url": "https://www.ucf.edu/degree/hospitality-management-bs/lodging-management/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "hospitality-management-bs-theme-park-and-attraction-management",
+			"name": "Hospitality Management (BS) - Theme Park and Attraction Management",
+			"url": "https://www.ucf.edu/degree/hospitality-management-bs/theme-park-and-attraction-management/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "lifestyle-community-management-bs",
+			"name": "Lifestyle Community Management (BS)",
+			"url": "https://www.ucf.edu/degree/lifestyle-community-management-bs/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "lodging-and-restaurant-management-bs",
+			"name": "Lodging and Restaurant Management (BS)",
+			"url": "https://www.ucf.edu/degree/lodging-and-restaurant-management-bs/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "lodging-and-restaurant-management-bs-as-to-bs-track",
+			"name": "Lodging and Restaurant Management (BS) - AS to BS Track",
+			"url": "https://www.ucf.edu/degree/lodging-and-restaurant-management-bs/as-to-bs-track/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "theme-park-and-attraction-management-bs",
+			"name": "Theme Park and Attraction Management (BS)",
+			"url": "https://www.ucf.edu/degree/theme-park-and-attraction-management-bs/",
+			"college": "Hospitality Management",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biomedical-sciences-bs",
+			"name": "Biomedical Sciences (BS)",
+			"url": "https://www.ucf.edu/degree/biomedical-sciences-bs/",
+			"college": "Medicine",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biomedical-sciences-bs-integrated-biomedical-sciences-track",
+			"name": "Biomedical Sciences (BS) - Integrated Biomedical Sciences Track",
+			"url": "https://www.ucf.edu/degree/biomedical-sciences-bs/integrated-biomedical-sciences-track/",
+			"college": "Medicine",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biomedical-sciences-bs-neuroscience",
+			"name": "Biomedical Sciences (BS) - Neuroscience",
+			"url": "https://www.ucf.edu/degree/biomedical-sciences-bs/neuroscience/",
+			"college": "Medicine",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biomedical-sciences-bs-pre-medical-track",
+			"name": "Biomedical Sciences (BS) - Pre-Medical Track",
+			"url": "https://www.ucf.edu/degree/biomedical-sciences-bs/pre-medical-track/",
+			"college": "Medicine",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biotechnology-bs",
+			"name": "Biotechnology (BS)",
+			"url": "https://www.ucf.edu/degree/biotechnology-bs/",
+			"college": "Medicine",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "medical-laboratory-sciences-bs",
+			"name": "Medical Laboratory Sciences (BS)",
+			"url": "https://www.ucf.edu/degree/medical-laboratory-sciences-bs/",
+			"college": "Medicine",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "molecular-and-cellular-biology-bs",
+			"name": "Molecular and Cellular Biology (BS)",
+			"url": "https://www.ucf.edu/degree/molecular-and-cellular-biology-bs/",
+			"college": "Medicine",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "molecular-microbiology-bs",
+			"name": "Molecular Microbiology (BS)",
+			"url": "https://www.ucf.edu/degree/molecular-microbiology-bs/",
+			"college": "Medicine",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "accounting-bsba",
+			"name": "Accounting (BSBA)",
+			"url": "https://www.ucf.edu/degree/accounting-bsba/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "business-economics-bsba",
+			"name": "Business Economics (BSBA)",
+			"url": "https://www.ucf.edu/degree/business-economics-bsba/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "business-economics-bsba-business-economics-bsba-business-analytics",
+			"name": "Business Economics (BSBA) - Business Analytics",
+			"url": "https://www.ucf.edu/degree/business-economics-bsba/business-economics-bsba-business-analytics/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "economics-bs",
+			"name": "Economics (BS)",
+			"url": "https://www.ucf.edu/degree/economics-bs/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "finance-bsba",
+			"name": "Finance (BSBA)",
+			"url": "https://www.ucf.edu/degree/finance-bsba/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "integrated-business-bsba",
+			"name": "Integrated Business (BSBA)",
+			"url": "https://www.ucf.edu/degree/integrated-business-bsba/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "management-bsba",
+			"name": "Management (BSBA)",
+			"url": "https://www.ucf.edu/degree/management-bsba/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "marketing-bsba",
+			"name": "Marketing (BSBA)",
+			"url": "https://www.ucf.edu/degree/marketing-bsba/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "marketing-bsba-general-marketing",
+			"name": "Marketing (BSBA) - General Marketing",
+			"url": "https://www.ucf.edu/degree/marketing-bsba/general-marketing/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "marketing-bsba-professional-selling",
+			"name": "Marketing (BSBA) - Professional Selling",
+			"url": "https://www.ucf.edu/degree/marketing-bsba/professional-selling/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "real-estate-bsba",
+			"name": "Real Estate (BSBA)",
+			"url": "https://www.ucf.edu/degree/real-estate-bsba/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "real-estate-bsba-appraisal-track",
+			"name": "Real Estate (BSBA) - Appraisal Track",
+			"url": "https://www.ucf.edu/degree/real-estate-bsba/appraisal-track/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "risk-management-and-insurance-bsba",
+			"name": "Risk Management and Insurance (BSBA)",
+			"url": "https://www.ucf.edu/degree/risk-management-and-insurance-bsba/",
+			"college": "Miller Business",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nursing-bsn",
+			"name": "Nursing (BSN)",
+			"url": "https://www.ucf.edu/degree/nursing-bsn/",
+			"college": "Nursing",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nursing-bsn-accelerated-second-degree-bsn",
+			"name": "Nursing (BSN) - Accelerated Second Degree BSN",
+			"url": "https://www.ucf.edu/degree/nursing-bsn/accelerated-second-degree-bsn/",
+			"college": "Nursing",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nursing-rn-bsn",
+			"name": "Nursing RN (BSN)",
+			"url": "https://www.ucf.edu/degree/nursing-rn-bsn/",
+			"college": "Nursing",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nursing-rn-bsn-as-to-bs",
+			"name": "Nursing RN (BSN) - AS to BS",
+			"url": "https://www.ucf.edu/degree/nursing-rn-bsn/as-to-bs/",
+			"college": "Nursing",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nursing-rn-bsn-concurrent-asn-to-bsn-seminole-state-track",
+			"name": "Nursing RN (BSN) - Concurrent ASN to BSN - Seminole State Track",
+			"url": "https://www.ucf.edu/degree/nursing-rn-bsn/concurrent-asn-to-bsn-seminole-state-track/",
+			"college": "Nursing",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nursing-rn-bsn-concurrent-asn-to-bsn-valencia-college-track",
+			"name": "Nursing RN (BSN) - Concurrent ASN to BSN - Valencia College Track",
+			"url": "https://www.ucf.edu/degree/nursing-rn-bsn/concurrent-asn-to-bsn-valencia-college-track/",
+			"college": "Nursing",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "nursing-rn-bsn-rn-bsn",
+			"name": "Nursing RN (BSN) - RN-BSN",
+			"url": "https://www.ucf.edu/degree/nursing-rn-bsn/rn-bsn/",
+			"college": "Nursing",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "photonic-science-and-engineering-bspse",
+			"name": "Photonic Science and Engineering (BSPSE)",
+			"url": "https://www.ucf.edu/degree/photonic-science-and-engineering-bspse/",
+			"college": "Optics and Photonics",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "actuarial-science-bs",
+			"name": "Actuarial Science (BS)",
+			"url": "https://www.ucf.edu/degree/actuarial-science-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "advertising-public-relations-ba",
+			"name": "Advertising / Public Relations (BA)",
+			"url": "https://www.ucf.edu/degree/advertising-public-relations-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "anthropology-ba",
+			"name": "Anthropology (BA)",
+			"url": "https://www.ucf.edu/degree/anthropology-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "anthropology-ba-anthropological-methods-and-practice-track",
+			"name": "Anthropology (BA) - Anthropological Methods and Practice Track",
+			"url": "https://www.ucf.edu/degree/anthropology-ba/anthropological-methods-and-practice-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "anthropology-ba-general-track",
+			"name": "Anthropology (BA) - General Track",
+			"url": "https://www.ucf.edu/degree/anthropology-ba/general-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biology-bs",
+			"name": "Biology (BS)",
+			"url": "https://www.ucf.edu/degree/biology-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biology-bs-ecology-evolutionary-and-conservation",
+			"name": "Biology (BS) - Ecology, Evolutionary and Conservation Track",
+			"url": "https://www.ucf.edu/degree/biology-bs/ecology-evolutionary-and-conservation/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biology-bs-general-biology",
+			"name": "Biology (BS) - General Biology Track",
+			"url": "https://www.ucf.edu/degree/biology-bs/general-biology/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biology-bs-marine-and-aquatic",
+			"name": "Biology (BS) - Marine and Aquatic Track",
+			"url": "https://www.ucf.edu/degree/biology-bs/marine-and-aquatic/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biology-bs-plant-sciences",
+			"name": "Biology (BS) - Plant Sciences Track",
+			"url": "https://www.ucf.edu/degree/biology-bs/plant-sciences/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biology-bs-pre-health-professional",
+			"name": "Biology (BS) - Pre-Health Professional Track",
+			"url": "https://www.ucf.edu/degree/biology-bs/pre-health-professional/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "biology-bs-zoology-and-pre-veterinarian-science",
+			"name": "Biology (BS) - Zoology and Pre-Veterinarian Science",
+			"url": "https://www.ucf.edu/degree/biology-bs/zoology-and-pre-veterinarian-science/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "chemistry-ba",
+			"name": "Chemistry (BA)",
+			"url": "https://www.ucf.edu/degree/chemistry-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "chemistry-ba-education-track",
+			"name": "Chemistry (BA) - Education Track",
+			"url": "https://www.ucf.edu/degree/chemistry-ba/education-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "chemistry-ba-industry-track",
+			"name": "Chemistry (BA) - Industry Track",
+			"url": "https://www.ucf.edu/degree/chemistry-ba/industry-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "chemistry-ba-preprofessional-track",
+			"name": "Chemistry (BA) - Preprofessional Track",
+			"url": "https://www.ucf.edu/degree/chemistry-ba/preprofessional-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "chemistry-bs",
+			"name": "Chemistry (BS)",
+			"url": "https://www.ucf.edu/degree/chemistry-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "chemistry-bs-biochemistry",
+			"name": "Chemistry (BS) - Biochemistry",
+			"url": "https://www.ucf.edu/degree/chemistry-bs/biochemistry/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "communication-ba",
+			"name": "Communication (BA)",
+			"url": "https://www.ucf.edu/degree/communication-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "communication-ba-business-and-professional-communication-track",
+			"name": "Communication (BA) - Business and Professional Communication Track",
+			"url": "https://www.ucf.edu/degree/communication-ba/business-and-professional-communication-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "communication-ba-general-communication-track",
+			"name": "Communication (BA) - General Communication Track",
+			"url": "https://www.ucf.edu/degree/communication-ba/general-communication-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "communication-ba-visual-communication-track",
+			"name": "Communication (BA) - Visual Communication Track",
+			"url": "https://www.ucf.edu/degree/communication-ba/visual-communication-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "communication-and-conflict-ba",
+			"name": "Communication and Conflict (BA)",
+			"url": "https://www.ucf.edu/degree/communication-and-conflict-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "data-science-bs",
+			"name": "Data Science (BS)",
+			"url": "https://www.ucf.edu/degree/data-science-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "digital-media-ba",
+			"name": "Digital Media (BA)",
+			"url": "https://www.ucf.edu/degree/digital-media-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "digital-media-ba-game-design-track",
+			"name": "Digital Media (BA) - Game Design Track",
+			"url": "https://www.ucf.edu/degree/digital-media-ba/game-design-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "digital-media-ba-web-and-interactive-media-track",
+			"name": "Digital Media (BA) - Web and Interactive Media Track",
+			"url": "https://www.ucf.edu/degree/digital-media-ba/web-and-interactive-media-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "film-ba",
+			"name": "Film (BA)",
+			"url": "https://www.ucf.edu/degree/film-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "film-bfa",
+			"name": "Film (BFA)",
+			"url": "https://www.ucf.edu/degree/film-bfa/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "forensic-science-bs",
+			"name": "Forensic Science (BS)",
+			"url": "https://www.ucf.edu/degree/forensic-science-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "forensic-science-bs-biochemistry",
+			"name": "Forensic Science (BS) - Biochemistry",
+			"url": "https://www.ucf.edu/degree/forensic-science-bs/biochemistry/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "forensic-science-bs-chemistry",
+			"name": "Forensic Science (BS) - Chemistry",
+			"url": "https://www.ucf.edu/degree/forensic-science-bs/chemistry/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "integrated-sciences-and-technology-bs",
+			"name": "Integrated Sciences and Technology (BS)",
+			"url": "https://www.ucf.edu/degree/integrated-sciences-and-technology-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "integrated-sciences-and-technology-bs-integrated-science-education-track",
+			"name": "Integrated Sciences and Technology (BS) - Integrated Science Education Track",
+			"url": "https://www.ucf.edu/degree/integrated-sciences-and-technology-bs/integrated-science-education-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "integrated-sciences-and-technology-bs-integrated-sciences-track",
+			"name": "Integrated Sciences and Technology (BS) - Integrated Sciences Track",
+			"url": "https://www.ucf.edu/degree/integrated-sciences-and-technology-bs/integrated-sciences-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "international-and-global-studies-ba",
+			"name": "International and Global Studies (BA)",
+			"url": "https://www.ucf.edu/degree/international-and-global-studies-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "journalism-ba",
+			"name": "Journalism (BA)",
+			"url": "https://www.ucf.edu/degree/journalism-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "journalism-ba-electronic-journalism",
+			"name": "Journalism (BA) - Electronic Journalism",
+			"url": "https://www.ucf.edu/degree/journalism-ba/electronic-journalism/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "journalism-ba-print-digital-journalism",
+			"name": "Journalism (BA) - Print/Digital Journalism",
+			"url": "https://www.ucf.edu/degree/journalism-ba/print-digital-journalism/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mathematics-bs",
+			"name": "Mathematics (BS)",
+			"url": "https://www.ucf.edu/degree/mathematics-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mathematics-bs-computational-track",
+			"name": "Mathematics (BS) - Computational Track",
+			"url": "https://www.ucf.edu/degree/mathematics-bs/computational-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mathematics-bs-engineering-physics-track",
+			"name": "Mathematics (BS) - Engineering/Physics Track",
+			"url": "https://www.ucf.edu/degree/mathematics-bs/engineering-physics-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mathematics-bs-general-mathematics-track",
+			"name": "Mathematics (BS) - General Mathematics Track",
+			"url": "https://www.ucf.edu/degree/mathematics-bs/general-mathematics-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mathematics-bs-mathematical-biology-track",
+			"name": "Mathematics (BS) - Mathematical Biology Track",
+			"url": "https://www.ucf.edu/degree/mathematics-bs/mathematical-biology-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mathematics-bs-mathematics-bs-mathematical-data-analysis-track",
+			"name": "Mathematics (BS) - Mathematical Data Analysis Track",
+			"url": "https://www.ucf.edu/degree/mathematics-bs/mathematics-bs-mathematical-data-analysis-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "mathematics-bs-mathematical-economics-track",
+			"name": "Mathematics (BS) - Mathematical Economics Track",
+			"url": "https://www.ucf.edu/degree/mathematics-bs/mathematical-economics-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "media-production-and-management-ba",
+			"name": "Media Production and Management (BA)",
+			"url": "https://www.ucf.edu/degree/media-production-and-management-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "media-production-and-management-ba-media-management-and-operations-track",
+			"name": "Media Production and Management (BA) - Media Management and Operations Track",
+			"url": "https://www.ucf.edu/degree/media-production-and-management-ba/media-management-and-operations-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "media-production-and-management-ba-production-track",
+			"name": "Media Production and Management (BA) - Production Track",
+			"url": "https://www.ucf.edu/degree/media-production-and-management-ba/production-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "media-production-and-management-ba-sports-production-track",
+			"name": "Media Production and Management (BA) - Sports Production Track",
+			"url": "https://www.ucf.edu/degree/media-production-and-management-ba/sports-production-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-ba",
+			"name": "Physics (BA)",
+			"url": "https://www.ucf.edu/degree/physics-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-ba-biophysics-concentration",
+			"name": "Physics (BA) - Biophysics Concentration",
+			"url": "https://www.ucf.edu/degree/physics-ba/biophysics-concentration/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-ba-education-concentration",
+			"name": "Physics (BA) - Education Concentration",
+			"url": "https://www.ucf.edu/degree/physics-ba/education-concentration/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-ba-information-technology-data-science-concentration",
+			"name": "Physics (BA) - Information Technology/Data Science Concentration",
+			"url": "https://www.ucf.edu/degree/physics-ba/information-technology-data-science-concentration/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-ba-technical-writing-concentration",
+			"name": "Physics (BA) - Technical Writing Concentration",
+			"url": "https://www.ucf.edu/degree/physics-ba/technical-writing-concentration/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-bs",
+			"name": "Physics (BS)",
+			"url": "https://www.ucf.edu/degree/physics-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-bs-astronomy",
+			"name": "Physics (BS) - Astronomy",
+			"url": "https://www.ucf.edu/degree/physics-bs/astronomy/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-bs-computational",
+			"name": "Physics (BS) - Computational",
+			"url": "https://www.ucf.edu/degree/physics-bs/computational/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-bs-materials",
+			"name": "Physics (BS) - Materials",
+			"url": "https://www.ucf.edu/degree/physics-bs/materials/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "physics-bs-optics-and-lasers",
+			"name": "Physics (BS) - Optics and Lasers",
+			"url": "https://www.ucf.edu/degree/physics-bs/optics-and-lasers/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "political-science-ba",
+			"name": "Political Science (BA)",
+			"url": "https://www.ucf.edu/degree/political-science-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "political-science-ba-american-politics-and-policy",
+			"name": "Political Science (BA) - American Politics and Policy",
+			"url": "https://www.ucf.edu/degree/political-science-ba/american-politics-and-policy/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "political-science-ba-political-science-ba-intelligence-and-national-security-track",
+			"name": "Political Science (BA) - Intelligence and National Security Track",
+			"url": "https://www.ucf.edu/degree/political-science-ba/political-science-ba-intelligence-and-national-security-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "political-science-ba-international-relations-and-comp-politics",
+			"name": "Political Science (BA) - International Relations and Comp. Politics",
+			"url": "https://www.ucf.edu/degree/political-science-ba/international-relations-and-comp-politics/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "political-science-ba-prelaw",
+			"name": "Political Science (BA) - Prelaw",
+			"url": "https://www.ucf.edu/degree/political-science-ba/prelaw/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "psychology-bs",
+			"name": "Psychology (BS)",
+			"url": "https://www.ucf.edu/degree/psychology-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "psychology-bs-clinical-psychology-track",
+			"name": "Psychology (BS) - Clinical Psychology Track",
+			"url": "https://www.ucf.edu/degree/psychology-bs/clinical-psychology-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "psychology-bs-human-factors-psychology-track",
+			"name": "Psychology (BS) - Cognition and Human Factors Psychology Track",
+			"url": "https://www.ucf.edu/degree/psychology-bs/human-factors-psychology-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "psychology-bs-experimental-psychology-track",
+			"name": "Psychology (BS) - Experimental Psychology Track",
+			"url": "https://www.ucf.edu/degree/psychology-bs/experimental-psychology-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "psychology-bs-general-psychology-track",
+			"name": "Psychology (BS) - General Psychology Track",
+			"url": "https://www.ucf.edu/degree/psychology-bs/general-psychology-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "psychology-bs-industrial-organizational-psychology-track",
+			"name": "Psychology (BS) - Industrial / Organizational Psychology Track",
+			"url": "https://www.ucf.edu/degree/psychology-bs/industrial-organizational-psychology-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "psychology-bs-neuroscience-track",
+			"name": "Psychology (BS) - Neuroscience Track",
+			"url": "https://www.ucf.edu/degree/psychology-bs/neuroscience-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "social-sciences-bs",
+			"name": "Social Sciences (BS)",
+			"url": "https://www.ucf.edu/degree/social-sciences-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "sociology-ba",
+			"name": "Sociology (BA)",
+			"url": "https://www.ucf.edu/degree/sociology-ba/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "sociology-bs",
+			"name": "Sociology (BS)",
+			"url": "https://www.ucf.edu/degree/sociology-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "sociology-bs-crime-law-and-deviance-track",
+			"name": "Sociology (BS) - Crime, Law, and Deviance Track",
+			"url": "https://www.ucf.edu/degree/sociology-bs/crime-law-and-deviance-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "sociology-bs-medical-sociology-track",
+			"name": "Sociology (BS) - Medical Sociology Track",
+			"url": "https://www.ucf.edu/degree/sociology-bs/medical-sociology-track/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "statistics-bs",
+			"name": "Statistics (BS)",
+			"url": "https://www.ucf.edu/degree/statistics-bs/",
+			"college": "Sciences",
+			"level": "Bachelor’s"
+		},
+		{
+			"slug": "texts-and-technology-phd",
+			"name": "Texts and Technology PhD",
+			"url": "https://www.ucf.edu/degree/texts-and-technology-phd/",
+			"college": "Arts and Humanities",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "theatre-mfa",
+			"name": "Theatre MFA",
+			"url": "https://www.ucf.edu/degree/theatre-mfa/",
+			"college": "Arts and Humanities",
+			"level": "Master’s"
+		},
+		{
+			"slug": "history-ma",
+			"name": "History MA",
+			"url": "https://www.ucf.edu/degree/history-ma/",
+			"college": "Arts and Humanities",
+			"level": "Master’s"
+		},
+		{
+			"slug": "english-ma",
+			"name": "English MA",
+			"url": "https://www.ucf.edu/degree/english-ma/",
+			"college": "Arts and Humanities",
+			"level": "Master’s"
+		},
+		{
+			"slug": "emerging-media-mfa",
+			"name": "Emerging Media MFA",
+			"url": "https://www.ucf.edu/degree/emerging-media-mfa/",
+			"college": "Arts and Humanities",
+			"level": "Master’s"
+		},
+		{
+			"slug": "business-administration-mba",
+			"name": "Business Administration MBA",
+			"url": "https://www.ucf.edu/degree/business-administration-mba/",
+			"college": "Business",
+			"level": "Master’s"
+		},
+		{
+			"slug": "management-msm",
+			"name": "Management MSM",
+			"url": "https://www.ucf.edu/degree/management-msm/",
+			"college": "Business",
+			"level": "Master’s"
+		},
+		{
+			"slug": "accounting-msa",
+			"name": "Accounting MSA",
+			"url": "https://www.ucf.edu/degree/accounting-msa/",
+			"college": "Business",
+			"level": "Master’s"
+		},
+		{
+			"slug": "sport-business-management-msbm",
+			"name": "Sport Business Management MSBM",
+			"url": "https://www.ucf.edu/degree/sport-business-management-msbm/",
+			"college": "Business",
+			"level": "Master’s"
+		},
+		{
+			"slug": "business-administration-phd",
+			"name": "Business Administration PhD",
+			"url": "https://www.ucf.edu/degree/business-administration-phd/",
+			"college": "Business",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "health-administration-mha",
+			"name": "Health Administration MHA",
+			"url": "https://www.ucf.edu/degree/health-administration-mha/",
+			"college": "Community Innovation and Education",
+			"level": "Master’s"
+		},
+		{
+			"slug": "public-administration-mpa",
+			"name": "Public Administration MPA",
+			"url": "https://www.ucf.edu/degree/public-administration-mpa/",
+			"college": "Community Innovation and Education",
+			"level": "Master’s"
+		},
+		{
+			"slug": "criminal-justice-ms",
+			"name": "Criminal Justice MS",
+			"url": "https://www.ucf.edu/degree/criminal-justice-ms/",
+			"college": "Community Innovation and Education",
+			"level": "Master’s"
+		},
+		{
+			"slug": "educational-leadership-ma",
+			"name": "Educational Leadership MA",
+			"url": "https://www.ucf.edu/degree/educational-leadership-ma/",
+			"college": "Community Innovation and Education",
+			"level": "Master’s"
+		},
+		{
+			"slug": "counselor-education-ma",
+			"name": "Counselor Education MA",
+			"url": "https://www.ucf.edu/degree/counselor-education-ma/",
+			"college": "Community Innovation and Education",
+			"level": "Master’s"
+		},
+		{
+			"slug": "computer-science-ms",
+			"name": "Computer Science MS",
+			"url": "https://www.ucf.edu/degree/computer-science-ms/",
+			"college": "Engineering and Computer Science",
+			"level": "Master’s"
+		},
+		{
+			"slug": "computer-science-phd",
+			"name": "Computer Science PhD",
+			"url": "https://www.ucf.edu/degree/computer-science-phd/",
+			"college": "Engineering and Computer Science",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "engineering-management-ms",
+			"name": "Engineering Management MS",
+			"url": "https://www.ucf.edu/degree/engineering-management-ms/",
+			"college": "Engineering and Computer Science",
+			"level": "Master’s"
+		},
+		{
+			"slug": "aerospace-engineering-msae",
+			"name": "Aerospace Engineering MSAE",
+			"url": "https://www.ucf.edu/degree/aerospace-engineering-msae/",
+			"college": "Engineering and Computer Science",
+			"level": "Master’s"
+		},
+		{
+			"slug": "mechanical-engineering-msme",
+			"name": "Mechanical Engineering MSME",
+			"url": "https://www.ucf.edu/degree/mechanical-engineering-msme/",
+			"college": "Engineering and Computer Science",
+			"level": "Master’s"
+		},
+		{
+			"slug": "interdisciplinary-studies-ma",
+			"name": "Interdisciplinary Studies MA",
+			"url": "https://www.ucf.edu/degree/interdisciplinary-studies-ma/",
+			"college": "Graduate Studies",
+			"level": "Master’s"
+		},
+		{
+			"slug": "nanotechnology-ms",
+			"name": "Nanotechnology MS",
+			"url": "https://www.ucf.edu/degree/nanotechnology-ms/",
+			"college": "Graduate Studies",
+			"level": "Master’s"
+		},
+		{
+			"slug": "interdisciplinary-studies-ms",
+			"name": "Interdisciplinary Studies MS",
+			"url": "https://www.ucf.edu/degree/interdisciplinary-studies-ms/",
+			"college": "Graduate Studies",
+			"level": "Master’s"
+		},
+		{
+			"slug": "social-work-msw",
+			"name": "Social Work MSW",
+			"url": "https://www.ucf.edu/degree/social-work-msw/",
+			"college": "Health Professions and Sciences",
+			"level": "Master’s"
+		},
+		{
+			"slug": "communication-sciences-and-disorders-ma",
+			"name": "Communication Sciences and Disorders MA",
+			"url": "https://www.ucf.edu/degree/communication-sciences-and-disorders-ma/",
+			"college": "Health Professions and Sciences",
+			"level": "Master’s"
+		},
+		{
+			"slug": "doctor-of-physical-therapy-dpt",
+			"name": "Physical Therapy DPT",
+			"url": "https://www.ucf.edu/degree/doctor-of-physical-therapy-dpt/",
+			"college": "Health Professions and Sciences",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "kinesiology-ms",
+			"name": "Kinesiology MS",
+			"url": "https://www.ucf.edu/degree/kinesiology-ms/",
+			"college": "Health Professions and Sciences",
+			"level": "Master’s"
+		},
+		{
+			"slug": "master-of-athletic-training-matht",
+			"name": "Master of Athletic Training MAT",
+			"url": "https://www.ucf.edu/degree/master-of-athletic-training-matht/",
+			"college": "Health Professions and Sciences",
+			"level": "Master’s"
+		},
+		{
+			"slug": "doctor-of-medicine-md",
+			"name": "Medicine MD",
+			"url": "https://www.ucf.edu/degree/doctor-of-medicine-md/",
+			"college": "Medicine",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "biomedical-sciences-phd",
+			"name": "Biomedical Sciences PhD",
+			"url": "https://www.ucf.edu/degree/biomedical-sciences-phd/",
+			"college": "Medicine",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "biomedical-sciences-ms",
+			"name": "Biomedical Sciences MS",
+			"url": "https://www.ucf.edu/degree/biomedical-sciences-ms/",
+			"college": "Medicine",
+			"level": "Master’s"
+		},
+		{
+			"slug": "biotechnology-ms",
+			"name": "Biotechnology MS",
+			"url": "https://www.ucf.edu/degree/biotechnology-ms/",
+			"college": "Medicine",
+			"level": "Master’s"
+		},
+		{
+			"slug": "doctor-of-nursing-practice-dnp",
+			"name": "Nursing Practice DNP",
+			"url": "https://www.ucf.edu/degree/doctor-of-nursing-practice-dnp/",
+			"college": "Nursing",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "nursing-msn",
+			"name": "Nursing MSN",
+			"url": "https://www.ucf.edu/degree/nursing-msn/",
+			"college": "Nursing",
+			"level": "Master’s"
+		},
+		{
+			"slug": "nursing-phd",
+			"name": "Nursing PhD",
+			"url": "https://www.ucf.edu/degree/nursing-phd/",
+			"college": "Nursing",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "optics-and-photonics-phd",
+			"name": "Optics and Photonics PhD",
+			"url": "https://www.ucf.edu/degree/optics-and-photonics-phd/",
+			"college": "Optics and Photonics",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "optics-and-photonics-ms",
+			"name": "Optics and Photonics MS",
+			"url": "https://www.ucf.edu/degree/optics-and-photonics-ms/",
+			"college": "Optics and Photonics",
+			"level": "Master’s"
+		},
+		{
+			"slug": "applied-photonics-certificate",
+			"name": "Applied Photonics Graduate Certificate",
+			"url": "https://www.ucf.edu/degree/applied-photonics-certificate/",
+			"college": "Optics and Photonics",
+			"level": "Master’s"
+		},
+		{
+			"slug": "optical-imaging-systems-certificate",
+			"name": "Optical Imaging Systems Graduate Certificate",
+			"url": "https://www.ucf.edu/degree/optical-imaging-systems-certificate/",
+			"college": "Optics and Photonics",
+			"level": "Master’s"
+		},
+		{
+			"slug": "hospitality-and-tourism-management-ms",
+			"name": "Hospitality and Tourism Management MS",
+			"url": "https://www.ucf.edu/degree/hospitality-and-tourism-management-ms/",
+			"college": "Rosen College of Hospitality Management",
+			"level": "Master’s"
+		},
+		{
+			"slug": "hospitality-management-phd",
+			"name": "Hospitality Management PhD",
+			"url": "https://www.ucf.edu/degree/hospitality-management-phd/",
+			"college": "Rosen College of Hospitality Management",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "destination-marketing-and-management-certificate",
+			"name": "Destination Marketing and Management Certificate",
+			"url": "https://www.ucf.edu/degree/destination-marketing-and-management-certificate/",
+			"college": "Rosen College of Hospitality Management",
+			"level": "Master’s"
+		},
+		{
+			"slug": "event-management-certificate",
+			"name": "Event Management Certificate",
+			"url": "https://www.ucf.edu/degree/event-management-certificate/",
+			"college": "Rosen College of Hospitality Management",
+			"level": "Master’s"
+		},
+		{
+			"slug": "hospitality-and-tourism-technologies-certificate",
+			"name": "Hospitality and Tourism Technologies Certificate",
+			"url": "https://www.ucf.edu/degree/hospitality-and-tourism-technologies-certificate/",
+			"college": "Rosen College of Hospitality Management",
+			"level": "Master’s"
+		},
+		{
+			"slug": "interactive-entertainment-ms",
+			"name": "Interactive Entertainment MS",
+			"url": "https://www.ucf.edu/degree/interactive-entertainment-ms/",
+			"college": "Sciences",
+			"level": "Master’s"
+		},
+		{
+			"slug": "psychology-phd",
+			"name": "Psychology PhD",
+			"url": "https://www.ucf.edu/degree/psychology-phd/",
+			"college": "Sciences",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "physics-phd",
+			"name": "Physics PhD",
+			"url": "https://www.ucf.edu/degree/physics-phd/",
+			"college": "Sciences",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "chemistry-phd",
+			"name": "Chemistry PhD",
+			"url": "https://www.ucf.edu/degree/chemistry-phd/",
+			"college": "Sciences",
+			"level": "Doctoral"
+		},
+		{
+			"slug": "mathematics-phd",
+			"name": "Mathematics PhD",
+			"url": "https://www.ucf.edu/degree/mathematics-phd/",
+			"college": "Sciences",
+			"level": "Doctoral"
+		}
+	],
+	"facts": {
+		"computer-science-bs": {
+			"name": "Computer Science B.S.",
+			"url": "https://www.ucf.edu/degree/computer-science-bs/",
+			"college": "Engineering and Computer Science",
+			"sample": true,
+			"source": {
+				"label": "Sample catalog data",
+				"url": "https://www.ucf.edu/degree/computer-science-bs/",
+				"asOf": "2026-10-01"
+			},
+			"facts": [
+				{
+					"label": "Degree",
+					"value": "Bachelor of Science"
+				},
+				{
+					"label": "Credit hours",
+					"value": "120",
+					"data": true
+				},
+				{
+					"label": "Typical length",
+					"value": "4 years, full time"
+				},
+				{
+					"label": "Format",
+					"value": "In person, main campus"
+				},
+				{
+					"label": "Starts",
+					"value": "Fall, spring and summer"
+				},
+				{
+					"label": "College",
+					"value": "Engineering and Computer Science"
+				}
+			]
+		},
+		"psychology-bs": {
+			"name": "Psychology B.S.",
+			"url": "https://www.ucf.edu/degree/psychology-bs/",
+			"college": "Sciences",
+			"sample": true,
+			"source": {
+				"label": "Sample catalog data",
+				"url": "https://www.ucf.edu/degree/psychology-bs/",
+				"asOf": "2026-10-01"
+			},
+			"facts": [
+				{
+					"label": "Degree",
+					"value": "Bachelor of Science"
+				},
+				{
+					"label": "Credit hours",
+					"value": "120",
+					"data": true
+				},
+				{
+					"label": "Typical length",
+					"value": "4 years, full time"
+				},
+				{
+					"label": "Format",
+					"value": "In person or fully online"
+				},
+				{
+					"label": "Starts",
+					"value": "Fall, spring and summer"
+				},
+				{
+					"label": "College",
+					"value": "Sciences"
+				}
+			]
+		}
+	}
+}

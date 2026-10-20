@@ -1,6 +1,6 @@
 {
 	"name": "ucf-wordpress-block-theme",
-	"version": "0.1.0-alpha.1",
+	"version": "0.2.0-alpha.1",
 	"description": "A WordPress block theme bringing the UCF Athena Framework to Full Site Editing.",
 	"private": true,
 	"license": "GPL-2.0-or-later",

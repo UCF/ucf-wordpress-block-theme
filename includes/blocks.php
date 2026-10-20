@@ -2,8 +2,8 @@
 /**
  * Custom block registration.
  *
- * This file owns the *static* blocks only — the ones compiled from src/blocks/ whose
- * `save()` emits real markup.
+ * This file owns the *static* blocks — the ones compiled from src/blocks/ whose `save()`
+ * emits real markup — and the inserter category every theme block is filed under.
  *
  * A server-rendered block does not belong here. A dynamic block lives in the file that owns
  * the data it renders, next to the queries and meta it reads, so that its registration and
@@ -43,3 +43,42 @@ function ucf_theme_register_blocks() {
 	}
 }
 add_action( 'init', 'ucf_theme_register_blocks' );
+
+/**
+ * The inserter category every block the theme adds is filed under.
+ *
+ * WHY one category for all of them — the data blocks, and the Section variation of core/group:
+ * an author looking for "the UCF ones" finds them in one place, rather than scattered across
+ * Widgets and Design among core's.
+ *
+ * SYNC: each block's `category` — in includes/programs.php, people.php, events.php,
+ * provenance.php, alerts.php and src/js/editor/section-variation.js — names this slug.
+ * `BlocksTest` checks the PHP registrations; the JS one is by hand.
+ */
+const UCF_THEME_BLOCK_CATEGORY = 'ucf';
+
+/**
+ * Add the UCF category to the inserter, first in the list.
+ *
+ * @param array<int, array<string, mixed>> $categories Registered categories.
+ * @return array<int, array<string, mixed>> Categories, with UCF first.
+ */
+function ucf_theme_block_category( $categories ) {
+	foreach ( $categories as $category ) {
+		if ( UCF_THEME_BLOCK_CATEGORY === $category['slug'] ) {
+			return $categories;
+		}
+	}
+
+	array_unshift(
+		$categories,
+		array(
+			'slug'  => UCF_THEME_BLOCK_CATEGORY,
+			'title' => __( 'UCF', 'ucf-wordpress-block-theme' ),
+			'icon'  => null,
+		)
+	);
+
+	return $categories;
+}
+add_filter( 'block_categories_all', 'ucf_theme_block_category' );

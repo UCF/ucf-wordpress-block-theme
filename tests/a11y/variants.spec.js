@@ -2,9 +2,9 @@
  * Accessibility: one audit per registered block style.
  *
  * This is the tier the theme actually needs, and the one a per-route suite cannot stand in
- * for. The compositions — `is-style-light`, `-paper`, `-dark` and `-bold-gold` — set the
+ * for. The compositions — `is-style-light`, `-alt`, `-dark` and `-gold` — set the
  * `--ucf-*` roles their contents read, so the same link resolves to a different color in each.
- * Link blue passes on paper and would be 3.20:1 on gold — which is why the gold composition
+ * Horizon Deep passes on alt and would be 3.20:1 on gold — which is why the gold composition
  * sets its link role to black, and only a page per composition shows that it still does.
  * **A variant can fail contrast where the default passes**, which means auditing the default
  * composition proves nothing about the other three.

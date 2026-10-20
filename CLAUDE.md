@@ -54,19 +54,6 @@ file that owns the topic.
 **Prove a new test can fail.** Break the code it covers, watch it go red, then restore. A test
 that passes against nothing at all is indistinguishable from a passing test.
 
-## Tests
-
-`npm test` runs the PHP unit suite in about a tenth of a second and needs no Docker. Read
-[`tests/README.md`](tests/README.md) before adding to it — it covers what belongs in this tier,
-what must never be mocked into it, and the two non-obvious parts of the harness (includes load
-per-test, so hooks are not assertable).
-
-**New code in `includes/` ships with its test.** Nothing enforces it. Put the test with the
-file that owns the topic.
-
-**Prove a new test can fail.** Break the code it covers, watch it go red, then restore. A test
-that passes against nothing at all is indistinguishable from a passing test.
-
 ## Working practices
 
 These are about how to make a change here, not about what the theme is.

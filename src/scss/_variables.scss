@@ -9,23 +9,31 @@
 // that depends on it.
 
 $color: (
-	"gold": var(--wp--preset--color--gold),
-	"gold-deep": var(--wp--preset--color--gold-deep),
 	"black": var(--wp--preset--color--black),
+	"gold": var(--wp--preset--color--gold),
 	"white": var(--wp--preset--color--white),
-	"ink": var(--wp--preset--color--ink),
-	"paper-alt": var(--wp--preset--color--paper-alt),
-	"horizon-blue": var(--wp--preset--color--horizon-blue),
-	"blue-tint": var(--wp--preset--color--blue-tint),
-	"link-blue": var(--wp--preset--color--link-blue),
-	"link-blue-hover": var(--wp--preset--color--link-blue-hover),
-	"text-body": var(--wp--preset--color--text-body),
-	"text-secondary": var(--wp--preset--color--text-secondary),
-	"text-secondary-dark": var(--wp--preset--color--text-secondary-dark),
-	"line": var(--wp--preset--color--line),
-	"line-dark": var(--wp--preset--color--line-dark),
-	"success": var(--wp--preset--color--success),
-	"danger": var(--wp--preset--color--danger),
+	"horizon": var(--wp--preset--color--horizon),
+	"horizon-deep": var(--wp--preset--color--horizon-deep),
+	"horizon-deeper": var(--wp--preset--color--horizon-deeper),
+	"horizon-light": var(--wp--preset--color--horizon-light),
+	"gray-050": var(--wp--preset--color--gray-050),
+	"gray-200": var(--wp--preset--color--gray-200),
+	"gray-300": var(--wp--preset--color--gray-300),
+	"gray-400": var(--wp--preset--color--gray-400),
+	"gray-500": var(--wp--preset--color--gray-500),
+	"gray-600": var(--wp--preset--color--gray-600),
+	"gray-700": var(--wp--preset--color--gray-700),
+	"gray-800": var(--wp--preset--color--gray-800),
+	"gray-900": var(--wp--preset--color--gray-900),
+	"red-700": var(--wp--preset--color--red-700),
+	"red-300": var(--wp--preset--color--red-300),
+	"red-050": var(--wp--preset--color--red-050),
+	"red-950": var(--wp--preset--color--red-950),
+	"green-700": var(--wp--preset--color--green-700),
+	"green-300": var(--wp--preset--color--green-300),
+	"green-050": var(--wp--preset--color--green-050),
+	"green-950": var(--wp--preset--color--green-950),
+	"line-on-gold": var(--wp--preset--color--line-on-gold),
 );
 
 $font: (
@@ -37,9 +45,13 @@ $font: (
 // UPSTREAM: WordPress kebab-cases slugs when generating CSS vars, so `h1` would become
 // `--wp--preset--font-size--h-1`. Every slug here is already kebab-stable.
 $size: (
+	"data": var(--wp--preset--font-size--data),
 	"small": var(--wp--preset--font-size--small),
+	"data-lg": var(--wp--preset--font-size--data-lg),
 	"body": var(--wp--preset--font-size--body),
 	"lead": var(--wp--preset--font-size--lead),
+	"heading-6": var(--wp--preset--font-size--heading-6),
+	"heading-5": var(--wp--preset--font-size--heading-5),
 	"heading-4": var(--wp--preset--font-size--heading-4),
 	"heading-3": var(--wp--preset--font-size--heading-3),
 	"heading-2": var(--wp--preset--font-size--heading-2),
@@ -54,6 +66,10 @@ $space: (
 	"40": var(--wp--preset--spacing--40),
 	"50": var(--wp--preset--spacing--50),
 	"60": var(--wp--preset--spacing--60),
+	"70": var(--wp--preset--spacing--70),
+	"80": var(--wp--preset--spacing--80),
+	"90": var(--wp--preset--spacing--90),
+	"100": var(--wp--preset--spacing--100),
 );
 
 // SYNC: the page's inline breathing room. Every full-bleed band uses this, so a band and the
@@ -67,11 +83,24 @@ $gutter: var(--wp--custom--gutter);
 // would otherwise create. Anything that has to cover the page measures from here.
 $z-university-header: 10000;
 
-// The theme's one shared breakpoint: where a two-column shell collapses to a single column.
-// Nothing reads it yet — the theme currently ships no responsive component — so it is here as
-// the agreed value for the first one that needs it, not as a leftover.
+// SPEC: the design system's spacing scale, `space-1` … `space-10` (4px … 128px). Slug `N0` is
+// step N, so `space-5` is `50` — WordPress orders spacing presets by slug, and numeric slugs
+// keep the editor's spacing control in scale order.
+//
+// The theme's one shared breakpoint: where sidebars appear and a two-column shell collapses
+// to a single column. The design system names four (576/768/1024/1280); this is the one that
+// changes a layout. Gutters and section padding are fluid `clamp()` tokens in theme.json
+// instead of steps at 768.
 //
 // WHY: one shared value, and only one. A component with its own breaking point declares it
 // next to the component and says why; a general-purpose scale invites rules to break at a
 // width that has nothing to do with their content.
-$breakpoint-lg: 960px;
+$breakpoint-lg: 1024px;
+
+// Custom tokens from theme.json `settings.custom`, named once here.
+$section-y: var(--wp--custom--section-y);
+$tap-target: var(--wp--custom--tap-target);
+$rule-accent: var(--wp--custom--rule-accent);
+$border-hairline: var(--wp--custom--border-hairline);
+$border-control: var(--wp--custom--border-control);
+$focus-width: var(--wp--custom--focus-width);

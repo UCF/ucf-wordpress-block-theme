@@ -43,7 +43,7 @@ import {
 		{
 			name: 'ucf/badge',
 			className: 'badge',
-			bg: 'line',
+			bg: 'gray-200',
 			title: __( 'Default', 'ucf-wordpress-block-theme' ),
 		},
 		{
@@ -55,25 +55,25 @@ import {
 		{
 			name: 'ucf/badge-blue',
 			className: 'badge-blue',
-			bg: 'link-blue',
+			bg: 'horizon-deep',
 			title: __( 'Blue', 'ucf-wordpress-block-theme' ),
 		},
 		{
 			name: 'ucf/badge-success',
 			className: 'badge-success',
-			bg: 'success',
+			bg: 'green-700',
 			title: __( 'Success', 'ucf-wordpress-block-theme' ),
 		},
 		{
 			name: 'ucf/badge-danger',
 			className: 'badge-danger',
-			bg: 'danger',
+			bg: 'red-700',
 			title: __( 'Danger', 'ucf-wordpress-block-theme' ),
 		},
 		{
 			name: 'ucf/badge-dark',
 			className: 'badge-dark',
-			bg: 'ink',
+			bg: 'gray-900',
 			title: __( 'Dark', 'ucf-wordpress-block-theme' ),
 		},
 		{

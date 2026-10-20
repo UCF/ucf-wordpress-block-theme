@@ -56,7 +56,6 @@ final class DegreeTest extends TestCase {
 	 */
 	protected function setUp(): void {
 		parent::setUp();
-		Functions\stubEscapeFunctions();
 		$this->loadInclude( 'degree' );
 	}
 

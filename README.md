@@ -3,10 +3,10 @@
 A WordPress block theme for the University of Central Florida that brings the look, feel, and
 conventions of the UCF Athena Framework to the WordPress block editor (Full Site Editing).
 
-> **Status: scaffold.** The structure, build pipeline and token architecture are in place and
-> working. The design values in `theme.json` are placeholders carried over from the UCF Brand
-> Block Theme, pending Athena equivalents — see
-> [docs/architecture.md § Tokens are placeholders](docs/architecture.md#tokens-are-placeholders).
+> **Status: prototype.** The structure, build pipeline and token architecture are in place and
+> working. The design values in `theme.json` and the patterns come from the UCF Web Design
+> System prototype — see [docs/design-system-import.md](docs/design-system-import.md) for what
+> came in and what was left out.
 
 ## Requirements
 
@@ -33,6 +33,31 @@ For a local WordPress to develop against:
 ```bash
 npm run env:start     # wp-env, Docker required
 ```
+
+## Try it in WordPress Playground
+
+[`blueprint.json`](blueprint.json) builds a throwaway site in the browser — no Docker, no
+install — with this theme from the `basic-blocks` branch, the UCF University Header (which
+the theme injects itself), the [UCF Footer plugin](https://github.com/UCF/UCF-Footer-Plugin),
+three pages built from the theme's page patterns — a homepage, a degree program page and a
+research story — and a style guide at `/style-guide/` with every block style, data block and
+pattern, built by [`tools/style-guide.php`](tools/style-guide.php). The same script rebuilds
+that page on any site: `wp eval-file wp-content/themes/ucf-wordpress-block-theme/tools/style-guide.php`.
+
+Open it at:
+
+```
+https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/UCF/ucf-wordpress-block-theme/basic-blocks/blueprint.json
+```
+
+Or locally: `npx @wp-playground/cli server --blueprint=blueprint.json`.
+
+-   **The blueprint installs the branch from GitHub, not your working copy** — push first.
+-   **Networking is on**, because the header script and the footer's menus are fetched from
+    ucf.edu. Both send CORS headers that allow `playground.wordpress.net`.
+-   **The patterns' photo slots are empty**, as they are when an author inserts them; the
+    blueprint adds no media.
+-   It signs you in as `admin`, which is Playground's own throwaway account.
 
 ## Scripts
 
@@ -70,19 +95,24 @@ src/scss/              The stylesheet, compiled to build/css/main.css
   _utilities.scss        Classes a pattern uses to bind a role to part of a component
   main.scss              Load order — which is output order
 src/blocks/            Static custom blocks (empty)
-src/js/editor/         Editor glue — Section variation, Badge formats. Builds to build/editor.js
+src/js/editor/         Editor glue — variation, formats, data-block previews, editor policy
+src/js/frontend/       Progressive enhancements. Builds to build/frontend.js
 
-patterns/              Block patterns (empty, flat). See patterns/README.md
-templates/             Block templates: index, page, single, search, 404, and the
-                       selectable degree-program template for the `degree` post type
+patterns/              Block patterns, flat. See patterns/README.md
+templates/             Block templates: index, page, page-landing, single, single-degree, search,
+                       404, and the selectable degree-program template for the `degree` post type
                        No header or footer part — the University Header is injected
                        by includes/university-header.php, and the footer is a plugin
 
 assets/fonts/          Self-hosted webfonts, declared as fontFace in theme.json
+assets/icons/          The UCF icon set, registered by includes/icons.php
+data/mock/             Mock data the data blocks read until real sources are wired up
+styles/                Style variations: Brighter
 build/                 Compiled output. Committed; never hand-edited
 tests/php/             PHP unit suite. See tests/README.md
 tools/                 Build and check scripts
 docs/                  architecture.md — read it before changing anything
+                       design-principles.md, design-system-import.md
 ```
 
 ## Before you change anything

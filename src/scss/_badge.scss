@@ -1,14 +1,14 @@
 // ── Badge ────────────────────────────────────────────────────────────────────
 //
 // CONTEXT: inline chip applied to a run of text via the "Badge" rich-text format — see
-// src/js/badge-format.js.
+// src/js/editor/badge-format.js.
 //
 // SPEC: the Athena-derived badge, same metrics, with the tones mapped onto this theme's
 // palette so a theme.json change flows through. Arrived here by way of the UCF Brand Block
 // Theme, which had taken it from the classic Athena theme.
 //
 // SUBSTITUTION: the original sized this with the `meta` token (0.68rem). That step was
-// removed from this theme's scale, so it uses `small` (0.86rem) — the current floor. Badges
+// removed from this theme's scale, so it uses `small` (0.875rem) — the design system's 14px floor. Badges
 // are uppercase and tracked at 0.1em, which needs the size more than body copy does.
 
 @use "sass:list";
@@ -36,14 +36,14 @@
 
 .badge {
 	@extend %badge-base;
-	background-color: var(--wp--preset--color--line);
-	color: var(--wp--preset--color--text-body);
+	background-color: var(--wp--preset--color--gray-200);
+	color: var(--wp--preset--color--black);
 }
 
 // SYNC: one entry per format in src/js/editor/badge-format.js. (background slug, text slug).
 //
-// A11Y: every pair clears WCAG AA for body text (4.5:1) against the current placeholder
-// tokens — `blue` is the floor at 5.86:1, the rest are 8:1 or better. A badge is 0.86rem at
+// A11Y: every pair clears WCAG AA for body text (4.5:1) — `blue` is the floor at 5.86:1,
+// `success` 6.29:1, `danger` 6.57:1, the rest 11:1 or better. A badge is 0.86rem at
 // 700 uppercase, which is *not* large text, so 4.5:1 is the bar and not the 3:1 that applies
 // from 18.66px bold. Re-measure the whole table when the tokens are swapped for Athena's.
 $badge-tones: (
@@ -52,19 +52,19 @@ $badge-tones: (
 		"black",
 	),
 	"blue": (
-		"link-blue",
+		"horizon-deep",
 		"white",
 	),
 	"success": (
-		"success",
+		"green-700",
 		"white",
 	),
 	"danger": (
-		"danger",
+		"red-700",
 		"white",
 	),
 	"dark": (
-		"ink",
+		"gray-900",
 		"white",
 	),
 	"inverse": (
