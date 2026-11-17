@@ -130,3 +130,16 @@ mark {
 		transition-duration: 0.01ms !important;
 	}
 }
+
+// UPSTREAM: full-width bands stack flush on their own padding, so core's flow gap between
+// blocks has to go. `:root :where(.is-layout-constrained) > *` at (0,1,0) gives every block in
+// post content a top margin, which leaves a strip of page between two bands that should meet.
+// The doubled classes outrank it without `!important`.
+// CONTEXT: the Section, Hero and Section Nav are the ucf-content plugin's blocks; their own CSS
+// sets no block margin, because the gap is the host's.
+.ucf-section.ucf-section,
+.ucf-c-hero.ucf-c-hero,
+.ucf-c-section-nav.ucf-c-section-nav,
+.wp-block-cover.alignfull.alignfull {
+	margin-block: 0;
+}
