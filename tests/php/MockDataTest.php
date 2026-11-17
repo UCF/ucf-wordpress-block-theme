@@ -46,9 +46,9 @@ final class MockDataTest extends TestCase {
 	 * @return void
 	 */
 	public function test_a_filter_replaces_a_set() {
-		Filters\expectApplied( 'ucf_theme_mock_data_events' )->once()->andReturn( array( 'events' => array() ) );
+		Filters\expectApplied( 'ucf_theme_mock_data_people' )->once()->andReturn( array( 'people' => array() ) );
 
-		$this->assertSame( array( 'events' => array() ), ucf_theme_mock_data( 'events' ) );
+		$this->assertSame( array( 'people' => array() ), ucf_theme_mock_data( 'people' ) );
 	}
 
 	/**
@@ -91,27 +91,15 @@ final class MockDataTest extends TestCase {
 	}
 
 	/**
-	 * People, events and alerts: the documented keys.
+	 * People: the documented keys.
 	 *
 	 * @return void
 	 */
-	public function test_people_events_and_alerts_have_the_documented_shape() {
+	public function test_people_have_the_documented_shape() {
 		foreach ( ucf_theme_mock_data( 'people' )['people'] as $slug => $person ) {
 			foreach ( array( 'name', 'role', 'credentials', 'expertise', 'links', 'contact' ) as $key ) {
 				$this->assertArrayHasKey( $key, $person, "{$slug} is missing `{$key}`." );
 			}
-		}
-
-		foreach ( ucf_theme_mock_data( 'events' )['events'] as $event ) {
-			foreach ( array( 'title', 'offset', 'time', 'location', 'url' ) as $key ) {
-				$this->assertArrayHasKey( $key, $event );
-			}
-		}
-
-		foreach ( array( 'emergency', 'notice' ) as $type ) {
-			$alert = ucf_theme_mock_data( 'alerts' )['alerts'][ $type ];
-			$this->assertNotEmpty( $alert['title'] );
-			$this->assertNotEmpty( $alert['link']['url'] );
 		}
 	}
 

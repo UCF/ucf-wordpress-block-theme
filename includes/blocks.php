@@ -47,13 +47,11 @@ add_action( 'init', 'ucf_theme_register_blocks' );
 /**
  * The inserter category every block the theme adds is filed under.
  *
- * WHY one category for all of them — the data blocks, and the Section variation of core/group:
- * an author looking for "the UCF ones" finds them in one place, rather than scattered across
- * Widgets and Design among core's.
+ * WHY one category for all of the data blocks: an author looking for "the UCF ones" finds them
+ * in one place, rather than scattered across Widgets and Design among core's.
  *
- * SYNC: each block's `category` — in includes/programs.php, people.php, events.php,
- * provenance.php, alerts.php and src/js/editor/section-variation.js — names this slug.
- * `BlocksTest` checks the PHP registrations; the JS one is by hand.
+ * SYNC: each block's `category` — in includes/programs.php, people.php and provenance.php —
+ * names this slug. `BlocksTest` checks them.
  */
 const UCF_THEME_BLOCK_CATEGORY = 'ucf';
 

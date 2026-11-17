@@ -81,7 +81,7 @@ defined( 'WEEK_IN_SECONDS' ) || define( 'WEEK_IN_SECONDS', 604800 ); // phpcs:ig
 
 /*
  * The escaping and formatting functions the data blocks' markup builders call
- * (includes/programs.php, people.php, events.php, provenance.php, alerts.php). Real
+ * (includes/programs.php, people.php, provenance.php). Real
  * definitions rather than per-test stubs, because no test varies them: the builders' tests
  * assert on the markup, and these must simply behave like core's for plain values.
  */

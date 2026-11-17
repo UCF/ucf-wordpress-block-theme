@@ -1,10 +1,10 @@
 // ── Data blocks ──────────────────────────────────────────────────────────────
 //
 // CONTEXT: the components fed from a data source rather than typed — Facts, Program finder,
-// Profile, Events, Provenance, Alert banner. Each is a server-rendered block registered in the
-// includes/ file that owns its data (programs.php, people.php, events.php, provenance.php,
-// alerts.php); the markup and class names follow the design system's own, so this file is
-// close to its bundle.css with every value read from a role.
+// Profile, Provenance. Each is a server-rendered block registered in the includes/ file that
+// owns its data (programs.php, people.php, provenance.php); the markup and class names follow
+// the design system's own, so this file is close to its bundle.css with every value read from
+// a role. Events and the Alert banner are the ucf-events plugin's and UCF-Alert-Plugin's.
 //
 // WHY one partial for all of them: they share a vocabulary — the data voice for sources and
 // dates, the stretched-link list row — and none is large enough to stand alone.
@@ -340,67 +340,6 @@ $_focus: var(--ucf-focus, #{compositions.role-default("focus")});
 	padding: 0;
 }
 
-// ── Events ───────────────────────────────────────────────────────────────────
-
-.ucf-events {
-	border-top: $border-hairline solid $_line;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.ucf-event {
-	border-bottom: $border-hairline solid $_line;
-	display: grid;
-	gap: map.get($space, "50");
-	grid-template-columns: 72px minmax(0, 1fr);
-	padding-block: map.get($space, "50");
-
-	@include row-link(".ucf-event__title a");
-}
-
-// SPEC: the date block — inverse of the field, the day in Oswald. The text is a `<time>`, so
-// people and machines read the same date.
-.ucf-event__date {
-	align-items: center;
-	background-color: $_body;
-	color: var(--ucf-surface, #{map.get($color, "white")});
-	display: flex;
-	flex-direction: column;
-	height: 72px;
-	justify-content: center;
-	width: 72px;
-}
-
-.ucf-event__month {
-	font-size: 0.75rem;
-	font-weight: 800;
-	letter-spacing: 0.08em;
-	line-height: 1;
-	text-transform: uppercase;
-}
-
-.ucf-event__day {
-	font-family: var(--wp--preset--font-family--display);
-	font-size: 2rem;
-	font-weight: 700;
-	line-height: 1;
-	margin-top: 2px;
-}
-
-.ucf-event__title {
-	margin: 0 0 map.get($space, "10");
-}
-
-.ucf-event__meta {
-	color: $_muted;
-	display: flex;
-	flex-wrap: wrap;
-	font-size: map.get($size, "small");
-	gap: map.get($space, "10") map.get($space, "50");
-	margin: 0;
-}
-
 // ── Provenance ───────────────────────────────────────────────────────────────
 
 // SPEC: who wrote it, who checked it, when, and which unit stands behind it. Dates are
@@ -443,69 +382,6 @@ $_focus: var(--ucf-focus, #{compositions.role-default("focus")});
 	display: block;
 	font-size: map.get($size, "small");
 	font-weight: 400;
-}
-
-// ── Alert banner ─────────────────────────────────────────────────────────────
-
-// SPEC: the university-wide banner. Emergency is red and comes only from the UCF Alert feed;
-// notice is gold. Each paints its own fixed pair rather than reading a role — the banner must
-// look the same on every site and every field.
-// A11Y: white on red-700 6.57:1; black on gold 11.46:1. Icon and title together, never hue alone.
-.ucf-alert-banner {
-	padding: map.get($space, "40") var(--wp--custom--gutter);
-
-	a {
-		color: inherit;
-		font-weight: 700;
-	}
-
-	.wp-block-icon svg {
-		flex: none;
-		height: 28px;
-		width: 28px;
-	}
-}
-
-.ucf-alert-banner__inner {
-	align-items: flex-start;
-	display: flex;
-	gap: map.get($space, "40");
-	margin-inline: auto;
-	max-width: var(--wp--style--global--wide-size);
-}
-
-.ucf-alert-banner__title {
-	font-size: map.get($size, "body");
-	font-weight: 800;
-	margin: 0 0 map.get($space, "10");
-}
-
-.ucf-alert-banner p {
-	margin: 0;
-}
-
-// FIX: (0,1,1) over _typography.scss, which colors `p` and headings from the enclosing
-// composition's roles — inside a Dark band that is white text on the gold notice.
-.ucf-alert-banner :is(p, h2) {
-	color: inherit;
-}
-
-.ucf-alert-banner--emergency {
-	background-color: map.get($color, "red-700");
-	color: map.get($color, "white");
-
-	:focus-visible {
-		outline-color: map.get($color, "white");
-	}
-}
-
-.ucf-alert-banner--notice {
-	background-color: map.get($color, "gold");
-	color: map.get($color, "black");
-
-	:focus-visible {
-		outline-color: map.get($color, "black");
-	}
 }
 
 // SPEC: the search box is a design-system control — 52px, a 2px border in `line-strong`.

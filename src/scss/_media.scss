@@ -1,6 +1,6 @@
 // ── Media ────────────────────────────────────────────────────────────────────
 //
-// CONTEXT: how photographs sit on a page — core Media & Text, the page openers, and the
+// CONTEXT: how photographs sit on a page — core Media & Text and the
 // placement patterns from the design system's page studies (pair, split, strip, bleed, plate).
 // Every rule here is layout; color comes from the enclosing composition.
 //
@@ -39,41 +39,6 @@
 
 .wp-block-media-text > .wp-block-media-text__content > :last-child {
 	margin-bottom: 0;
-}
-
-// ── Page openers ─────────────────────────────────────────────────────────────
-
-// SPEC: Hero image — a full-width photograph with the headline on a solid panel over its lower
-// corner, never on the photo itself. The panel is the `dark` composition, so its text is
-// 21:1 whatever the photograph does. Below 768px the panel simply follows the photo.
-.ucf-hero-image {
-	position: relative;
-
-	> .wp-block-image {
-		margin: 0;
-	}
-
-	> .is-style-dark {
-		padding: map.get($space, "60") map.get($space, "50");
-	}
-
-	@media (min-width: 768px) {
-		> .is-style-dark {
-			bottom: 0;
-			left: 0;
-			max-width: 40rem;
-			padding: map.get($space, "70");
-			position: absolute;
-		}
-	}
-}
-
-// SPEC: the panel on the right, for a photograph whose subject sits on the left.
-@media (min-width: 768px) {
-	.ucf-hero-image--right > .is-style-dark {
-		left: auto;
-		right: 0;
-	}
 }
 
 // ── Page-study placements ────────────────────────────────────────────────────

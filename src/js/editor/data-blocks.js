@@ -1,7 +1,7 @@
 /**
  * Editor previews for the theme's server-rendered data blocks.
  *
- * Facts, Program finder, Profile, Events, Provenance and Alert banner are registered in PHP,
+ * Facts, Program finder, Profile and Provenance are registered in PHP,
  * in the includes/ file that owns each one's data, and render on the server. This gives each
  * an `edit` that previews that render and exposes its attributes as controls.
  *
@@ -25,9 +25,7 @@ const BLOCKS = [
 	'ucf/facts',
 	'ucf/program-finder',
 	'ucf/profile',
-	'ucf/events',
 	'ucf/provenance',
-	'ucf/alert-banner',
 ];
 
 /**

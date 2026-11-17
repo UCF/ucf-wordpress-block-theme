@@ -4,7 +4,7 @@
  *
  * CONTEXT: the design system's findability rule is that the visible answer and the
  * machine-readable answer are the same words. So nothing here is typed by an editor: the data
- * blocks (Facts, Profile, Events, Provenance) add a node for what they just rendered, the FAQ
+ * blocks (Facts, Profile, Provenance) add a node for what they just rendered, the FAQ
  * pattern's accordion adds `FAQPage`, and this file adds the site's `Organization` and the
  * page's `BreadcrumbList`. The graph prints once, in the footer.
  *

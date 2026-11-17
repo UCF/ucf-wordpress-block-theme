@@ -2,8 +2,8 @@
 /**
  * Mock data — the stand-in for the systems the data blocks will eventually read.
  *
- * CONTEXT: the program, people, events and alert blocks render from data a theme does not
- * own: UCF-Degree-CPT-Plugin, UCF-People-CPT, UCF-Events-Plugin, the UCF Alert feed. Until
+ * CONTEXT: the program and people blocks render from data a theme does not own:
+ * UCF-Degree-CPT-Plugin and UCF-People-CPT. Until
  * they are wired up, each block reads a JSON file in data/mock/ through this one function,
  * and nothing else in the theme knows the data is fake.
  *

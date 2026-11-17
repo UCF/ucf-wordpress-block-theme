@@ -1,14 +1,14 @@
 // ── Components ───────────────────────────────────────────────────────────────
 //
 // CONTEXT: the design system's components that are a *shape* made of core blocks rather than
-// a block of their own — Card, Stat statement, Notice, Quick links, Steps. Each is a pattern
+// a block of their own — the horizontal Card, Notice, Quick links, Steps. Each is a pattern
 // (patterns/) that prefills a class on a core Group or List; the class here gives that
 // arrangement its look and reads the enclosing composition's roles for color.
 //
 // WHY patterns over custom blocks. Every one of these is a group of headings, paragraphs,
 // images and lists that core already edits, saves and validates. A custom block would own a
-// `save()` and its deprecations forever to arrive at the same markup — the reasoning that
-// made Section a variation of core/group (docs/architecture.md § The Section band).
+// `save()` and its deprecations forever to arrive at the same markup. A component that needs
+// more than core can save belongs in ucf-react-component-library instead.
 // WHY the `ucf-` prefix: these are components, and _typography.scss already excludes
 // `[class*="ucf-"]` links from the generic link color, so a component's own link styling is
 // not outranked on hover.
@@ -63,8 +63,9 @@ $_muted: var(--ucf-muted, #{compositions.role-default("muted")});
 
 // ── Card ─────────────────────────────────────────────────────────────────────
 
-// SPEC: one link, one title under about eight words, image and text optional. Three looks:
-// plain, boxed on the raised ground, ruled with a heavy top rule.
+// SPEC: one link, one title under about eight words, image and text optional.
+// CONTEXT: only the horizontal card is the theme's; every other card is the ucf-content
+// plugin's Card block (`ucf-content/card`), with its own presets.
 .ucf-card {
 	height: 100%;
 
@@ -93,46 +94,6 @@ $_muted: var(--ucf-muted, #{compositions.role-default("muted")});
 			grid-column: 2;
 			margin-block-start: 0;
 		}
-	}
-}
-
-.ucf-card--boxed {
-	background-color: var(--ucf-raised, #{compositions.role-default("raised")});
-	padding: map.get($space, "50");
-
-	// SPEC: the image runs to the box's edges.
-	> .wp-block-image:first-child {
-		margin: calc(-1 * #{map.get($space, "50")})
-			calc(-1 * #{map.get($space, "50")}) map.get($space, "50");
-	}
-}
-
-.ucf-card--ruled {
-	border-top: $rule-accent solid $_body;
-	padding-top: map.get($space, "40");
-}
-
-// ── Stat statement ───────────────────────────────────────────────────────────
-
-// SPEC: a fact written as a complete statement, never a giant number over small words. The
-// statement is the first paragraph; one supporting sentence; the source in the data voice.
-.ucf-stat {
-	border-top: $rule-accent solid $_accent;
-	padding-top: map.get($space, "50");
-
-	> p:first-child {
-		font-family: var(--wp--preset--font-family--display);
-		font-size: clamp(1.625rem, 1.45rem + 0.75vw, 2.125rem);
-		font-weight: 600;
-		letter-spacing: 0.01em;
-		line-height: 1.08;
-		text-transform: uppercase;
-		text-wrap: balance;
-	}
-
-	> p:not(:first-child, .is-style-data) {
-		font-size: map.get($size, "data-lg");
-		line-height: 1.6;
 	}
 }
 
@@ -486,10 +447,10 @@ ol.wp-block-list.ucf-steps {
 
 	// SPEC: the sentence under the H1 stays near the prose measure even though the band is
 	// the full container — a 1240px line of lead text is unreadable.
-	// UPSTREAM: core's constrained layout gives every child `margin: auto !important`, which
-	// centered the capped sentence under a left-aligned H1; only !important moves it back.
-	> .has-lead-font-size {
-		margin-left: 0 !important;
+	// SYNC: `.ucf-section__inner` is the ucf-content Section's inner element, which holds the
+	// header's blocks.
+	.ucf-section__inner > .has-lead-font-size {
+		margin-left: 0;
 		max-width: 46rem;
 	}
 }

@@ -33,9 +33,7 @@ $ucf_theme_files = array(
 	'structured-data',    // One JSON-LD graph per page, from what the page renders.
 	'programs',           // Facts and Program finder blocks.
 	'people',             // Profile block.
-	'events',             // Events block.
 	'provenance',         // Provenance block and its reviewer field.
-	'alerts',             // Alert banner block.
 	'tables',             // Keyboard access to a table that scrolls sideways.
 	'university-header',  // The UCF University Header: its script tag and placeholder.
 	'paste-artifacts',    // Word-processor characters normalized on display.

@@ -10,8 +10,8 @@
  */
 
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"ucf-section is-style-light","layout":{"type":"constrained"}} -->
-<section class="wp-block-group alignfull ucf-section is-style-light"><!-- wp:heading -->
+<!-- wp:ucf-content/section {"width":"constrained"} -->
+<section class="wp-block-ucf-content-section alignfull ucf-section ucf-composition-light"><div class="ucf-section__inner ucf-section__inner--constrained"><!-- wp:heading -->
 <h2 class="wp-block-heading">Questions we get most</h2>
 <!-- /wp:heading -->
 
@@ -53,5 +53,5 @@
 <!-- /wp:accordion-panel --></div>
 <!-- /wp:accordion-item -->
 </div>
-<!-- /wp:accordion --></section>
-<!-- /wp:group -->
+<!-- /wp:accordion --></div></section>
+<!-- /wp:ucf-content/section -->

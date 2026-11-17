@@ -61,17 +61,38 @@ function ucf_theme_style_guide_label( $text ) {
 }
 
 /**
- * A band of page, holding a section of the guide.
+ * A band of page, holding a section of the guide: the ucf-content plugin's Section block.
+ *
+ * SYNC: the markup is the block's `save()` in ucf-react-component-library
+ * (integrations/tests/__snapshots__/blocks.test.tsx.snap). Defaults are not written, so Light
+ * and the default spacing have no attributes.
  *
  * @param string $composition Composition slug.
  * @param string $inner       Block markup.
+ * @param string $spacing     `default` or `cozy`.
+ * @param string $class_name  Extra classes, or ''.
  * @return string Block markup.
  */
-function ucf_theme_style_guide_band( $composition, $inner ) {
-	$class = 'ucf-section is-style-' . $composition;
+function ucf_theme_style_guide_band( $composition, $inner, $spacing = 'default', $class_name = '' ) {
+	$attributes = array_filter(
+		array(
+			'composition' => 'light' === $composition ? '' : $composition,
+			'spacing'     => 'default' === $spacing ? '' : $spacing,
+			'className'   => $class_name,
+		)
+	);
+	$classes    = array_filter(
+		array(
+			'wp-block-ucf-content-section alignfull',
+			$class_name,
+			'ucf-section ucf-composition-' . $composition,
+			'default' === $spacing ? '' : 'ucf-section--' . $spacing,
+		)
+	);
 
-	return '<!-- wp:group {"tagName":"section","align":"full","className":"' . $class . '","layout":{"type":"constrained","contentSize":"1240px"}} -->'
-		. '<section class="wp-block-group alignfull ' . $class . '">' . $inner . '</section><!-- /wp:group -->';
+	return '<!-- wp:ucf-content/section ' . ( $attributes ? wp_json_encode( $attributes ) . ' ' : '' ) . '-->'
+		. '<section class="' . implode( ' ', $classes ) . '"><div class="ucf-section__inner ucf-section__inner--default">'
+		. $inner . '</div></section><!-- /wp:ucf-content/section -->';
 }
 
 /**
@@ -104,13 +125,16 @@ function ucf_theme_style_guide_compositions() {
 
 	$html = '';
 
+	// SYNC: COMPOSITIONS in ucf-react-component-library's integrations/schema/compositions.ts,
+	// the Section block's choices.
 	foreach ( array(
-		'light' => 'Light',
-		'alt'   => 'Light Gray',
-		'dark'  => 'Dark',
-		'gold'  => 'Bold Gold',
+		'light'    => 'Light',
+		'alt'      => 'Light Alt',
+		'dark'     => 'Dark',
+		'dark-alt' => 'Dark Alt',
+		'gold'     => 'Bold Gold',
 	) as $slug => $name ) {
-		$html .= ucf_theme_style_guide_band( $slug, ucf_theme_style_guide_label( 'Composition · ' . $name . ' · is-style-' . $slug ) . $sample );
+		$html .= ucf_theme_style_guide_band( $slug, ucf_theme_style_guide_label( 'Composition · ' . $name . ' · ucf-composition-' . $slug ) . $sample );
 	}
 
 	return $html;
@@ -238,15 +262,13 @@ function ucf_theme_style_guide_elements() {
  */
 function ucf_theme_style_guide_data_blocks() {
 	$blocks = array(
-		'Alert banner · notice'    => '<!-- wp:ucf/alert-banner {"type":"notice"} /-->',
-		'Alert banner · emergency' => '<!-- wp:ucf/alert-banner {"type":"emergency"} /-->',
-		'Breadcrumbs (core)'       => '<!-- wp:breadcrumbs /-->',
-		'Facts'                    => '<!-- wp:ucf/facts {"program":"computer-science-bs"} /-->',
-		'Profile'                  => '<!-- wp:ucf/profile {"person":"sample-cs-professor"} /-->',
-		'Profile · feature'        => '<!-- wp:ucf/profile {"person":"sample-researcher","feature":true} /-->',
-		'Events'                   => '<!-- wp:ucf/events {"count":3} /-->',
-		'Provenance'               => '<!-- wp:ucf/provenance /-->',
-		'Program finder'           => '<!-- wp:ucf/program-finder /-->',
+		'Breadcrumbs (core)'      => '<!-- wp:breadcrumbs /-->',
+		'Event List (ucf-events)' => '<!-- wp:ucf-events/event-list {"limit":3} /-->',
+		'Facts'                   => '<!-- wp:ucf/facts {"program":"computer-science-bs"} /-->',
+		'Profile'                 => '<!-- wp:ucf/profile {"person":"sample-cs-professor"} /-->',
+		'Profile · feature'       => '<!-- wp:ucf/profile {"person":"sample-researcher","feature":true} /-->',
+		'Provenance'              => '<!-- wp:ucf/provenance /-->',
+		'Program finder'          => '<!-- wp:ucf/program-finder /-->',
 	);
 
 	$html = ucf_theme_style_guide_heading( 'Data blocks', 'data-blocks' )
@@ -342,16 +364,18 @@ function ucf_theme_style_guide_content() {
 		$jump .= '<!-- wp:list-item --><li><a href="#' . $anchor . '">' . $title . '</a></li><!-- /wp:list-item -->';
 	}
 
-	$header = '<!-- wp:group {"tagName":"header","align":"full","className":"ucf-section ucf-section--tight is-style-light ucf-page-header","layout":{"type":"constrained","contentSize":"1240px"}} -->'
-		. '<header class="wp-block-group alignfull ucf-section ucf-section--tight is-style-light ucf-page-header">'
-		. '<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">Style guide</h1><!-- /wp:heading -->'
+	$header = ucf_theme_style_guide_band(
+		'light',
+		'<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">Style guide</h1><!-- /wp:heading -->'
 		. '<!-- wp:paragraph {"fontSize":"lead"} --><p class="has-lead-font-size">Every block style, data block and pattern in the theme, on one page. Built by tools/style-guide.php.</p><!-- /wp:paragraph -->'
 		. '<!-- wp:group {"className":"ucf-toc","layout":{"type":"default"}} --><div class="wp-block-group ucf-toc"><!-- wp:heading {"className":"is-style-sans","fontSize":"heading-6"} --><h2 class="wp-block-heading is-style-sans has-heading-6-font-size">On this page</h2><!-- /wp:heading -->'
-		. '<!-- wp:list --><ul class="wp-block-list">' . $jump . '</ul><!-- /wp:list --></div><!-- /wp:group -->'
-		. '</header><!-- /wp:group -->';
+		. '<!-- wp:list --><ul class="wp-block-list">' . $jump . '</ul><!-- /wp:list --></div><!-- /wp:group -->',
+		'cozy',
+		'ucf-page-header'
+	);
 
 	return $header
-		. ucf_theme_style_guide_band( 'light', ucf_theme_style_guide_heading( 'Compositions', 'compositions' ) . '<!-- wp:paragraph --><p>The same content on each of the four fields. Every role re-resolves; nothing in the content names a color.</p><!-- /wp:paragraph -->' )
+		. ucf_theme_style_guide_band( 'light', ucf_theme_style_guide_heading( 'Compositions', 'compositions' ) . '<!-- wp:paragraph --><p>The same content on each Section composition. Every role re-resolves; nothing in the content names a color.</p><!-- /wp:paragraph -->' )
 		. ucf_theme_style_guide_compositions()
 		. ucf_theme_style_guide_elements()
 		. ucf_theme_style_guide_data_blocks()

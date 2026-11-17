@@ -22,7 +22,8 @@ that works. Each rung down is more code to own, so skipping ahead is the expensi
 2. **An existing class or block style.** A composition (`.is-style-dark`,
    `.is-style-alt`), a role utility (`.accent-text`, `.accent-fill`, `.hairline`, `.muted`),
    an element style (`is-style-data`, `is-style-check`…) or a component class a pattern
-   applies (`.ucf-card`, `.ucf-stat`…) — the vocabulary in `src/scss/`.
+   applies (`.ucf-notice`, `.ucf-steps`…) — the vocabulary in `src/scss/`. Or a block from
+   the component library's plugins (see [Blocks from the component library](#blocks-from-the-component-library)).
 3. **A core block control.** Padding, border width, alignment, background. If the editor can
    already express it, let the editor express it.
 4. **Something new.** A new token in `theme.json`, a new block style, a new partial. This rung
@@ -94,31 +95,28 @@ own white background, because inheritance never beats a matching selector. The c
 form scopes correctly: the nested card redeclares `--ucf-body` for itself, and the paragraph
 inside it resolves to the card's value.
 
-## The Section band
+## Blocks from the component library
 
-A Section is a full-bleed strip of page with its own padding and its own field. It is
-registered as the `ucf-section` **variation of `core/group`**, in
-`src/js/editor/section-variation.js`, and styled as `.ucf-section` in `src/scss/_section.scss`.
+The Section, Card, Highlight and Hero are the **ucf-content** plugin's blocks
+(`ucf-content/section`, `/card`, `/highlight`, `/hero`), and the Event List is the
+**ucf-events** plugin's (`ucf-events/event-list`). Both plugins are built in
+ucf-react-component-library, which owns their markup, CSS and settings. **The plugins extend
+the theme; the theme does not require them.** Some of its templates and patterns place their
+blocks, which show as unsupported where the plugins are not active. Those patterns are moving
+out of the theme. The Alert banner is UCF-Alert-Plugin's.
 
-**Why a variation and not a block type.** A band is a group whose defaults are already chosen.
-As a variation it _is_ a group, so every composition style, every core group control and every
-future core improvement applies with nothing to keep in step — and there is no `save()` to
-version with deprecations for markup core already emits. A separate block type would have
-meant re-registering all eight compositions onto it to arrive at the same markup.
+**What the theme still owns for them:** the element styles inside them (headings, paragraphs,
+buttons, from `theme.json` and `src/scss/`), and the Brighter variation, which re-resolves
+`.ucf-composition-dark` in `_compositions.scss` as it does `.is-style-dark`. The plugin's
+`base.css` sets the `--ucf-*` roles for each `.ucf-composition-*` class; the theme's
+`.is-style-*` compositions on core/group stay for the groups inside a band (a notice, a panel).
 
-**It ships with a composition applied** (`is-style-light`). That follows from the rule above:
-a background set through the color control does not bring the roles with it, so a band with no
-style is a band with no field. Switching the style in the Styles panel is the one documented
-way to change what the field is.
-
-**Two details worth keeping:**
-
--   `scope: [ 'inserter' ]`. Without it the variation is also offered as a transform on every
-    existing group, which turns an ordinary content group into a full-bleed band by accident.
--   `isActive` is a function, not the `[ 'className' ]` shorthand. That shorthand compares the
-    attribute for equality, and `className` changes the moment an author switches composition —
-    `ucf-section is-style-dark` would stop matching and the block would revert to reading as a
-    plain Group in the list view. Only the marker class is load-bearing.
+**Writing one in a template or pattern.** Copy the block's saved markup from the library's
+`integrations/tests/__snapshots__/blocks.test.tsx.snap`, then put core blocks inside its inner
+element. A Card's or Highlight's parts are core blocks carrying the part's class
+(`ucf-c-card__title`, `ucf-c-highlight__statement`), as `{Name}.parts.ts` lists them. An
+attribute left at its default is not written; a mismatch makes the block invalid in the editor,
+and nothing in `npm test` catches it, so check `getBlocks()` in the editor after changing one.
 
 ## Patterns declare structure and composition, never color
 
@@ -173,9 +171,7 @@ The current topics:
 | `structured-data.php`   | One JSON-LD graph per page, from what the page rendered                            |
 | `programs.php`          | Facts and Program finder blocks                                                    |
 | `people.php`            | Profile block                                                                      |
-| `events.php`            | Events block                                                                       |
 | `provenance.php`        | Provenance block and the `ucf_reviewer` post field                                 |
-| `alerts.php`            | Alert banner block                                                                 |
 | `university-header.php` | The UCF University Header script tag and placeholder                               |
 | `paste-artifacts.php`   | Word-processor characters normalized on save and on display                        |
 | `search-service.php`    | Cached, GET-only reads of the UCF Search Service API                               |
@@ -339,14 +335,14 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     style. Missing are the Jest markup sweep over `templates/`, `parts/` and `patterns/`, and
     an integration tier. Keep them out of `npm test`: that command must never need Docker.
 -   **A full pattern library.** `patterns/` holds the design system's basic components as
-    patterns (cards, stats, notices, quick links, steps, FAQ, calls to action, section
-    headers); page-level patterns and templates are next. Every pattern is filed under one custom
+    patterns (the horizontal card, notices, quick links, steps, FAQ, calls to action, section
+    headers), and two page-level patterns. Cards, highlights and heroes are the ucf-content
+    plugin's blocks, with their designs as presets. Every pattern is filed under one custom
     category, UCF (`includes/patterns.php`). The directory is **flat on purpose** — core reads each
     file's header comment and never the path, so subdirectories imply a taxonomy nothing
     enforces. The brand theme's units → groups → sections → pages ladder was its own editorial
-    structure; units and sections are intended to ship here as blocks instead, and Section
-    already does, as the `ucf-section` variation of core/group (see
-    [The Section band](#the-section-band)). Core's built-in categories cover almost everything;
+    structure; units and sections ship as blocks instead, from the component library (see
+    [Blocks from the component library](#blocks-from-the-component-library)). Core's built-in categories cover almost everything;
     register a custom one only for a pattern that fits none of them. See
     [patterns/README.md](../patterns/README.md).
 -   **Static custom blocks.** `src/blocks/` is empty: every design-system component is a core
@@ -354,8 +350,8 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     server-rendered block in the `includes/` file that owns the data.
 -   **Real data sources.** The degree blocks in `includes/degree.php` are the exception: they
     read the UCF Search Service live, and are PHP-only (`supports.autoRegister`), so have no
-    source under `src/`. The six data blocks (Facts, Program finder, Profile, Events,
-    Provenance, Alert banner) read mock data from `data/mock/` through
+    source under `src/`. The four data blocks (Facts, Program finder, Profile, Provenance)
+    read mock data from `data/mock/` through
     `ucf_theme_mock_data()`. Each set has a filter, `ucf_theme_mock_data_{set}`, which is where a
     plugin's real data replaces it; the shape each block expects is documented at the top of its
     file, and `MockDataTest` checks the mock files still have it. Everything rendered from mock

@@ -1,9 +1,9 @@
 <?php
 /**
  * The data blocks' markup builders and structured-data nodes: Facts, Program finder, Profile,
- * Events, Provenance, Alert banner.
+ * Provenance, and the degree records.
  *
- * WHY one file for six includes. Each include's testable part is the same kind of thing — a
+ * WHY one file for several includes. Each include's testable part is the same kind of thing — a
  * pure builder from a record to markup and a node — and the record shapes are what tie them
  * together; MockDataTest checks the data, this checks what is made from it. The registration
  * and render callbacks need real WordPress (`register_block_type`, `get_block_wrapper_attributes`)
@@ -20,12 +20,8 @@ namespace UCF\Theme\Tests;
  * @covers ::ucf_theme_finder_markup
  * @covers ::ucf_theme_profile_markup
  * @covers ::ucf_theme_person_node
- * @covers ::ucf_theme_upcoming_events
- * @covers ::ucf_theme_events_markup
- * @covers ::ucf_theme_event_node
  * @covers ::ucf_theme_provenance_markup
  * @covers ::ucf_theme_article_node
- * @covers ::ucf_theme_alert_markup
  * @covers ::ucf_theme_degree_record
  * @covers ::ucf_theme_degree_level
  */
@@ -36,7 +32,7 @@ final class DataBlocksTest extends TestCase {
 	 */
 	protected function setUp(): void {
 		parent::setUp();
-		$this->loadInclude( 'format', 'mock-data', 'programs', 'people', 'events', 'provenance', 'alerts' );
+		$this->loadInclude( 'format', 'mock-data', 'programs', 'people', 'provenance' );
 	}
 
 	/**
@@ -145,59 +141,6 @@ final class DataBlocksTest extends TestCase {
 	}
 
 	/**
-	 * Events: past ones drop off, the rest come soonest first, and the count is honored.
-	 *
-	 * @return void
-	 */
-	public function test_upcoming_events() {
-		$events = array(
-			array(
-				'title'  => 'Later',
-				'offset' => 10,
-			),
-			array(
-				'title'  => 'Past',
-				'offset' => -1,
-			),
-			array(
-				'title'  => 'Today',
-				'offset' => 0,
-			),
-			array(
-				'title' => 'Dated',
-				'date'  => '2026-10-03',
-			),
-		);
-
-		$upcoming = ucf_theme_upcoming_events( $events, '2026-10-01', 5 );
-
-		$this->assertSame( array( 'Today', 'Dated', 'Later' ), array_column( $upcoming, 'title' ) );
-		$this->assertSame( '2026-10-11', $upcoming[2]['date'] );
-		$this->assertCount( 1, ucf_theme_upcoming_events( $events, '2026-10-01', 1 ) );
-	}
-
-	/**
-	 * Events markup: a machine-readable date, and an online event is a virtual location.
-	 *
-	 * @return void
-	 */
-	public function test_events_markup_and_node() {
-		$event = array(
-			'title'    => 'Info session',
-			'date'     => '2026-09-15',
-			'time'     => '6 p.m.',
-			'location' => 'Online',
-			'url'      => '#',
-		);
-
-		$html = ucf_theme_events_markup( array( $event ) );
-
-		$this->assertStringContainsString( '<time datetime="2026-09-15">Sept. 15, 2026</time>', $html );
-		$this->assertStringContainsString( 'aria-hidden="true"', $html );
-		$this->assertSame( 'VirtualLocation', ucf_theme_event_node( $event )['location']['@type'] );
-	}
-
-	/**
 	 * Provenance: a sample reviewer is labeled on the page and left out of the structured data.
 	 *
 	 * @return void
@@ -222,25 +165,6 @@ final class DataBlocksTest extends TestCase {
 		$record['author'] = '';
 		$this->assertStringNotContainsString( 'Written by', ucf_theme_provenance_markup( $record ) );
 		$this->assertSame( 'Sample Name, Ph.D.', ucf_theme_article_node( $record, 'Title' )['reviewedBy']['name'] );
-	}
-
-	/**
-	 * Alert: only an emergency is announced on load.
-	 *
-	 * @return void
-	 */
-	public function test_only_an_emergency_is_announced() {
-		$alert = array(
-			'title' => 'Closed',
-			'text'  => 'Campus is closed.',
-			'link'  => array(
-				'label' => 'Updates',
-				'url'   => 'https://www.ucf.edu/alert/',
-			),
-		);
-
-		$this->assertStringContainsString( 'role="alert"', ucf_theme_alert_markup( $alert, 'emergency', '' ) );
-		$this->assertStringNotContainsString( 'role="alert"', ucf_theme_alert_markup( $alert, 'notice', '' ) );
 	}
 
 	/**

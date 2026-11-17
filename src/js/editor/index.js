@@ -8,7 +8,6 @@
  *
  * Add a module here by importing it for its side effects; each one registers itself.
  */
-import './section-variation';
 import './badge-format';
 import './credit-format';
 import './data-blocks';

@@ -10,8 +10,8 @@
  */
 
 ?>
-<!-- wp:group {"tagName":"section","align":"full","className":"ucf-section is-style-dark","layout":{"type":"constrained","contentSize":"1240px"}} -->
-<section class="wp-block-group alignfull ucf-section is-style-dark"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|50"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+<!-- wp:ucf-content/section {"composition":"dark"} -->
+<section class="wp-block-ucf-content-section alignfull ucf-section ucf-composition-dark"><div class="ucf-section__inner ucf-section__inner--default"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|50"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
 <div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"constrained","contentSize":"38rem","justifyContent":"left"}} -->
 <div class="wp-block-group"><!-- wp:heading -->
 <h2 class="wp-block-heading">Plan a visit</h2>
@@ -31,5 +31,5 @@
 <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#">See visit options</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
-<!-- /wp:group --></section>
-<!-- /wp:group -->
+<!-- /wp:group --></div></section>
+<!-- /wp:ucf-content/section -->
