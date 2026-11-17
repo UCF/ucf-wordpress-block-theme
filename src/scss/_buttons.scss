@@ -28,7 +28,7 @@
 	border: $border-control solid transparent;
 	display: inline-flex;
 	justify-content: center;
-	min-height: 52px;
+	min-height: $button-min-height;
 	text-decoration: none;
 }
 
@@ -37,8 +37,8 @@
 // A11Y: the underline thickens on hover rather than changing color, so the state is visible
 // in shape; the 44px height keeps it a full tap target though it reads as text.
 .wp-block-button.is-style-text > .wp-block-button__link {
-	text-decoration-thickness: 3px;
-	text-underline-offset: 0.4em;
+	text-decoration-thickness: $button-underline;
+	text-underline-offset: $button-underline-offset;
 
 	&,
 	&:hover,
@@ -57,8 +57,8 @@
 
 	&:hover,
 	&:focus {
-		text-decoration-thickness: 5px;
-		text-underline-offset: 0.3em;
+		text-decoration-thickness: $button-underline-hover;
+		text-underline-offset: $button-underline-offset-hover;
 	}
 }
 
@@ -101,10 +101,10 @@
 // paragraph — choosing the size is the whole act.
 .wp-block-button__link.has-small-font-size {
 	min-height: $tap-target;
-	padding: 0.55rem 1.1rem;
+	padding: $button-padding-y-small $button-padding-x-small;
 }
 
 .wp-block-button__link.has-body-font-size {
-	min-height: 60px;
-	padding: 1rem 2rem;
+	min-height: $button-min-height-large;
+	padding: $button-padding-y-large $button-padding-x-large;
 }

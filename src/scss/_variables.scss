@@ -104,3 +104,21 @@ $rule-accent: var(--wp--custom--rule-accent);
 $border-hairline: var(--wp--custom--border-hairline);
 $border-control: var(--wp--custom--border-control);
 $focus-width: var(--wp--custom--focus-width);
+
+// The button's and link's measurements. SYNC: the same custom tokens as
+// ucf-react-component-library's tokens/tokens.json, which its Button primitive reads too.
+$button-min-height: var(--wp--custom--button-min-height);
+$button-min-height-large: var(--wp--custom--button-min-height-large);
+$button-padding-y-small: var(--wp--custom--button-padding-y-small);
+$button-padding-x-small: var(--wp--custom--button-padding-x-small);
+$button-padding-y-large: var(--wp--custom--button-padding-y-large);
+$button-padding-x-large: var(--wp--custom--button-padding-x-large);
+$button-underline: var(--wp--custom--button-underline);
+$button-underline-hover: var(--wp--custom--button-underline-hover);
+$button-underline-offset: var(--wp--custom--button-underline-offset);
+$button-underline-offset-hover: var(
+	--wp--custom--button-underline-offset-hover
+);
+$link-underline: var(--wp--custom--link-underline);
+$link-underline-hover: var(--wp--custom--link-underline-hover);
+$link-underline-offset: var(--wp--custom--link-underline-offset);

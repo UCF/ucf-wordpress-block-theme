@@ -109,7 +109,7 @@ function ucf_theme_style_guide_image( $ratio, $caption ) {
 }
 
 /**
- * The compositions: the same content on each of the four fields.
+ * The compositions: the same content on each field.
  *
  * @return string Block markup.
  */

@@ -28,8 +28,10 @@ add_action( 'init', 'ucf_theme_register_block_styles' );
 /**
  * Register the color compositions as core/group block styles.
  *
- * One primitive, four color pairs, one registered style each — `is-style-alt` and friends,
- * a background plus the text roles that go with it.
+ * One primitive, five compositions, one registered style each — `is-style-alt` and friends,
+ * a background plus the text roles that go with it. The names and labels are the component
+ * library's (tokens/tokens.json `composition` in ucf-react-component-library), so a core
+ * Group and the ucf-content Section offer the same five.
  *
  * Definitions live in src/scss/_compositions.scss, which also declares the `--ucf-*` roles
  * each pair supplies.
@@ -53,10 +55,11 @@ add_action( 'init', 'ucf_theme_register_block_styles' );
  */
 function ucf_theme_register_composition_styles() {
 	$compositions = array(
-		'light' => __( 'Light', 'ucf-wordpress-block-theme' ),
-		'alt'   => __( 'Light Gray', 'ucf-wordpress-block-theme' ),
-		'dark'  => __( 'Dark', 'ucf-wordpress-block-theme' ),
-		'gold'  => __( 'Bold Gold', 'ucf-wordpress-block-theme' ),
+		'light'    => __( 'Light - Default', 'ucf-wordpress-block-theme' ),
+		'alt'      => __( 'Light Alt', 'ucf-wordpress-block-theme' ),
+		'dark'     => __( 'Dark', 'ucf-wordpress-block-theme' ),
+		'dark-alt' => __( 'Dark Alt', 'ucf-wordpress-block-theme' ),
+		'gold'     => __( 'Bold Gold', 'ucf-wordpress-block-theme' ),
 	);
 
 	foreach ( $compositions as $name => $label ) {
