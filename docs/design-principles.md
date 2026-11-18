@@ -30,7 +30,7 @@ page.
 
 ## Color and surfaces
 
--   Pick a composition for a band — Light, Light Gray, Dark, Bold Gold — and nothing else.
+-   Pick a composition for a band — Light, Light Alt, Dark, Dark Alt, Bold Gold — and nothing else.
     Editors never choose a text or button color.
 -   Balance light and dark down the page. At most one gold band, usually the closing call to
     action.

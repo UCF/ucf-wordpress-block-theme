@@ -1,14 +1,14 @@
 // ── Components ───────────────────────────────────────────────────────────────
 //
 // CONTEXT: the design system's components that are a *shape* made of core blocks rather than
-// a block of their own — Card, Stat statement, Notice, Quick links, Steps. Each is a pattern
+// a block of their own — Quick links, Steps. Each is a pattern
 // (patterns/) that prefills a class on a core Group or List; the class here gives that
 // arrangement its look and reads the enclosing composition's roles for color.
 //
 // WHY patterns over custom blocks. Every one of these is a group of headings, paragraphs,
 // images and lists that core already edits, saves and validates. A custom block would own a
-// `save()` and its deprecations forever to arrive at the same markup — the reasoning that
-// made Section a variation of core/group (docs/architecture.md § The Section band).
+// `save()` and its deprecations forever to arrive at the same markup. A component that needs
+// more than core can save belongs in ucf-react-component-library instead.
 // WHY the `ucf-` prefix: these are components, and _typography.scss already excludes
 // `[class*="ucf-"]` links from the generic link color, so a component's own link styling is
 // not outranked on hover.
@@ -58,130 +58,6 @@ $_muted: var(--ucf-muted, #{compositions.role-default("muted")});
 		outline: $focus-width solid
 			var(--ucf-focus, #{compositions.role-default("focus")});
 		outline-offset: 4px;
-	}
-}
-
-// ── Card ─────────────────────────────────────────────────────────────────────
-
-// SPEC: one link, one title under about eight words, image and text optional. Three looks:
-// plain, boxed on the raised ground, ruled with a heavy top rule.
-.ucf-card {
-	height: 100%;
-
-	@include stretched-link(".wp-block-heading a");
-
-	> .wp-block-image {
-		margin-bottom: map.get($space, "40");
-	}
-}
-
-// SPEC: the horizontal card — image beside the text from 576px, for a list of stories where
-// a grid would be too much. The image takes 40%.
-@media (min-width: 576px) {
-	.ucf-card--horizontal {
-		align-items: start;
-		display: grid;
-		gap: map.get($space, "50");
-		grid-template-columns: 2fr 3fr;
-
-		> .wp-block-image {
-			grid-row: 1 / span 4;
-			margin: 0;
-		}
-
-		> :not(.wp-block-image) {
-			grid-column: 2;
-			margin-block-start: 0;
-		}
-	}
-}
-
-.ucf-card--boxed {
-	background-color: var(--ucf-raised, #{compositions.role-default("raised")});
-	padding: map.get($space, "50");
-
-	// SPEC: the image runs to the box's edges.
-	> .wp-block-image:first-child {
-		margin: calc(-1 * #{map.get($space, "50")})
-			calc(-1 * #{map.get($space, "50")}) map.get($space, "50");
-	}
-}
-
-.ucf-card--ruled {
-	border-top: $rule-accent solid $_body;
-	padding-top: map.get($space, "40");
-}
-
-// ── Stat statement ───────────────────────────────────────────────────────────
-
-// SPEC: a fact written as a complete statement, never a giant number over small words. The
-// statement is the first paragraph; one supporting sentence; the source in the data voice.
-.ucf-stat {
-	border-top: $rule-accent solid $_accent;
-	padding-top: map.get($space, "50");
-
-	> p:first-child {
-		font-family: var(--wp--preset--font-family--display);
-		font-size: clamp(1.625rem, 1.45rem + 0.75vw, 2.125rem);
-		font-weight: 600;
-		letter-spacing: 0.01em;
-		line-height: 1.08;
-		text-transform: uppercase;
-		text-wrap: balance;
-	}
-
-	> p:not(:first-child, .is-style-data) {
-		font-size: map.get($size, "data-lg");
-		line-height: 1.6;
-	}
-}
-
-// ── Notice ───────────────────────────────────────────────────────────────────
-
-// SPEC: an icon and a word, always — meaning never rests on color. The pattern places a core
-// Icon and a heading; the type is a modifier class. The Important type is gold, so it is the
-// `gold` composition plus this class, which keeps every role on it correct.
-.ucf-notice {
-	border: $border-control solid $_body;
-	padding: map.get($space, "50");
-
-	.wp-block-icon svg {
-		height: 24px;
-		width: 24px;
-	}
-
-	> :last-child > :last-child {
-		margin-bottom: 0;
-	}
-}
-
-.ucf-notice.is-style-gold {
-	border-color: map.get($color, "gold");
-}
-
-.ucf-notice--success {
-	background-color: var(
-		--ucf-success-soft,
-		#{compositions.role-default("success-soft")}
-	);
-	border-color: var(--ucf-success, #{compositions.role-default("success")});
-
-	.wp-block-icon,
-	.wp-block-heading {
-		color: var(--ucf-success, #{compositions.role-default("success")});
-	}
-}
-
-.ucf-notice--danger {
-	background-color: var(
-		--ucf-danger-soft,
-		#{compositions.role-default("danger-soft")}
-	);
-	border-color: var(--ucf-danger, #{compositions.role-default("danger")});
-
-	.wp-block-icon,
-	.wp-block-heading {
-		color: var(--ucf-danger, #{compositions.role-default("danger")});
 	}
 }
 
@@ -296,43 +172,6 @@ $_muted: var(--ucf-muted, #{compositions.role-default("muted")});
 	}
 }
 
-// ── On this page ─────────────────────────────────────────────────────────────
-
-// SPEC: jump links to the page's H2s, under a heavy rule. Columns of 14rem, so the same list
-// is one column in a sidebar and several across a wide band.
-.ucf-toc {
-	border-top: $rule-accent solid $_body;
-	padding-top: map.get($space, "40");
-
-	.wp-block-list {
-		column-gap: map.get($space, "60");
-		columns: 3 14rem;
-		list-style: none;
-		padding-left: 0;
-
-		> li {
-			break-inside: avoid;
-			margin: 0;
-		}
-	}
-
-	a {
-		color: $_body;
-		display: block;
-		padding-block: map.get($space, "20");
-		text-decoration: none;
-
-		&:hover {
-			text-decoration: underline;
-		}
-
-		// SPEC: the section in view, marked by src/js/frontend/spy.js.
-		&[aria-current="true"] {
-			font-weight: 800;
-		}
-	}
-}
-
 // ── Sources ──────────────────────────────────────────────────────────────────
 
 // SPEC: numbered references at the end of a page, in the data voice, under a heavy rule. An
@@ -365,30 +204,6 @@ $_muted: var(--ucf-muted, #{compositions.role-default("muted")});
 	margin-left: 0.1em;
 	text-decoration: none;
 	vertical-align: super;
-}
-
-// ── Video ────────────────────────────────────────────────────────────────────
-
-// SPEC: a video that loads nothing until asked — a poster, a play link, then the player
-// (src/js/frontend/video.js). Without JavaScript the link simply goes to the video. Title and
-// duration sit in text beside it.
-.ucf-video {
-	> figure {
-		margin: 0;
-		position: relative;
-	}
-
-	iframe {
-		aspect-ratio: 16 / 9;
-		border: 0;
-		display: block;
-		height: auto;
-		width: 100%;
-	}
-}
-
-.ucf-video__play {
-	font-weight: 700;
 }
 
 // ── Steps ────────────────────────────────────────────────────────────────────
@@ -450,32 +265,6 @@ ol.wp-block-list.ucf-steps {
 	}
 }
 
-// SPEC: the FAQ's "Expand all" (src/js/frontend/expand.js) — a text-weight action, right-aligned
-// above the questions, with the indicator underline the Text button uses.
-// WHY a row around the button: core's constrained layout centers every direct child with
-// `margin: auto !important`, so the row is that child and the button sits right inside it.
-.ucf-expand-all-row {
-	text-align: right;
-}
-
-.ucf-expand-all {
-	background: none;
-	border: 0;
-	color: $_body;
-	cursor: pointer;
-	font: inherit;
-	font-weight: 700;
-	min-height: $tap-target;
-	padding: 0;
-	text-decoration: underline;
-	text-decoration-color: var(
-		--ucf-indicator,
-		#{compositions.role-default("indicator")}
-	);
-	text-decoration-thickness: 3px;
-	text-underline-offset: 0.4em;
-}
-
 // ── Page layout: header band and main column with sidebar ────────────────────
 
 // SPEC: the design system's PageHeader — breadcrumbs, the H1, one sentence, closed by a
@@ -486,10 +275,10 @@ ol.wp-block-list.ucf-steps {
 
 	// SPEC: the sentence under the H1 stays near the prose measure even though the band is
 	// the full container — a 1240px line of lead text is unreadable.
-	// UPSTREAM: core's constrained layout gives every child `margin: auto !important`, which
-	// centered the capped sentence under a left-aligned H1; only !important moves it back.
-	> .has-lead-font-size {
-		margin-left: 0 !important;
+	// SYNC: `.ucf-section__inner` is the ucf-content Section's inner element, which holds the
+	// header's blocks.
+	.ucf-section__inner > .has-lead-font-size {
+		margin-left: 0;
 		max-width: 46rem;
 	}
 }
@@ -525,8 +314,7 @@ ol.wp-block-list.ucf-steps {
 	max-width: var(--wp--style--global--content-size);
 }
 
-// SPEC: the sidebar holds still beside the page from 1024px — "On this page", the next step,
-// a contact. Below that it is ordinary content after the main column.
+// SPEC: the sidebar holds still beside the page from 1024px — the next step, a contact. Below that it is ordinary content after the main column.
 .ucf-sidebar {
 	display: grid;
 	gap: map.get($space, "60");
@@ -534,11 +322,5 @@ ol.wp-block-list.ucf-steps {
 	@media (min-width: $breakpoint-lg) {
 		position: sticky;
 		top: map.get($space, "50");
-	}
-
-	// WHY one column: the jump list sits in a 300px sidebar, where 14rem columns would be one
-	// anyway — this says so rather than relying on it.
-	.ucf-toc .wp-block-list {
-		columns: auto;
 	}
 }

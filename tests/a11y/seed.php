@@ -327,24 +327,25 @@ function ucf_theme_a11y_seed_routes() {
 /**
  * A page per piece of theme markup that no template or pattern renders.
  *
- * Neither the Section band nor the badges appear in `templates/`: both are things an author
- * adds in the editor. Without a page of their own here, nothing the suite visits would carry
- * them, and a contrast regression in either would sail through.
+ * No template shows the Section in every composition, and none carries the badges: both are
+ * things an author picks in the editor. Without a page of their own here, nothing the suite
+ * visits would carry them, and a contrast regression in either would sail through.
  *
  * @return array<int, array<string, string>> Manifest entries.
  */
 function ucf_theme_a11y_seed_features() {
 	/*
-	 * WHY: one band per registered composition, stacked, rather than the variation's default
-	 * `is-style-light` alone. Stacked bands are how a Section is actually used, and the band's
-	 * own padding and full-bleed alignment are what this page adds over the variant tier — a
-	 * single Light band would repeat that tier's light page and add nothing.
+	 * WHY: one band per composition, stacked, rather than the block's default Light alone.
+	 * Stacked bands are how a Section is actually used, and the band's own padding and
+	 * full-bleed alignment are what this page adds over the variant tier — a single Light band
+	 * would repeat that tier's light page and add nothing.
+	 * SYNC: COMPOSITIONS in ucf-react-component-library's integrations/schema/compositions.ts,
+	 * the Section block's choices.
 	 */
-	$bands  = '';
-	$styles = WP_Block_Styles_Registry::get_instance()->get_registered_styles_for_block( 'core/group' );
+	$bands = '';
 
-	foreach ( array_keys( $styles ) as $style ) {
-		$bands .= ucf_theme_a11y_section( 'is-style-' . $style, ucfirst( $style ) . ' section' ) . "\n\n";
+	foreach ( array( 'light', 'alt', 'dark', 'dark-alt', 'gold' ) as $composition ) {
+		$bands .= ucf_theme_a11y_section( $composition, ucfirst( $composition ) . ' section' ) . "\n\n";
 	}
 
 	ucf_theme_a11y_insert(
@@ -379,22 +380,26 @@ function ucf_theme_a11y_seed_features() {
 }
 
 /**
- * One Section band, as the variation in src/js/editor/section-variation.js inserts it.
+ * One Section band: the ucf-content plugin's Section block, as it saves.
  *
- * SYNC: the attributes mirror that variation's `attributes` — `section` tag, full alignment,
- * the `ucf-section` marker class and a constrained layout. Change one, change both.
+ * SYNC: the markup is the block's `save()` in ucf-react-component-library
+ * (integrations/tests/__snapshots__/blocks.test.tsx.snap). An attribute left at its default
+ * is not written, so Light has no attributes.
  *
- * @param string $style_class The composition class, `is-style-*`.
+ * @param string $composition A composition slug: light, alt, dark, dark-alt, gold.
  * @param string $heading     Band heading.
  * @return string Block markup.
  */
-function ucf_theme_a11y_section( $style_class, $heading ) {
-	return '<!-- wp:group {"tagName":"section","align":"full","className":"ucf-section ' . $style_class . '","layout":{"type":"constrained"}} -->' . "\n"
-		. '<section class="wp-block-group alignfull ucf-section ' . $style_class . '">'
+function ucf_theme_a11y_section( $composition, $heading ) {
+	$attributes = 'light' === $composition ? '' : ' {"composition":"' . $composition . '"}';
+
+	return '<!-- wp:ucf-content/section' . $attributes . ' -->' . "\n"
+		. '<section class="wp-block-ucf-content-section alignfull ucf-section ucf-composition-' . $composition . '">'
+		. '<div class="ucf-section__inner ucf-section__inner--default">'
 		. '<!-- wp:heading --><h2 class="wp-block-heading">' . esc_html( $heading ) . '</h2><!-- /wp:heading -->'
 		. ucf_theme_a11y_probe()
-		. '</section>' . "\n"
-		. '<!-- /wp:group -->';
+		. '</div></section>' . "\n"
+		. '<!-- /wp:ucf-content/section -->';
 }
 
 /**

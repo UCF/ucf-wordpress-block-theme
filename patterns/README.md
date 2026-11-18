@@ -58,23 +58,19 @@ class on a core Group, List or Table, and that class â€” styled in `src/scss/` â
 the component. Removing the class in the editor turns it back into a plain block. They are
 deliberately not block styles: the Styles panel slot on a Group is its composition.
 
+Cards, highlights, heroes and Section bands are not patterns: they are the ucf-content plugin's
+blocks, and their designs are that block's presets (docs/architecture.md, "Blocks from the
+component library"). Patterns here place those blocks; they never copy their CSS.
+
 | Class                                        | Component                     | Styled in                                     |
 | -------------------------------------------- | ----------------------------- | --------------------------------------------- |
-| `ucf-card` (`--boxed`, `--ruled`, `--horizontal`) | Card                     | `_components.scss`                            |
-| `ucf-stat`                                   | Stat statement                | `_components.scss`                            |
-| `ucf-notice` (`--success`, `--danger`)       | Inline notice                 | `_components.scss`                            |
 | `ucf-quick-links`, `ucf-quick-link`          | Quick links                   | `_components.scss`                            |
 | `ucf-steps`                                  | Steps (on an ordered List)    | `_components.scss`                            |
 | `ucf-answer`                                 | Answer summary                | `_components.scss`                            |
-| `ucf-toc`                                    | On this page                  | `_components.scss`, `src/js/frontend/spy.js`  |
 | `ucf-sources`, `ucf-ref`                     | Sources and in-text markers   | `_components.scss`                            |
-| `ucf-video`, `ucf-video__play`               | Video facade                  | `_components.scss`, `src/js/frontend/video.js`|
-| `ucf-faq` (on core Accordion)                | FAQ, "Expand all", `FAQPage`  | `src/js/frontend/expand.js`, `structured-data.php` |
 | `ucf-compare` (on core Table)                | Comparison table              | `_table.scss`                                 |
-| `ucf-hero-image`, `ucf-keep-dark`            | Hero image                    | `_media.scss`, `_compositions.scss`           |
 | `ucf-media-pair`, `ucf-split-media`, `ucf-photo-strip`, `ucf-plate`, `ucf-bleed` | Photo placements | `_media.scss` |
 | `ucf-schematic`, `ucf-marker`                | Schematic figure, section marker | `_media.scss`                              |
-| `ucf-section--tight`                         | Tight Section band            | `_section.scss`                               |
 
 Page-level patterns (`page-*`, `post-*`) declare `Block Types: core/post-content`, so the
 editor offers them when a new page or post is created. The two page patterns expect the

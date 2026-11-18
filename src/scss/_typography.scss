@@ -1,4 +1,5 @@
 @use "compositions";
+@use "variables" as *;
 
 // ── Typography ───────────────────────────────────────────────────────────────
 //
@@ -46,8 +47,8 @@ h6 {
 // (0,1,0), which the `:hover` half here would otherwise outrank.
 a:where(:not(.wp-block-button__link, [class*="ucf-"])) {
 	color: var(--ucf-link, #{compositions.role-default("link")});
-	text-decoration-thickness: 1px;
-	text-underline-offset: 0.2em;
+	text-decoration-thickness: $link-underline;
+	text-underline-offset: $link-underline-offset;
 }
 
 // WHY: hover moves toward the field's own high-contrast text rather than the light field's
@@ -56,5 +57,5 @@ a:where(:not(.wp-block-button__link, [class*="ucf-"])) {
 // depends on hue alone.
 a:where(:not(.wp-block-button__link, [class*="ucf-"])):hover {
 	color: var(--ucf-link-hover, #{compositions.role-default("link-hover")});
-	text-decoration-thickness: 2px;
+	text-decoration-thickness: $link-underline-hover;
 }

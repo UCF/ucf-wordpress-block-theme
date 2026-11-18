@@ -84,13 +84,8 @@ on the wrong block type).
 | `UniversityHeaderTest` | The contract with a host the theme does not control                 |
 | `BlockStylesTest`      | That `block-styles.php` and `_compositions.scss` still agree        |
 | `IconsTest`            | That `ucf_theme_icons()` and `assets/icons/` still agree            |
-| `MockDataTest`         | That each mock data file has the shape its block documents          |
-| `DataBlocksTest`       | The data blocks' markup builders and structured-data nodes          |
-| `StructuredDataTest`   | The JSON-LD collector, its escaping, FAQ pairs from an accordion    |
-| `FormatTest`           | Dates in AP style                                                   |
+| `StructuredDataTest`   | The JSON-LD collector and its escaping                              |
 | `SetupTest`            | That the Brighter variation's class is the one the stylesheet reads |
-| `SearchServiceTest`    | The Search Service cache: fresh, stale, and remembered failure      |
-| `DegreeTest`           | Program fields as bound values, and each degree block's markup      |
 
 Two of these exist because the failure they guard is **silent**:
 

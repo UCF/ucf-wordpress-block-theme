@@ -51,7 +51,7 @@
 
 // SPEC: how an unverified number looks until its owner confirms it — the design system's
 // "sample data for review" convention. A sample figure ships with this note beside it, never
-// alone; the mock data blocks print the same note when their data is flagged as sample.
+// alone.
 // A11Y: the label is real text, not a pseudo-element, so it is read with the note. The dashed
 // border marks it as provisional in shape, not color.
 .is-style-sample,

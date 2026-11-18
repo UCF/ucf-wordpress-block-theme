@@ -75,6 +75,8 @@ $treatments: (
 			"button-text": "black",
 			"danger": "red-700",
 			"danger-soft": "red-050",
+			// CONTEXT: the ground of a form control. Read by the component library's blocks.
+			"field": "white",
 			// A11Y: black, 21:1 on white. The ring used to be Horizon Blue at 3.54:1 — passing
 			// 2.4.11, but the tightest pair in the table.
 			"focus": "black",
@@ -94,6 +96,9 @@ $treatments: (
 			"raised": "gray-050",
 			"success": "green-700",
 			"success-soft": "green-050",
+			// CONTEXT: text on a `body`-colored fill (a dark badge on a light field). Read by the
+			// component library's blocks.
+			"on-body": "gold",
 		),
 	// WHY: body copy is white rather than a grey — grey body copy reads as washed out on black.
 	"dark":
@@ -112,6 +117,7 @@ $treatments: (
 			// A11Y: red-300 on black 9.2:1, on red-950 7.37:1.
 			"danger": "red-300",
 			"danger-soft": "red-950",
+			"field": "gray-800",
 			"focus": "gold",
 			"heading": "white",
 			"indicator": "gold",
@@ -128,6 +134,7 @@ $treatments: (
 			"raised": "gray-900",
 			"success": "green-300",
 			"success-soft": "green-950",
+			"on-body": "black",
 		),
 	// A11Y: the gold field is unforgiving — nothing lighter than gray-700 clears 4.5:1 on it
 	// (gray-700 is 6.9:1; horizon-deep would be 3.20:1). A role added here cannot de-emphasize
@@ -150,6 +157,7 @@ $treatments: (
 			// the danger text sits on, not the gold.
 			"danger": "red-700",
 			"danger-soft": "red-050",
+			"field": "gray-050",
 			// FIX: black, 11.46:1. A blue ring inherited here was 1.93:1 on gold.
 			"focus": "black",
 			"heading": "black",
@@ -161,16 +169,19 @@ $treatments: (
 			"link-hover": "black",
 			"muted": "gray-700",
 			"on-accent": "white",
-			// WHY: gold, not a lighter tint — there is no approved tint, and a boxed card on a gold
-			// band separates by its rule instead.
-			"raised": "gold",
+			// SPEC: white, as ucf-react-component-library's tokens.json has it: a boxed panel on a
+			// gold band reads as a white card. There is no approved gold tint.
+			"raised": "white",
 			"success": "green-700",
-			"success-soft": "green-050"
+			"success-soft": "green-050",
+			"on-body": "white"
 		)
 );
 
 // WHY: `treatment` is the foreign key into $treatments above.
-// SPEC: the design system's four surfaces — `ucf-surface-light`, `-alt`, `-dark`, `-gold`.
+// SPEC: the design system's surfaces — `ucf-surface-light`, `-alt`, `-dark`, `-gold` — and
+// the component library's Dark Alt. SYNC: ucf-react-component-library's tokens/tokens.json,
+// `composition`, which the plugins' `.ucf-composition-*` classes are built from.
 // Balance light and dark down a page; one gold band per page at most, usually the call to
 // action.
 $compositions: (
@@ -178,6 +189,8 @@ $compositions: (
 		"bg": "white",
 		"text": "black",
 		"treatment": "light",
+		"bar": "dark",
+		"overrides": (),
 	),
 	// FIX: a panel on this field is white, not the treatment's gray-050 — the design system's
 	// boxed card uses `surface-alt`, which on its own Alt surface is the ground itself, and the
@@ -185,19 +198,40 @@ $compositions: (
 	"alt":
 		(
 			"bg": "gray-050",
-			"raised": "white",
 			"text": "black",
 			"treatment": "light",
+			"bar": "dark",
+			"overrides": (
+				"raised": "white",
+				"field": "gray-050",
+			),
 		),
 	"dark": (
 		"bg": "black",
 		"text": "white",
 		"treatment": "dark",
+		"bar": "alt",
+		"overrides": (),
 	),
+	// CONTEXT: the dark field one step up from black. Its panels go black, the way Alt's go
+	// white.
+	"dark-alt":
+		(
+			"bg": "gray-900",
+			"text": "white",
+			"treatment": "dark",
+			"bar": "alt",
+			"overrides": (
+				"raised": "black",
+			),
+		),
 	"gold": (
 		"bg": "gold",
 		"text": "black",
 		"treatment": "gold",
+		"panel": "alt",
+		"bar": "dark",
+		"overrides": (),
 	),
 );
 
@@ -205,6 +239,45 @@ $compositions: (
 // fallback, so the default lives in exactly one place.
 @function role-default($role) {
 	@return map.get($color, map.get($treatments, "light", $role));
+}
+
+// The roles a composition sets: its treatment's, with its own overrides, plus `surface`.
+// WHY: `surface` is the field's own background, per composition rather than per treatment —
+// `light` and `alt` share a treatment but not a background. A tile that has to cover a line
+// drawn behind it (quick links) paints it to look like the field it sits on.
+// WHY overrides: a composition's `raised` or `field` is a contrast with its own background,
+// not with the treatment's.
+@function composition-roles($name) {
+	$spec: map.get($compositions, $name);
+	$roles: map.merge(
+		map.get($treatments, map.get($spec, "treatment")),
+		map.get($spec, "overrides")
+	);
+
+	@return map.merge(
+		$roles,
+		(
+			"surface": map.get($spec, "bg"),
+		)
+	);
+}
+
+// Declare a map of roles as `--ucf-{prefix}{role}`.
+@mixin roles($roles, $prefix: "") {
+	@each $role, $slug in $roles {
+		@if not map.has-key($color, $slug) {
+			@error "The role `#{$prefix}#{$role}` has the slug `#{$slug}`, which is not in $color.";
+		}
+
+		--ucf-#{$prefix}#{$role}: #{map.get($color, $slug)};
+	}
+}
+
+// Set every role under a prefix to `initial`.
+@mixin unset-roles($prefix) {
+	@each $role, $slug in composition-roles("light") {
+		--ucf-#{$prefix}#{$role}: initial;
+	}
 }
 
 // WHY: everything downstream reads these properties rather than the tokens directly, which
@@ -238,18 +311,23 @@ $compositions: (
 	// naming a color.
 	.is-style-#{$name},
 	.is-style-#{$name}-accent {
-		@include treatment(map.get($spec, "treatment"));
+		@include roles(composition-roles($name));
 
-		// WHY: the field's own background, as a role. It is per composition, not per treatment —
-		// `light` and `alt` share a treatment but not a background — so it is set here rather
-		// than in the table. A tile that has to cover a line drawn behind it (quick links) paints
-		// this to look like the field it sits on.
-		--ucf-surface: #{map.get($color, map.get($spec, "bg"))};
+		// CONTEXT: the `panel` and `bar` layers are the roles of the composition a component's
+		// inner panel or bar sits on (a gold card's white panel, a dark bar on a light card).
+		// The component library's blocks read them; `initial` stops an outer band's layer
+		// leaking into a nested one that has none.
+		@each $layer in ("panel", "bar") {
+			@if map.has-key($spec, $layer) {
+				@include roles(
+					composition-roles(map.get($spec, $layer)),
+					"#{$layer}-"
+				);
+			}
 
-		// WHY: a composition may override its treatment's `raised`, for the same reason — it is
-		// a contrast with this background, not with the treatment.
-		@if map.has-key($spec, "raised") {
-			--ucf-raised: #{map.get($color, map.get($spec, "raised"))};
+			@if not map.has-key($spec, $layer) {
+				@include unset-roles("#{$layer}-");
+			}
 		}
 
 		background-color: map.get($color, map.get($spec, "bg"));
@@ -273,9 +351,12 @@ $compositions: (
 // `is-bright` to the body.
 // WHY: a body class and not CSS in the variation. A variation's own CSS would be a second file
 // setting `--ucf-*` roles, and this is the only file allowed to.
-// WHY `:not(.ucf-keep-dark)`: a band whose darkness is the point — a panel over a photograph —
-// opts out, the way the page studies exempt their anchor bands.
-.is-bright .is-style-dark:not(.ucf-keep-dark) {
+// CONTEXT: `.ucf-composition-dark` is the ucf-content plugin's Section; its roles are set by
+// the plugin's base.css at (0,1,0), which these selectors outrank.
+// WHY `:not(.ucf-c-hero)`: the plugin's Hero can set its copy over a photograph, where the
+// darkness is the point, the way the page studies exempt their anchor bands.
+.is-bright .is-style-dark,
+.is-bright .ucf-composition-dark:not(.ucf-c-hero) {
 	@include treatment("light");
 
 	--ucf-surface: #{map.get($color, "white")};
@@ -298,6 +379,6 @@ $compositions: (
 }
 
 // SPEC: separation comes from a hairline rather than a change of ground.
-.is-bright .ucf-section + .ucf-section:not(.is-style-gold) {
+.is-bright .ucf-section + .ucf-section:not(.ucf-composition-gold) {
 	border-top: $border-hairline solid map.get($color, "gray-200");
 }

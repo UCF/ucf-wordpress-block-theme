@@ -3,7 +3,7 @@
  * Title: Degree program page
  * Slug: ucf-wordpress-block-theme/page-degree-program
  * Categories: ucf
- * Description: A whole degree program page: the answer first, the facts, question-shaped sections, a comparison, the faculty, an FAQ and who reviewed it. Uses the Landing template, so the page supplies its own H1.
+ * Description: A whole degree program page: the answer first, question-shaped sections, a comparison and an FAQ. Uses the Landing template, so the page supplies its own H1.
  * Keywords: degree, program, major, page
  * Block Types: core/post-content
  * Post Types: page
@@ -12,8 +12,8 @@
  */
 
 ?>
-<!-- wp:group {"tagName":"header","align":"full","className":"ucf-section ucf-section--tight is-style-light ucf-page-header","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"constrained","contentSize":"1240px"}} -->
-<header class="wp-block-group alignfull ucf-section ucf-section--tight is-style-light ucf-page-header"><!-- wp:breadcrumbs /-->
+<!-- wp:ucf-content/section {"spacing":"cozy","className":"ucf-page-header"} -->
+<section class="wp-block-ucf-content-section alignfull ucf-page-header ucf-section ucf-composition-light ucf-section--cozy"><div class="ucf-section__inner ucf-section__inner--default"><!-- wp:breadcrumbs /-->
 
 <!-- wp:heading {"level":1} -->
 <h1 class="wp-block-heading">Computer Science B.S.</h1>
@@ -21,11 +21,11 @@
 
 <!-- wp:paragraph {"fontSize":"lead"} -->
 <p class="has-lead-font-size">Design, build and test the software that runs at the scale of a 70,000-student university, and the industries around it.</p>
-<!-- /wp:paragraph --></header>
-<!-- /wp:group -->
+<!-- /wp:paragraph --></div></section>
+<!-- /wp:ucf-content/section -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"ucf-section ucf-section--tight is-style-light","layout":{"type":"constrained","contentSize":"1240px"}} -->
-<section class="wp-block-group alignfull ucf-section ucf-section--tight is-style-light"><!-- wp:columns {"className":"ucf-with-sidebar"} -->
+<!-- wp:ucf-content/section {"spacing":"cozy"} -->
+<section class="wp-block-ucf-content-section alignfull ucf-section ucf-composition-light ucf-section--cozy"><div class="ucf-section__inner ucf-section__inner--default"><!-- wp:columns {"className":"ucf-with-sidebar"} -->
 <div class="wp-block-columns ucf-with-sidebar"><!-- wp:column {"className":"ucf-with-sidebar__main"} -->
 <div class="wp-block-column ucf-with-sidebar__main"><!-- wp:group {"className":"ucf-answer","style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group ucf-answer"><!-- wp:paragraph -->
@@ -50,8 +50,6 @@
 <p class="is-style-data">Reviewed Oct. 1, 2026 · Owner: Department of Computer Science</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
-
-<!-- wp:ucf/facts {"program":"computer-science-bs"} /-->
 
 <!-- wp:heading {"anchor":"what-will-i-study"} -->
 <h2 class="wp-block-heading" id="what-will-i-study">What will I study?</h2>
@@ -116,47 +114,47 @@
 <!-- /wp:heading -->
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|60"}},"layout":{"type":"grid","columnCount":3,"minimumColumnWidth":"14rem"}} -->
-<div class="wp-block-group"><!-- wp:group {"className":"ucf-stat","style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-stat"><!-- wp:paragraph -->
-<p>Graduates work at software, defense and simulation companies across Florida</p>
+<div class="wp-block-group"><!-- wp:ucf-content/highlight -->
+<div class="wp-block-ucf-content-highlight ucf-c ucf-c-highlight" data-rule="top"><div class="ucf-c-highlight__content"><!-- wp:paragraph {"className":"ucf-c-highlight__statement"} -->
+<p class="ucf-c-highlight__statement">Graduates work at software, defense and simulation companies across Florida</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>One sentence saying why it matters.</p>
+<!-- wp:paragraph {"className":"ucf-c-highlight__detail"} -->
+<p class="ucf-c-highlight__detail">One sentence saying why it matters.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"className":"is-style-data"} -->
-<p class="is-style-data">Source: sample, replace with Career Services outcomes</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
+<!-- wp:paragraph {"className":"ucf-c-highlight__source"} -->
+<p class="ucf-c-highlight__source">Source: sample, replace with Career Services outcomes</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:ucf-content/highlight -->
 
-<!-- wp:group {"className":"ucf-stat","style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-stat"><!-- wp:paragraph -->
-<p>Most graduates are employed or in graduate school within a year</p>
+<!-- wp:ucf-content/highlight -->
+<div class="wp-block-ucf-content-highlight ucf-c ucf-c-highlight" data-rule="top"><div class="ucf-c-highlight__content"><!-- wp:paragraph {"className":"ucf-c-highlight__statement"} -->
+<p class="ucf-c-highlight__statement">Most graduates are employed or in graduate school within a year</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>One sentence of support.</p>
+<!-- wp:paragraph {"className":"ucf-c-highlight__detail"} -->
+<p class="ucf-c-highlight__detail">One sentence of support.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"className":"is-style-data"} -->
-<p class="is-style-data">Source: sample, replace with Career Services outcomes</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
+<!-- wp:paragraph {"className":"ucf-c-highlight__source"} -->
+<p class="ucf-c-highlight__source">Source: sample, replace with Career Services outcomes</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:ucf-content/highlight -->
 
-<!-- wp:group {"className":"ucf-stat","style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-stat"><!-- wp:paragraph -->
-<p>Senior design teams deliver software to real sponsors every spring</p>
+<!-- wp:ucf-content/highlight -->
+<div class="wp-block-ucf-content-highlight ucf-c ucf-c-highlight" data-rule="top"><div class="ucf-c-highlight__content"><!-- wp:paragraph {"className":"ucf-c-highlight__statement"} -->
+<p class="ucf-c-highlight__statement">Senior design teams deliver software to real sponsors every spring</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>One sentence of support.</p>
+<!-- wp:paragraph {"className":"ucf-c-highlight__detail"} -->
+<p class="ucf-c-highlight__detail">One sentence of support.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph {"className":"is-style-data"} -->
-<p class="is-style-data">Source: sample</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
+<!-- wp:paragraph {"className":"ucf-c-highlight__source"} -->
+<p class="ucf-c-highlight__source">Source: sample</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:ucf-content/highlight --></div>
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"className":"is-style-sample"} -->
@@ -179,22 +177,12 @@
 <p class="is-style-sample">Sample data for review. Replace with verified data before publishing.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:heading {"anchor":"who-teaches-it"} -->
-<h2 class="wp-block-heading" id="who-teaches-it">Who teaches it?</h2>
-<!-- /wp:heading -->
-
-<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|60"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
-<div class="wp-block-group"><!-- wp:ucf/profile {"person":"sample-cs-professor"} /-->
-
-<!-- wp:ucf/profile {"person":"sample-advisor"} /--></div>
-<!-- /wp:group -->
-
 <!-- wp:heading {"anchor":"questions"} -->
 <h2 class="wp-block-heading" id="questions">Questions we get most</h2>
 <!-- /wp:heading -->
 
-<!-- wp:accordion {"className":"ucf-faq"} -->
-<div role="group" class="wp-block-accordion ucf-faq"><!-- wp:accordion-item -->
+<!-- wp:accordion -->
+<div role="group" class="wp-block-accordion"><!-- wp:accordion-item -->
 <div class="wp-block-accordion-item"><!-- wp:accordion-heading -->
 <h3 class="wp-block-accordion-heading has-icon has-icon-right"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">Can I study computer science online?</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>
 <!-- /wp:accordion-heading -->
@@ -235,54 +223,28 @@
 <h2 class="wp-block-heading">Upcoming events</h2>
 <!-- /wp:heading -->
 
-<!-- wp:ucf/events {"count":3} /-->
+<!-- wp:ucf-events/event-list {"limit":3} /-->
 
-<!-- wp:ucf/provenance /--></div>
+</div>
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"300px"} -->
 <div class="wp-block-column" style="flex-basis:300px"><!-- wp:group {"className":"ucf-sidebar","layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-sidebar"><!-- wp:group {"className":"ucf-toc","layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-toc"><!-- wp:heading {"className":"is-style-sans","fontSize":"heading-6"} -->
-<h2 class="wp-block-heading is-style-sans has-heading-6-font-size">On this page</h2>
+<div class="wp-block-group ucf-sidebar"><!-- wp:ucf-content/card {"variant":"boxed"} -->
+<div class="wp-block-ucf-content-card ucf-c ucf-c-card" data-variant="boxed"><div class="ucf-c-card__content"><!-- wp:heading {"className":"ucf-c-card__title"} -->
+<h2 class="wp-block-heading ucf-c-card__title">Next step</h2>
 <!-- /wp:heading -->
 
-<!-- wp:list -->
-<ul class="wp-block-list"><!-- wp:list-item -->
-<li><a href="#at-a-glance">At a glance</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#what-will-i-study">What will I study?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#can-i-get-in">Can I get in?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#what-will-it-cost">What will it cost?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#what-do-graduates-do">What do graduates do?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#how-does-it-compare">How does it compare?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#who-teaches-it">Who teaches it?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#questions">Questions</a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ucf-card ucf-card--boxed","style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-card ucf-card--boxed"><!-- wp:heading {"className":"is-style-sans","fontSize":"heading-5"} -->
-<h2 class="wp-block-heading is-style-sans has-heading-5-font-size">Next step</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph {"fontSize":"data-lg"} -->
-<p class="has-data-lg-font-size">One application covers every undergraduate program, and you can save and come back.</p>
+<!-- wp:paragraph {"className":"ucf-c-card__description"} -->
+<p class="ucf-c-card__description">One application covers every undergraduate program, and you can save and come back.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:buttons -->
 <div class="wp-block-buttons"><!-- wp:button -->
 <div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://www.ucf.edu/apply-to-ucf/">Start your application</a></div>
 <!-- /wp:button --></div>
-<!-- /wp:buttons --></div>
-<!-- /wp:group -->
+<!-- /wp:buttons --></div></div>
+<!-- /wp:ucf-content/card -->
 
 <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
 <div class="wp-block-group"><!-- wp:heading {"className":"is-style-sans","fontSize":"heading-6"} -->
@@ -303,11 +265,11 @@
 <!-- /wp:group --></div>
 <!-- /wp:group --></div>
 <!-- /wp:column --></div>
-<!-- /wp:columns --></section>
-<!-- /wp:group -->
+<!-- /wp:columns --></div></section>
+<!-- /wp:ucf-content/section -->
 
-<!-- wp:group {"tagName":"section","align":"full","className":"ucf-section is-style-gold","layout":{"type":"constrained","contentSize":"1240px"}} -->
-<section class="wp-block-group alignfull ucf-section is-style-gold"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|50"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+<!-- wp:ucf-content/section {"composition":"gold"} -->
+<section class="wp-block-ucf-content-section alignfull ucf-section ucf-composition-gold"><div class="ucf-section__inner ucf-section__inner--default"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|50"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
 <div class="wp-block-group"><!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|40"}},"layout":{"type":"constrained","contentSize":"38rem","justifyContent":"left"}} -->
 <div class="wp-block-group"><!-- wp:heading -->
 <h2 class="wp-block-heading">Still deciding?</h2>
@@ -327,5 +289,5 @@
 <div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="#">Talk to an advisor</a></div>
 <!-- /wp:button --></div>
 <!-- /wp:buttons --></div>
-<!-- /wp:group --></section>
-<!-- /wp:group -->
+<!-- /wp:group --></div></section>
+<!-- /wp:ucf-content/section -->

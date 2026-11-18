@@ -146,7 +146,23 @@
 			"border-control": "2px",
 			"focus-width": "3px",
 			"universal-header-h": "54px",
-			"measure": "720px"
+			"measure": "720px",
+			"button-min-height": "52px",
+			"button-min-height-large": "60px",
+			"button-padding-y": "0.8rem",
+			"button-padding-x": "1.5rem",
+			"button-padding-y-small": "0.55rem",
+			"button-padding-x-small": "1.1rem",
+			"button-padding-y-large": "1rem",
+			"button-padding-x-large": "2rem",
+			"button-letter-spacing": "0.01em",
+			"button-underline": "3px",
+			"button-underline-hover": "5px",
+			"button-underline-offset": "0.4em",
+			"button-underline-offset-hover": "0.3em",
+			"link-underline": "1px",
+			"link-underline-hover": "2px",
+			"link-underline-offset": "0.2em"
 		},
 		"layout": {
 			"contentSize": "720px",
@@ -493,16 +509,16 @@
 					"fontFamily": "var(--wp--preset--font-family--body)",
 					"fontSize": "var(--wp--preset--font-size--data-lg)",
 					"fontWeight": "700",
-					"letterSpacing": "0.01em",
+					"letterSpacing": "var(--wp--custom--button-letter-spacing)",
 					"lineHeight": "1.2",
 					"textTransform": "none"
 				},
 				"spacing": {
 					"padding": {
-						"top": "0.8rem",
-						"right": "1.5rem",
-						"bottom": "0.8rem",
-						"left": "1.5rem"
+						"top": "var(--wp--custom--button-padding-y)",
+						"right": "var(--wp--custom--button-padding-x)",
+						"bottom": "var(--wp--custom--button-padding-y)",
+						"left": "var(--wp--custom--button-padding-x)"
 					}
 				},
 				":hover": {
@@ -571,11 +587,6 @@
 		}
 	},
 	"customTemplates": [
-		{
-			"name": "degree-program",
-			"title": "Degree Program",
-			"postTypes": [ "degree" ]
-		},
 		{
 			"name": "page-landing",
 			"title": "Landing",
