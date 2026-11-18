@@ -3,10 +3,10 @@
  * Structured data — one JSON-LD graph per page, built from what the page renders.
  *
  * CONTEXT: the design system's findability rule is that the visible answer and the
- * machine-readable answer are the same words. So nothing here is typed by an editor: the data
- * blocks (Facts, Profile, Provenance) add a node for what they just rendered, the FAQ
- * pattern's accordion adds `FAQPage`, and this file adds the site's `Organization` and the
- * page's `BreadcrumbList`. The graph prints once, in the footer.
+ * machine-readable answer are the same words. So nothing here is typed by an editor: this file
+ * adds the site's `Organization` and the page's `BreadcrumbList`, and a server-rendered block
+ * can add a node for what it just rendered through `ucf_theme_structured_data()`. The graph
+ * prints once, in the footer.
  *
  * UPSTREAM: block themes render the whole template before `wp_head` runs, so by `wp_footer`
  * every block has had its chance to add a node.
@@ -110,100 +110,6 @@ function ucf_theme_breadcrumb_node( array $trail ) {
 		'itemListElement' => $items,
 	);
 }
-
-/**
- * Question-and-answer pairs from a parsed core/accordion block.
- *
- * WHY parsed blocks, not the rendered HTML. The accordion's structure — item, heading, panel —
- * is already there; reading it out of markup would mean matching core's class names.
- *
- * @param array<string, mixed> $accordion A parsed `core/accordion` block.
- * @return array<int, array{question: string, answer: string}> Pairs, in order.
- */
-function ucf_theme_faq_pairs( array $accordion ) {
-	$pairs = array();
-
-	foreach ( $accordion['innerBlocks'] ?? array() as $item ) {
-		$question = '';
-		$answer   = array();
-
-		foreach ( $item['innerBlocks'] ?? array() as $part ) {
-			if ( 'core/accordion-heading' === $part['blockName'] ) {
-				$question = trim( wp_strip_all_tags( $part['innerHTML'] ?? '' ) );
-				// UPSTREAM: core prints a "+" in the toggle; it is not part of the question.
-				$question = trim( preg_replace( '/\s*\+$/', '', $question ) );
-			}
-
-			if ( 'core/accordion-panel' === $part['blockName'] ) {
-				foreach ( $part['innerBlocks'] ?? array() as $child ) {
-					$answer[] = trim( wp_strip_all_tags( $child['innerHTML'] ?? '' ) );
-				}
-			}
-		}
-
-		$answer = trim( implode( ' ', array_filter( $answer ) ) );
-
-		if ( '' !== $question && '' !== $answer ) {
-			$pairs[] = array(
-				'question' => $question,
-				'answer'   => $answer,
-			);
-		}
-	}
-
-	return $pairs;
-}
-
-/**
- * A FAQPage node.
- *
- * @param array<int, array{question: string, answer: string}> $pairs Pairs.
- * @return array<string, mixed>|null Node, or null with no pairs.
- */
-function ucf_theme_faq_node( array $pairs ) {
-	if ( ! $pairs ) {
-		return null;
-	}
-
-	$questions = array();
-
-	foreach ( $pairs as $pair ) {
-		$questions[] = array(
-			'@type'          => 'Question',
-			'name'           => $pair['question'],
-			'acceptedAnswer' => array(
-				'@type' => 'Answer',
-				'text'  => $pair['answer'],
-			),
-		);
-	}
-
-	return array(
-		'@type'      => 'FAQPage',
-		'mainEntity' => $questions,
-	);
-}
-
-/**
- * Collect `FAQPage` from an accordion marked as an FAQ.
- *
- * WHY only `ucf-faq`. An accordion is also used for reference content — the colleges on the
- * academics page — and claiming that as questions and answers would be false markup.
- *
- * @param string               $content Rendered block.
- * @param array<string, mixed> $block   Parsed block.
- * @return string The content, unchanged.
- */
-function ucf_theme_collect_faq( $content, $block ) {
-	$classes = ' ' . ( $block['attrs']['className'] ?? '' ) . ' ';
-
-	if ( false !== strpos( $classes, ' ucf-faq ' ) ) {
-		ucf_theme_structured_data( ucf_theme_faq_node( ucf_theme_faq_pairs( $block ) ) );
-	}
-
-	return $content;
-}
-add_filter( 'render_block_core/accordion', 'ucf_theme_collect_faq', 10, 2 );
 
 /**
  * Print the graph, with the site and breadcrumb nodes every page carries.

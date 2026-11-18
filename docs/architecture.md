@@ -22,7 +22,7 @@ that works. Each rung down is more code to own, so skipping ahead is the expensi
 2. **An existing class or block style.** A composition (`.is-style-dark`,
    `.is-style-alt`), a role utility (`.accent-text`, `.accent-fill`, `.hairline`, `.muted`),
    an element style (`is-style-data`, `is-style-check`…) or a component class a pattern
-   applies (`.ucf-notice`, `.ucf-steps`…) — the vocabulary in `src/scss/`. Or a block from
+   applies (`.ucf-steps`, `.ucf-quick-links`…) — the vocabulary in `src/scss/`. Or a block from
    the component library's plugins (see [Blocks from the component library](#blocks-from-the-component-library)).
 3. **A core block control.** Padding, border width, alignment, background. If the editor can
    already express it, let the editor express it.
@@ -166,17 +166,10 @@ The current topics:
 | `block-styles.php`      | Every `register_block_style()`                                                     |
 | `patterns.php`          | The UCF pattern category every theme pattern is filed under                        |
 | `icons.php`             | The UCF icon set, registered with core's icon registry                             |
-| `format.php`            | How dates are written, for every block that prints one                             |
-| `mock-data.php`         | The stand-in for the data sources the data blocks will read                        |
 | `structured-data.php`   | One JSON-LD graph per page, from what the page rendered                            |
-| `programs.php`          | Facts and Program finder blocks                                                    |
 | `people.php`            | Profile block                                                                      |
-| `provenance.php`        | Provenance block and the `ucf_reviewer` post field                                 |
 | `university-header.php` | The UCF University Header script tag and placeholder                               |
 | `paste-artifacts.php`   | Word-processor characters normalized on save and on display                        |
-| `search-service.php`    | Cached, GET-only reads of the UCF Search Service API                               |
-| `degree.php`            | Degree pages: the `ucf-theme/degree` bindings source and the server-rendered       |
-|                         | `ucf-theme/degree-*` blocks                                                        |
 
 **No file may depend on another at include time.** Every one only defines functions and adds
 hooks, so the load order in `functions.php` is documentation rather than a constraint. A
@@ -227,9 +220,8 @@ source is the whole change.
 
 A folder with a `block.json` is auto-detected. Anything else — editor glue, a front-end script,
 a rich-text format — is named in `webpack.config.js`. There are two named entries: `editor`
-(variations, formats, the data blocks' previews, editor policy) and `frontend` (every
-progressive enhancement — finder filtering, citation copy, the video facade, "Expand all",
-scroll-spy, external-link marking). Each front-end module finds its own markup and does
+(formats, editor policy, pre-publish checks, the Brighter canvas class) and `frontend`
+(every progressive enhancement — finder filtering, citation copy, external-link marking). Each front-end module finds its own markup and does
 nothing on a page without it; nothing on a page may depend on one to appear.
 
 ## Build and content
@@ -335,7 +327,7 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     style. Missing are the Jest markup sweep over `templates/`, `parts/` and `patterns/`, and
     an integration tier. Keep them out of `npm test`: that command must never need Docker.
 -   **A full pattern library.** `patterns/` holds the design system's basic components as
-    patterns (the horizontal card, notices, quick links, steps, FAQ, calls to action, section
+    patterns (quick links, steps, calls to action, section
     headers), and two page-level patterns. Cards, highlights and heroes are the ucf-content
     plugin's blocks, with their designs as presets. Every pattern is filed under one custom
     category, UCF (`includes/patterns.php`). The directory is **flat on purpose** — core reads each
@@ -346,13 +338,8 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     register a custom one only for a pattern that fits none of them. See
     [patterns/README.md](../patterns/README.md).
 -   **Static custom blocks.** `src/blocks/` is empty: every design-system component is a core
-    block, a block style, a pattern over core blocks — or, where it renders data, a
-    server-rendered block in the `includes/` file that owns the data.
--   **Real data sources.** The degree blocks in `includes/degree.php` are the exception: they
-    read the UCF Search Service live, and are PHP-only (`supports.autoRegister`), so have no
-    source under `src/`. The four data blocks (Facts, Program finder, Profile, Provenance)
-    read mock data from `data/mock/` through
-    `ucf_theme_mock_data()`. Each set has a filter, `ucf_theme_mock_data_{set}`, which is where a
-    plugin's real data replaces it; the shape each block expects is documented at the top of its
-    file, and `MockDataTest` checks the mock files still have it. Everything rendered from mock
-    data carries the sample-data note. See [design-system-import.md](design-system-import.md).
+    block, a block style, a pattern over core blocks, a block from the component library's
+    plugins — or, where it renders data, a server-rendered block in the `includes/` file that
+    owns the data.
+-   **Data blocks.** The theme renders no data of its own. Events, degree lists and the degree
+    finder are the component library's blocks (ucf-events, ucf-degrees).

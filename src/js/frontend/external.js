@@ -18,7 +18,7 @@ document
 			ucf ||
 			host === window.location.hostname ||
 			link.classList.contains( 'wp-block-button__link' ) ||
-			link.closest( '.ucf-quick-link, .ucf-card, .ucf-result' )
+			link.closest( '.ucf-quick-link, .ucf-c' )
 		) {
 			return;
 		}

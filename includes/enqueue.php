@@ -75,8 +75,8 @@ function ucf_theme_enqueue_assets() {
 		file_exists( $css_path ) ? filemtime( $css_path ) : false
 	);
 
-	// WHY one front-end script for every enhancement — filtering, copying a citation, the
-	// video facade, expanding an FAQ, marking the section in view. Each is a few lines, each
+	// WHY one front-end script for every enhancement — filtering, copying a citation, marking
+	// links that leave UCF. Each is a few lines, each
 	// wires itself to a `data-ucf-*` attribute or a class, and every one is an enhancement:
 	// with the script blocked, every block still renders and every link still works.
 	ucf_theme_enqueue_build_script( 'ucf-theme-frontend', 'frontend' );

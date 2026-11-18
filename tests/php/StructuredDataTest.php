@@ -1,6 +1,6 @@
 <?php
 /**
- * Structured data: the collector, the script element, and FAQ pairs read from an accordion.
+ * Structured data: the collector and the script element.
  *
  * @package ucf-wordpress-block-theme
  */
@@ -11,9 +11,6 @@ namespace UCF\Theme\Tests;
  * @covers ::ucf_theme_structured_data
  * @covers ::ucf_theme_structured_data_script
  * @covers ::ucf_theme_breadcrumb_node
- * @covers ::ucf_theme_faq_pairs
- * @covers ::ucf_theme_faq_node
- * @covers ::ucf_theme_collect_faq
  */
 final class StructuredDataTest extends TestCase {
 
@@ -24,80 +21,6 @@ final class StructuredDataTest extends TestCase {
 		parent::setUp();
 		$this->loadInclude( 'structured-data' );
 		ucf_theme_structured_data( null, true );
-	}
-
-	/**
-	 * A parsed accordion, as `parse_blocks()` returns one.
-	 *
-	 * @param string $class_name The accordion's className.
-	 * @return array<string, mixed>
-	 */
-	private function accordion( $class_name ) {
-		$item = static function ( $question, $answer ) {
-			return array(
-				'blockName'   => 'core/accordion-item',
-				'innerBlocks' => array(
-					array(
-						'blockName'   => 'core/accordion-heading',
-						'innerHTML'   => '<h3><button><span class="wp-block-accordion-heading__toggle-title">' . $question . '</span><span aria-hidden="true">+</span></button></h3>',
-						'innerBlocks' => array(),
-					),
-					array(
-						'blockName'   => 'core/accordion-panel',
-						'innerHTML'   => '<div role="region"></div>',
-						'innerBlocks' => array(
-							array(
-								'blockName' => 'core/paragraph',
-								'innerHTML' => '<p>' . $answer . '</p>',
-							),
-						),
-					),
-				),
-			);
-		};
-
-		return array(
-			'blockName'   => 'core/accordion',
-			'attrs'       => array( 'className' => $class_name ),
-			'innerBlocks' => array(
-				$item( 'Can I change my major?', 'Usually <strong>yes</strong>.' ),
-				$item( 'Empty answer?', '' ),
-			),
-		);
-	}
-
-	/**
-	 * Questions come out without core's "+" glyph, answers without markup, and an item with no
-	 * answer is dropped rather than claimed.
-	 *
-	 * @return void
-	 */
-	public function test_reads_question_and_answer_pairs() {
-		$this->assertSame(
-			array(
-				array(
-					'question' => 'Can I change my major?',
-					'answer'   => 'Usually yes.',
-				),
-			),
-			ucf_theme_faq_pairs( $this->accordion( 'ucf-faq' ) )
-		);
-	}
-
-	/**
-	 * Only an accordion marked `ucf-faq` becomes FAQPage — reference content is not Q&A.
-	 *
-	 * @return void
-	 */
-	public function test_only_a_marked_accordion_is_an_faq() {
-		ucf_theme_collect_faq( '', $this->accordion( 'ucf-colleges' ) );
-		$this->assertSame( array(), ucf_theme_structured_data() );
-
-		ucf_theme_collect_faq( '', $this->accordion( 'something ucf-faq' ) );
-		$graph = ucf_theme_structured_data();
-
-		$this->assertCount( 1, $graph );
-		$this->assertSame( 'FAQPage', $graph[0]['@type'] );
 	}
 
 	/**

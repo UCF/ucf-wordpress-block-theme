@@ -3,7 +3,7 @@
  * Title: Research story
  * Slug: ucf-wordpress-block-theme/post-research-story
  * Categories: ucf
- * Description: A research story written to be quoted: key takeaways first, sourced claims, a named researcher, a video and numbered sources. The template adds the byline and review dates.
+ * Description: A research story written to be quoted: key takeaways first, sourced claims, a link to the video and numbered sources.
  * Keywords: research, story, news, article
  * Block Types: core/post-content
  * Post Types: post
@@ -56,15 +56,13 @@
 <h2 class="wp-block-heading">Who does the work?</h2>
 <!-- /wp:heading -->
 
-<!-- wp:ucf/profile {"person":"sample-researcher","feature":true} /-->
-
-<!-- wp:group {"className":"ucf-video","style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-video"><!-- wp:image {"aspectRatio":"16/9","scale":"cover"} -->
+<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group"><!-- wp:image {"aspectRatio":"16/9","scale":"cover"} -->
 <figure class="wp-block-image"><img alt="" style="aspect-ratio:16/9;object-fit:cover"/></figure>
 <!-- /wp:image -->
 
-<!-- wp:paragraph {"className":"ucf-video__play"} -->
-<p class="ucf-video__play"><a href="https://www.youtube.com/watch?v=aqz-KE-bpKQ">Play: The video's title</a></p>
+<!-- wp:paragraph -->
+<p><a href="https://www.youtube.com/watch?v=aqz-KE-bpKQ">Play: The video's title</a></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"className":"is-style-data"} -->

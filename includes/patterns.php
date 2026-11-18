@@ -3,8 +3,7 @@
  * The UCF pattern category.
  *
  * WHY one category for every pattern the theme ships, rather than core's Featured, Text,
- * Banner and the rest: an author looking for "the UCF ones" finds them in one place, the same
- * reason every theme block is filed under the UCF block category (includes/blocks.php).
+ * Banner and the rest: an author looking for "the UCF ones" finds them in one place.
  *
  * SYNC: every file in patterns/ declares `Categories: ucf`. `PatternsTest` checks it, since a
  * pattern naming any other category lands outside the group with nothing to say so.

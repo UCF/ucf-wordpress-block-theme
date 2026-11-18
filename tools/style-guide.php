@@ -264,15 +264,10 @@ function ucf_theme_style_guide_data_blocks() {
 	$blocks = array(
 		'Breadcrumbs (core)'      => '<!-- wp:breadcrumbs /-->',
 		'Event List (ucf-events)' => '<!-- wp:ucf-events/event-list {"limit":3} /-->',
-		'Facts'                   => '<!-- wp:ucf/facts {"program":"computer-science-bs"} /-->',
-		'Profile'                 => '<!-- wp:ucf/profile {"person":"sample-cs-professor"} /-->',
-		'Profile · feature'       => '<!-- wp:ucf/profile {"person":"sample-researcher","feature":true} /-->',
-		'Provenance'              => '<!-- wp:ucf/provenance /-->',
-		'Program finder'          => '<!-- wp:ucf/program-finder /-->',
 	);
 
 	$html = ucf_theme_style_guide_heading( 'Data blocks', 'data-blocks' )
-		. '<!-- wp:paragraph --><p>Server-rendered from data the theme does not own. Today that is mock data in <code>data/mock/</code>, marked on the page as sample.</p><!-- /wp:paragraph -->';
+		. '<!-- wp:paragraph --><p>Rendered on the server from data the theme does not own.</p><!-- /wp:paragraph -->';
 
 	foreach ( $blocks as $label => $markup ) {
 		$html .= ucf_theme_style_guide_label( $label ) . $markup;
@@ -347,7 +342,7 @@ function ucf_theme_style_guide_patterns() {
  * @return string Block markup.
  */
 function ucf_theme_style_guide_content() {
-	$jump = '';
+	$links = array();
 	foreach ( array(
 		'compositions' => 'Compositions',
 		'type'         => 'Type',
@@ -361,20 +356,35 @@ function ucf_theme_style_guide_content() {
 		'data-blocks'  => 'Data blocks',
 		'patterns'     => 'Patterns',
 	) as $anchor => $title ) {
-		$jump .= '<!-- wp:list-item --><li><a href="#' . $anchor . '">' . $title . '</a></li><!-- /wp:list-item -->';
+		$links[] = array(
+			'label' => $title,
+			'href'  => '#' . $anchor,
+		);
 	}
+
+	/*
+	 * The ucf-content plugin's Section Nav, as it saves.
+	 * SYNC: the block's `save()` in ucf-react-component-library
+	 * (components/content/section-nav); the attribute is the list of links.
+	 */
+	$items = '';
+	foreach ( $links as $link ) {
+		$items .= '<li class="ucf-c-section-nav__item"><a class="ucf-c-section-nav__link" href="' . esc_attr( $link['href'] ) . '">' . esc_html( $link['label'] ) . '</a></li>';
+	}
+	$nav = '<!-- wp:ucf-content/section-nav ' . wp_json_encode( array( 'links' => $links ) ) . ' -->'
+		. '<nav aria-label="On this page" class="wp-block-ucf-content-section-nav alignfull ucf-c ucf-c-section-nav"><ul class="ucf-c-section-nav__list">' . $items . '</ul></nav>'
+		. '<!-- /wp:ucf-content/section-nav -->';
 
 	$header = ucf_theme_style_guide_band(
 		'light',
 		'<!-- wp:heading {"level":1} --><h1 class="wp-block-heading">Style guide</h1><!-- /wp:heading -->'
-		. '<!-- wp:paragraph {"fontSize":"lead"} --><p class="has-lead-font-size">Every block style, data block and pattern in the theme, on one page. Built by tools/style-guide.php.</p><!-- /wp:paragraph -->'
-		. '<!-- wp:group {"className":"ucf-toc","layout":{"type":"default"}} --><div class="wp-block-group ucf-toc"><!-- wp:heading {"className":"is-style-sans","fontSize":"heading-6"} --><h2 class="wp-block-heading is-style-sans has-heading-6-font-size">On this page</h2><!-- /wp:heading -->'
-		. '<!-- wp:list --><ul class="wp-block-list">' . $jump . '</ul><!-- /wp:list --></div><!-- /wp:group -->',
+		. '<!-- wp:paragraph {"fontSize":"lead"} --><p class="has-lead-font-size">Every block style, data block and pattern in the theme, on one page. Built by tools/style-guide.php.</p><!-- /wp:paragraph -->',
 		'cozy',
 		'ucf-page-header'
 	);
 
 	return $header
+		. $nav
 		. ucf_theme_style_guide_band( 'light', ucf_theme_style_guide_heading( 'Compositions', 'compositions' ) . '<!-- wp:paragraph --><p>The same content on each Section composition. Every role re-resolves; nothing in the content names a color.</p><!-- /wp:paragraph -->' )
 		. ucf_theme_style_guide_compositions()
 		. ucf_theme_style_guide_elements()

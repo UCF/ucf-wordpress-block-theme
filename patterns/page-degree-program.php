@@ -3,7 +3,7 @@
  * Title: Degree program page
  * Slug: ucf-wordpress-block-theme/page-degree-program
  * Categories: ucf
- * Description: A whole degree program page: the answer first, the facts, question-shaped sections, a comparison, the faculty, an FAQ and who reviewed it. Uses the Landing template, so the page supplies its own H1.
+ * Description: A whole degree program page: the answer first, question-shaped sections, a comparison and an FAQ. Uses the Landing template, so the page supplies its own H1.
  * Keywords: degree, program, major, page
  * Block Types: core/post-content
  * Post Types: page
@@ -50,8 +50,6 @@
 <p class="is-style-data">Reviewed Oct. 1, 2026 · Owner: Department of Computer Science</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
-
-<!-- wp:ucf/facts {"program":"computer-science-bs"} /-->
 
 <!-- wp:heading {"anchor":"what-will-i-study"} -->
 <h2 class="wp-block-heading" id="what-will-i-study">What will I study?</h2>
@@ -179,22 +177,12 @@
 <p class="is-style-sample">Sample data for review. Replace with verified data before publishing.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:heading {"anchor":"who-teaches-it"} -->
-<h2 class="wp-block-heading" id="who-teaches-it">Who teaches it?</h2>
-<!-- /wp:heading -->
-
-<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|60"}},"layout":{"type":"grid","columnCount":2,"minimumColumnWidth":"20rem"}} -->
-<div class="wp-block-group"><!-- wp:ucf/profile {"person":"sample-cs-professor"} /-->
-
-<!-- wp:ucf/profile {"person":"sample-advisor"} /--></div>
-<!-- /wp:group -->
-
 <!-- wp:heading {"anchor":"questions"} -->
 <h2 class="wp-block-heading" id="questions">Questions we get most</h2>
 <!-- /wp:heading -->
 
-<!-- wp:accordion {"className":"ucf-faq"} -->
-<div role="group" class="wp-block-accordion ucf-faq"><!-- wp:accordion-item -->
+<!-- wp:accordion -->
+<div role="group" class="wp-block-accordion"><!-- wp:accordion-item -->
 <div class="wp-block-accordion-item"><!-- wp:accordion-heading -->
 <h3 class="wp-block-accordion-heading has-icon has-icon-right"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">Can I study computer science online?</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>
 <!-- /wp:accordion-heading -->
@@ -237,38 +225,12 @@
 
 <!-- wp:ucf-events/event-list {"limit":3} /-->
 
-<!-- wp:ucf/provenance /--></div>
+</div>
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"300px"} -->
 <div class="wp-block-column" style="flex-basis:300px"><!-- wp:group {"className":"ucf-sidebar","layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-sidebar"><!-- wp:group {"className":"ucf-toc","layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-toc"><!-- wp:heading {"className":"is-style-sans","fontSize":"heading-6"} -->
-<h2 class="wp-block-heading is-style-sans has-heading-6-font-size">On this page</h2>
-<!-- /wp:heading -->
-
-<!-- wp:list -->
-<ul class="wp-block-list"><!-- wp:list-item -->
-<li><a href="#at-a-glance">At a glance</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#what-will-i-study">What will I study?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#can-i-get-in">Can I get in?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#what-will-it-cost">What will it cost?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#what-do-graduates-do">What do graduates do?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#how-does-it-compare">How does it compare?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#who-teaches-it">Who teaches it?</a></li>
-<!-- /wp:list-item --><!-- wp:list-item -->
-<li><a href="#questions">Questions</a></li>
-<!-- /wp:list-item --></ul>
-<!-- /wp:list --></div>
-<!-- /wp:group -->
-
-<!-- wp:ucf-content/card {"variant":"boxed"} -->
+<div class="wp-block-group ucf-sidebar"><!-- wp:ucf-content/card {"variant":"boxed"} -->
 <div class="wp-block-ucf-content-card ucf-c ucf-c-card" data-variant="boxed"><div class="ucf-c-card__content"><!-- wp:heading {"className":"ucf-c-card__title"} -->
 <h2 class="wp-block-heading ucf-c-card__title">Next step</h2>
 <!-- /wp:heading -->

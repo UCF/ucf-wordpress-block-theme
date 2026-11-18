@@ -95,7 +95,6 @@ ol.wp-block-list > li::marker {
 
 // SPEC: definition pairs — a term and its value, for office hours and contact details. Core
 // has no definition-list block, so each item is "**Term** value": the bold run is the term.
-// For program facts use the Facts block, which emits a real `<dl>`.
 .wp-block-list.is-style-definitions {
 	list-style: none;
 	padding-left: 0;

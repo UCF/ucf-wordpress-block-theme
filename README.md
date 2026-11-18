@@ -99,14 +99,12 @@ src/js/editor/         Editor glue — variation, formats, data-block previews, 
 src/js/frontend/       Progressive enhancements. Builds to build/frontend.js
 
 patterns/              Block patterns, flat. See patterns/README.md
-templates/             Block templates: index, page, page-landing, single, single-degree, search,
-                       404, and the selectable degree-program template for the `degree` post type
+templates/             Block templates: index, page, page-landing, single, search and 404
                        No header or footer part — the University Header is injected
                        by includes/university-header.php, and the footer is a plugin
 
 assets/fonts/          Self-hosted webfonts, declared as fontFace in theme.json
 assets/icons/          The UCF icon set, registered by includes/icons.php
-data/mock/             Mock data the data blocks read until real sources are wired up
 styles/                Style variations: Brighter
 build/                 Compiled output. Committed; never hand-edited
 tests/php/             PHP unit suite. See tests/README.md

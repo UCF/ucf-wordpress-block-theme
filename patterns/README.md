@@ -64,15 +64,10 @@ component library"). Patterns here place those blocks; they never copy their CSS
 
 | Class                                        | Component                     | Styled in                                     |
 | -------------------------------------------- | ----------------------------- | --------------------------------------------- |
-| `ucf-card`, `ucf-card--horizontal`           | Horizontal card               | `_components.scss`                            |
-| `ucf-notice` (`--success`, `--danger`)       | Inline notice                 | `_components.scss`                            |
 | `ucf-quick-links`, `ucf-quick-link`          | Quick links                   | `_components.scss`                            |
 | `ucf-steps`                                  | Steps (on an ordered List)    | `_components.scss`                            |
 | `ucf-answer`                                 | Answer summary                | `_components.scss`                            |
-| `ucf-toc`                                    | On this page                  | `_components.scss`, `src/js/frontend/spy.js`  |
 | `ucf-sources`, `ucf-ref`                     | Sources and in-text markers   | `_components.scss`                            |
-| `ucf-video`, `ucf-video__play`               | Video facade                  | `_components.scss`, `src/js/frontend/video.js`|
-| `ucf-faq` (on core Accordion)                | FAQ, "Expand all", `FAQPage`  | `src/js/frontend/expand.js`, `structured-data.php` |
 | `ucf-compare` (on core Table)                | Comparison table              | `_table.scss`                                 |
 | `ucf-media-pair`, `ucf-split-media`, `ucf-photo-strip`, `ucf-plate`, `ucf-bleed` | Photo placements | `_media.scss` |
 | `ucf-schematic`, `ucf-marker`                | Schematic figure, section marker | `_media.scss`                              |

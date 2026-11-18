@@ -588,11 +588,6 @@
 	},
 	"customTemplates": [
 		{
-			"name": "degree-program",
-			"title": "Degree Program",
-			"postTypes": [ "degree" ]
-		},
-		{
 			"name": "page-landing",
 			"title": "Landing",
 			"postTypes": [ "page" ]
