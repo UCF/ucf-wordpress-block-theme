@@ -7,7 +7,7 @@ Read [architecture.md](architecture.md) first; this file only records the import
 The import followed the escalation ladder: tokens first, then core blocks styled, then
 patterns over core blocks. **No custom block type was needed in the theme.** WordPress 7.1
 core already ships Breadcrumbs, Accordion, Details, Icon (with an icon registry), Page List and
-grid layout. The Section, Card, Highlight (StatStatement), Hero and Event List are blocks from
+grid layout. The Section, Card, Highlight (StatStatement), Hero, Quick Links and Event List are blocks from
 ucf-react-component-library's ucf-content and ucf-events plugins, which extend the theme; the
 Alert banner is UCF-Alert-Plugin's.
 
@@ -54,8 +54,8 @@ treatment in `_compositions.scss`. New roles: `muted`, `line-strong`, `indicator
 | Icon           | Core Icon; the set registered as the `ucf` collection (`includes/icons.php`)    |
 | Card           | `ucf-content/card` block and its presets                                        |
 | StatStatement  | `ucf-content/highlight` block, Statement preset                                 |
-| QuickLinks     | Pattern + `.ucf-quick-links` / `.ucf-quick-link`                                |
-| Steps          | Pattern: core ordered List + `.ucf-steps`                                       |
+| QuickLinks     | `ucf-content/quick-links` block (ucf-content plugin)                            |
+| Steps          | Core ordered List, `is-style-steps`: the component library's List (Steps); the theme neither registers nor imports it |
 | CallToAction   | Patterns, gold and dark                                                         |
 | Section header | Patterns, plain and split                                                       |
 
