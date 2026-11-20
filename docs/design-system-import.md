@@ -38,26 +38,26 @@ treatment in `_compositions.scss`. New roles: `muted`, `line-strong`, `indicator
 
 **Components.**
 
-| Design system  | Built as                                                                        |
-| -------------- | ------------------------------------------------------------------------------- |
-| Section        | `ucf-content/section` block (ucf-content plugin)                                |
-| Headings, Text | theme.json element styles; Lead/Display presets; `data` and `sans` block styles |
-| Lists          | Core List; `check` and `divided` styles                                         |
-| Buttons        | Core Button; Outline is the secondary; `text` style added                       |
-| Quote          | Core Quote and Pullquote                                                        |
-| Table          | Core Table; right-aligned columns become mono, tabular                          |
-| Figure         | Core Image with the aspect-ratio presets; caption in the data voice             |
-| Accordion      | Core Details                                                                    |
-| FAQ            | Core Accordion (its toggle is a real heading)                                   |
-| Breadcrumbs    | Core Breadcrumbs, styled                                                        |
-| SectionNav     | Core Page List, styled with the `indicator` bar                                 |
-| Icon           | Core Icon; the set registered as the `ucf` collection (`includes/icons.php`)    |
-| Card           | `ucf-content/card` block and its presets                                        |
-| StatStatement  | `ucf-content/highlight` block, Statement preset                                 |
-| QuickLinks     | `ucf-content/quick-links` block (ucf-content plugin)                            |
+| Design system  | Built as                                                                                                              |
+| -------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Section        | `ucf-content/section` block (ucf-content plugin)                                                                      |
+| Headings, Text | theme.json element styles; Lead/Display presets; `data` and `sans` block styles                                       |
+| Lists          | Core List; `check` and `divided` styles                                                                               |
+| Buttons        | Core Button; Outline is the secondary; `text` style added                                                             |
+| Quote          | Core Quote and Pullquote                                                                                              |
+| Table          | Core Table; right-aligned columns become mono, tabular                                                                |
+| Figure         | Core Image with the aspect-ratio presets; caption in the data voice                                                   |
+| Accordion      | Core Details                                                                                                          |
+| FAQ            | Core Accordion (its toggle is a real heading)                                                                         |
+| Breadcrumbs    | Core Breadcrumbs, styled                                                                                              |
+| SectionNav     | Core Page List, styled with the `indicator` bar                                                                       |
+| Icon           | Core Icon; the set registered as the `ucf` collection (`includes/icons.php`)                                          |
+| Card           | `ucf-content/card` block and its presets                                                                              |
+| StatStatement  | `ucf-content/highlight` block, Statement preset                                                                       |
+| QuickLinks     | `ucf-content/quick-links` block (ucf-content plugin)                                                                  |
 | Steps          | Core ordered List, `is-style-steps`: the component library's List (Steps); the theme neither registers nor imports it |
-| CallToAction   | Patterns, gold and dark                                                         |
-| Section header | Patterns, plain and split                                                       |
+| CallToAction   | Patterns, gold and dark                                                                                               |
+| Section header | Patterns, plain and split                                                                                             |
 
 **Prototype page.** `https://www.ucf.edu/academics/` was rebuilt on the local `ucf` site as
 the "Academics" page, using the Landing template (`templates/page-landing.html`, which leaves
