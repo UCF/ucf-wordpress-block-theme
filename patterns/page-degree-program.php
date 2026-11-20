@@ -85,8 +85,8 @@
 <p>You apply to UCF and name Computer Science as your major. Admission requirements are set by <a href="https://www.ucf.edu/admissions/undergraduate/">Undergraduate Admissions</a>, and this page links there rather than repeating them.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:list {"ordered":true,"className":"ucf-steps"} -->
-<ol class="wp-block-list ucf-steps"><!-- wp:list-item -->
+<!-- wp:list {"ordered":true,"className":"is-style-steps"} -->
+<ol class="wp-block-list is-style-steps"><!-- wp:list-item -->
 <li><strong>Apply to UCF.</strong> Name Computer Science as your intended major.</li>
 <!-- /wp:list-item --><!-- wp:list-item -->
 <li><strong>Complete the foundation courses.</strong> Calculus and the first programming course, with the grades the catalog sets.</li>

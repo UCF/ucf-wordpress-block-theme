@@ -22,7 +22,7 @@ that works. Each rung down is more code to own, so skipping ahead is the expensi
 2. **An existing class or block style.** A composition (`.is-style-dark`,
    `.is-style-alt`), a role utility (`.accent-text`, `.accent-fill`, `.hairline`, `.muted`),
    an element style (`is-style-data`, `is-style-check`…) or a component class a pattern
-   applies (`.ucf-steps`, `.ucf-quick-links`…) — the vocabulary in `src/scss/`. Or a block from
+   applies (`.ucf-answer`, `.ucf-sources`…) — the vocabulary in `src/scss/`. Or a block from
    the component library's plugins (see [Blocks from the component library](#blocks-from-the-component-library)).
 3. **A core block control.** Padding, border width, alignment, background. If the editor can
    already express it, let the editor express it.
@@ -97,8 +97,8 @@ inside it resolves to the card's value.
 
 ## Blocks from the component library
 
-The Section, Card, Highlight and Hero are the **ucf-content** plugin's blocks
-(`ucf-content/section`, `/card`, `/highlight`, `/hero`), and the Event List is the
+The Section, Card, Highlight, Hero and Quick Links are the **ucf-content** plugin's blocks
+(`ucf-content/section`, `/card`, `/highlight`, `/hero`, `/quick-links`), and the Event List is the
 **ucf-events** plugin's (`ucf-events/event-list`). Both plugins are built in
 ucf-react-component-library, which owns their markup, CSS and settings. **The plugins extend
 the theme; the theme does not require them.** Some of its templates and patterns place their
@@ -112,7 +112,7 @@ buttons, from `theme.json` and `src/scss/`), and the Brighter variation, which r
 `.is-style-*` compositions on core/group stay for the groups inside a band (a notice, a panel).
 
 **Writing one in a template or pattern.** Copy the block's saved markup from the library's
-`integrations/tests/__snapshots__/blocks.test.tsx.snap`, then put core blocks inside its inner
+`core/testing/suites/__snapshots__/blocks.test.tsx.snap`, then put core blocks inside its inner
 element. A Card's or Highlight's parts are core blocks carrying the part's class
 (`ucf-c-card__title`, `ucf-c-highlight__statement`), as `{Name}.parts.ts` lists them. An
 attribute left at its default is not written; a mismatch makes the block invalid in the editor,
@@ -327,8 +327,8 @@ Ported from the brand theme's structural half only. Deliberately absent, with no
     style. Missing are the Jest markup sweep over `templates/`, `parts/` and `patterns/`, and
     an integration tier. Keep them out of `npm test`: that command must never need Docker.
 -   **A full pattern library.** `patterns/` holds the design system's basic components as
-    patterns (quick links, steps, calls to action, section
-    headers), and two page-level patterns. Cards, highlights and heroes are the ucf-content
+    patterns (calls to action, section
+    headers), and two page-level patterns. Cards, highlights, heroes and quick links are the ucf-content
     plugin's blocks, with their designs as presets. Every pattern is filed under one custom
     category, UCF (`includes/patterns.php`). The directory is **flat on purpose** — core reads each
     file's header comment and never the path, so subdirectories imply a taxonomy nothing

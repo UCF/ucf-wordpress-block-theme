@@ -33,47 +33,9 @@
 <!-- /wp:ucf-content/hero -->
 
 <!-- wp:ucf-content/section {"spacing":"cozy"} -->
-<section class="wp-block-ucf-content-section alignfull ucf-section ucf-composition-light ucf-section--cozy"><div class="ucf-section__inner ucf-section__inner--default"><!-- wp:group {"className":"ucf-quick-links","style":{"spacing":{"blockGap":"2px"}},"layout":{"type":"grid","minimumColumnWidth":"14rem"}} -->
-<div class="wp-block-group ucf-quick-links"><!-- wp:group {"className":"ucf-quick-link","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-quick-link"><!-- wp:paragraph -->
-<p><a href="https://www.ucf.edu/admissions/">Can I get in?</a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Requirements, deadlines and the admitted class profile.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ucf-quick-link","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-quick-link"><!-- wp:paragraph -->
-<p><a href="https://www.ucf.edu/tuition-fees/">What will it cost?</a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Tuition, aid and the net price calculator.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ucf-quick-link","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-quick-link"><!-- wp:paragraph -->
-<p><a href="https://www.ucf.edu/academics/">What do graduates do?</a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Outcomes by program, from the people who track them.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
-
-<!-- wp:group {"className":"ucf-quick-link","style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"default"}} -->
-<div class="wp-block-group ucf-quick-link"><!-- wp:paragraph -->
-<p><a href="https://www.ucf.edu/">What is it like here?</a></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Housing, clubs and life on campus.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group --></div>
-<!-- /wp:group --></div></section>
+<section class="wp-block-ucf-content-section alignfull ucf-section ucf-composition-light ucf-section--cozy"><div class="ucf-section__inner ucf-section__inner--default"><!-- wp:ucf-content/quick-links {"tiles":[{"label":"Can I get in?","description":"Requirements, deadlines and the admitted class profile.","href":"https://www.ucf.edu/admissions/"},{"label":"What will it cost?","description":"Tuition, aid and the net price calculator.","href":"https://www.ucf.edu/tuition-fees/"},{"label":"What do graduates do?","description":"Outcomes by program, from the people who track them.","href":"https://www.ucf.edu/academics/"},{"label":"What is it like here?","description":"Housing, clubs and life on campus.","href":"https://www.ucf.edu/"}]} -->
+<div class="wp-block-ucf-content-quick-links ucf-c ucf-c-quick-links"><ul class="ucf-c-quick-links__list"><li class="ucf-c-quick-links__item"><a class="ucf-c-quick-links__link" href="https://www.ucf.edu/admissions/">Can I get in?</a><p class="ucf-c-quick-links__description">Requirements, deadlines and the admitted class profile.</p></li><li class="ucf-c-quick-links__item"><a class="ucf-c-quick-links__link" href="https://www.ucf.edu/tuition-fees/">What will it cost?</a><p class="ucf-c-quick-links__description">Tuition, aid and the net price calculator.</p></li><li class="ucf-c-quick-links__item"><a class="ucf-c-quick-links__link" href="https://www.ucf.edu/academics/">What do graduates do?</a><p class="ucf-c-quick-links__description">Outcomes by program, from the people who track them.</p></li><li class="ucf-c-quick-links__item"><a class="ucf-c-quick-links__link" href="https://www.ucf.edu/">What is it like here?</a><p class="ucf-c-quick-links__description">Housing, clubs and life on campus.</p></li></ul></div>
+<!-- /wp:ucf-content/quick-links --></div></section>
 <!-- /wp:ucf-content/section -->
 
 <!-- wp:ucf-content/section {"composition":"dark"} -->

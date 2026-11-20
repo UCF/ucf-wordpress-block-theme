@@ -58,14 +58,12 @@ class on a core Group, List or Table, and that class â€” styled in `src/scss/` â
 the component. Removing the class in the editor turns it back into a plain block. They are
 deliberately not block styles: the Styles panel slot on a Group is its composition.
 
-Cards, highlights, heroes and Section bands are not patterns: they are the ucf-content plugin's
+Cards, highlights, heroes, quick links and Section bands are not patterns: they are the ucf-content plugin's
 blocks, and their designs are that block's presets (docs/architecture.md, "Blocks from the
 component library"). Patterns here place those blocks; they never copy their CSS.
 
 | Class                                        | Component                     | Styled in                                     |
 | -------------------------------------------- | ----------------------------- | --------------------------------------------- |
-| `ucf-quick-links`, `ucf-quick-link`          | Quick links                   | `_components.scss`                            |
-| `ucf-steps`                                  | Steps (on an ordered List)    | `_components.scss`                            |
 | `ucf-answer`                                 | Answer summary                | `_components.scss`                            |
 | `ucf-sources`, `ucf-ref`                     | Sources and in-text markers   | `_components.scss`                            |
 | `ucf-compare` (on core Table)                | Comparison table              | `_table.scss`                                 |
